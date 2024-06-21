@@ -1,0 +1,78 @@
+.cursos {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__filters {
+        display: flex;
+        margin: 10px;
+        padding: 10px;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        &-name {
+            line-height: 40px;
+            font-size: 14px;
+            font-family: lexend;
+            padding: 0 10px;
+            width: 300px;
+
+        }
+
+    }
+
+    &__content {
+        display: flex;
+        justify-content: space-evenly;
+        flex-flow: row wrap;
+
+    }
+
+    &__curso {
+        position: relative;
+        cursor: pointer;
+        border: 1px solid rgb(179, 179, 179);
+        margin: 40px 20px;
+        font-family: lexend;
+        background-color: #fff;
+        font-size: 15px;
+        $margin-datos: 10px 10px;
+        top: 0;
+        transition: .3s;
+        color: #363636;
+
+        &:hover {
+            top: -10px;
+            box-shadow: 3px 10px 16px 0px rgba(0, 0, 0, 0.37);
+        }
+
+        &-nombre {
+            margin: $margin-datos;
+
+        }
+
+        &-portada {
+            img {
+                width: 380px;
+                height: 100px;
+            }
+
+            div {
+                position: absolute;
+                background-color: #ffffff00;
+                width: 380px;
+                height: 100px;
+            }
+
+        }
+
+        &-id {
+            margin: $margin-datos;
+            background-color: #fff;
+        }
+
+        &-teacher {
+            margin: $margin-datos;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+<section class="cursos">
+    <div class="cursos__filters">
+        <input type="text" name="nameFind" class="cursos__filters-name" placeholder="Busque sus cursos" [(ngModel)] = nameFind>
+        <select name="a" id="">
+            <option value="a">Periodos</option>
+        </select>
+        
+    </div>
+    <div class="cursos__content">
+        @for (curso of cursos; track 1) {
+        <article class="cursos__curso">
+            <div class="cursos__curso-portada"><div></div><img [src]="curso.portada" alt=""></div>
+            <div class="cursos__curso-nombre">{{curso.name}}-{{curso.year}} </div>
+            <div class="cursos__curso-id">{{curso.id}}</div>
+            <div class="cursos__curso-teacher">{{curso.profesor}}</div>
+        </article>
+        }
+    </div>
+</section>

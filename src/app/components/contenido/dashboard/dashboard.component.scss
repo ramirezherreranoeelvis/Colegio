@@ -1,0 +1,56 @@
+$font_lexend: lexend, System-UI;
+
+.dashboard {
+    display: flex;
+    width: 100%;
+}
+
+.center-separate {
+    width: 1px;
+    background-color: black;
+}
+
+.perfil {
+    flex: 1;
+}
+
+.workspace {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+
+    .menu {
+        &__list {
+            display: flex;
+            width: 100%;
+        }
+
+        &__item {
+            font-family: $font_lexend;
+            flex: 1;
+            height: 40px;
+            border: none;
+            margin: 1px;
+            background: #8C52FF;
+            color: white;
+            text-transform: capitalize;
+            transition: background .1s;
+
+            &:hover {
+                background: #6213ff;
+            }
+        }
+
+
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+
+        &__item{
+            display: flex;
+            flex: 1;
+        }
+    }
+}
