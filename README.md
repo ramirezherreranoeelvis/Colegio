@@ -15,15 +15,16 @@ Lenguajes de Programación y/o Frameworks:
 
 Backend:
   - Spring Boot <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original.svg" title="SPRING" alt="SPRING" width="10" height="10">&nbsp;
-  - Java <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="JAVA" alt="JAVA" width="10" height="10">&nbsp;
-  - Maven
-  - Hibernate
+  - Java <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
+  - Maven <img src="https://github.com/devicons/devicon/blob/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/maven/maven-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
+  - Hibernate <img src="https://github.com/devicons/devicon/blob/master/icons/hibernate/hibernate-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
+
 
 Frontend:
-  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angularjs/angularjs-original.svg" title="Angular" alt="Angular" width="10" height="10">&nbsp;
-  - TypeScript <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="TS" alt="TS" width="10" height="10">&nbsp;
-  - SASS
-  - HTML <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="10" height="10">&nbsp;
+  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angularjs/angularjs-original.svg" title="Angular" alt="Angular" width="12" height="12">&nbsp;
+  - TypeScript <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="TS" alt="TS" width="12" height="12">&nbsp;
+  - SASS <img src="https://github.com/devicons/devicon/blob/master/icons/sass/sass-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
+  - HTML <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="12" height="12">&nbsp;
 
 Base de Datos:
-  -MySQL <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MYSQL" alt="MYSQL" width="10" height="10">&nbsp;
+  -MySQL <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MYSQL" alt="MYSQL" width="12" height="12">&nbsp;
