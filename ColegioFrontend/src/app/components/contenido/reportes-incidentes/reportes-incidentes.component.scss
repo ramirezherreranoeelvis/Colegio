@@ -1,0 +1,25 @@
+.incidentes {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #c0ebff;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: 100px;
+        margin: 40px;
+        border-left: 1px dashed;
+        border-right: 1px dashed;
+        background-color: #a9ffbf;
+    }
+    &__incidente{
+        width: 100%;
+        display: flex;
+        flex: 1;
+        border-bottom: 1px dashed;
+        
+    }
+}

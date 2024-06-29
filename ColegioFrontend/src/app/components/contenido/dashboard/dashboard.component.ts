@@ -19,7 +19,7 @@ import { ReportesIncidentesComponent } from '../reportes-incidentes/reportes-inc
     styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-    private _selectSection: number = 3;
+    private _selectSection: number = 1;
 
     // Setter para actualizar _selectSection
     protected set selectSection(theSelectSection: number) {
