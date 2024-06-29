@@ -3,6 +3,7 @@ Este proyecto está diseñado para poner en práctica y demostrar mis conocimien
 
 ___
 <h2>Objetivos del proyecto:</h2>
+
   - Controlar el horario de ingreso del alumno.
   - Mejorar el control de los padres al de sus hijos.
   - Mejorar el control de pago de las matriculas y pensiones.
