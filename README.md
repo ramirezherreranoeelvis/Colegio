@@ -29,4 +29,4 @@ ___
   
 <h4>Base de Datos:</h4>
 
-  -MySQL <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MYSQL" alt="MYSQL" width="12" height="12">&nbsp;
+  - MySQL <img src="https://github.com/devicons/devicon/blob/master/icons/mysql/mysql-original.svg" title="MYSQL" alt="MYSQL" width="12" height="12">&nbsp;
