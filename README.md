@@ -16,7 +16,7 @@ Lenguajes de Programación y/o Frameworks:
 Backend:
   - Spring Boot <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original.svg" title="SPRING" alt="SPRING" width="10" height="10">&nbsp;
   - Java <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
-  - Maven <img src="https://github.com/devicons/devicon/blob/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/maven/maven-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
+  - Maven <img src="https://github.com/devicons/devicon/blob/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/maven/maven-original.svg?plain=1" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
   - Hibernate <img src="https://github.com/devicons/devicon/blob/master/icons/hibernate/hibernate-original.svg" title="JAVA" alt="JAVA" width="12" height="12">&nbsp;
 
 
