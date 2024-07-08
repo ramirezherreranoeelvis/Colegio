@@ -1,9 +1,10 @@
-package com.exam.colegio.model.entity;
+package com.exam.colegio.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+
 @Setter
 @Getter
 @Builder

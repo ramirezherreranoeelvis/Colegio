@@ -1,4 +1,4 @@
-package com.exam.colegio.model;
+package com.exam.colegio.entity.person;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

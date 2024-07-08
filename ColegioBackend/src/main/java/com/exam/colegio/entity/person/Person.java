@@ -1,6 +1,7 @@
-package com.exam.colegio.model.entity;
+package com.exam.colegio.entity.person;
 
 import com.exam.colegio.annotation.Dni;
+import com.exam.colegio.entity.Access;
 import jakarta.persistence.*;
 import lombok.*;
 

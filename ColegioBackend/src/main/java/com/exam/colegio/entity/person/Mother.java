@@ -1,5 +1,4 @@
-package com.exam.colegio.model;
-import com.exam.colegio.model.entity.Person;
+package com.exam.colegio.entity.person;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Builder;

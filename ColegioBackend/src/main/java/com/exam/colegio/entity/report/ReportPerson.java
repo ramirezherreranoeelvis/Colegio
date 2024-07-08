@@ -1,5 +1,6 @@
-package com.exam.colegio.model.entity;
+package com.exam.colegio.entity.report;
 
+import com.exam.colegio.entity.person.Person;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

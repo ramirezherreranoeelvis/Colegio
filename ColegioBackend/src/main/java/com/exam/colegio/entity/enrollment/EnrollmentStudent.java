@@ -1,8 +1,6 @@
-package com.exam.colegio.entity.registration;
+package com.exam.colegio.entity.enrollment;
 
-import com.exam.colegio.entity.person.Person;
 import com.exam.colegio.entity.person.Student;
-import com.exam.colegio.entity.report.Report;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
