@@ -2,6 +2,7 @@ package com.exam.colegio.entity.course;
 
 import com.exam.colegio.entity.Classroom;
 import com.exam.colegio.entity.enrollment.Enrollment;
+import com.exam.colegio.entity.person.Teacher;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +26,11 @@ public class CourseScheduled {
         @ManyToOne
         @JoinColumn(name = "idCourse", nullable = false)
         private Course course;
+
+
+        @ManyToOne
+        @JoinColumn(name = "idTeacher", nullable = false)
+        private Teacher teacher;
 
         @ManyToOne
         @JoinColumn(name = "idEnrollment", nullable = false)

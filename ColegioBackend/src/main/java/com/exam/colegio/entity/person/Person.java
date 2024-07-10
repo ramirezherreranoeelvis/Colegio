@@ -1,14 +1,14 @@
 package com.exam.colegio.entity.person;
 
 import com.exam.colegio.annotation.Dni;
-import com.exam.colegio.entity.Access;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Setter
 @Getter
-@Builder
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @DiscriminatorColumn(name = "typePerson", discriminatorType = DiscriminatorType.STRING, length = 20)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "person")
@@ -37,7 +37,5 @@ public class Person {
         @ManyToOne
         @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
         private Access access;
-
-
 
 }

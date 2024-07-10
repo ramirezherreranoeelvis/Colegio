@@ -21,7 +21,7 @@ public class Report {
         private Integer idReport;
 
         @ManyToOne
-        @JoinColumn(name = "idPerson", nullable = false)
+        @JoinColumn(name = "idAssistant", nullable = false)
         private Assistant assistant;
 
         @Column(name = "description", nullable = false, length = 300)

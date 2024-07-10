@@ -17,7 +17,7 @@ public class EnrollmentStudent {
         private Integer idEnrollmentStudent;
 
         @ManyToOne
-        @JoinColumn(name = "idPerson", nullable = false)
+        @JoinColumn(name = "idStudent", nullable = false)
         private Student student;
 
         @ManyToOne

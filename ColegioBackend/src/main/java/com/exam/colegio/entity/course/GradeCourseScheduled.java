@@ -1,7 +1,5 @@
 package com.exam.colegio.entity.course;
 
-import com.exam.colegio.entity.Classroom;
-import com.exam.colegio.entity.enrollment.Enrollment;
 import com.exam.colegio.entity.person.Student;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -30,10 +28,10 @@ public class GradeCourseScheduled {
         private CourseScheduled courseScheduled;
 
         @ManyToOne
-        @JoinColumn(name = "idPerson", nullable = false)
+        @JoinColumn(name = "idStudent", nullable = false)
         private Student student;
 
-        @Column(name = "grade", precision = 4, scale = 2)
+        @Column(name = "grade", precision = 4, scale = 2, nullable = false)
         private BigDecimal grade;
 
 
