@@ -1,0 +1,68 @@
+$font_lexend: lexend, System-UI;
+$color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
+$sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
+.body {
+    background: $color-fondo;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.horario {
+    box-shadow: $sombra;
+    border-radius: 20px;
+    background: #ffffff;
+    padding: 40px 40px 0px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__table {
+        border-collapse: collapse;
+        border-color: #0044ff;
+        border-style: solid;
+        font-family: $font_lexend;
+        border-width: 3px;
+    }
+
+    &__header-item {
+        border-width: 4px;
+        border-style: solid;
+        background-color: #38e1ff;
+        padding: 10px;
+
+        &:first-child {
+            padding: 25px 0;
+        }
+
+    }
+
+    &__body-item {
+        border-width: 4px;
+        border-style: solid;
+        text-align: center;
+        padding: 10px;
+        min-width: 100px;
+        text-transform: capitalize;
+
+    }
+
+    &__download {
+        margin: 30px;
+        width: 200px;
+        height: 50px;
+        font-family: $font_lexend;
+        border: none;
+        background: #143ef7;
+        color: white;
+        border-radius: 10px;
+        transition: background .2s;
+        font-size: 14px;
+
+        &:hover {
+            background: #4869ff;
+        }
+    }
+}
