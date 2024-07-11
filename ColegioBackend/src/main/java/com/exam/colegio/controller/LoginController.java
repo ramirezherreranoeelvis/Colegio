@@ -1,6 +1,6 @@
 package com.exam.colegio.controller;
 
-import com.exam.colegio.dto.PersonDTO;
+import com.exam.colegio.entity.person.Person;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
         @GetMapping("/metodo")
-        public PersonDTO ingresarSistema(String username, String Password) {
-                return PersonDTO.builder().surnameMaternal("ApelldioMaterno").build();
+        public Person ingresarSistema(String username, String Password) {
+                return null;
         }
 
 }

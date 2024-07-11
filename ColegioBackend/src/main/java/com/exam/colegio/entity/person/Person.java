@@ -7,8 +7,8 @@ import lombok.*;
 @Setter
 @Getter
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @DiscriminatorColumn(name = "typePerson", discriminatorType = DiscriminatorType.STRING, length = 20)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "person")
@@ -37,5 +37,4 @@ public class Person {
         @ManyToOne
         @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
         private Access access;
-
 }

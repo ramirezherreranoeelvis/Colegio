@@ -1,0 +1,141 @@
+entity -> 24 class
+
+
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("assistant")
+public class Assistant extends Person {
+
+        @Builder
+        public Assistant(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("director")
+public class Director extends Person {
+
+        @Builder
+        public Director(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("father")
+public class Father extends Person {
+
+        @Builder
+        public Father(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("mother")
+public class Mother extends Person {
+
+        @Builder
+        public Mother(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@DiscriminatorColumn(name = "typePerson", discriminatorType = DiscriminatorType.STRING, length = 20)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "person")
+public class Person {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idPerson;
+
+        @Dni
+        @Column(name = "dni", nullable = false, unique = true, updatable = false)
+        private Integer dni;
+
+        @Column(name = "name", nullable = false, length = 250)
+        private String name;
+
+        @Column(name = "surnamePaternal", nullable = false, length = 50)
+        private String surnamePaternal;
+
+        @Column(name = "surnameMaternal", nullable = false, length = 50)
+        private String surnameMaternal;
+
+        @Column(name = "phoneNumber", nullable = false)
+        private int phoneNumber;
+
+        @ManyToOne
+        @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
+        private Access access;
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("representative")
+public class Representative extends Person {
+
+        @Builder
+        public Representative(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("student")
+public class Student extends Person {
+
+        @ManyToOne
+        @JoinColumn(name = "idFather", nullable = false, updatable = false)
+        private Father father;
+
+        @ManyToOne
+        @JoinColumn(name = "idMother", nullable = false, updatable = false)
+        private Mother mother;
+
+        @ManyToOne
+        @JoinColumn(name = "idRepresentative", nullable = false)
+        private Representative representative;
+
+        @Builder
+        public Student(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("teacher")
+public class Teacher extends Person {
+
+        @Builder
+        public Teacher(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}

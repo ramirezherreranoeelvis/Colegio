@@ -2,7 +2,8 @@ $font_lexend: lexend, System-UI;
 
 .dashboard {
     display: flex;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 .center-separate {
@@ -48,7 +49,7 @@ $font_lexend: lexend, System-UI;
         flex: 1;
         display: flex;
 
-        &__item{
+        &__item {
             display: flex;
             flex: 1;
         }

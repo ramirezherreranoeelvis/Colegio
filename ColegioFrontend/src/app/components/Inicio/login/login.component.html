@@ -1,0 +1,22 @@
+<div class="login">
+    <div class="login__container">
+        <div class="login__left">
+            <h2>Colegio</h2>
+        </div>
+        <div class="login__right">
+            <form #myform="ngForm" (ngSubmit)="goToSesion(myform)" class="login__form">
+                <div class="login__data">
+                    <label for="">Usuario:</label>
+                    <input type="text" name="username" [(ngModel)]="username" required
+                        [ngClass]="{'active': contenedorActivo === 1}" (click)="selectInputText(1)">
+                    <label for="">Contraseña:</label>
+                    <input type="password" name="password" [(ngModel)]="password" required
+                        [ngClass]="{'active': contenedorActivo === 2}" (click)="selectInputText(2)">
+                </div>
+                <div class="login__options">
+                    <input type="submit" value="Iniciar Sesión">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
