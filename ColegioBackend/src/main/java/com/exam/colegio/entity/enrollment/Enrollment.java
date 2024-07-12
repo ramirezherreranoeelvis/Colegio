@@ -1,13 +1,16 @@
 package com.exam.colegio.entity.enrollment;
 
 
-import com.exam.colegio.entity.Grade;
+import com.exam.colegio.entity.other.Grade;
+import com.exam.colegio.entity.course.CourseScheduled;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -40,5 +43,10 @@ public class Enrollment {
         @Column(name = "monthlyFee", nullable = false, precision = 6, scale = 2)
         private BigDecimal monthlyFee;
 
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
+
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<CourseScheduled> courseScheduleds = new ArrayList<>();
 
 }

@@ -17,15 +17,15 @@ import lombok.Setter;
 public class Student extends Person {
 
         @ManyToOne
-        @JoinColumn(name = "idFather", nullable = false, updatable = false)
+        @JoinColumn(name = "idFather")
         private Father father;
 
         @ManyToOne
-        @JoinColumn(name = "idMother", nullable = false, updatable = false)
+        @JoinColumn(name = "idMother")
         private Mother mother;
 
         @ManyToOne
-        @JoinColumn(name = "idRepresentative", nullable = false)
+        @JoinColumn(name = "idRepresentative")
         private Representative representative;
 
         @Builder

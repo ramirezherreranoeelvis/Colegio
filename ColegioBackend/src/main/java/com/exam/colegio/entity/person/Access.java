@@ -19,7 +19,7 @@ public class Access {
         @Column(name = "access", nullable = false)
         private boolean accessEnabled;
 
-        @Column(name = "username", nullable = false, unique = true, updatable = false, length = 20)
+        @Column(name = "username", nullable = false, unique = true, updatable = true, length = 20)
         private String username;
 
         @Column(name = "description", length = 150)

@@ -1,4 +1,4 @@
-package com.exam.colegio.entity;
+package com.exam.colegio.entity.other;
 
 import com.exam.colegio.entity.person.Student;
 import jakarta.persistence.*;

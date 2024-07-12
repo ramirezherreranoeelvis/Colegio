@@ -1,4 +1,4 @@
-package com.exam.colegio.entity;
+package com.exam.colegio.entity.other;
 
 import jakarta.persistence.*;
 import lombok.Builder;

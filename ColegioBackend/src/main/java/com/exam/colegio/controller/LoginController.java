@@ -1,10 +1,7 @@
 package com.exam.colegio.controller;
 
 import com.exam.colegio.entity.person.Person;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/test")
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
         @GetMapping("/metodo")
-        public Person ingresarSistema(String username, String Password) {
+        public Person ingresarSistema(@RequestParam String username, @RequestParam String Password) {
                 return null;
         }
 

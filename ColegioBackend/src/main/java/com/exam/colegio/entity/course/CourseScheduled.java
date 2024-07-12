@@ -1,9 +1,11 @@
 package com.exam.colegio.entity.course;
 
-import com.exam.colegio.entity.Classroom;
+import com.exam.colegio.entity.other.Classroom;
+import com.exam.colegio.entity.other.DayOfWeek;
 import com.exam.colegio.entity.enrollment.Enrollment;
 import com.exam.colegio.entity.person.Teacher;
 import jakarta.persistence.*;
+import java.time.LocalTime;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +29,6 @@ public class CourseScheduled {
         @JoinColumn(name = "idCourse", nullable = false)
         private Course course;
 
-
         @ManyToOne
         @JoinColumn(name = "idTeacher", nullable = false)
         private Teacher teacher;
@@ -35,5 +36,15 @@ public class CourseScheduled {
         @ManyToOne
         @JoinColumn(name = "idEnrollment", nullable = false)
         private Enrollment enrollment;
+
+        @Column(name = "startTime", nullable = false)
+        private LocalTime startTime;
+
+        @Column(name = "endTime", nullable = false)
+        private LocalTime endTime;
+
+        @Enumerated(EnumType.STRING)
+        @Column(name = "day", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
+        private DayOfWeek dayOfWeek;
 
 }
