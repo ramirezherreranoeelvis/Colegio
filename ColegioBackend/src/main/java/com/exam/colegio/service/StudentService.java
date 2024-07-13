@@ -5,17 +5,20 @@ import com.exam.colegio.entity.person.Student;
 import com.exam.colegio.repository.person.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+/**
+ * @author Gatomontes
+ */
 @Service
 public class StudentService implements IStudentDAO {
 
         @Override
-        public Student findByUsername(String username) {
-                return null;
-        }
+        public Optional<Student> findByUsername(String username) {
+                var student = studentRepository.findByAccessUsername(username);
 
-        @Override
-        public Student findByDni(Integer dni) {
-                return null;
+                return student;
         }
 
         @Autowired

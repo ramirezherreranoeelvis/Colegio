@@ -1,13 +1,14 @@
 package com.exam.colegio.entity.person;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.exam.colegio.entity.other.TeacherCourseScheduled;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,6 +28,9 @@ public class Student extends Person {
         @ManyToOne
         @JoinColumn(name = "idRepresentative")
         private Representative representative;
+
+        @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<com.exam.colegio.entity.enrollment.EnrollmentStudent> enrollmentStudents = new ArrayList<>();
 
         @Builder
         public Student(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
