@@ -2,7 +2,7 @@ package com.exam.colegio.service;
 
 import com.exam.colegio.dao.IStudentDAO;
 import com.exam.colegio.entity.person.Student;
-import com.exam.colegio.repository.IStudentRepository;
+import com.exam.colegio.repository.person.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service

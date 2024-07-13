@@ -1,6 +1,9 @@
 $font_lexend: lexend, System-UI;
 $color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
 $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
+$color-btnDonwloadHorario: #143ef7;
+$sombra-input: 2px 1px 10px 0 rgba(0, 0, 0, 0.301);
+
 .body {
     background: $color-fondo;
     height: 100%;
@@ -20,6 +23,7 @@ $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
     flex-direction: column;
 
     &__table {
+        box-shadow: 2px 1px 10px 0 rgba(0, 0, 0, 0.301);
         border-collapse: collapse;
         border-color: #0044ff;
         border-style: solid;
@@ -30,7 +34,8 @@ $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
     &__header-item {
         border-width: 4px;
         border-style: solid;
-        background-color: #38e1ff;
+        background-color: #00b7ff;
+        color: #000;
         padding: 10px;
 
         &:first-child {
@@ -55,14 +60,15 @@ $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
         height: 50px;
         font-family: $font_lexend;
         border: none;
-        background: #143ef7;
+        background: $color-btnDonwloadHorario;
         color: white;
         border-radius: 10px;
-        transition: background .2s;
-        font-size: 14px;
+        transition: background .2s, box-shadow .2s;
+        font-size: 15px;
 
         &:hover {
-            background: #4869ff;
+            background: #4400ff;
+            box-shadow: $sombra-input;
         }
     }
 }

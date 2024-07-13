@@ -2,7 +2,7 @@ package com.exam.colegio.service;
 
 import com.exam.colegio.dao.IEnrollmentDAO;
 import com.exam.colegio.dto.CourseHorarioDTO;
-import com.exam.colegio.repository.IEnrollmentRepository;
+import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

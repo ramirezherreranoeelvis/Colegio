@@ -1,10 +1,10 @@
 package com.exam.colegio.repository.enrollment;
 
-import com.exam.colegio.entity.course.CourseScheduled;
+import com.exam.colegio.entity.enrollment.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICourseScheduledRepository extends JpaRepository<CourseScheduled, Integer> {
+public interface IPaymentRepository extends JpaRepository<Payment, Integer> {
 
 }

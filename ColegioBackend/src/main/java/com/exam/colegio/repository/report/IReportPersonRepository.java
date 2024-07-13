@@ -1,10 +1,10 @@
-package com.exam.colegio.repository.course;
+package com.exam.colegio.repository.report;
 
-import com.exam.colegio.entity.course.Course;
+import com.exam.colegio.entity.report.ReportPerson;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ICourseRepository extends JpaRepository<Course, Integer> {
+public interface IReportPersonRepository extends JpaRepository<ReportPerson, Integer> {
 
 }

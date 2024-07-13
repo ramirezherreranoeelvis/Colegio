@@ -2,25 +2,30 @@ package com.exam.colegio.controller;
 
 import com.exam.colegio.dao.IEnrollmentDAO;
 import com.exam.colegio.dao.IStudentDAO;
-import com.exam.colegio.dto.CourseHorarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Gatomontes
  */
+@RestController
+@RequestMapping("/horario")
+@CrossOrigin(origins = "http://localhost:4200/login", allowedHeaders = "*")
 public class HorarioController {
+
+        @GetMapping("/actual")
+        public ResponseEntity<?> horarioActual(@RequestParam String username) {
+                var student = studentDAO.findByUsername(username);
+
+                return ResponseEntity.ok(
+                        enrollmentDAO.findAllCoursesByStudentAndEnrollment(student.getDni(), null)
+                );
+        }
 
         @Autowired
         private IEnrollmentDAO enrollmentDAO;
         @Autowired
         private IStudentDAO studentDAO;
-
-        public List<CourseHorarioDTO> horario(@RequestParam String username) {
-                var student = studentDAO.findByUsername(username);
-                return enrollmentDAO.findAllCoursesByStudentAndEnrollment(student.getDni(), null);
-        }
 
 }

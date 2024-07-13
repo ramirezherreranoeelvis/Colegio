@@ -9,7 +9,9 @@ import lombok.Setter;
 @Getter
 @Builder
 @Entity
-@Table(name = "access")
+@Table(name = "access", indexes = {
+        @Index(name = "idx_username_password", columnList = "username, password")
+})
 public class Access {
 
         @Id
@@ -27,6 +29,5 @@ public class Access {
 
         @Column(name = "password", nullable = false, length = 20)
         private String password;
-
 
 }

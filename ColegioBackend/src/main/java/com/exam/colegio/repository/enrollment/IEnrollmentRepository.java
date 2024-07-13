@@ -1,4 +1,4 @@
-package com.exam.colegio.repository;
+package com.exam.colegio.repository.enrollment;
 
 import com.exam.colegio.entity.enrollment.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;
