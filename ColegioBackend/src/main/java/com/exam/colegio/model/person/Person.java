@@ -25,7 +25,7 @@ public class Person {
         private Integer idPerson;
 
         @Dni
-        @Column(name = "dni", nullable = false, unique = true, updatable = false)
+        @Column(name = "dni", nullable = false, unique = true, updatable = false, length = 8)
         private String dni;
 
         @Column(name = "name", nullable = false, length = 250)
@@ -37,7 +37,7 @@ public class Person {
         @Column(name = "surnameMaternal", nullable = false, length = 50)
         private String surnameMaternal;
 
-        @Column(name = "phoneNumber", nullable = false)
+        @Column(name = "phoneNumber", nullable = false, length = 15)
         private String phoneNumber;
 
         @ManyToOne

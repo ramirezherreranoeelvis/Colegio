@@ -22,7 +22,8 @@ public class TestController {
         @GetMapping
         public List<?> data() {
                 var idEnrollment = 7;
-                return null;
+                var enrollment = enrollmentService.findById(idEnrollment).get();
+                return enrollmentService.getScheduleByEnrollment(enrollment).getWeekHorario();
         }
 
         @Autowired
