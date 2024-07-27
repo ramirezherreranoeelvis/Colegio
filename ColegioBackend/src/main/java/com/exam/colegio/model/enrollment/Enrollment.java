@@ -1,7 +1,7 @@
-package com.exam.colegio.mvc.entity.entity.enrollment;
+package com.exam.colegio.model.enrollment;
 
-import com.exam.colegio.mvc.entity.entity.other.Grade;
-import com.exam.colegio.mvc.entity.entity.course.CourseScheduled;
+import com.exam.colegio.model.other.Grade;
+import com.exam.colegio.model.course.CourseScheduled;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

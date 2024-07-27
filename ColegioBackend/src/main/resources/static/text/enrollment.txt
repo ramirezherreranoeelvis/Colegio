@@ -1,0 +1,115 @@
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "enrollment")
+public class Enrollment {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idEnrollment;
+
+        @ManyToOne
+        @JoinColumn(name = "idSeason", nullable = false)
+        private Season season;
+
+        @ManyToOne
+        @JoinColumn(name = "idGrade", nullable = false)
+        private Grade grade;
+
+        @Column(name = "vacancies", nullable = false)
+        private Integer vacancies;
+
+        @Column(name = "enrolled", nullable = false)
+        private Integer enrolled;
+
+        @Column(name = "cost", nullable = false, precision = 6, scale = 2)
+        private BigDecimal cost;
+
+        @Column(name = "monthlyFee", nullable = false, precision = 6, scale = 2)
+        private BigDecimal monthlyFee;
+
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
+
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<CourseScheduled> courseScheduleds = new ArrayList<>();
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "enrollmentStudent")
+public class EnrollmentStudent {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idEnrollmentStudent;
+
+        @ManyToOne
+        @JoinColumn(name = "idStudent", nullable = false)
+        private Student student;
+
+        @ManyToOne
+        @JoinColumn(name = "idEnrollment", nullable = false)
+        private Enrollment enrollment;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "payment")
+public class Payment {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idPayment;
+
+        @ManyToOne
+        @JoinColumn(name = "idEnrollmentStudent", nullable = false)
+        private EnrollmentStudent enrollmentStudent;
+
+        @ManyToOne
+        @JoinColumn(name = "idTypeStatus", nullable = false)
+        private TypeStatus typeStatus;
+
+        @Column(name = "pay", precision = 6, scale = 2)
+        private BigDecimal pay;
+
+        @Column(name = "description", length = 50)
+        private String description;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "season")
+public class Season {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idSeason;
+
+        @Column(name = "year", nullable = false, updatable = false, unique = true)
+        private Date year;
+
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "typeStatus")
+public class TypeStatus {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idTypeStatus;
+
+        @Column(name = "name", nullable = false, length = 20, unique = true)
+        private String name;
+
+}

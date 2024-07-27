@@ -1,13 +1,13 @@
-package com.exam.colegio.mvc.entity.entity.other;
+package com.exam.colegio.model.other;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "classroom")
 public class Classroom {

@@ -1,4 +1,4 @@
-package com.exam.colegio.entity.other;
+package com.exam.colegio.util;
 
 /**
  *
@@ -6,13 +6,13 @@ package com.exam.colegio.entity.other;
  */
 public enum DayOfWeek {
 
-        MONDAY("LUNES"),
-        TUESDAY("MARTES"),
-        WEDNESDAY("MIERCOLES"),
-        THURSDAY("JUEVES"),
-        FRIDAY("VIERNES"),
-        SATURDAY("SABADO"),
-        SUNDAY("DOMINGO");
+        LUNES("LUNES"),
+        MARTES("MARTES"),
+        MIERCOLES("MIERCOLES"),
+        JUEVES("JUEVES"),
+        VIERNES("VIERNES"),
+        SABADO("SABADO"),
+        DOMINGO("DOMINGO");
 
         private final String displayName;
 

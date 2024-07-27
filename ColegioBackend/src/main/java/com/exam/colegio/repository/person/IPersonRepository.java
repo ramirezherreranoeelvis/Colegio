@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.person;
 
-import com.exam.colegio.entity.person.Person;
+import com.exam.colegio.model.person.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -9,11 +9,11 @@ import lombok.Setter;
 @Builder
 public class PersonLoginDTO {
 
-        private Integer dni;
+        private String dni;
         private String name;
         private String surnamePaternal;
         private String surnameMaternal;
-        private int phoneNumber;
+        private String phoneNumber;
         private String username;
         private String password;
 

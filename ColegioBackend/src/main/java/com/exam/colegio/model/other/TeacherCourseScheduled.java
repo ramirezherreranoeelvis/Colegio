@@ -1,7 +1,7 @@
-package com.exam.colegio.mvc.entity.entity.other;
+package com.exam.colegio.model.other;
 
-import com.exam.colegio.mvc.entity.entity.course.CourseScheduled;
-import com.exam.colegio.mvc.entity.entity.person.Teacher;
+import com.exam.colegio.model.course.CourseScheduled;
+import com.exam.colegio.model.person.Teacher;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

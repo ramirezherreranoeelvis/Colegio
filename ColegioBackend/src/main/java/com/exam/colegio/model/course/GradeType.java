@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.entity.entity.course;
+package com.exam.colegio.model.course;
 
 import jakarta.persistence.*;
 import lombok.Builder;

@@ -20,7 +20,7 @@ export class LoginComponent {
         constructor(private router: Router) { }
 
         protected goToSesion(form: NgForm) {
-                this.router.navigate(['home']);
+                this.router.navigate(['workspace']);
         }
 
         //styles:

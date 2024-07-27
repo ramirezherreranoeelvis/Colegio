@@ -1,28 +1,21 @@
 package com.exam.colegio.controller;
 
-import com.exam.colegio.dto.DayHorarioDTO;
-import com.exam.colegio.dto.EventoHorarioDTO;
-import com.exam.colegio.model.course.CourseScheduled;
-import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.repository.course.*;
 import com.exam.colegio.repository.enrollment.*;
 import com.exam.colegio.repository.other.IGradeRepository;
 import com.exam.colegio.repository.person.IStudentRepository;
 import com.exam.colegio.repository.person.ITeacherRepository;
 import com.exam.colegio.service.EnrollmentService;
-import com.exam.colegio.util.DayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/data")
-public class DataController {
+public class TestController {
 
 
 
@@ -55,7 +48,7 @@ public class DataController {
         //report
 
 
-        public DataController(ITeacherRepository teacherRepository, IStudentRepository studentRepository, IGradeRepository gradeRepository, ITypeStatusRepository typeStatusRepository, ISeasonRepository seasonRepository, IPaymentRepository paymentRepository, IEnrollmentStudentRepository enrollmentStudentRepository, IEnrollmentRepository enrollmentRepository, IStudentAttendanceCourseScheduledRepository studentAttendanceCourseScheduledRepository, IGradeTypeRepository gradeTypeRepository, IGradeCourseScheduledRepository gradeCourseScheduledRepository, ICourseScheduledRepository courseScheduledRepository, ICourseRepository courseRepository) {
+        public TestController(ITeacherRepository teacherRepository, IStudentRepository studentRepository, IGradeRepository gradeRepository, ITypeStatusRepository typeStatusRepository, ISeasonRepository seasonRepository, IPaymentRepository paymentRepository, IEnrollmentStudentRepository enrollmentStudentRepository, IEnrollmentRepository enrollmentRepository, IStudentAttendanceCourseScheduledRepository studentAttendanceCourseScheduledRepository, IGradeTypeRepository gradeTypeRepository, IGradeCourseScheduledRepository gradeCourseScheduledRepository, ICourseScheduledRepository courseScheduledRepository, ICourseRepository courseRepository) {
                 this.teacherRepository = teacherRepository;
                 this.studentRepository = studentRepository;
                 this.gradeRepository = gradeRepository;

@@ -1,8 +1,10 @@
 package com.exam.colegio.dao;
 
 import com.exam.colegio.dto.PersonLoginDTO;
+import java.util.Optional;
+
 public interface IPersonDAO {
 
-        PersonLoginDTO findByUsername(String username, String password);
+        Optional<PersonLoginDTO> findByUsername(String username, String password);
 
 }

@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.report;
 
-import com.exam.colegio.entity.report.ReportPerson;
+import com.exam.colegio.model.report.ReportPerson;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

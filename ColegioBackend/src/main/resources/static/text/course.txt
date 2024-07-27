@@ -1,0 +1,129 @@
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "course")
+public class Course {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idCourse;
+
+        @Column(name = "name", nullable = false, length = 50)
+        private String name;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "courseScheduled")
+public class CourseScheduled {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idCourseScheduled;
+
+        @ManyToOne
+        @JoinColumn(name = "idClassroom", nullable = false)
+        private Classroom classroom;
+
+        @ManyToOne
+        @JoinColumn(name = "idCourse", nullable = false)
+        private Course course;
+
+        @ManyToOne
+        @JoinColumn(name = "idTeacher", nullable = false)
+        private Teacher teacher;
+
+        @ManyToOne
+        @JoinColumn(name = "idEnrollment", nullable = false)
+        private Enrollment enrollment;
+
+        @Column(name = "startTime", nullable = false)
+        private LocalTime startTime;
+
+        @Column(name = "endTime", nullable = false)
+        private LocalTime endTime;
+
+        @Enumerated(EnumType.STRING)
+        @Column(name = "day", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
+        private DayOfWeek dayOfWeek;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "gradeCourseScheduled")
+public class GradeCourseScheduled {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idGradeCourseScheduled;
+
+        @ManyToOne
+        @JoinColumn(name = "idGradeType", nullable = false)
+        private GradeType gradeType;
+
+        @ManyToOne
+        @JoinColumn(name = "idCourseScheduled", nullable = false)
+        private CourseScheduled courseScheduled;
+
+        @ManyToOne
+        @JoinColumn(name = "idStudent", nullable = false)
+        private Student student;
+
+        @Column(name = "grade", precision = 4, scale = 2, nullable = false)
+        private BigDecimal grade;
+
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "gradeType")
+public class GradeType {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idGradeType;
+
+        @Column(name = "name", nullable = false, length = 20)
+        private String name;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "studentAttendanceCourseScheduled")
+public class StudentAttendanceCourseScheduled {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idStudentAttendanceCourseScheduled;
+
+        @ManyToOne
+        @JoinColumn(name = "idPerson", nullable = false)
+        private Student student;
+
+        @ManyToOne
+        @JoinColumn(name = "idCourseScheduled", nullable = false)
+        private CourseScheduled courseScheduled;
+
+        @Column(name = "timeEntry", nullable = false)
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date timeEntry;
+
+        @Column(name = "timeExit")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date timeExit;
+
+        @PrePersist
+        protected void onCreate() {
+                timeEntry = new Date();
+        }
+
+}

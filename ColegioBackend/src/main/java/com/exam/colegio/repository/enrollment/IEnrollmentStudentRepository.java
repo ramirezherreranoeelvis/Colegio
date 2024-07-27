@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.enrollment;
 
-import com.exam.colegio.entity.enrollment.EnrollmentStudent;
+import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,20 +1,41 @@
 package com.exam.colegio.dto;
 
-import com.exam.colegio.entity.course.CourseScheduled;
+import java.time.LocalTime;
 import java.util.List;
-import lombok.Builder;
-import lombok.Getter;
+
+import lombok.*;
 
 /**
- *
  * @author Gatomontes
  */
 @Getter
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
 public class HorarioDTO {
 
-        private List<CourseScheduled> courseScheduleds;
-        
-        
+        private List<Day> weekHorario;
+
+        @Getter
+        @Setter
+        @Builder
+        public static class Day {
+
+                private String day;
+                private List<Event> cursos;
+
+        }
+
+        @Getter
+        @Setter
+        @Builder
+        public static class Event {
+
+                private String event;
+                private LocalTime startTime;
+                private LocalTime endTime;
+
+        }
+
 
 }

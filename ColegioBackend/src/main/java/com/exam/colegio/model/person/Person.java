@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.entity.entity.person;
+package com.exam.colegio.model.person;
 
 import com.exam.colegio.annotation.Dni;
 import jakarta.persistence.*;
@@ -9,8 +9,14 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorColumn(name = "typePerson", discriminatorType = DiscriminatorType.STRING, length = 20)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+        name = "typePerson",
+        discriminatorType = DiscriminatorType.STRING,
+        length = 20
+)
+@Inheritance(
+        strategy = InheritanceType.SINGLE_TABLE
+)
 @Table(name = "person")
 public class Person {
 
@@ -32,9 +38,30 @@ public class Person {
         private String surnameMaternal;
 
         @Column(name = "phoneNumber", nullable = false)
-        private int phoneNumber;
+        private String phoneNumber;
 
         @ManyToOne
         @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
         private Access access;
+
+        public String getTypePerson() {
+                if (this instanceof Student) {
+                        return "student";
+                } else if (this instanceof Teacher) {
+                        return "teacher";
+                } else if (this instanceof Assistant) {
+                        return "assistant";
+                } else if (this instanceof Director) {
+                        return "director";
+                } else if (this instanceof Father) {
+                        return "father";
+                } else if (this instanceof Mother) {
+                        return "mother";
+                } else if (this instanceof Representative) {
+                        return "representative";
+                } else {
+                        return "unknown";
+                }
+        }
+
 }

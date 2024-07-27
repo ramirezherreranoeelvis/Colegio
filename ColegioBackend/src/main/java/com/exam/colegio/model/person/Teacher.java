@@ -1,7 +1,8 @@
-package com.exam.colegio.mvc.entity.entity.person;
+package com.exam.colegio.model.person;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.exam.colegio.model.other.TeacherCourseScheduled;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
 public class Teacher extends Person {
 
         @Builder
-        public Teacher(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Teacher(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
         @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
-        private List<com.exam.colegio.mvc.entity.entity.other.TeacherCourseScheduled> TeacherCourseScheduled = new ArrayList<>();
+        private List<TeacherCourseScheduled> teacherCourseScheduled = new ArrayList<>();
 
 }

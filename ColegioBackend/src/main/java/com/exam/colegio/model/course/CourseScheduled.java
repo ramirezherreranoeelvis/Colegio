@@ -15,7 +15,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "courseScheduled")
-public class DayHorarioDTO {
+public class CourseScheduled {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

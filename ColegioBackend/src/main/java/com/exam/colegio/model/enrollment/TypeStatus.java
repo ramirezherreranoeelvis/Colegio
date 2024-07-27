@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.entity.entity.enrollment;
+package com.exam.colegio.model.enrollment;
 
 import jakarta.persistence.*;
 import lombok.Builder;

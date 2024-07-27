@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/horario")
 @CrossOrigin(origins = "http://localhost:4200/", allowedHeaders = "*")
-public class HorarioController {
+public class ScheduledController {
 
         @GetMapping("/actual")
         public ResponseEntity<?> horarioActual(@RequestParam String username) {
@@ -22,23 +22,22 @@ public class HorarioController {
                 if (studentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
                 }
-                
+
                 // get data student
                 var student = studentOptional.get();
-                String dniStudent = student.getDni();
                 var enrollmentStudents = student.getEnrollmentStudents();
-                
+
                 if (enrollmentStudents.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No enrollments found for student");
                 }
+                //get Last EnrollmentStudent
+                var lastIndexEnrollmentStudent = enrollmentStudents.size() - 1;
+                var lastEnrollmentStudent = enrollmentStudents.get(lastIndexEnrollmentStudent);
 
-                var lastIdEnrollment = enrollmentStudents.size() - 1;
-                var lastEnrollmentStudent = enrollmentStudents.get(lastIdEnrollment);
                 var lastEnrollment = lastEnrollmentStudent.getEnrollment();
-                var idEnrollment = lastEnrollment.getIdEnrollment();
-                var courses = this.enrollmentDAO.findAllCoursesByStudentAndEnrollment(dniStudent, idEnrollment);
+                var horario = this.enrollmentDAO.getScheduleByEnrollment(lastEnrollment);
 
-                return ResponseEntity.ok(courses);
+                return ResponseEntity.ok(horario);
         }
 
         @Autowired

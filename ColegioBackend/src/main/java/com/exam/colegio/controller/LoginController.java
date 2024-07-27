@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.controller;
+package com.exam.colegio.controller;
 
 import com.exam.colegio.dao.IPersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
         @GetMapping("/login")
-        public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        public ResponseEntity<?> ingresarSistema(@RequestParam String username, @RequestParam String password) {
 
                 if (username.isBlank()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");

@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.other;
 
-import com.exam.colegio.entity.other.Grade;
+import com.exam.colegio.model.other.Grade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.entity.entity.person;
+package com.exam.colegio.model.person;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Assistant extends Person {
 
         @Builder
-        public Assistant(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Assistant(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

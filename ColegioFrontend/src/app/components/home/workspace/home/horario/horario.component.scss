@@ -2,16 +2,15 @@ $font_lexend: lexend, System-UI;
 $color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
 $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
 $color-btnDonwloadHorario: #143ef7;
-$sombra-input: 2px 1px 10px 0 rgba(0, 0, 0, 0.301);
+$sombra-input: 2px 1px 10px 0 #00065a;
 
 .body {
     background: $color-fondo;
-    height: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .horario {
     box-shadow: $sombra;
     border-radius: 20px;
@@ -23,7 +22,7 @@ $sombra-input: 2px 1px 10px 0 rgba(0, 0, 0, 0.301);
     flex-direction: column;
 
     &__table {
-        box-shadow: 2px 1px 10px 0 rgba(0, 0, 0, 0.301);
+        box-shadow: 2px 1px 10px 0 #0000004d;
         border-collapse: collapse;
         border-color: #0044ff;
         border-style: solid;

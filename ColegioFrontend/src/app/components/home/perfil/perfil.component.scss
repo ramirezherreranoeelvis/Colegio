@@ -1,0 +1,105 @@
+$font_lexend: lexend, System-UI;
+
+.perfil {
+    flex: 1;
+    display: flex;
+    font-family: $font_lexend;
+    background-color: #1e4dce;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    background-color: #ffffff;
+    width: 85%;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .data {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        font-size: 12px;
+    }
+
+    .separation__data-options {
+        display: flex;
+        justify-content: center;
+
+        .border {
+            background: linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
+            width: 90%;
+            height: 1px;
+        }
+    }
+
+    .options {
+        display: flex;
+        justify-content: center;
+
+        padding: 10px;
+
+        input[type="button"] {
+            background-color: #ffffff;
+            border: none;
+            margin: 0 16px;
+            font-family: "Work Sans";
+            font-weight: bold;
+            padding: 10px 45px;
+            border-radius: 3px;
+            box-shadow: 0 0 2px 1px #0000004d;
+            transition: .1s background, .1s color;
+
+            &:hover {
+                color: #9af8ff;
+                background: #19008a;
+                box-shadow: 2px 2px 2px 0px #0000004d;
+            }
+        }
+    }
+}
+
+/* .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+
+    background-color: #ee0707;
+
+    .data{
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+    }
+
+    .options {
+        display: flex;
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 3px;
+        box-shadow: 0 0 4px 0px #0000004d;
+
+        input[type="button"] {
+            background-color: #ffffff;
+            border: none;
+            margin: 0 16px;
+            font-family: "Work Sans";
+            font-weight: bold;
+            padding: 10px 45px;
+            border-radius: 3px;
+            box-shadow: 0 0 2px 1px #0000004d;
+            transition: .1s background, .1s color;
+
+            &:hover {
+                color: #9af8ff;
+                background: #19008a;
+                box-shadow: 2px 2px 2px 0px #0000004d;
+            }
+        }
+    }
+} */

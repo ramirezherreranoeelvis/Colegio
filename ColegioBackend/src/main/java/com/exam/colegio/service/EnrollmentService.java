@@ -1,30 +1,94 @@
 package com.exam.colegio.service;
 
 import com.exam.colegio.dao.IEnrollmentDAO;
-import com.exam.colegio.dto.CourseHorarioDTO;
+import com.exam.colegio.dto.HorarioDTO;
+import com.exam.colegio.model.course.CourseScheduled;
+import com.exam.colegio.model.enrollment.Enrollment;
+import com.exam.colegio.model.enrollment.EnrollmentStudent;
+import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
+import com.exam.colegio.util.DayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalTime;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class EnrollmentService implements IEnrollmentDAO {
 
         @Override
-        public List<CourseHorarioDTO> findAllCoursesByStudentAndEnrollment(Integer dniStudent, Integer idEnrollment) {
-                return enrollmentRepository.findAll().stream()
-                        .filter(enrollment -> enrollment.getIdEnrollment().equals(idEnrollment))
-                        .flatMap(enrollment -> enrollment.getEnrollmentStudents().stream())
-                        .filter(enrollmentStudent -> enrollmentStudent.getStudent().getDni().equals(dniStudent))
-                        .flatMap(enrollmentStudent -> enrollmentStudent.getEnrollment().getCourseScheduleds().stream())
-                        .map(courseScheduled -> CourseHorarioDTO.builder()
-                                .name(courseScheduled.getCourse().getName())
-                                .startTime(courseScheduled.getStartTime())
-                                .endTime(courseScheduled.getEndTime())
-                                .day(courseScheduled.getDayOfWeek().getDisplayName())
-                                .build()
-                        )
-                        .toList();
+        public Optional<Enrollment> findById(int idEnrollment) {
+                return enrollmentRepository.findById(idEnrollment);
+        }
+
+        @Override
+        public Optional<Enrollment> addRegisterStudent(Student student, Enrollment enrollment) {
+                var enrollmentStudents = enrollment.getEnrollmentStudents();
+
+                //buscamos si ya existe un registro a la matricula ya existente para no guardar por segunda vez
+                var enrollmentStudentOptional = enrollmentStudents.stream()
+                        .filter(enrollmentStudent -> enrollmentStudent.getStudent().getDni().equals(student.getDni()) &&
+                                                     enrollmentStudent.getEnrollment().getIdEnrollment().equals(enrollment.getIdEnrollment())
+                        ).findFirst();
+                if (enrollmentStudentOptional.isPresent()) {
+                        return Optional.empty();
+                }
+
+                // Crear un nuevo EnrollmentStudent y añadirlo a la lista
+                enrollmentStudents.add(EnrollmentStudent.builder()
+                        .enrollment(enrollment)
+                        .student(student)
+                        .build());
+
+                // Guardar el Enrollment, lo que también debería guardar el nuevo EnrollmentStudent debido al cascade = CascadeType.ALL
+                return Optional.of(enrollmentRepository.save(enrollment));
+        }
+
+        @Override
+        public HorarioDTO getScheduleByEnrollment(Enrollment enrollment) {
+                // Obtener todos los cursos programados para esa inscripción y agruparlos por día
+                Map<DayOfWeek, List<CourseScheduled>> coursesByDay = enrollment.getCourseScheduleds().stream()
+                        .collect(Collectors.groupingBy(CourseScheduled::getDayOfWeek));
+
+                return new HorarioDTO(
+                        Arrays.stream(DayOfWeek.values())
+                                .map(dayOfWeek -> {
+                                        List<HorarioDTO.Event> eventos = new ArrayList<>();
+                                        List<CourseScheduled> courses = coursesByDay.getOrDefault(dayOfWeek, Collections.emptyList());
+
+                                        // Ordenar los cursos por hora de inicio
+                                        courses.sort(Comparator.comparing(CourseScheduled::getStartTime));
+
+                                        LocalTime lastEndTime = null;
+
+                                        for (CourseScheduled course : courses) {
+                                                if (lastEndTime != null && !course.getStartTime().equals(lastEndTime)) {
+                                                        // Crear un evento de recreo
+                                                        eventos.add(HorarioDTO.Event.builder()
+                                                                .event("Recreo")
+                                                                .startTime(lastEndTime)
+                                                                .endTime(course.getStartTime())
+                                                                .build());
+                                                }
+                                                // Agregar el curso al horario
+                                                eventos.add(HorarioDTO.Event.builder()
+                                                        .event(course.getCourse().getName())
+                                                        .startTime(course.getStartTime())
+                                                        .endTime(course.getEndTime())
+                                                        .build());
+
+                                                lastEndTime = course.getEndTime();
+                                        }
+
+                                        return HorarioDTO.Day.builder()
+                                                .day(dayOfWeek.getDisplayName())
+                                                .cursos(eventos)
+                                                .build();
+                                })
+                                .collect(Collectors.toList())
+                );
         }
 
         private final IEnrollmentRepository enrollmentRepository;

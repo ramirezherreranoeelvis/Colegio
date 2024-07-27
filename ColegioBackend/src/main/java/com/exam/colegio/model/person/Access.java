@@ -1,4 +1,4 @@
-package com.exam.colegio.mvc.entity.entity.person;
+package com.exam.colegio.model.person;
 
 import jakarta.persistence.*;
 import lombok.*;
