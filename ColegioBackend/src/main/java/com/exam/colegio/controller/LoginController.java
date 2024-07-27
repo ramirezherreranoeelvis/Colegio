@@ -1,4 +1,4 @@
-package com.exam.colegio.controller;
+package com.exam.colegio.mvc.controller;
 
 import com.exam.colegio.dao.IPersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ public class LoginController {
                 if (username.isBlank()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
                 }
-                var person = personDAO.findByUsername(username, password);
+                var personDTOOptional = personDAO.findByUsername(username, password);
 
-                if (person == null) {
+                if (personDTOOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The specified username does not exist.");
                 }
 
-                return ResponseEntity.ok(person);
+                return ResponseEntity.ok(personDTOOptional.get());
         }
 
         @Autowired

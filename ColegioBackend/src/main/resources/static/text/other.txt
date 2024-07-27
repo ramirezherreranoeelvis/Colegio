@@ -1,0 +1,105 @@
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "classroom")
+public class Classroom {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idClassroom;
+
+        @Column(name = "number", nullable = false, unique = true)
+        private int number;
+
+        @Column(name = "floor", nullable = false)
+        private int floor;
+
+}
+public enum DayOfWeek {
+
+        MONDAY("LUNES"),
+        TUESDAY("MARTES"),
+        WEDNESDAY("MIERCOLES"),
+        THURSDAY("JUEVES"),
+        FRIDAY("VIERNES"),
+        SATURDAY("SABADO"),
+        SUNDAY("DOMINGO");
+
+        private final String displayName;
+
+        DayOfWeek(String displayName) {
+                this.displayName = displayName;
+        }
+
+        public String getDisplayName() {
+                return displayName;
+        }
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "entrySchool")
+public class EntrySchool {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idEntrySchool;
+
+        @ManyToOne
+        @JoinColumn(name = "idPerson", nullable = false, updatable = false)
+        private Student student;
+
+        @Column(name = "timeEntry", nullable = false)
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date timeEntry;
+
+        @Column(name = "timeExit")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date timeExit;
+
+        @PrePersist
+        protected void onCreate() {
+                timeEntry = new Date();
+        }
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "grade")
+public class Grade {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idGrade;
+
+        @Column(name = "name", nullable = false, unique = true, length = 30)
+        private String name;
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@Table(name = "teacherCourseScheduled")
+public class TeacherCourseScheduled {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer idTeacherCourseScheduled;
+
+        @ManyToOne
+        @JoinColumn(name = "idTeacher", nullable = false)
+        private Teacher teacher;
+
+        @ManyToOne
+        @JoinColumn(name = "idCourseScheduled", nullable = false)
+        private CourseScheduled courseScheduled;
+
+        @Column(name = "salary", nullable = false, precision = 6, scale = 2)
+        private BigDecimal salary;
+
+}
