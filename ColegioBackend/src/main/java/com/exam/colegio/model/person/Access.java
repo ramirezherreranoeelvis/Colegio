@@ -24,10 +24,10 @@ public class Access {
         @Column(name = "username", nullable = false, unique = true, updatable = true, length = 20)
         private String username;
 
-        @Column(name = "description", length = 150)
-        private String description;
-
         @Column(name = "password", nullable = false, length = 20)
         private String password;
+
+        @Column(name = "description", length = 150)
+        private String description;
 
 }

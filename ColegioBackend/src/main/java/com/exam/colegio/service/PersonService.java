@@ -15,20 +15,22 @@ public class PersonService implements IPersonDAO {
 
         @Override
         public Optional<PersonLoginDTO> findByUsername(String username, String password) {
+
                 var personOptional = personRepository.findByAccessUsernameAndAccessPassword(username, password);
 
-                var personLogingOptional = personOptional.map(person -> PersonLoginDTO.builder()
+                return personOptional.map(person -> PersonLoginDTO.builder()
                         .dni(person.getDni())
                         .name(person.getName())
                         .surnamePaternal(person.getSurnamePaternal())
                         .surnameMaternal(person.getSurnameMaternal())
                         .phoneNumber(person.getPhoneNumber())
+                        .typePerson(person.getTypePerson())
+                        .accessEnabled(person.getAccess().isAccessEnabled())
                         .username(person.getAccess().getUsername())
                         .password(person.getAccess().getPassword())
+                        .description(person.getAccess().getDescription())
                         .build()
                 );
-
-                return personLogingOptional;
         }
 
 }

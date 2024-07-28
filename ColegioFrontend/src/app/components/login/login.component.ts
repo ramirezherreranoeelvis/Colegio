@@ -2,6 +2,8 @@ import { CommonModule, NgClass } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../../service/login.service';
+import { User } from '../../model/user';
 
 @Component({
         selector: 'app-login',
@@ -11,21 +13,32 @@ import { Router } from '@angular/router';
                 FormsModule
         ],
         templateUrl: './login.component.html',
-        styleUrl: './login.component.scss'
+        styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-        public username: string = "";
-        public password: string = "";
 
-        constructor(private router: Router) { }
+        protected contenedorActivo: number = 0;
 
-        protected goToSesion(form: NgForm) {
-                this.router.navigate(['workspace']);
+        constructor(private router: Router, private loginService: LoginService) { }
+
+        public goToSesion(form: NgForm) {
+                const { username, password } = form.value;
+                this.loginService.ingresarAlSistema(username, password)
+                        .subscribe(
+                                (userData: User) => {
+                                        if (!userData.accessEnabled) {
+                                                alert("Usted no tiene acceso al sistema")
+                                                return
+                                        }
+                                        this.router.navigate(['workspace']);
+                                },
+                                (error) => {
+                                        alert("No se pudo ingresar");
+                                        console.error('Error al obtener los datos del usuario:', error);
+                                }
+                        );
         }
 
-        //styles:
-        /* sombra en click */
-        protected contenedorActivo: number = 0;
         protected selectInputText(contenedor: number): void {
                 this.contenedorActivo = contenedor;
         }
