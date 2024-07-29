@@ -1,9 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-perfil',
 	standalone: true,
-	imports: [],
+	imports: [
+		CommonModule,
+		RouterOutlet,
+		RouterLink
+	],
 	templateUrl: './perfil.component.html',
 	styleUrl: './perfil.component.scss'
 })

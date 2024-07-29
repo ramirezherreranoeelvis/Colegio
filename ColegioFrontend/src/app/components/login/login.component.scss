@@ -1,4 +1,4 @@
-$color-fondo : linear-gradient(45deg, #ff0080, #000980, #8400ffde);
+$color-fondo : linear-gradient(45deg, #E31C48, #000980, #8400ffde);
 $color-celeste: #0dcaf0;
 $color-azul-oscuro: #07085e;
 $color-azul-oscuro-2: #000141;
@@ -11,6 +11,20 @@ $text-gradient: (
 );
 
 .login {
+        &::-webkit-scrollbar {
+                width: 15px;
+                background-color: #ff0080;
+
+                /* background-color: #F5F7FA; */
+                &-thumb {
+                        border-radius: 10px;
+                        background: #000980;
+                }
+        }
+}
+
+.login {
+        overflow: auto;
         width: 100vw;
         height: 100vh;
         display: flex;
@@ -61,10 +75,10 @@ $text-gradient: (
                 flex-direction: column;
 
                 label {
-                        font-family: "Lexend", sans-serif;
-                        color: #def6ff;
+                        font-family: "lexend", sans-serif;
+                        color: #ecfffe;
                         font-weight: normal;
-                        font-size: 22px;
+                        font-size: 25px;
                         padding: 10px 25px;
                 }
 

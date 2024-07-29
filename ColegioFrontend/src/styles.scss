@@ -10,28 +10,4 @@
 * {
     margin: 0;
     padding: 0;
-    text-decoration: none;
-    list-style: none;
-
-}
-
-app-root {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-
-body {
-    width: 100vw;
-    height: 100vh;
-
-    &::-webkit-scrollbar {
-        width: 15px;
-        background-color: #ff0080;
-
-        &-thumb {
-            border-radius: 50px;
-            background: #1900ff;
-        }
-    }
 }

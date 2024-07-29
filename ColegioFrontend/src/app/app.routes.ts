@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { NotasGeneralesComponent } from './components/home/workspace/home/notas-generales/notas-generales.component';
-import { HorarioComponent } from './components/home/workspace/home/horario/horario.component';
-import { HistorialComponent } from './components/home/workspace/home/historial/historial.component';
-import { CursosComponent } from './components/home/workspace/home/cursos/cursos.component';
-import { ReportesIncidentesComponent } from './components/home/workspace/home/reportes-incidentes/reportes-incidentes.component';
-
-import { MatriculaComponent } from './components/home/workspace/matricula/matricula.component';
-import { WorkspaceComponent } from './components/home/workspace/workspace.component';
-import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { HomeComponent } from './components/dashboard/workspace/home/home.component';
+import { CursosComponent } from './components/dashboard/workspace/home/cursos/cursos.component';
+import { HistorialComponent } from './components/dashboard/workspace/home/historial/historial.component';
+import { HorarioComponent } from './components/dashboard/workspace/home/horario/horario.component';
+import { NotasGeneralesComponent } from './components/dashboard/workspace/home/notas-generales/notas-generales.component';
+import { ReportesIncidentesComponent } from './components/dashboard/workspace/home/reportes-incidentes/reportes-incidentes.component';
+import { MatriculaComponent } from './components/dashboard/workspace/matricula/matricula.component';
+import { RegistrarMatriculaComponent } from './components/dashboard/workspace/matricula/registrar-matricula/registrar-matricula.component';
+import { RegistrarPagoMatriculaComponent } from './components/dashboard/workspace/matricula/registrar-pago-matricula/registrar-pago-matricula.component';
+import { RegistrarPagoMensualComponent } from './components/dashboard/workspace/matricula/registrar-pago-mensual/registrar-pago-mensual.component';
 
 export const routes: Routes = [
         {
@@ -22,51 +24,80 @@ export const routes: Routes = [
                 component: LoginComponent
         },
         {
-                path: 'workspace',
-                title: 'workspace',
-                component: WorkspaceComponent
-        },
-        {
-                path: 'home',
-                title: 'home',
-                component: HomeComponent,
+                path: 'dashboard',
+                title: 'dashboard',
+                component: DashboardComponent,
                 children: [
                         {
                                 path: '',
-                                redirectTo: 'horario',
+                                redirectTo: 'home',
                                 pathMatch: 'full'
                         },
                         {
-                                path: 'cursos',
-                                title: 'cursos',
-                                component: CursosComponent
+                                path: 'home',
+                                title: 'home',
+                                component: HomeComponent,
+                                children: [
+                                        {
+                                                path: '',
+                                                redirectTo: 'horario',
+                                                pathMatch: 'full'
+                                        },
+                                        {
+                                                path: 'cursos',
+                                                title: 'cursos',
+                                                component: CursosComponent
+                                        },
+                                        {
+                                                path: 'historial',
+                                                title: 'historial',
+                                                component: HistorialComponent
+                                        },
+                                        {
+                                                path: 'horario',
+                                                title: 'horario',
+                                                component: HorarioComponent
+                                        },
+                                        {
+                                                path: 'notas-generales',
+                                                title: 'notas generales',
+                                                component: NotasGeneralesComponent
+                                        },
+                                        {
+                                                path: 'reportes-incidentes',
+                                                title: 'reportes incidentes',
+                                                component: ReportesIncidentesComponent
+                                        }
+                                ]
                         },
                         {
-                                path: 'historial',
-                                title: 'historial',
-                                component: HistorialComponent
-                        },
-                        {
-                                path: 'horario',
-                                title: 'horario',
-                                component: HorarioComponent
-                        },
-                        {
-                                path: 'notas-generales',
-                                title: 'notas generales',
-                                component: NotasGeneralesComponent
-                        },
-                        {
-                                path: 'reportes-incidentes',
-                                title: 'reportes incidentes',
-                                component: ReportesIncidentesComponent
-                        },
+                                path: 'matricula',
+                                title: 'matricula',
+                                component: MatriculaComponent,
+                                children: [
+                                        {
+                                                path: '',
+                                                redirectTo: 'registrar-matricula',
+                                                pathMatch: 'full'
+                                        },
+                                        {
+                                                path: 'registrar-matricula',
+                                                title: 'registrar-matricula',
+                                                component: RegistrarMatriculaComponent
+                                        },
+                                        {
+                                                path: 'registrar-pago-matricula',
+                                                title: 'registrar-pago-matricula',
+                                                component: RegistrarPagoMatriculaComponent
+                                        },
+                                        {
+                                                path: 'registrar-pago-mensual',
+                                                title: 'registrar-pago-mensual',
+                                                component: RegistrarPagoMensualComponent
+                                        }
+                                ]
+                        }
                 ]
-        },
-        {
-                path: 'matrcicula',
-                title: 'matricula',
-                component: MatriculaComponent,
-                children: []
+
         }
 ];

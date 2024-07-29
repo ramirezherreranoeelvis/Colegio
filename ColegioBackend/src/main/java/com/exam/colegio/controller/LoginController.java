@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class LoginController {
 
-        java.util.logging.Logger l = java.util.logging.Logger.getLogger(getClass().getName());
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
         @GetMapping
         public ResponseEntity<?> ingresarSistema(@RequestParam String username, @RequestParam String password) {
@@ -29,7 +29,7 @@ public class LoginController {
                 if (personDTOOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("The specified username does not exist.");
                 }
-                l.info(personDTOOptional.get().getTypePerson());
+                logger.info(personDTOOptional.get().getTypePerson());
                 return ResponseEntity.ok(personDTOOptional.get());
 
         }

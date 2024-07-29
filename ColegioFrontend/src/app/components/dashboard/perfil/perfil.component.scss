@@ -1,0 +1,68 @@
+$font_lexend: lexend, System-UI;
+$color__fondo-data: #ffffff;
+$color__boder-separation: linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
+
+.perfil {
+    height: 100vh;
+    display: flex;
+    font-family: $font_lexend;
+    justify-content: center;
+    align-items: center;
+
+    &__content {
+        padding: 10px;
+        background-color: $color__fondo-data;
+        width: 85%;
+        border-radius: 3px;
+        box-shadow: 0 0 2px 1px #0000004d;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        margin: 10px;
+        font-size: 12px;
+    }
+
+    &__label {
+        margin: 3px 0;
+    }
+
+    &__separation-data-options {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__border {
+        background: $color__boder-separation ;
+        width: 90%;
+        height: 1px;
+    }
+
+    &__options {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: black;
+        background-color: #ffffff;
+        border: none;
+        margin: 0 16px;
+        font-family: "Work Sans";
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px 45px;
+        border-radius: 3px;
+        box-shadow: 0 0 2px 1px #0000004d;
+        transition: .1s background, .1s color;
+
+        &:hover {
+            color: #9af8ff;
+            background: #19008a;
+            box-shadow: 2px 2px 2px 0px #0000004d;
+        }
+    }
+}

@@ -2,8 +2,9 @@ import { CommonModule, NgClass } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginService } from '../../service/login.service';
+
 import { User } from '../../model/user';
+import { LoginService } from './login.service';
 
 @Component({
         selector: 'app-login',

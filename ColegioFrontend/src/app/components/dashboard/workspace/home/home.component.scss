@@ -1,0 +1,44 @@
+$font_lexend: lexend, System-UI;
+
+.home {
+    height: 100%;
+    &__menu-list {
+        background-color: #2222e4;
+        width: 100%;
+        flex: 1;
+        list-style: none;
+        display: flex;
+        font-family: $font_lexend;
+        box-shadow: 0px 0px 10px 0px #0000004d;
+    }
+
+    &__menu-item {
+        display: flex;
+        flex: 1;
+
+        a {
+
+            text-decoration: none;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-transform: capitalize;
+            margin: 1px;
+            height: 35px;
+            flex: 1;
+            background: #ffffff;
+            color: #1a3cff;
+            transition: background .1s, color .1s;
+
+            &:hover {
+                color: #def6ff;
+                background: #ffffff00;
+            }
+        }
+    }
+    &__content{
+        overflow: auto;
+        height: calc(100% - 37px);
+    }
+}

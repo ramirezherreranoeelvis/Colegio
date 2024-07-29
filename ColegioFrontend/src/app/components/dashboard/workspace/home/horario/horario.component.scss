@@ -5,8 +5,9 @@ $color-btnDonwloadHorario: #143ef7;
 $sombra-input: 2px 1px 10px 0 #00065a;
 
 .body {
+    overflow: auto;
     background: $color-fondo;
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
