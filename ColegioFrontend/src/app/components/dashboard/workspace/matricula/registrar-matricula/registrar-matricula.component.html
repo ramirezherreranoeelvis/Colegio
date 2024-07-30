@@ -1,1 +1,91 @@
-<p>registrar-matricula works!</p>
+<section class="registrar-matricula">
+    <div class="registrar-matricula__content">
+        <h1 class="registrar-matricula__title">Registro de Matrícula</h1>
+        <section class="registrar-matricula__datos">
+            <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
+            <select class="registrar-matricula__select">
+                <option selected="">Hijos</option>
+                <option value="1">Fernando</option>
+                <option value="2">Adrian</option>
+                <option value="3">Aaron</option>
+            </select>
+        </section>
+        <section class="registrar-matricula__hijo">
+            <h2 class="registrar-matricula__subtitle">Datos personales del Hijo:</h2>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Alumno:
+                </span><span class="registrar-matricula__data">Fernando Alberto Cori Huaman</span></article>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">DNI: </span><span
+                    class="registrar-matricula__data">00999000</span></article>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Grado:
+                </span><span class="registrar-matricula__data">1° primaria</span></article>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Edad:
+                </span><span class="registrar-matricula__data">6</span></article>
+        </section>
+        <section class="registrar-matricula__detalles">
+            <h2 class="registrar-matricula__subtitle">Detalles de Matrícula:</h2>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Grado:
+                </span><span class="registrar-matricula__data">2° primaria</span></article>
+            <article class="registrar-matricula__horario">
+                <span class="registrar-matricula__attribute">Horario: </span>
+                <div class="registrar-matricula__horario-content">
+                    <table class="registrar-matricula__horario-table" border="1">
+                        <thead class="registrar-matricula__horario-header">
+                            <tr class="registrar-matricula__horario-header-row">
+                                <th class="registrar-matricula__horario-header-item" colspan="6">Horario</th>
+                            </tr>
+                            <tr class="registrar-matricula__horario-header-row">
+                                <th class="registrar-matricula__horario-header-item">Hora</th>
+                                @for (day of horario; track $index) {
+                                    @if (day.cursos.length!=0) {
+                                        <th class="registrar-matricula__horario-header-item">{{day.day}}</th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody class="registrar-matricula__horario-body">
+                            @for (day of getHorario(); track $index) {
+                                <tr class="registrar-matricula__horario-body-row">
+                                    <td class="registrar-matricula__horario-body-item">{{day.startTime}} - {{day.endTime}}</td>
+                                </tr>
+                            }
+                            <tr class="registrar-matricula__horario-body-row">
+                                <td class="registrar-matricula__horario-body-item">7:30 - 8:30</td>
+                                <td class="registrar-matricula__horario-body-item">razonamiento matemático</td>
+                                <td class="registrar-matricula__horario-body-item">álgebra</td>
+                                <td class="registrar-matricula__horario-body-item">razonamiento verbal</td>
+                                <td class="registrar-matricula__horario-body-item">literatura</td>
+                                <td class="registrar-matricula__horario-body-item">comprensión lectora</td>
+                            </tr>
+                            <tr class="registrar-matricula__horario-body-row registrar-matricula__horario-body-recreo">
+                                <td class="registrar-matricula__horario-body-item">8:30 - 8:40</td>
+                                <td class="registrar-matricula__horario-body-item" colspan="5">recreo</td>
+                            </tr>
+                            <tr class="registrar-matricula__horario-body-row">
+                                <td class="registrar-matricula__horario-body-item">12:40 - 14:00</td>
+                                <td class="registrar-matricula__horario-body-item">biología</td>
+                                <td class="registrar-matricula__horario-body-item">historia universal</td>
+                                <td class="registrar-matricula__horario-body-item">química</td>
+                                <td class="registrar-matricula__horario-body-item">historia del Perú</td>
+                                <td class="registrar-matricula__horario-body-item">geometría</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- Tabla vacia para llenar -->
+                    <table class="registrar-matricula__horario-table" border="1">
+                        <tr class="registrar-matricula__horario-header-row">
+                            <th class="registrar-matricula__horario-header-item">Hora</th>
+                            
+                        </tr>
+                    </table>
+                </div>
+            </article>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Inicio:
+                </span><span class="registrar-matricula__data">04/03/2024</span></article>
+            <article class="registrar-matricula__article"><span class="registrar-matricula__attribute">Precio:
+                </span><span class="registrar-matricula__data">S/150</span></article>
+        </section>
+        <section class="registrar-matricula__opciones">
+            <input type="button" class="registrar-matricula__button" value="Registrar matrícula">
+        </section>
+    </div>
+</section>

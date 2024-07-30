@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 declare var paypal;
