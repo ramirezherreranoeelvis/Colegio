@@ -1,6 +1,8 @@
 package com.exam.colegio.controller;
 
 import com.exam.colegio.dto.StudentDTO;
+import com.exam.colegio.model.enrollment.Enrollment;
+import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.person.Father;
 import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.model.person.Student;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 
@@ -93,19 +97,55 @@ public class EnrollmentController {
                 return ResponseEntity.ok(listStudentsDTO);
         }
 
+        @PostMapping("/registrar-matricula")
+        public ResponseEntity<String> registrarMatricula(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
+                var studentOptional = this.studentService.findByDni(dniStudent);
+                var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
+                //validadion de alumno y matricula existente
+                if (studentOptional.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
+                }
+                if (enrollmentOptional.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enrollment Not Found");
+                }
+                var student = studentOptional.get();
+                var enrollment = enrollmentOptional.get();
+                //validadocion de grado y alumno
+                BiPredicate<Student, Enrollment> validacionGrado = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
+
+                if (validacionGrado.test(student, enrollment)) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Esa matricula no es para ese estudiante");
+                }
+
+                // validar que no este registrado:
+                var enrollmentStudentExist = enrollmentStudentService.isStudentEnrolled(student, enrollment);
+                if (enrollmentStudentExist) {
+                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
+                }
+
+                var enrollmentStudent = this.enrollmentStudentService.save(EnrollmentStudent.builder().student(student).enrollment(enrollment).build());
+                if (enrollmentStudent == null) {
+                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Hubo un error al guardar");
+                }
+                return ResponseEntity.ok("Alumno registrado correctamente");
+        }
+
+
         private final StudentService studentService;
         private final EnrollmentService enrollmentService;
         private final PersonService personService;
         private final FatherService fatherService;
         private final MotherService motherService;
+        private final EnrollmentStudentService enrollmentStudentService;
 
         @Autowired
-        public EnrollmentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, FatherService fatherService, MotherService motherService) {
+        public EnrollmentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, FatherService fatherService, MotherService motherService, EnrollmentStudentService enrollmentStudentService) {
                 this.studentService = studentService;
                 this.enrollmentService = enrollmentService;
                 this.personService = personService;
                 this.fatherService = fatherService;
                 this.motherService = motherService;
+                this.enrollmentStudentService = enrollmentStudentService;
         }
 
 }
