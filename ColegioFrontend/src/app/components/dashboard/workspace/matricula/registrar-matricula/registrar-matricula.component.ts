@@ -16,41 +16,22 @@ export class RegistrarMatriculaComponent {
         }
 
         protected getHorario() {
-                var horarioTransformado = [
-                        {
-                                "startTime": "07:30:00",
-                                "endTime": "08:50:00"
-                        },
-                        {
-                                "startTime": "08:50:00",
-                                "endTime": "09:10:00"
-                        },
-                        {
-                                "startTime": "09:10:00",
-                                "endTime": "10:30:00"
-                        },
-                        {
-                                "startTime": "10:30:00",
-                                "endTime": "11:00:00"
-                        },
-                        {
-                                "startTime": "11:00:00",
-                                "endTime": "12:20:00"
-                        },
-                        {
-                                "startTime": "12:20:00",
-                                "endTime": "12:40:00"
-                        },
-                        {
-                                "startTime": "12:40:00",
-                                "endTime": "14:00:00"
-                        },
-                        {
-                                "startTime": "07:35:00",
-                                "endTime": "08:50:00"
-                        }
-                ]
-                return horarioTransformado
+                const horarioTransformado = [];
+                this.horario.forEach(day => {
+                        day.cursos.forEach(curso => {
+                                const existingHorario = horarioTransformado.find(h => h.startTime === curso.startTime && h.endTime === curso.endTime);
+                                if (existingHorario) {
+                                        existingHorario.cursos.push(curso.event);
+                                } else {
+                                        horarioTransformado.push({
+                                                startTime: curso.startTime,
+                                                endTime: curso.endTime,
+                                                cursos: [curso.event]
+                                        });
+                                }
+                        });
+                });
+                return horarioTransformado;
         }
 
 

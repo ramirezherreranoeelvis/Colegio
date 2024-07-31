@@ -55,7 +55,7 @@ export class RegistrarMatriculaService {
                                 "cursos": [
                                         {
                                                 "event": "razonamiento matemático",
-                                                "startTime": "07:35:00",
+                                                "startTime": "07:30:00",
                                                 "endTime": "08:50:00"
                                         },
                                         {

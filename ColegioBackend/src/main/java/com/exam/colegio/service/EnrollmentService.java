@@ -5,15 +5,18 @@ import com.exam.colegio.dto.HorarioDTO;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
+import com.exam.colegio.model.other.Grade;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
 import com.exam.colegio.util.DayOfWeek;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class EnrollmentService implements IEnrollmentDAO {
@@ -89,6 +92,17 @@ public class EnrollmentService implements IEnrollmentDAO {
                                 })
                                 .collect(Collectors.toList())
                 );
+        }
+
+        @Override
+        public Optional<Enrollment> findByGrade(Grade grade) {
+                var idGrade = grade.getIdGrade();
+                return this.enrollmentRepository.findAll().stream()
+                        .filter(enrollment ->
+                                enrollment.getSeason().getYear().equals(String.valueOf(LocalDate.now().getYear() + 1)) &&
+                                enrollment.getGrade().getIdGrade() == idGrade
+                        )
+                        .findFirst();
         }
 
         private final IEnrollmentRepository enrollmentRepository;

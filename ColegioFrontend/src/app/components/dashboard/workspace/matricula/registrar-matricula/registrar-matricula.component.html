@@ -36,46 +36,23 @@
                             <tr class="registrar-matricula__horario-header-row">
                                 <th class="registrar-matricula__horario-header-item">Hora</th>
                                 @for (day of horario; track $index) {
-                                    @if (day.cursos.length!=0) {
-                                        <th class="registrar-matricula__horario-header-item">{{day.day}}</th>
-                                    }
+                                @if (day.cursos.length!=0) {
+                                <th class="registrar-matricula__horario-header-item">{{day.day}}</th>
+                                }
                                 }
                             </tr>
                         </thead>
                         <tbody class="registrar-matricula__horario-body">
                             @for (day of getHorario(); track $index) {
-                                <tr class="registrar-matricula__horario-body-row">
-                                    <td class="registrar-matricula__horario-body-item">{{day.startTime}} - {{day.endTime}}</td>
-                                </tr>
+                            <tr class="registrar-matricula__horario-body-row">
+                                <td class="registrar-matricula__horario-body-item">{{day.startTime}} - {{day.endTime}}
+                                </td>
+                                @for (curso of day.cursos; track $index) {
+                                <td class="registrar-matricula__horario-body-item">{{curso}}</td>
+                                }
+                            </tr>
                             }
-                            <tr class="registrar-matricula__horario-body-row">
-                                <td class="registrar-matricula__horario-body-item">7:30 - 8:30</td>
-                                <td class="registrar-matricula__horario-body-item">razonamiento matemático</td>
-                                <td class="registrar-matricula__horario-body-item">álgebra</td>
-                                <td class="registrar-matricula__horario-body-item">razonamiento verbal</td>
-                                <td class="registrar-matricula__horario-body-item">literatura</td>
-                                <td class="registrar-matricula__horario-body-item">comprensión lectora</td>
-                            </tr>
-                            <tr class="registrar-matricula__horario-body-row registrar-matricula__horario-body-recreo">
-                                <td class="registrar-matricula__horario-body-item">8:30 - 8:40</td>
-                                <td class="registrar-matricula__horario-body-item" colspan="5">recreo</td>
-                            </tr>
-                            <tr class="registrar-matricula__horario-body-row">
-                                <td class="registrar-matricula__horario-body-item">12:40 - 14:00</td>
-                                <td class="registrar-matricula__horario-body-item">biología</td>
-                                <td class="registrar-matricula__horario-body-item">historia universal</td>
-                                <td class="registrar-matricula__horario-body-item">química</td>
-                                <td class="registrar-matricula__horario-body-item">historia del Perú</td>
-                                <td class="registrar-matricula__horario-body-item">geometría</td>
-                            </tr>
                         </tbody>
-                    </table>
-                    <!-- Tabla vacia para llenar -->
-                    <table class="registrar-matricula__horario-table" border="1">
-                        <tr class="registrar-matricula__horario-header-row">
-                            <th class="registrar-matricula__horario-header-item">Hora</th>
-                            
-                        </tr>
                     </table>
                 </div>
             </article>

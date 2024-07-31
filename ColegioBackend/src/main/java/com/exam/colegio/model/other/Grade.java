@@ -19,4 +19,12 @@ public class Grade {
         @Column(name = "name", nullable = false, unique = true, length = 30)
         private String name;
 
+        @ManyToOne
+        @JoinColumn(name = "idNextGrade")
+        private Grade nextGrade;
+
+        @ManyToOne
+        @JoinColumn(name = "idPreviousGrade")
+        private Grade previousGrade;
+
 }
