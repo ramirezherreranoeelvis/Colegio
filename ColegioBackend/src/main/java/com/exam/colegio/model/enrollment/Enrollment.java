@@ -21,7 +21,7 @@ public class Enrollment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEnrollment;
+        private int idEnrollment;
 
         @ManyToOne
         @JoinColumn(name = "idSeason", nullable = false)
@@ -32,10 +32,10 @@ public class Enrollment {
         private Grade grade;
 
         @Column(name = "vacancies", nullable = false)
-        private Integer vacancies;
+        private int vacancies;
 
         @Column(name = "enrolled", nullable = false)
-        private Integer enrolled;
+        private int enrolled;
 
         @Column(name = "cost", nullable = false, precision = 6, scale = 2)
         private BigDecimal cost;

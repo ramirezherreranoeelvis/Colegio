@@ -17,7 +17,7 @@ public class GradeCourseScheduled {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idGradeCourseScheduled;
+        private int idGradeCourseScheduled;
 
         @ManyToOne
         @JoinColumn(name = "idGradeType", nullable = false)

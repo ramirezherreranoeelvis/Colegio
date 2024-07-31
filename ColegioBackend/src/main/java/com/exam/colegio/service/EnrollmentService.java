@@ -33,7 +33,7 @@ public class EnrollmentService implements IEnrollmentDAO {
                 //buscamos si ya existe un registro a la matricula ya existente para no guardar por segunda vez
                 var enrollmentStudentOptional = enrollmentStudents.stream()
                         .filter(enrollmentStudent -> enrollmentStudent.getStudent().getDni().equals(student.getDni()) &&
-                                                     enrollmentStudent.getEnrollment().getIdEnrollment().equals(enrollment.getIdEnrollment())
+                                                     enrollmentStudent.getEnrollment().getIdEnrollment() == enrollment.getIdEnrollment()
                         ).findFirst();
                 if (enrollmentStudentOptional.isPresent()) {
                         return Optional.empty();

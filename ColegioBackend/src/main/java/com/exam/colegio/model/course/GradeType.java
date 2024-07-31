@@ -14,7 +14,7 @@ public class GradeType {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idGradeType;
+        private int idGradeType;
 
         @Column(name = "name", nullable = false, length = 20)
         private String name;
