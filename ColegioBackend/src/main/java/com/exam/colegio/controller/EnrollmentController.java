@@ -1,6 +1,7 @@
 package com.exam.colegio.controller;
 
-import com.exam.colegio.dto.StudentDTO;
+import com.exam.colegio.dto.MatriculaRegistrarDTO;
+import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.person.Father;
@@ -12,11 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 
 /**
@@ -32,18 +32,8 @@ import java.util.stream.Collectors;
 public class EnrollmentController {
 
         @GetMapping("/horario-matricula")
-        public ResponseEntity<?> getHorario(@RequestParam String dniStudent) {
-                var studentOptional = this.studentService.findByDni(dniStudent);
-                if (studentOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
-                }
-                var student = studentOptional.get();
-                var grade = student.getGrade();
-                var gradeNext = grade.getNextGrade();
-                if (gradeNext == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un siguiente grado");
-                }
-                var enrollmentOptional = this.enrollmentService.findByGrade(gradeNext);
+        public ResponseEntity<?> getHorario(@RequestParam int idEnrollment) {
+                var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
                 if (enrollmentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
                 }
@@ -51,6 +41,26 @@ public class EnrollmentController {
                 return ResponseEntity.ok(horarioDTO);
         }
 
+        /*
+            public ResponseEntity<?> getHorarioCodeAnterior(@RequestParam String dniStudent) {
+                    var studentOptional = this.studentService.findByDni(dniStudent);
+                    if (studentOptional.isEmpty()) {
+                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
+                    }
+                    var student = studentOptional.get();
+                    var grade = student.getGrade();
+                    var gradeNext = grade.getNextGrade();
+                    if (gradeNext == null) {
+                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un siguiente grado");
+                    }
+                    var enrollmentOptional = this.enrollmentService.findByGrade(gradeNext);
+                    if (enrollmentOptional.isEmpty()) {
+                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
+                    }
+                    var horarioDTO = this.enrollmentService.getScheduleByEnrollment(enrollmentOptional.get());
+                    return ResponseEntity.ok(horarioDTO);
+            }
+    */
         @GetMapping("/students")
         public ResponseEntity<?> getStudents(@RequestParam String dniParent) {
                 Optional<String> typeParentOptional = personService.getTypeParent(dniParent);
@@ -79,22 +89,16 @@ public class EnrollmentController {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No children found");
                 }
 
-                List<StudentDTO> listStudentsDTO = listStudents.stream()
-                        .map(student -> StudentDTO.builder()
-                                .dni(student.getDni())
-                                .name(student.getName())
-                                .surnamePaternal(student.getSurnamePaternal())
-                                .surnameMaternal(student.getSurnameMaternal())
-                                .phoneNumber(student.getPhoneNumber())
-                                .accessEnabled(student.getAccess().isAccessEnabled())
-                                .username(student.getAccess().getUsername())
-                                .password(student.getAccess().getPassword())
-                                .description(student.getAccess().getDescription())
-                                .grade(student.getGrade().getName())
-                                .build()
-                        ).collect(Collectors.toList());
-
-                return ResponseEntity.ok(listStudentsDTO);
+                return ResponseEntity.ok(listStudents.stream().map(student -> {
+                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        var enrollmentOptional = this.enrollmentService.findByGrade(student.getGrade().getNextGrade());
+                        MatriculaRegistrarDTO enrollmentDTO = null;
+                        if (enrollmentOptional.isPresent()) {
+                                var enrollment = enrollmentOptional.get();
+                                enrollmentDTO = MatriculaRegistrarDTO.builder().idEnrollment(enrollment.getIdEnrollment()).startDate(formato.format(enrollment.getSeason().getStartDate())).nameGrade(enrollment.getGrade().getName()).vacancies(enrollment.getVacancies()).enrolled(enrollment.getEnrolled()).cost(enrollment.getCost()).monthlyFee(enrollment.getMonthlyFee()).build();
+                        }
+                        return StudentRegistrarMatriculaDTO.builder().dni(student.getDni()).name(student.getName()).surnamePaternal(student.getSurnamePaternal()).surnameMaternal(student.getSurnameMaternal()).phoneNumber(student.getPhoneNumber()).accessEnabled(student.getAccess().isAccessEnabled()).username(student.getAccess().getUsername()).password(student.getAccess().getPassword()).description(student.getAccess().getDescription()).grade(student.getGrade().getName()).nextEnrollment(enrollmentDTO).build();
+                }).toList());
         }
 
         @PostMapping("/registrar-matricula")

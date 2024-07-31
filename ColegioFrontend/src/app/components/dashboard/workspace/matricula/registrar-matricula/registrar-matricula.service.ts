@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
+import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
 
 @Injectable({
         providedIn: 'root'
@@ -221,4 +222,50 @@ export class RegistrarMatriculaService {
                 ]
         }
 
+        public getStudent(): StudentRegistrarMatricula[] {
+                return [
+                        {
+                                "dni": "17464282",
+                                "name": "Luis",
+                                "surnamePaternal": "Ramirez",
+                                "surnameMaternal": "Salvatierra",
+                                "phoneNumber": "+51 169 617 791",
+                                "accessEnabled": true,
+                                "username": "LRamirezSa",
+                                "password": "10002000",
+                                "description": "",
+                                "grade": "2° secundaria",
+                                "nextEnrollment": {
+                                        "idEnrollment": 9,
+                                        "startDate": "2025-04-04",
+                                        "nameGrade": "3° secundaria",
+                                        "vacancies": 40,
+                                        "enrolled": 0,
+                                        "cost": 250.00,
+                                        "monthlyFee": 250.00
+                                }
+                        },
+                        {
+                                "dni": "65206787",
+                                "name": "Gonzalo",
+                                "surnamePaternal": "Ramirez",
+                                "surnameMaternal": "Salvatierra",
+                                "phoneNumber": "+51 135 854 938",
+                                "accessEnabled": true,
+                                "username": "GRamirezSa",
+                                "password": "10002000",
+                                "description": "",
+                                "grade": "2° secundaria",
+                                "nextEnrollment": {
+                                        "idEnrollment": 9,
+                                        "startDate": "2025-04-04",
+                                        "nameGrade": "3° secundaria",
+                                        "vacancies": 40,
+                                        "enrolled": 0,
+                                        "cost": 250.00,
+                                        "monthlyFee": 250.00
+                                }
+                        }
+                ]
+        }
 }
