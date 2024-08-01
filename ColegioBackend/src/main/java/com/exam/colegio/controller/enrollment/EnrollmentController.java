@@ -105,6 +105,7 @@ public class EnrollmentController {
         public ResponseEntity<String> registrarMatricula(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
                 var studentOptional = this.studentService.findByDni(dniStudent);
                 var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
+
                 //validadion de alumno y matricula existente
                 if (studentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
@@ -114,6 +115,7 @@ public class EnrollmentController {
                 }
                 var student = studentOptional.get();
                 var enrollment = enrollmentOptional.get();
+
                 //validadocion de grado y alumno
                 BiPredicate<Student, Enrollment> validacionGrado = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
 
