@@ -1,4 +1,4 @@
-package com.exam.colegio.controller;
+package com.exam.colegio.controller.enrollment;
 
 import com.exam.colegio.dto.MatriculaRegistrarDTO;
 import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;

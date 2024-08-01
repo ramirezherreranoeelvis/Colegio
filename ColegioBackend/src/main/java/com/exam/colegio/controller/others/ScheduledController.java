@@ -1,4 +1,4 @@
-package com.exam.colegio.controller;
+package com.exam.colegio.controller.others;
 
 import com.exam.colegio.dao.IEnrollmentDAO;
 import com.exam.colegio.dao.IStudentDAO;

@@ -1,4 +1,4 @@
-package com.exam.colegio.controller;
+package com.exam.colegio.controller.login;
 
 import com.exam.colegio.dao.IPersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;

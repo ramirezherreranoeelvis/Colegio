@@ -1,4 +1,4 @@
-package com.exam.colegio.controller;
+package com.exam.colegio.controller.others;
 
 import com.exam.colegio.repository.course.*;
 import com.exam.colegio.repository.enrollment.*;
