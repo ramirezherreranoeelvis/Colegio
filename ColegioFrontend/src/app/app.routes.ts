@@ -77,7 +77,7 @@ export const routes: Routes = [
                                 children: [
                                         {
                                                 path: '',
-                                                redirectTo: 'registrar-matricula',
+                                                redirectTo: 'registrar-pago-matricula',
                                                 pathMatch: 'full'
                                         },
                                         {

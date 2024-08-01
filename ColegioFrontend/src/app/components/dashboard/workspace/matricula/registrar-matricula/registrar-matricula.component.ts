@@ -31,7 +31,6 @@ export class RegistrarMatriculaComponent implements OnInit {
                                 this.students = data;
                         },
                         (error) => {
-                                alert(error.error)
                                 console.error('Error fetching students', error);
                         }
                 );
