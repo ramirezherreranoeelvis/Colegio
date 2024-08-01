@@ -38,7 +38,7 @@ public class EnrollmentController {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
                 }
                 var horarioDTO = this.enrollmentService.getScheduleByEnrollment(enrollmentOptional.get());
-                return ResponseEntity.ok(horarioDTO);
+                return ResponseEntity.ok(horarioDTO.getWeekHorario());
         }
 
         /*
@@ -117,16 +117,18 @@ public class EnrollmentController {
                 //validadocion de grado y alumno
                 BiPredicate<Student, Enrollment> validacionGrado = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
 
-                if (validacionGrado.test(student, enrollment)) {
+                if (!validacionGrado.test(student, enrollment)) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Esa matricula no es para ese estudiante");
                 }
 
                 // validar que no este registrado:
                 var enrollmentStudentExist = enrollmentStudentService.isStudentEnrolled(student, enrollment);
                 if (enrollmentStudentExist) {
-                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
+                        logger.info("no comprobo");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
                 }
 
+                logger.info("no lo verifico");
                 var enrollmentStudent = this.enrollmentStudentService.save(EnrollmentStudent.builder().student(student).enrollment(enrollment).build());
                 if (enrollmentStudent == null) {
                         ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Hubo un error al guardar");
@@ -151,5 +153,7 @@ public class EnrollmentController {
                 this.motherService = motherService;
                 this.enrollmentStudentService = enrollmentStudentService;
         }
+
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
 }

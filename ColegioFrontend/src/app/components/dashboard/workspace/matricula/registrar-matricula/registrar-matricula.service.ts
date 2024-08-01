@@ -1,271 +1,43 @@
 import { Injectable } from '@angular/core';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
 import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
         providedIn: 'root'
 })
 export class RegistrarMatriculaService {
+        private url: string = "http://localhost:8080/enrollment";
 
-        constructor() { }
+        constructor(private httpClient: HttpClient) { }
 
-        public getHorarioMatricula(): DayHorario[] {
-                return [
-                        {
-                                "day": "LUNES",
-                                "cursos": [
-                                        {
-                                                "event": "química",
-                                                "startTime": "07:30:00",
-                                                "endTime": "08:50:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "08:50:00",
-                                                "endTime": "09:10:00"
-                                        },
-                                        {
-                                                "event": "aritmética",
-                                                "startTime": "09:10:00",
-                                                "endTime": "10:30:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "10:30:00",
-                                                "endTime": "11:00:00"
-                                        },
-                                        {
-                                                "event": "geometría",
-                                                "startTime": "11:00:00",
-                                                "endTime": "12:20:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "12:20:00",
-                                                "endTime": "12:40:00"
-                                        },
-                                        {
-                                                "event": "álgebra",
-                                                "startTime": "12:40:00",
-                                                "endTime": "14:00:00"
-                                        }
-                                ]
-                        },
-                        {
-                                "day": "MARTES",
-                                "cursos": [
-                                        {
-                                                "event": "razonamiento matemático",
-                                                "startTime": "07:30:00",
-                                                "endTime": "08:50:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "08:50:00",
-                                                "endTime": "09:10:00"
-                                        },
-                                        {
-                                                "event": "razonamiento verbal",
-                                                "startTime": "09:10:00",
-                                                "endTime": "10:30:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "10:30:00",
-                                                "endTime": "11:00:00"
-                                        },
-                                        {
-                                                "event": "literatura",
-                                                "startTime": "11:00:00",
-                                                "endTime": "12:20:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "12:20:00",
-                                                "endTime": "12:40:00"
-                                        },
-                                        {
-                                                "event": "comprensión lectora",
-                                                "startTime": "12:40:00",
-                                                "endTime": "14:00:00"
-                                        }
-                                ]
-                        },
-                        {
-                                "day": "MIERCOLES",
-                                "cursos": [
-                                        {
-                                                "event": "física",
-                                                "startTime": "07:30:00",
-                                                "endTime": "08:50:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "08:50:00",
-                                                "endTime": "09:10:00"
-                                        },
-                                        {
-                                                "event": "historia universal",
-                                                "startTime": "09:10:00",
-                                                "endTime": "10:30:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "10:30:00",
-                                                "endTime": "11:00:00"
-                                        },
-                                        {
-                                                "event": "cómputo",
-                                                "startTime": "11:00:00",
-                                                "endTime": "12:20:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "12:20:00",
-                                                "endTime": "12:40:00"
-                                        },
-                                        {
-                                                "event": "ingles",
-                                                "startTime": "12:40:00",
-                                                "endTime": "14:00:00"
-                                        }
-                                ]
-                        },
-                        {
-                                "day": "JUEVES",
-                                "cursos": [
-                                        {
-                                                "event": "biología",
-                                                "startTime": "07:30:00",
-                                                "endTime": "08:50:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "08:50:00",
-                                                "endTime": "09:10:00"
-                                        },
-                                        {
-                                                "event": "educación física",
-                                                "startTime": "09:10:00",
-                                                "endTime": "10:30:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "10:30:00",
-                                                "endTime": "11:00:00"
-                                        },
-                                        {
-                                                "event": "geografía",
-                                                "startTime": "11:00:00",
-                                                "endTime": "12:20:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "12:20:00",
-                                                "endTime": "12:40:00"
-                                        },
-                                        {
-                                                "event": "castellano",
-                                                "startTime": "12:40:00",
-                                                "endTime": "14:00:00"
-                                        }
-                                ]
-                        },
-                        {
-                                "day": "VIERNES",
-                                "cursos": [
-                                        {
-                                                "event": "ortografía",
-                                                "startTime": "07:30:00",
-                                                "endTime": "08:50:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "08:50:00",
-                                                "endTime": "09:10:00"
-                                        },
-                                        {
-                                                "event": "civica",
-                                                "startTime": "09:10:00",
-                                                "endTime": "10:30:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "10:30:00",
-                                                "endTime": "11:00:00"
-                                        },
-                                        {
-                                                "event": "historia del perú",
-                                                "startTime": "11:00:00",
-                                                "endTime": "12:20:00"
-                                        },
-                                        {
-                                                "event": "Recreo",
-                                                "startTime": "12:20:00",
-                                                "endTime": "12:40:00"
-                                        },
-                                        {
-                                                "event": "razonamiento matemático",
-                                                "startTime": "12:40:00",
-                                                "endTime": "14:00:00"
-                                        }
-                                ]
-                        },
-                        {
-                                "day": "SABADO",
-                                "cursos": []
-                        },
-                        {
-                                "day": "DOMINGO",
-                                "cursos": []
-                        }
-                ]
+        public getHorarioMatricula(idEnrollment: number): Observable<DayHorario[]> {
+                const params = new HttpParams().set('idEnrollment', idEnrollment.toString());
+                const urlHorarioMatricula = `${this.url}/horario-matricula`;
+                return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
+                        map(response => response)
+                );
         }
 
-        public getStudent(): StudentRegistrarMatricula[] {
-                return [
-                        {
-                                "dni": "17464282",
-                                "name": "Luis",
-                                "surnamePaternal": "Ramirez",
-                                "surnameMaternal": "Salvatierra",
-                                "phoneNumber": "+51 169 617 791",
-                                "accessEnabled": true,
-                                "username": "LRamirezSa",
-                                "password": "10002000",
-                                "description": "",
-                                "grade": "2° secundaria",
-                                "nextEnrollment": {
-                                        "idEnrollment": 9,
-                                        "startDate": "2025-04-04",
-                                        "nameGrade": "3° secundaria",
-                                        "vacancies": 40,
-                                        "enrolled": 0,
-                                        "cost": 250.00,
-                                        "monthlyFee": 250.00
-                                }
-                        },
-                        {
-                                "dni": "65206787",
-                                "name": "Gonzalo",
-                                "surnamePaternal": "Ramirez",
-                                "surnameMaternal": "Salvatierra",
-                                "phoneNumber": "+51 135 854 938",
-                                "accessEnabled": true,
-                                "username": "GRamirezSa",
-                                "password": "10002000",
-                                "description": "",
-                                "grade": "2° secundaria",
-                                "nextEnrollment": {
-                                        "idEnrollment": 9,
-                                        "startDate": "2025-04-04",
-                                        "nameGrade": "3° secundaria",
-                                        "vacancies": 40,
-                                        "enrolled": 0,
-                                        "cost": 250.00,
-                                        "monthlyFee": 250.00
-                                }
-                        }
-                ]
+        public getStudent(dniParent: string): Observable<StudentRegistrarMatricula[]> {
+                const params = new HttpParams().set('dniParent', dniParent);
+                const urlGetStudent = `${this.url}/students`;
+                return this.httpClient.get<StudentRegistrarMatricula[]>(urlGetStudent, { params }).pipe(
+                        map(response => response)
+                );
+        }
+
+        public registrarMatricula(student: StudentRegistrarMatricula): Observable<string> {
+                var idEnrollment: number = student.nextEnrollment.idEnrollment;
+                var dniStudent: string = student.dni;
+                const params = new HttpParams()
+                        .set('dniStudent', dniStudent)
+                        .set('idEnrollment', idEnrollment.toString());
+                const urlRegistrarMatricula = `${this.url}/registrar-matricula`;
+                return this.httpClient.post<string>(urlRegistrarMatricula, null, { params }).pipe(
+                        map(response => response)
+                );
         }
 }
