@@ -15,7 +15,7 @@ export class RegistrarMatriculaService {
 
         public getHorarioMatricula(idEnrollment: number): Observable<DayHorario[]> {
                 const params = new HttpParams().set('idEnrollment', idEnrollment.toString());
-                const urlHorarioMatricula = `${this.url}/horario-matricula`;
+                const urlHorarioMatricula = `${this.url}/horario`;
                 return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
                         map(response => response)
                 );
@@ -35,7 +35,7 @@ export class RegistrarMatriculaService {
                 const params = new HttpParams()
                         .set('dniStudent', dniStudent)
                         .set('idEnrollment', idEnrollment.toString());
-                const urlRegistrarMatricula = `${this.url}/registrar-matricula`;
+                const urlRegistrarMatricula = `${this.url}/registrar`;
                 return this.httpClient.post<string>(urlRegistrarMatricula, null, { params }).pipe(
                         map(response => response)
                 );

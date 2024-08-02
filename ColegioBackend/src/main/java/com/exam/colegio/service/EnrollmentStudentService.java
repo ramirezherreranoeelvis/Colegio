@@ -33,6 +33,8 @@ public class EnrollmentStudentService {
                                         es.getEnrollment().getIdEnrollment() == enrollment.getIdEnrollment());
         }
 
-
+        public EnrollmentStudent update(EnrollmentStudent enrollmentStudent) {
+                return enrollmentStudentRepository.save(enrollmentStudent);
+        }
 
 }

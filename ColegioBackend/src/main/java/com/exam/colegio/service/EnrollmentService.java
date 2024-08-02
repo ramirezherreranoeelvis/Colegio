@@ -105,13 +105,18 @@ public class EnrollmentService implements IEnrollmentDAO {
                         .findFirst();
         }
 
+
+        @Override
+        public Enrollment update(Enrollment enrollment) {
+                return this.enrollmentRepository.save(enrollment);
+        }
+
         private final IEnrollmentRepository enrollmentRepository;
 
         @Autowired
         public EnrollmentService(IEnrollmentRepository enrollmentRepository) {
                 this.enrollmentRepository = enrollmentRepository;
         }
-
 
 
 }

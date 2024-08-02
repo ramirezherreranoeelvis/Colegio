@@ -1,7 +1,18 @@
 <section class="registrar-pago-matricula">
         <div class="registrar-pago-matricula__content">
                 <h1 class="registrar-pago-matricula__title">Pago de Matricula</h1>
-                <div class="article">
+                <section class="registrar-matricula__datos">
+                        <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
+                        <select class="registrar-matricula__select" [(ngModel)]="studentSelectDNI"
+                                (change)="updateDataStudentSelect()">
+                                <option selected="" [value]="0">Hijos</option>
+                                @for (student of students; track $index) {
+                                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "
+                                        +student.surnameMaternal}}</option>
+                                }
+                        </select>
+                </section>
+                <section class="pago">
                         <div class="data">
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
@@ -17,6 +28,6 @@
                         <div class="options">
                                 <div #paypal></div>
                         </div>
-                </div>
+                </section>
         </div>
 </section>

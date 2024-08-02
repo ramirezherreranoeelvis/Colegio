@@ -14,10 +14,7 @@ export class LoginService {
         constructor(private httpClient: HttpClient, private authService: AuthService) { }
 
         public ingresarAlSistema(username: string, password: string): Observable<User> {
-                var usernameUrl = "username=" + username;
-                var passwordUrl = "password=" + password
-
-                return this.httpClient.get<User>(this.url + "?" + usernameUrl + "&" + passwordUrl)
+                return this.httpClient.get<User>(`${this.url}?username=${username}&password=${password}`)
                         .pipe(
                                 map(user => {
                                         if (user.accessEnabled) {

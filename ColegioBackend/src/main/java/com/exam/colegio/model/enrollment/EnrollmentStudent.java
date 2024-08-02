@@ -1,7 +1,6 @@
 package com.exam.colegio.model.enrollment;
 
 import com.exam.colegio.model.person.Student;
-import com.exam.colegio.model.report.ReportPerson;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;

@@ -16,4 +16,6 @@ public interface IEnrollmentDAO {
 
         Optional<Enrollment> findByGrade(Grade grade);
 
+        Enrollment update(Enrollment enrollment);
+
 }

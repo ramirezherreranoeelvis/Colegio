@@ -31,7 +31,7 @@ export class LoginComponent {
                                                 alert("Usted no tiene acceso al sistema")
                                                 return
                                         }
-                                        this.router.navigate(['workspace']);
+                                        this.router.navigate(['dashboard']);
                                 },
                                 (error) => {
                                         alert("No se pudo ingresar");

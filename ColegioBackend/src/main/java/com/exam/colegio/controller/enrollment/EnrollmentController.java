@@ -4,6 +4,7 @@ import com.exam.colegio.dto.MatriculaRegistrarDTO;
 import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
+import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.person.Father;
 import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.model.person.Student;
@@ -14,8 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiPredicate;
 
 
@@ -31,7 +31,7 @@ import java.util.function.BiPredicate;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class EnrollmentController {
 
-        @GetMapping("/horario-matricula")
+        @GetMapping("/horario")
         public ResponseEntity<?> getHorario(@RequestParam int idEnrollment) {
                 var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
                 if (enrollmentOptional.isEmpty()) {
@@ -101,12 +101,12 @@ public class EnrollmentController {
                 }).toList());
         }
 
-        @PostMapping("/registrar-matricula")
-        public ResponseEntity<String> registrarMatricula(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
+        @PostMapping("/registrar")
+        public ResponseEntity<?> registerStudentEnrollment(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
                 var studentOptional = this.studentService.findByDni(dniStudent);
                 var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
 
-                //validadion de alumno y matricula existente
+                //validation de alumno y matrícula existente
                 if (studentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
                 }
@@ -116,26 +116,69 @@ public class EnrollmentController {
                 var student = studentOptional.get();
                 var enrollment = enrollmentOptional.get();
 
-                //validadocion de grado y alumno
-                BiPredicate<Student, Enrollment> validacionGrado = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
+                //validation de grado y alumno
+                BiPredicate<Student, Enrollment> validationGrade = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
 
-                if (!validacionGrado.test(student, enrollment)) {
+                if (!validationGrade.test(student, enrollment)) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Esa matricula no es para ese estudiante");
                 }
 
                 // validar que no este registrado:
                 var enrollmentStudentExist = enrollmentStudentService.isStudentEnrolled(student, enrollment);
                 if (enrollmentStudentExist) {
-                        logger.info("no comprobo");
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
                 }
 
-                logger.info("no lo verifico");
-                var enrollmentStudent = this.enrollmentStudentService.save(EnrollmentStudent.builder().student(student).enrollment(enrollment).build());
-                if (enrollmentStudent == null) {
-                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Hubo un error al guardar");
+                // Obtener los tipos de pago para ponerlos como falta:
+                var pendienteOptional = this.typeStatusService.findAll().stream().filter(typeStatus -> typeStatus.getIdTypeStatus() == 2).findFirst();
+                if (pendienteOptional.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Tipo de estado pendiente no encontrado");
                 }
-                return ResponseEntity.ok("Alumno registrado correctamente");
+                var pendiente = pendienteOptional.get();
+
+                //creación de lista de pagos
+                var payments = new ArrayList<Payment>();
+
+                // creamos el pago de matrícula:
+                payments.add(Payment.builder()
+                        .typeStatus(pendiente)
+                        .pay(enrollment.getCost())
+                        .description("Matricula")
+                        .build());
+                // creamos mensualidades:
+                for (int i = 0; i < enrollment.getMonths(); i++) {
+                        payments.add(Payment
+                                .builder()
+                                .typeStatus(pendiente)
+                                .pay(enrollment.getMonthlyFee())
+                                .description("mensualidad")
+                                .build()
+                        );
+                }
+
+                // crear enrollmentStudent:
+                var enrollmentStudent = this.enrollmentStudentService.save(EnrollmentStudent.builder()
+                        .student(student)
+                        .enrollment(enrollment)
+                        .build()
+                );
+
+                //resultado:
+                var message = new HashMap<String,String>();
+                if (enrollmentStudent == null) {
+                        message.put("message", "Hubo un error al guardar");
+                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+                }
+
+                payments.forEach(payment -> payment.setEnrollmentStudent(enrollmentStudent));
+                enrollmentStudent.setPayments(payments);
+                this.enrollmentStudentService.update(enrollmentStudent);
+
+                enrollment.setEnrolled(enrollment.getEnrolled() + 1);
+                this.enrollmentService.update(enrollment);
+
+                message.put("message", "Alumno registrado correctamente");
+                return ResponseEntity.ok(message);
         }
 
 
@@ -145,15 +188,17 @@ public class EnrollmentController {
         private final FatherService fatherService;
         private final MotherService motherService;
         private final EnrollmentStudentService enrollmentStudentService;
+        private final TypeStatusService typeStatusService;
 
         @Autowired
-        public EnrollmentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, FatherService fatherService, MotherService motherService, EnrollmentStudentService enrollmentStudentService) {
+        public EnrollmentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, FatherService fatherService, MotherService motherService, EnrollmentStudentService enrollmentStudentService, TypeStatusService typeStatusService) {
                 this.studentService = studentService;
                 this.enrollmentService = enrollmentService;
                 this.personService = personService;
                 this.fatherService = fatherService;
                 this.motherService = motherService;
                 this.enrollmentStudentService = enrollmentStudentService;
+                this.typeStatusService = typeStatusService;
         }
 
         private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());

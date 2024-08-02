@@ -1,9 +1,22 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+        providedIn: 'root'
 })
 export class RegistrarPagoMatriculaService {
+        private url: string = "http://localhost:8080/payment";
 
-  constructor() { }
+        constructor(private httpClient: HttpClient) { }
+
+        public getStudent(dniParent: string): Observable<StudentRegistrarMatricula[]> {
+                const params = new HttpParams().set('dniParent', dniParent);
+                const urlGetStudent = `${this.url}/students`;
+                return this.httpClient.get<StudentRegistrarMatricula[]>(urlGetStudent, { params }).pipe(
+                        map(response => response)
+                );
+        }
 }

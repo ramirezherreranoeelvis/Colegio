@@ -41,11 +41,10 @@ export class RegistrarMatriculaComponent implements OnInit {
         }
 
         public registrarMatricula(): void {
-                alert(this.studentSelect.dni)
                 if (this.studentSelect) {
                         this.registrarMatriculaService.registrarMatricula(this.studentSelect).subscribe(
                                 message => {
-                                        alert(message);
+                                        alert(message)
                                 },
                                 error => {
                                         console.log(error)

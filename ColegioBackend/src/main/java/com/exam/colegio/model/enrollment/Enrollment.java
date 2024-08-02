@@ -43,6 +43,9 @@ public class Enrollment {
         @Column(name = "monthlyFee", nullable = false, precision = 6, scale = 2)
         private BigDecimal monthlyFee;
 
+        @Column(name = "months", nullable = false)
+        private int months; // New attribute
+
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
