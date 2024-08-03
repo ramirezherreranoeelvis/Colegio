@@ -3,18 +3,17 @@
                 <h1 class="registrar-pago-matricula__title">Pago de Matricula</h1>
                 <section class="registrar-matricula__datos">
                         <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
-                        <select class="registrar-matricula__select" [(ngModel)]="studentSelectDNI"
-                                (change)="updateDataStudentSelect()">
-                                <option selected="" [value]="0">Hijos</option>
+                        <select class="registrar-matricula__select" (change)="updateDataStudentSelect($event)">
+                                <option [value]="0">Hijos</option>
                                 @for (student of students; track $index) {
-                                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "
-                                        +student.surnameMaternal}}</option>
+                                        <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
                                 }
                         </select>
                 </section>
                 <section class="pago">
+                        @if (studentSelect) {
                         <div class="data">
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
+                                <div class="attribute"><span class="name">{{studentSelect.name}} </span><span class="data"></span></div>
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
@@ -25,9 +24,13 @@
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
                                 <div class="attribute"><span class="name"> </span><span class="data"></span></div>
                         </div>
-                        <div class="options">
-                                <div #paypal></div>
+                        <div class="options">antes
+                                <div #paypal></div>despues
                         </div>
+                        }@else {
+                        hijo no seleccionado
+                        }
                 </section>
+
         </div>
 </section>

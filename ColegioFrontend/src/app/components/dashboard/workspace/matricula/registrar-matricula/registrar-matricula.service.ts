@@ -9,13 +9,14 @@ import { map } from 'rxjs/operators';
         providedIn: 'root'
 })
 export class RegistrarMatriculaService {
-        private url: string = "http://localhost:8080/enrollment";
+        private urlEnrollment: string = "http://localhost:8080/enrollment";
+        private urlParent: string = "http://localhost:8080/parent";
 
         constructor(private httpClient: HttpClient) { }
 
         public getHorarioMatricula(idEnrollment: number): Observable<DayHorario[]> {
                 const params = new HttpParams().set('idEnrollment', idEnrollment.toString());
-                const urlHorarioMatricula = `${this.url}/horario`;
+                const urlHorarioMatricula = `${this.urlEnrollment}/horario`;
                 return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
                         map(response => response)
                 );
@@ -23,7 +24,7 @@ export class RegistrarMatriculaService {
 
         public getStudent(dniParent: string): Observable<StudentRegistrarMatricula[]> {
                 const params = new HttpParams().set('dniParent', dniParent);
-                const urlGetStudent = `${this.url}/students`;
+                const urlGetStudent = `${this.urlParent}/students`;
                 return this.httpClient.get<StudentRegistrarMatricula[]>(urlGetStudent, { params }).pipe(
                         map(response => response)
                 );
@@ -35,7 +36,7 @@ export class RegistrarMatriculaService {
                 const params = new HttpParams()
                         .set('dniStudent', dniStudent)
                         .set('idEnrollment', idEnrollment.toString());
-                const urlRegistrarMatricula = `${this.url}/registrar`;
+                const urlRegistrarMatricula = `${this.urlEnrollment}/registrar`;
                 return this.httpClient.post<string>(urlRegistrarMatricula, null, { params }).pipe(
                         map(response => response)
                 );

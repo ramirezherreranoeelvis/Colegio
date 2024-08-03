@@ -9,12 +9,13 @@ import { map } from 'rxjs/operators';
 })
 export class RegistrarPagoMatriculaService {
         private url: string = "http://localhost:8080/payment";
+        private urlParent: string = "http://localhost:8080/parent";
 
         constructor(private httpClient: HttpClient) { }
 
         public getStudent(dniParent: string): Observable<StudentRegistrarMatricula[]> {
                 const params = new HttpParams().set('dniParent', dniParent);
-                const urlGetStudent = `${this.url}/students`;
+                const urlGetStudent = `${this.urlParent}/students`;
                 return this.httpClient.get<StudentRegistrarMatricula[]>(urlGetStudent, { params }).pipe(
                         map(response => response)
                 );

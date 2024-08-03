@@ -1,13 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PaypalService } from '../paypal.service';
 import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
-import { FormsModule } from '@angular/forms';
 import { RegistrarPagoMatriculaService } from './registrar-pago-matricula.service';
 
 @Component({
         selector: 'app-registrar-pago-matricula',
         standalone: true,
-        imports: [FormsModule],
+        imports: [],
         templateUrl: './registrar-pago-matricula.component.html',
         styleUrl: './registrar-pago-matricula.component.scss'
 })
@@ -15,8 +14,8 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
 
         public pagosRealizados: any[] = [];
         protected dniParent: string = "99233923";
-        protected studentSelectDNI: string;
         protected students: StudentRegistrarMatricula[];
+        protected studentSelect: StudentRegistrarMatricula;
 
         constructor(private paypalService: PaypalService, private registrarPagoMatriculaService: RegistrarPagoMatriculaService) { }
 
@@ -33,9 +32,18 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
                 );
         }
 
-        public updateDataStudentSelect(): void {
+        public updateDataStudentSelect(event: Event): void {
+                const dni = (event.target as HTMLSelectElement).value
+                if (dni == "0") {
+                        this.studentSelect = null;
+                        return;
+                }
+                this.studentSelect = this.students.find(s => s.dni == dni)
+        }
+
+        private paypal(): void {
                 this.paypalService.loadPayPalScript().then(() => {
-                        this.realizarPago('10.00'); // Monto inicial a pagar
+                        this.realizarPago('10.00');
                 }).catch(err => {
                         console.error('PayPal script could not be loaded.', err);
                 });
