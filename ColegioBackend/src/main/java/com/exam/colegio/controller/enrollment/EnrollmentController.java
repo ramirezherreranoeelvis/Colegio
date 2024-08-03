@@ -41,44 +41,24 @@ public class EnrollmentController {
                 return ResponseEntity.ok(horarioDTO.getWeekHorario());
         }
 
-        /*
-            public ResponseEntity<?> getHorarioCodeAnterior(@RequestParam String dniStudent) {
-                    var studentOptional = this.studentService.findByDni(dniStudent);
-                    if (studentOptional.isEmpty()) {
-                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
-                    }
-                    var student = studentOptional.get();
-                    var grade = student.getGrade();
-                    var gradeNext = grade.getNextGrade();
-                    if (gradeNext == null) {
-                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un siguiente grado");
-                    }
-                    var enrollmentOptional = this.enrollmentService.findByGrade(gradeNext);
-                    if (enrollmentOptional.isEmpty()) {
-                            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
-                    }
-                    var horarioDTO = this.enrollmentService.getScheduleByEnrollment(enrollmentOptional.get());
-                    return ResponseEntity.ok(horarioDTO);
-            }
-    */
         @GetMapping("/students")
         public ResponseEntity<?> getStudents(@RequestParam String dniParent) {
-                Optional<String> typeParentOptional = personService.getTypeParent(dniParent);
+                var typeParentOptional = personService.getTypeParent(dniParent);
                 if (typeParentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parent not found");
                 }
 
-                String typeParent = typeParentOptional.get();
+                var typeParent = typeParentOptional.get();
                 List<Student> listStudents;
 
                 if (typeParent.equals("father")) {
-                        Optional<Father> fatherOptional = fatherService.findByDni(dniParent);
+                        var fatherOptional = fatherService.findByDni(dniParent);
                         if (fatherOptional.isEmpty()) {
                                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Father not found");
                         }
                         listStudents = fatherOptional.get().getStudents();
                 } else {
-                        Optional<Mother> motherOptional = motherService.findByDni(dniParent);
+                        var motherOptional = motherService.findByDni(dniParent);
                         if (motherOptional.isEmpty()) {
                                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mother not found");
                         }
@@ -90,7 +70,7 @@ public class EnrollmentController {
                 }
 
                 return ResponseEntity.ok(listStudents.stream().map(student -> {
-                        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                        var formato = new SimpleDateFormat("yyyy-MM-dd");
                         var enrollmentOptional = this.enrollmentService.findByGrade(student.getGrade().getNextGrade());
                         MatriculaRegistrarDTO enrollmentDTO = null;
                         if (enrollmentOptional.isPresent()) {
@@ -164,7 +144,7 @@ public class EnrollmentController {
                 );
 
                 //resultado:
-                var message = new HashMap<String,String>();
+                var message = new HashMap<String, String>();
                 if (enrollmentStudent == null) {
                         message.put("message", "Hubo un error al guardar");
                         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);

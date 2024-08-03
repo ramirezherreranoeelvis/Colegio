@@ -44,7 +44,7 @@ public class Enrollment {
         private BigDecimal monthlyFee;
 
         @Column(name = "months", nullable = false)
-        private int months; // New attribute
+        private int months;
 
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)

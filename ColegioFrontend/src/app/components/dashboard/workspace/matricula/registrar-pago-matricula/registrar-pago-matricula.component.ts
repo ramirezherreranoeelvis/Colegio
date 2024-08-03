@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PaypalService } from '../paypal.service';
 import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
 import { RegistrarPagoMatriculaService } from './registrar-pago-matricula.service';
+import { Pago } from '../../../../../model/Pago';
 
 @Component({
         selector: 'app-registrar-pago-matricula',
@@ -12,10 +13,11 @@ import { RegistrarPagoMatriculaService } from './registrar-pago-matricula.servic
 })
 export class RegistrarPagoMatriculaComponent implements OnInit {
 
-        public pagosRealizados: any[] = [];
+        protected pagosRealizados: any[] = [];
         protected dniParent: string = "99233923";
         protected students: StudentRegistrarMatricula[];
         protected studentSelect: StudentRegistrarMatricula;
+        protected matriculaPendiente: Pago;
 
         constructor(private paypalService: PaypalService, private registrarPagoMatriculaService: RegistrarPagoMatriculaService) { }
 
@@ -25,6 +27,16 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
                 this.registrarPagoMatriculaService.getStudent(this.dniParent).subscribe(
                         (data: StudentRegistrarMatricula[]) => {
                                 this.students = data;
+                                this.studentSelect = data[0]
+                                this.registrarPagoMatriculaService.obtenerDeudas(this.studentSelect.dni).subscribe(
+                                        (data: Pago[]) => {
+                                                this.matriculaPendiente = data.find(pago => pago.description === "Matricula");
+                                                this.paypal(this.matriculaPendiente.pay)
+                                        },
+                                        (error) => {
+                                                console.error('No se pudo obtener los pagos pendientes', error);
+                                        }
+                                )
                         },
                         (error) => {
                                 console.error('Error fetching students', error);
@@ -34,16 +46,21 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
 
         public updateDataStudentSelect(event: Event): void {
                 const dni = (event.target as HTMLSelectElement).value
-                if (dni == "0") {
-                        this.studentSelect = null;
-                        return;
-                }
                 this.studentSelect = this.students.find(s => s.dni == dni)
+                this.registrarPagoMatriculaService.obtenerDeudas(this.studentSelect.dni).subscribe(
+                        (data: Pago[]) => {
+                                this.matriculaPendiente = data.find(pago => pago.description === "Matricula");
+                                this.paypal(this.matriculaPendiente.pay)
+                        },
+                        (error) => {
+                                console.error('No se pudo obtener los pagos pendientes', error);
+                        }
+                )
         }
 
-        private paypal(): void {
+        private paypal(pay: number): void {
                 this.paypalService.loadPayPalScript().then(() => {
-                        this.realizarPago('10.00');
+                        this.realizarPago(pay + "");
                 }).catch(err => {
                         console.error('PayPal script could not be loaded.', err);
                 });

@@ -5,6 +5,8 @@ import com.exam.colegio.dao.IFatherDAO;
 import com.exam.colegio.dao.IMotherDAO;
 import com.exam.colegio.dao.IStudentDAO;
 
+import com.exam.colegio.dto.PagoDTO;
+import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.service.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -22,74 +25,71 @@ import java.util.function.Predicate;
 public class PaymentController {
 
         @PostMapping("/processPaymentForEnrollment")
-        public void processPaymentForEnrollment() {
+        public ResponseEntity<?> processPaymentForEnrollment() {
                 throw new UnsupportedOperationException("Este método aún no está implementado");
         }
 
         @PostMapping("/processMonthlyPayment")
-        public void processMonthlyPayment() {
+        public ResponseEntity<?> processMonthlyPayment() {
                 throw new UnsupportedOperationException("Este método aún no está implementado");
+        }
+
+        @GetMapping("/pagosPendientes")
+        public ResponseEntity<?> pagosPendientes(@RequestParam String dniStudent) {
+                var studentOptional = this.studentService.findByDni(dniStudent);
+                if (studentOptional.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found Student");
+                }
+                var paymentList = this.studentService.findPendingPaymentsForStudent(studentOptional.get());
+                var paymentListDTO = paymentList.stream().map(payment -> {
+                        return new PagoDTO(payment.getIdPayment(), payment.getPay(), payment.getDescription());
+                }).toList();
+                return ResponseEntity.ok(paymentListDTO);
         }
 
         private MessageValidator dniRegistrationValidator(String dniStudent, String dniMother, String dniFather) {
                 if (dniStudent == null && (dniFather == null || dniMother == null)) {
                         return MessageValidator.builder().status(false)
-                                        .message(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DNI NULL"))
-                                        .build();
+                                .message(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DNI NULL"))
+                                .build();
                 }
                 if (Optional.ofNullable(dniStudent).orElse("").isEmpty()) {
                         return MessageValidator.builder().status(false).message(
                                         ResponseEntity.status(HttpStatus.NOT_FOUND).body("STUDENT DNI NOT FOUND"))
-                                        .build();
+                                .build();
                 }
                 if (Optional.ofNullable(dniMother).orElse("").isEmpty()
-                                && Optional.ofNullable(dniFather).orElse("").isEmpty()) {
+                    && Optional.ofNullable(dniFather).orElse("").isEmpty()) {
                         return MessageValidator.builder().status(false).message(
                                         ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO PARENT WITH VALID DNI"))
-                                        .build();
+                                .build();
                 }
                 if (!isEightDigitDni.test(dniStudent)
-                                || (!isEightDigitDni.test(dniMother) && !isEightDigitDni.test(dniFather))) {
+                    || (!isEightDigitDni.test(dniMother) && !isEightDigitDni.test(dniFather))) {
                         return MessageValidator
-                                        .builder().status(false).message(ResponseEntity
-                                                        .status(HttpStatus.UNPROCESSABLE_ENTITY).body("DNI INVALID"))
-                                        .build();
+                                .builder().status(false).message(ResponseEntity
+                                        .status(HttpStatus.UNPROCESSABLE_ENTITY).body("DNI INVALID"))
+                                .build();
                 }
                 return MessageValidator.builder().status(true).build();
         }
 
         private final Predicate<String> isEightDigitDni = dni -> Optional.ofNullable(dni).filter(d -> d.length() == 8)
-                        .isPresent();
+                .isPresent();
 
-        private final IFatherDAO fatherDAO;
-        private final IMotherDAO motherDAO;
-        private final IStudentDAO studentDAO;
-        private final IEnrollmentDAO enrollmentDAO;
         private final StudentService studentService;
         private final EnrollmentService enrollmentService;
         private final PersonService personService;
-        private final FatherService fatherService;
-        private final MotherService motherService;
         private final EnrollmentStudentService enrollmentStudentService;
-        private final TypeStatusService typeStatusService;
+        private final PaymentService paymentService;
 
         @Autowired
-        public PaymentController(IFatherDAO fatherDAO, IMotherDAO motherDAO, IStudentDAO studentDAO,
-                        IEnrollmentDAO enrollmentDAO, StudentService studentService,
-                        EnrollmentService enrollmentService, PersonService personService, FatherService fatherService,
-                        MotherService motherService, EnrollmentStudentService enrollmentStudentService,
-                        TypeStatusService typeStatusService) {
-                this.fatherDAO = fatherDAO;
-                this.motherDAO = motherDAO;
-                this.studentDAO = studentDAO;
-                this.enrollmentDAO = enrollmentDAO;
+        public PaymentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, EnrollmentStudentService enrollmentStudentService, PaymentService paymentService) {
                 this.studentService = studentService;
                 this.enrollmentService = enrollmentService;
                 this.personService = personService;
-                this.fatherService = fatherService;
-                this.motherService = motherService;
                 this.enrollmentStudentService = enrollmentStudentService;
-                this.typeStatusService = typeStatusService;
+                this.paymentService = paymentService;
         }
 
 }

@@ -4,32 +4,21 @@
                 <section class="registrar-matricula__datos">
                         <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
                         <select class="registrar-matricula__select" (change)="updateDataStudentSelect($event)">
-                                <option [value]="0">Hijos</option>
                                 @for (student of students; track $index) {
                                         <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
                                 }
                         </select>
                 </section>
                 <section class="pago">
-                        @if (studentSelect) {
                         <div class="data">
-                                <div class="attribute"><span class="name">{{studentSelect.name}} </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
-                                <div class="attribute"><span class="name"> </span><span class="data"></span></div>
+                                <div class="attribute"><span class="name">DNI: </span><span class="data">{{studentSelect.dni}}</span></div>
+                                <div class="attribute"><span class="name">Alumno: </span><span class="data">{{studentSelect.name + " " + studentSelect.surnamePaternal + " " + studentSelect.surnameMaternal}}</span></div>
+                                <div class="attribute"><span class="name">Grado: </span><span class="data">{{studentSelect.grade}}</span></div>
+                                <div class="attribute"><span class="name">Costo: </span><span class="data">S/{{matriculaPendiente.pay}}</span></div>
                         </div>
-                        <div class="options">antes
-                                <div #paypal></div>despues
+                        <div class="options">
+                                <div #paypal></div>
                         </div>
-                        }@else {
-                        hijo no seleccionado
-                        }
                 </section>
 
         </div>
