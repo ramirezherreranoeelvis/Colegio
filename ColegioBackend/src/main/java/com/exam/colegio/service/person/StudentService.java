@@ -28,6 +28,7 @@ public class StudentService implements IStudentDAO {
                 return studentRepository.findByDni(dni);
         }
 
+        @Override
         public List<Payment> findPendingPaymentsForStudent(Student student) {
                 return student.getEnrollmentStudents().stream()
                         .flatMap(enrollmentStudent -> enrollmentStudent.getPayments().stream())

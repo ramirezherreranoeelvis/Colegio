@@ -37,7 +37,7 @@ public class PersonService implements IPersonDAO {
                 );
         }
 
-
+        @Override
         public Optional<String> getTypeParent(String dni) {
                 return personRepository.findAll().stream()
                         .filter(person -> person.getDni().equals(dni))

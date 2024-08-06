@@ -1,6 +1,6 @@
 package com.exam.colegio.controller.login;
 
-import com.exam.colegio.dao.IPersonDAO;
+import com.exam.colegio.dao.person.IPersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class LoginController {
-
-        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
         @GetMapping
         public ResponseEntity<?> ingresarSistema(@RequestParam String username, @RequestParam String password) {
@@ -34,6 +32,7 @@ public class LoginController {
 
         }
 
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
         private final IPersonDAO personDAO;
 
         @Autowired

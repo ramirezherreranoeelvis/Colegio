@@ -1,14 +1,14 @@
 package com.exam.colegio.controller;
 
-import com.exam.colegio.dao.IEnrollmentDAO;
-import com.exam.colegio.dao.IFatherDAO;
-import com.exam.colegio.dao.IMotherDAO;
-import com.exam.colegio.dao.IStudentDAO;
-
 import com.exam.colegio.dto.PagoDTO;
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.enrollment.TypeStatus;
-import com.exam.colegio.service.*;
+import com.exam.colegio.service.enrollment.EnrollmentService;
+import com.exam.colegio.service.enrollment.EnrollmentStudentService;
+import com.exam.colegio.service.enrollment.PaymentService;
+import com.exam.colegio.service.enrollment.TypeStatusService;
+import com.exam.colegio.service.person.PersonService;
+import com.exam.colegio.service.person.StudentService;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 

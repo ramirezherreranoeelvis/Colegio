@@ -16,10 +16,10 @@ import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;
 import com.exam.colegio.model.person.Father;
 import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.model.person.Student;
-import com.exam.colegio.service.EnrollmentService;
-import com.exam.colegio.service.FatherService;
-import com.exam.colegio.service.MotherService;
-import com.exam.colegio.service.PersonService;
+import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
+import com.exam.colegio.dao.person.IFatherDAO;
+import com.exam.colegio.dao.person.IMotherDAO;
+import com.exam.colegio.dao.person.IPersonDAO;
 
 @RestController
 @RequestMapping("/parent")
@@ -28,7 +28,7 @@ public class ParentController {
 
         @GetMapping("/students")
         public ResponseEntity<?> getStudents(@RequestParam String dniParent) {
-                Optional<String> typeParentOptional = personService.getTypeParent(dniParent);
+                Optional<String> typeParentOptional = personDAO.getTypeParent(dniParent);
                 if (typeParentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parent not found");
                 }
@@ -37,13 +37,13 @@ public class ParentController {
                 List<Student> listStudents;
 
                 if (typeParent.equals("father")) {
-                        Optional<Father> fatherOptional = fatherService.findByDni(dniParent);
+                        Optional<Father> fatherOptional = fatherDAO.findByDni(dniParent);
                         if (fatherOptional.isEmpty()) {
                                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Father not found");
                         }
                         listStudents = fatherOptional.get().getStudents();
                 } else {
-                        Optional<Mother> motherOptional = motherService.findByDni(dniParent);
+                        Optional<Mother> motherOptional = motherDAO.findByDni(dniParent);
                         if (motherOptional.isEmpty()) {
                                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mother not found");
                         }
@@ -54,9 +54,10 @@ public class ParentController {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No children found");
                 }
 
+
                 return ResponseEntity.ok(listStudents.stream().map(student -> {
                         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                        var enrollmentOptional = this.enrollmentService.findByGrade(student.getGrade().getNextGrade());
+                        var enrollmentOptional = this.enrollmentDAO.findByGrade(student.getGrade().getNextGrade());
                         MatriculaRegistrarDTO enrollmentDTO = null;
                         if (enrollmentOptional.isPresent()) {
                                 var enrollment = enrollmentOptional.get();
@@ -80,17 +81,18 @@ public class ParentController {
                 }).toList());
         }
 
-        private final EnrollmentService enrollmentService;
-        private final PersonService personService;
-        private final FatherService fatherService;
-        private final MotherService motherService;
+
+        private final IEnrollmentDAO enrollmentDAO;
+        private final IPersonDAO personDAO;
+        private final IFatherDAO fatherDAO;
+        private final IMotherDAO motherDAO;
 
         @Autowired
-        public ParentController(EnrollmentService enrollmentService, PersonService personService,
-                        FatherService fatherService, MotherService motherService) {
-                this.enrollmentService = enrollmentService;
-                this.personService = personService;
-                this.fatherService = fatherService;
-                this.motherService = motherService;
+        public ParentController(IEnrollmentDAO enrollmentDAO, IPersonDAO personDAO, IFatherDAO fatherDAO, IMotherDAO motherDAO) {
+                this.enrollmentDAO = enrollmentDAO;
+                this.personDAO = personDAO;
+                this.fatherDAO = fatherDAO;
+                this.motherDAO = motherDAO;
         }
+
 }
