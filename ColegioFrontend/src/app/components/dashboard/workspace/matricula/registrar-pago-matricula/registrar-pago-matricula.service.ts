@@ -29,4 +29,9 @@ export class RegistrarPagoMatriculaService {
                         map(response => response)
                 );
         }
+
+        public cancelarPago(idPayment: number): Observable<any> {
+                return this.httpClient.post(`${this.url}/processPaymentForEnrollment`, idPayment);
+        }
+
 }

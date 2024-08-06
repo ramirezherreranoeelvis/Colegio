@@ -7,6 +7,7 @@ import com.exam.colegio.dao.IStudentDAO;
 
 import com.exam.colegio.dto.PagoDTO;
 import com.exam.colegio.model.enrollment.Payment;
+import com.exam.colegio.model.enrollment.TypeStatus;
 import com.exam.colegio.service.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,12 +26,28 @@ import java.util.function.Predicate;
 public class PaymentController {
 
         @PostMapping("/processPaymentForEnrollment")
-        public ResponseEntity<?> processPaymentForEnrollment() {
-                throw new UnsupportedOperationException("Este método aún no está implementado");
+        public ResponseEntity<?> processPaymentForEnrollment(@RequestParam int paymentRequest) {
+                Optional<Payment> optionalPayment = paymentService.findById(paymentRequest);
+
+                if (optionalPayment.isPresent()) {
+                        Payment payment = optionalPayment.get();
+
+                        TypeStatus canceledStatus = typeStatusService.findById(1).orElseThrow(() ->
+                                new RuntimeException("Tipo de estado no encontrado")
+                        );
+
+                        payment.setTypeStatus(canceledStatus);
+
+                        paymentService.save(payment);
+
+                        return ResponseEntity.ok("Pago cancelado exitosamente.");
+                } else {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pago no encontrado.");
+                }
         }
 
         @PostMapping("/processMonthlyPayment")
-        public ResponseEntity<?> processMonthlyPayment() {
+        public ResponseEntity<?> processMonthlyPayment(@RequestParam int paymentRequest) {
                 throw new UnsupportedOperationException("Este método aún no está implementado");
         }
 
@@ -82,14 +99,16 @@ public class PaymentController {
         private final PersonService personService;
         private final EnrollmentStudentService enrollmentStudentService;
         private final PaymentService paymentService;
+        private final TypeStatusService typeStatusService;
 
         @Autowired
-        public PaymentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, EnrollmentStudentService enrollmentStudentService, PaymentService paymentService) {
+        public PaymentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, EnrollmentStudentService enrollmentStudentService, PaymentService paymentService, TypeStatusService typeStatusService) {
                 this.studentService = studentService;
                 this.enrollmentService = enrollmentService;
                 this.personService = personService;
                 this.enrollmentStudentService = enrollmentStudentService;
                 this.paymentService = paymentService;
+                this.typeStatusService = typeStatusService;
         }
 
 }

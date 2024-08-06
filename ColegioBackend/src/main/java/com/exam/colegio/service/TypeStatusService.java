@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TypeStatusService {
@@ -15,6 +16,10 @@ public class TypeStatusService {
 
         public List<TypeStatus> findAll() {
                 return this.typeStatusRepository.findAll();
+        }
+
+        public Optional<TypeStatus> findById(Integer id){
+                return this.typeStatusRepository.findById(id);
         }
 
 }

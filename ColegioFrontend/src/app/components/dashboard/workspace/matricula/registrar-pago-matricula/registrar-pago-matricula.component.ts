@@ -38,19 +38,32 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
         public updateDataStudentSelect(event: Event): void {
                 const dni = (event.target as HTMLSelectElement).value;
                 if (dni === "0") {
-                    this.studentSelect = null;
-                    this.matriculaPendiente = null; // Resetea el monto cuando no hay selección
-                    return;
+                        this.studentSelect = null;
+                        this.matriculaPendiente = null; // Resetea el monto cuando no hay selección
+                        return;
                 }
                 this.studentSelect = this.students.find(s => s.dni === dni);
                 this.registrarPagoMatriculaService.obtenerDeudas(this.studentSelect.dni).subscribe(
-                    (data: Pago[]) => {
-                        this.matriculaPendiente = data.find(pago => pago.description === "Matricula");
-                    },
-                    (error) => {
-                        console.error('No se pudo obtener los pagos pendientes', error);
-                    }
+                        (data: Pago[]) => {
+                                this.matriculaPendiente = data.find(pago => pago.description === "Matricula");
+                        },
+                        (error) => {
+                                console.error('No se pudo obtener los pagos pendientes', error);
+                        }
                 );
-            }
-            
+        }
+
+        public cancelarPago(idPayment: number): void {
+                this.registrarPagoMatriculaService.cancelarPago(idPayment).subscribe(
+                        response => {
+                                console.log(response);
+                                alert('Pago cancelado exitosamente.');
+                        },
+                        error => {
+                                console.error('Error al cancelar el pago', error);
+                        }
+                );
+        }
+
+
 }
