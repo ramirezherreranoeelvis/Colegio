@@ -1,5 +1,6 @@
-package com.exam.colegio.service;
+package com.exam.colegio.service.enrollment;
 
+import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.person.Student;
@@ -10,31 +11,39 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class EnrollmentStudentService {
+public class EnrollmentStudentService implements IEnrollmentStudentDAO {
 
-        @Autowired
-        private IEnrollmentStudentRepository enrollmentStudentRepository;
-
+        @Override
         public EnrollmentStudent save(EnrollmentStudent enrollmentStudent) {
                 return enrollmentStudentRepository.save(enrollmentStudent);
         }
 
-
+        @Override
         public Optional<EnrollmentStudent> findByStudentAndEnrollment(Student student, Enrollment enrollment) {
                 return this.enrollmentStudentRepository.findAll().stream()
                         .filter(es -> es.getStudent().getIdPerson() == student.getIdPerson() &&
                                       es.getEnrollment().getIdEnrollment() == enrollment.getIdEnrollment()
                         ).findFirst();
         }
-        //encontrr si ya existe el estudiante mregistradoa  aesa matricula
+
+        //encontre si ya existe el estudiante registrado a esa matrícula
+        @Override
         public boolean isStudentEnrolled(Student student, Enrollment enrollment) {
                 return this.enrollmentStudentRepository.findAll().stream()
                         .anyMatch(es -> es.getStudent().getIdPerson() == student.getIdPerson() &&
                                         es.getEnrollment().getIdEnrollment() == enrollment.getIdEnrollment());
         }
 
+        @Override
         public EnrollmentStudent update(EnrollmentStudent enrollmentStudent) {
                 return enrollmentStudentRepository.save(enrollmentStudent);
+        }
+
+        private final IEnrollmentStudentRepository enrollmentStudentRepository;
+
+        @Autowired
+        public EnrollmentStudentService(IEnrollmentStudentRepository enrollmentStudentRepository) {
+                this.enrollmentStudentRepository = enrollmentStudentRepository;
         }
 
 }

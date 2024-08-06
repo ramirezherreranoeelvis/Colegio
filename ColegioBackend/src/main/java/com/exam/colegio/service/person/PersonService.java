@@ -1,11 +1,9 @@
-package com.exam.colegio.service;
+package com.exam.colegio.service.person;
 
-import com.exam.colegio.dao.IPersonDAO;
+import com.exam.colegio.dao.person.IPersonDAO;
 import com.exam.colegio.dto.PersonLoginDTO;
-import com.exam.colegio.model.person.Person;
 import com.exam.colegio.repository.person.IPersonRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;

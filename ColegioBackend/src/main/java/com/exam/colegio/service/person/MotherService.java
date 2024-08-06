@@ -1,6 +1,6 @@
-package com.exam.colegio.service;
+package com.exam.colegio.service.person;
 
-import com.exam.colegio.dao.IMotherDAO;
+import com.exam.colegio.dao.person.IMotherDAO;
 import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.repository.person.IMotherRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,17 +1,7 @@
 package com.exam.colegio.controller.others;
 
-import com.exam.colegio.repository.course.*;
-import com.exam.colegio.repository.enrollment.*;
-import com.exam.colegio.repository.other.IGradeRepository;
-import com.exam.colegio.repository.person.IStudentRepository;
-import com.exam.colegio.repository.person.ITeacherRepository;
-import com.exam.colegio.service.EnrollmentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.*;
 
 @RestController
 @RequestMapping("/data")

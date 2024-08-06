@@ -1,20 +1,18 @@
 package com.exam.colegio.controller.enrollment;
 
-import com.exam.colegio.dto.MatriculaRegistrarDTO;
-import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;
+import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
+import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;
+import com.exam.colegio.dao.enrollment.ITypeStatusDAO;
+import com.exam.colegio.dao.person.IStudentDAO;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.enrollment.Payment;
-import com.exam.colegio.model.person.Father;
-import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.model.person.Student;
-import com.exam.colegio.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.BiPredicate;
 
@@ -33,58 +31,18 @@ public class EnrollmentController {
 
         @GetMapping("/horario")
         public ResponseEntity<?> getHorario(@RequestParam int idEnrollment) {
-                var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
+                var enrollmentOptional = this.enrollmentDAO.findById(idEnrollment);
                 if (enrollmentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
                 }
-                var horarioDTO = this.enrollmentService.getScheduleByEnrollment(enrollmentOptional.get());
+                var horarioDTO = this.enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get());
                 return ResponseEntity.ok(horarioDTO.getWeekHorario());
-        }
-
-        @GetMapping("/students")
-        public ResponseEntity<?> getStudents(@RequestParam String dniParent) {
-                var typeParentOptional = personService.getTypeParent(dniParent);
-                if (typeParentOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parent not found");
-                }
-
-                var typeParent = typeParentOptional.get();
-                List<Student> listStudents;
-
-                if (typeParent.equals("father")) {
-                        var fatherOptional = fatherService.findByDni(dniParent);
-                        if (fatherOptional.isEmpty()) {
-                                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Father not found");
-                        }
-                        listStudents = fatherOptional.get().getStudents();
-                } else {
-                        var motherOptional = motherService.findByDni(dniParent);
-                        if (motherOptional.isEmpty()) {
-                                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mother not found");
-                        }
-                        listStudents = motherOptional.get().getStudents();
-                }
-
-                if (listStudents.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No children found");
-                }
-
-                return ResponseEntity.ok(listStudents.stream().map(student -> {
-                        var formato = new SimpleDateFormat("yyyy-MM-dd");
-                        var enrollmentOptional = this.enrollmentService.findByGrade(student.getGrade().getNextGrade());
-                        MatriculaRegistrarDTO enrollmentDTO = null;
-                        if (enrollmentOptional.isPresent()) {
-                                var enrollment = enrollmentOptional.get();
-                                enrollmentDTO = MatriculaRegistrarDTO.builder().idEnrollment(enrollment.getIdEnrollment()).startDate(formato.format(enrollment.getSeason().getStartDate())).nameGrade(enrollment.getGrade().getName()).vacancies(enrollment.getVacancies()).enrolled(enrollment.getEnrolled()).cost(enrollment.getCost()).monthlyFee(enrollment.getMonthlyFee()).build();
-                        }
-                        return StudentRegistrarMatriculaDTO.builder().dni(student.getDni()).name(student.getName()).surnamePaternal(student.getSurnamePaternal()).surnameMaternal(student.getSurnameMaternal()).phoneNumber(student.getPhoneNumber()).accessEnabled(student.getAccess().isAccessEnabled()).username(student.getAccess().getUsername()).password(student.getAccess().getPassword()).description(student.getAccess().getDescription()).grade(student.getGrade().getName()).nextEnrollment(enrollmentDTO).build();
-                }).toList());
         }
 
         @PostMapping("/registrar")
         public ResponseEntity<?> registerStudentEnrollment(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
-                var studentOptional = this.studentService.findByDni(dniStudent);
-                var enrollmentOptional = this.enrollmentService.findById(idEnrollment);
+                var studentOptional = this.studentDAO.findByDni(dniStudent);
+                var enrollmentOptional = this.enrollmentDAO.findById(idEnrollment);
 
                 //validation de alumno y matrícula existente
                 if (studentOptional.isEmpty()) {
@@ -104,13 +62,13 @@ public class EnrollmentController {
                 }
 
                 // validar que no este registrado:
-                var enrollmentStudentExist = enrollmentStudentService.isStudentEnrolled(student, enrollment);
+                var enrollmentStudentExist = enrollmentStudentDAO.isStudentEnrolled(student, enrollment);
                 if (enrollmentStudentExist) {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
                 }
 
                 // Obtener los tipos de pago para ponerlos como falta:
-                var pendienteOptional = this.typeStatusService.findAll().stream().filter(typeStatus -> typeStatus.getIdTypeStatus() == 2).findFirst();
+                var pendienteOptional = this.typeStatusDAO.getPendiente();
                 if (pendienteOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Tipo de estado pendiente no encontrado");
                 }
@@ -137,7 +95,7 @@ public class EnrollmentController {
                 }
 
                 // crear enrollmentStudent:
-                var enrollmentStudent = this.enrollmentStudentService.save(EnrollmentStudent.builder()
+                var enrollmentStudent = this.enrollmentStudentDAO.save(EnrollmentStudent.builder()
                         .student(student)
                         .enrollment(enrollment)
                         .build()
@@ -149,36 +107,29 @@ public class EnrollmentController {
                         message.put("message", "Hubo un error al guardar");
                         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
                 }
-
+                //a los pagos ahora les agregaos el enrollmentStudent sabiendo que ya se guardo;
                 payments.forEach(payment -> payment.setEnrollmentStudent(enrollmentStudent));
                 enrollmentStudent.setPayments(payments);
-                this.enrollmentStudentService.update(enrollmentStudent);
-
+                this.enrollmentStudentDAO.update(enrollmentStudent);
+                //actualizamos los matriculados
                 enrollment.setEnrolled(enrollment.getEnrolled() + 1);
-                this.enrollmentService.update(enrollment);
+                this.enrollmentDAO.update(enrollment);
 
                 message.put("message", "Alumno registrado correctamente");
                 return ResponseEntity.ok(message);
         }
 
-
-        private final StudentService studentService;
-        private final EnrollmentService enrollmentService;
-        private final PersonService personService;
-        private final FatherService fatherService;
-        private final MotherService motherService;
-        private final EnrollmentStudentService enrollmentStudentService;
-        private final TypeStatusService typeStatusService;
+        private final IStudentDAO studentDAO;
+        private final IEnrollmentDAO enrollmentDAO;
+        private final IEnrollmentStudentDAO enrollmentStudentDAO;
+        private final ITypeStatusDAO typeStatusDAO;
 
         @Autowired
-        public EnrollmentController(StudentService studentService, EnrollmentService enrollmentService, PersonService personService, FatherService fatherService, MotherService motherService, EnrollmentStudentService enrollmentStudentService, TypeStatusService typeStatusService) {
-                this.studentService = studentService;
-                this.enrollmentService = enrollmentService;
-                this.personService = personService;
-                this.fatherService = fatherService;
-                this.motherService = motherService;
-                this.enrollmentStudentService = enrollmentStudentService;
-                this.typeStatusService = typeStatusService;
+        public EnrollmentController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO, IEnrollmentStudentDAO enrollmentStudentDAO, ITypeStatusDAO typeStatusService) {
+                this.studentDAO = studentDAO;
+                this.enrollmentDAO = enrollmentDAO;
+                this.enrollmentStudentDAO = enrollmentStudentDAO;
+                this.typeStatusDAO = typeStatusService;
         }
 
         private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());

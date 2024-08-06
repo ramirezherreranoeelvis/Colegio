@@ -1,6 +1,6 @@
-package com.exam.colegio.service;
+package com.exam.colegio.service.enrollment;
 
-import com.exam.colegio.dao.IEnrollmentDAO;
+import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dto.HorarioDTO;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.enrollment.Enrollment;
@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class EnrollmentService implements IEnrollmentDAO {

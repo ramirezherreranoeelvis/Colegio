@@ -22,7 +22,7 @@ public class Person {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idPerson;
+        private int idPerson;
 
         @Dni
         @Column(name = "dni", nullable = false, unique = true, updatable = false, length = 8)

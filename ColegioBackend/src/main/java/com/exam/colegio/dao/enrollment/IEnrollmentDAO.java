@@ -1,4 +1,4 @@
-package com.exam.colegio.dao;
+package com.exam.colegio.dao.enrollment;
 
 import com.exam.colegio.dto.HorarioDTO;
 import com.exam.colegio.model.enrollment.Enrollment;

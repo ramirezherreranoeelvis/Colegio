@@ -1,7 +1,7 @@
 package com.exam.colegio.controller.others;
 
-import com.exam.colegio.dao.IEnrollmentDAO;
-import com.exam.colegio.dao.IStudentDAO;
+import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
+import com.exam.colegio.dao.person.IStudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

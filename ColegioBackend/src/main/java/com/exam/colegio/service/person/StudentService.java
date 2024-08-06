@@ -1,13 +1,12 @@
-package com.exam.colegio.service;
+package com.exam.colegio.service.person;
 
-import com.exam.colegio.dao.IStudentDAO;
+import com.exam.colegio.dao.person.IStudentDAO;
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.person.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

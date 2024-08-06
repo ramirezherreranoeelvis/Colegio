@@ -1,4 +1,4 @@
-package com.exam.colegio.dao;
+package com.exam.colegio.dao.person;
 
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.person.Student;

@@ -1,4 +1,4 @@
-package com.exam.colegio.controller.parent;
+package com.exam.colegio.controller.person;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
