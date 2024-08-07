@@ -16,14 +16,20 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 export class PerfilComponent {
 	protected user: User = new User("Alberto Edu Alanya Suarez", "12345678", "AAlanyaSu");
 
-	@ViewChild('perfilSection') miElementoRef!: ElementRef; // Cambiado a 'perfilSection'
-
+	@ViewChild('perfilSection') perfilSection!: ElementRef;
+	@ViewChild('menu') menuHamburguesa!: ElementRef;
 	toggleMenu() {
-		const element = this.miElementoRef.nativeElement;
-		if (element.classList.contains('noVisible')) {
-			element.classList.remove('noVisible'); // Quitar clase
+		const perfilElement = this.perfilSection.nativeElement;
+		if (perfilElement.classList.contains('noVisible')) {
+			perfilElement.classList.remove('noVisible'); // Quitar clase
 		} else {
-			element.classList.add('noVisible'); // Agregar clase
+			perfilElement.classList.add('noVisible'); // Agregar clase
+		}
+		const menuElement = this.menuHamburguesa.nativeElement;
+		if (menuElement.classList.contains('hamburger-menu__active')) {
+			menuElement.classList.remove('hamburger-menu__active'); // Quitar clase
+		} else {
+			menuElement.classList.add('hamburger-menu__active'); // Agregar clase
 		}
 	}
 }
