@@ -4,27 +4,69 @@ $sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
 $color-btnDonwloadHorario: #143ef7;
 $sombra-input: 2px 1px 10px 0 #00065a;
 
-.body {
+.horario {
     background: $color-fondo;
     min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.content{
-    overflow: auto;
-    /* width: 66.1%; */
-    height: 80%;
-}
-.horario {
-    box-shadow: $sombra;
-    border-radius: 20px;
-    background: #ffffff;
-    padding: 40px 40px 0px 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+
+    &__content {
+        box-shadow: $sombra;
+        border-radius: 20px;
+        background: #ffffff;
+        padding: 40px 40px 0px 40px;
+        display: flex;
+
+        flex-direction: column;
+        min-width: 70%;
+        min-height: 20vh;
+    }
+
+    .x {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+
+    .options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+
+    &__select {
+        margin: 15px 0;
+
+        &-student {
+            text-align: center;
+            width: 200px;
+            height: 50px;
+            color: white;
+            font-size: 15px;
+            font-family: $font_lexend;
+            background: #240079;
+            border: none;
+            border-bottom: 1px solid;
+            outline: none;
+            border-radius: 10px;
+            overflow: hidden;
+
+
+            option {
+                background-color: #fff;
+                color: #ff0080;
+            }
+        }
+    }
 
     &__table {
         box-shadow: 2px 1px 10px 0 #0000004d;
@@ -58,7 +100,7 @@ $sombra-input: 2px 1px 10px 0 #00065a;
 
     }
 
-    &__download {
+    &__download-button {
         margin: 30px;
         width: 200px;
         height: 50px;
@@ -74,5 +116,9 @@ $sombra-input: 2px 1px 10px 0 #00065a;
             background: #4400ff;
             box-shadow: $sombra-input;
         }
+    }
+
+    &__mensaje {
+        font-family: $font_lexend;
     }
 }

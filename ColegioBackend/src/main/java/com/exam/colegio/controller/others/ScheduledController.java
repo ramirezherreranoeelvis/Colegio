@@ -1,7 +1,9 @@
 package com.exam.colegio.controller.others;
 
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
+import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
+import com.exam.colegio.model.enrollment.Season;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,29 +17,18 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200/", allowedHeaders = "*")
 public class ScheduledController {
 
-        @GetMapping("/actual")
-        public ResponseEntity<?> horarioActual(@RequestParam String username) {
-                var studentOptional = this.studentDAO.findByUsername(username);
-
-                if (studentOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
-                }
-
-                // get data student
+        @GetMapping("/temporadas")
+        public ResponseEntity<?> getTemporadas(@RequestParam String dniStudent) {
+                var studentOptional = this.studentDAO.findByDni(dniStudent);
                 var student = studentOptional.get();
-                var enrollmentStudents = student.getEnrollmentStudents();
+                var seasons = this.studentDAO.findAllSeasonByStudent(student);
+                return ResponseEntity.ok(seasons);
+        }
 
-                if (enrollmentStudents.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No enrollments found for student");
-                }
-                //get Last EnrollmentStudent
-                var lastIndexEnrollmentStudent = enrollmentStudents.size() - 1;
-                var lastEnrollmentStudent = enrollmentStudents.get(lastIndexEnrollmentStudent);
-
-                var lastEnrollment = lastEnrollmentStudent.getEnrollment();
-                var horario = this.enrollmentDAO.getScheduleByEnrollment(lastEnrollment);
-
-                return ResponseEntity.ok(horario);
+        @GetMapping("/horario")
+        public ResponseEntity<?> getHorario(@RequestBody Season season) {
+                var enrollmentOptional = enrollmentDAO.findBySeason(season);
+                return ResponseEntity.ok(enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get()));
         }
 
         @Autowired
@@ -45,5 +36,7 @@ public class ScheduledController {
 
         @Autowired
         private IStudentDAO studentDAO;
+        @Autowired
+        private IEnrollmentStudentDAO enrollmentStudentDAO;
 
 }

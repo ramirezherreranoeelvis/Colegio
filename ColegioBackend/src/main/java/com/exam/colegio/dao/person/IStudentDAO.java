@@ -1,6 +1,7 @@
 package com.exam.colegio.dao.person;
 
 import com.exam.colegio.model.enrollment.Payment;
+import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 
 import java.util.List;
@@ -13,5 +14,7 @@ public interface IStudentDAO {
         Optional<Student> findByDni(String dni);
 
         List<Payment> findPendingPaymentsForStudent(Student student);
+
+        List<Season> findAllSeasonByStudent(Student student);
 
 }

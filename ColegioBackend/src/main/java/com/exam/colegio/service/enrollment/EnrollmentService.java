@@ -5,6 +5,7 @@ import com.exam.colegio.dto.HorarioDTO;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
+import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.other.Grade;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
@@ -108,6 +109,11 @@ public class EnrollmentService implements IEnrollmentDAO {
         @Override
         public Enrollment update(Enrollment enrollment) {
                 return this.enrollmentRepository.save(enrollment);
+        }
+
+        @Override
+        public Optional<Enrollment> findBySeason(Season season) {
+                return this.enrollmentRepository.findAll().stream().filter(enrollment -> enrollment.getSeason().getIdSeason() == season.getIdSeason()).findFirst();
         }
 
         private final IEnrollmentRepository enrollmentRepository;

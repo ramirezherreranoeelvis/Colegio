@@ -1,7 +1,10 @@
 package com.exam.colegio.service.person;
 
 import com.exam.colegio.dao.person.IStudentDAO;
+import com.exam.colegio.model.enrollment.Enrollment;
+import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.enrollment.Payment;
+import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.person.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,13 @@ public class StudentService implements IStudentDAO {
                         .collect(Collectors.toList());
         }
 
+        @Override
+        public List<Season> findAllSeasonByStudent(Student student) {
+                return student.getEnrollmentStudents().stream()
+                        .map(EnrollmentStudent::getEnrollment)
+                        .map(Enrollment::getSeason)
+                        .toList();
+        }
 
         private final IStudentRepository studentRepository;
 

@@ -2,6 +2,7 @@ package com.exam.colegio.dao.enrollment;
 
 import com.exam.colegio.dto.HorarioDTO;
 import com.exam.colegio.model.enrollment.Enrollment;
+import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.other.Grade;
 import com.exam.colegio.model.person.Student;
 
@@ -17,5 +18,7 @@ public interface IEnrollmentDAO {
         Optional<Enrollment> findByGrade(Grade grade);
 
         Enrollment update(Enrollment enrollment);
+
+        Optional<Enrollment> findBySeason(Season season);
 
 }

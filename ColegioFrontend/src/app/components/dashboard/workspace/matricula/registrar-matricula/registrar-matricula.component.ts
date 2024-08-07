@@ -77,18 +77,25 @@ export class RegistrarMatriculaComponent implements OnInit {
                         this.horario = []
                         data.forEach(day => {
                                 day.cursos.forEach(curso => {
-                                        const existingHorario = this.horario.find(h => h.startTime === curso.startTime && h.endTime === curso.endTime);
-                                        if (existingHorario) {
-                                                existingHorario.cursos.push(curso.event);
-                                        } else {
-                                                this.horario.push({
-                                                        startTime: curso.startTime,
-                                                        endTime: curso.endTime,
-                                                        cursos: [curso.event]
-                                                });
-                                        }
+                                    // Obtener solo la hora y el minuto
+                                    const [startHour, startMinute] = curso.startTime.split(':');
+                                    const [endHour, endMinute] = curso.endTime.split(':');
+                                    const startTime = `${startHour}:${startMinute}`;
+                                    const endTime = `${endHour}:${endMinute}`;
+                            
+                                    const existingHorario = this.horario.find(h => h.startTime === startTime && h.endTime === endTime);
+                                    if (existingHorario) {
+                                        existingHorario.cursos.push(curso.event);
+                                    } else {
+                                        this.horario.push({
+                                            startTime: startTime,
+                                            endTime: endTime,
+                                            cursos: [curso.event]
+                                        });
+                                    }
                                 });
-                        });
+                            });
+                            
                 });
         }
 
