@@ -19,7 +19,7 @@
                                         <div class="attribute"><span class="name">Costo: </span><span class="data">S/{{matriculaPendiente.pay}}</span></div>
                                 </div>
                                 <div class="options">
-                                        <app-paypal [dinero]="matriculaPendiente?.pay || 0"/>
+                                        <app-payment [dinero]="matriculaPendiente?.pay || 0" [idPay]="matriculaPendiente?.idPago || 0"/>
                                 </div>
                         }@else {
                                 Usted no ah seleccionado a ningun crio

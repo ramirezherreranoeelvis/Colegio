@@ -1,14 +1,34 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, ElementRef } from '@angular/core';
+import { Pago } from '../../model/Pago';
+import { map, Observable } from 'rxjs';
 
 declare var paypal
 
 @Injectable({
         providedIn: 'root'
 })
-export class PaypalService {
+export class PaymentService {
+        private url: string = "http://localhost:8080/payment";
+        constructor(private httpClient: HttpClient) { }
 
-        constructor() { }
+        public obtenerDeudas(dniStudent: string): Observable<Pago[]> {
+                const params = new HttpParams().set('dniStudent', dniStudent);
+                const urlPagoPendiente = `${this.url}/pagosPendientes`;
+                return this.httpClient.get<Pago[]>(urlPagoPendiente, { params }).pipe(
+                        map(response => response)
+                );
+        }
 
+        public cancelarPago(idPayment: number): Observable<any> {
+                const params = new HttpParams().set('idPayment', idPayment);
+                const urlCancelarPago = `${this.url}/processPayment`;
+                return this.httpClient.post<any>(urlCancelarPago, null, { params }).pipe(
+                        map(data => data)
+                );
+        }
+
+        //paypal
         public loadPayPalScript(): Promise<void> {
                 return new Promise((resolve, reject) => {
                         const script = document.createElement('script');

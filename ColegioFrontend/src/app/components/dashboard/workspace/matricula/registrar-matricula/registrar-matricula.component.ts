@@ -5,6 +5,7 @@ import { Enrollment } from '../../../../../model/registrarMatricula/nextEnrollme
 import { FormsModule } from '@angular/forms';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
 import { TurnoHorario } from '../../../../../model/horario/turnoHorario';
+import { ParentService } from '../../parent.service';
 
 
 
@@ -26,7 +27,7 @@ export class RegistrarMatriculaComponent implements OnInit {
         protected horario: TurnoHorario[] = [];
 
         public ngOnInit(): void {
-                this.registrarMatriculaService.getStudent(this.dniParent).subscribe(
+                this.parentService.getStudent(this.dniParent).subscribe(
                         (data: StudentRegistrarMatricula[]) => {
                                 this.students = data;
                         },
@@ -36,7 +37,7 @@ export class RegistrarMatriculaComponent implements OnInit {
                 );
         }
 
-        constructor(private registrarMatriculaService: RegistrarMatriculaService) {
+        constructor(private registrarMatriculaService: RegistrarMatriculaService, private parentService: ParentService) {
 
         }
 

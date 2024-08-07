@@ -1,31 +1,28 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PaypalService } from '../../../../paypal/paypal.service';
 import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
-import { RegistrarPagoMatriculaService } from './registrar-pago-matricula.service';
 import { Pago } from '../../../../../model/Pago';
-import { PaypalComponent } from '../../../../paypal/paypal.component';
+import { ParentService } from '../../parent.service';
+import { PaymentService } from '../../../../payment/payment.service';
+import { PaymentComponent } from "../../../../payment/payment.component";
 
 @Component({
         selector: 'app-registrar-pago-matricula',
         standalone: true,
-        imports: [PaypalComponent],
+        imports: [PaymentComponent],
         templateUrl: './registrar-pago-matricula.component.html',
         styleUrl: './registrar-pago-matricula.component.scss'
 })
 export class RegistrarPagoMatriculaComponent implements OnInit {
 
-        protected pagosRealizados: any[] = [];
         protected dniParent: string = "99233923";
         protected students: StudentRegistrarMatricula[];
         protected studentSelect: StudentRegistrarMatricula;
         protected matriculaPendiente: Pago;
 
-        constructor(private registrarPagoMatriculaService: RegistrarPagoMatriculaService) { }
-
-        @ViewChild('paypal', { static: true }) paypalElement: ElementRef;
+        constructor(private paymentService: PaymentService, private parentService: ParentService) { }
 
         public ngOnInit(): void {
-                this.registrarPagoMatriculaService.getStudent(this.dniParent).subscribe(
+                this.parentService.getStudent(this.dniParent).subscribe(
                         (data: StudentRegistrarMatricula[]) => {
                                 this.students = data;
                         },
@@ -43,7 +40,7 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
                         return;
                 }
                 this.studentSelect = this.students.find(s => s.dni === dni);
-                this.registrarPagoMatriculaService.obtenerDeudas(this.studentSelect.dni).subscribe(
+                this.paymentService.obtenerDeudas(this.studentSelect.dni).subscribe(
                         (data: Pago[]) => {
                                 this.matriculaPendiente = data.find(pago => pago.description === "Matricula");
                         },
@@ -53,17 +50,7 @@ export class RegistrarPagoMatriculaComponent implements OnInit {
                 );
         }
 
-        public cancelarPago(idPayment: number): void {
-                this.registrarPagoMatriculaService.cancelarPago(idPayment).subscribe(
-                        response => {
-                                console.log(response);
-                                alert('Pago cancelado exitosamente.');
-                        },
-                        error => {
-                                console.error('Error al cancelar el pago', error);
-                        }
-                );
-        }
+
 
 
 }

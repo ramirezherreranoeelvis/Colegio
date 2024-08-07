@@ -10,7 +10,6 @@ import { map } from 'rxjs/operators';
 })
 export class RegistrarMatriculaService {
         private urlEnrollment: string = "http://localhost:8080/enrollment";
-        private urlParent: string = "http://localhost:8080/parent";
 
         constructor(private httpClient: HttpClient) { }
 
@@ -18,14 +17,6 @@ export class RegistrarMatriculaService {
                 const params = new HttpParams().set('idEnrollment', idEnrollment.toString());
                 const urlHorarioMatricula = `${this.urlEnrollment}/horario`;
                 return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
-                        map(response => response)
-                );
-        }
-
-        public getStudent(dniParent: string): Observable<StudentRegistrarMatricula[]> {
-                const params = new HttpParams().set('dniParent', dniParent);
-                const urlGetStudent = `${this.urlParent}/students`;
-                return this.httpClient.get<StudentRegistrarMatricula[]>(urlGetStudent, { params }).pipe(
                         map(response => response)
                 );
         }

@@ -1,1 +1,36 @@
-<p>registrar-pago-mensual works!</p>
+<section class="registrar-pago-mensual">
+    <h2>Pago Mensual</h2>
+    <section>
+        <h2>Escoge a tu hijo</h2>
+        <select (change)="updateDataStudentSelect($event)">
+            <option [value]="0">Seleccione a un estudiante</option>
+            @for (student of students; track $index) {
+                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
+            }
+        </select>
+    </section>
+    @if (studentSelect) {
+        <h3>Pagos pendienes mensuales</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Costo</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (Pago of mensualidadesPendientes; track $index) {
+                    <tr><td>{{$index + 1}}</td><td>{{Pago.pay}}</td> <td><input type="button" value="ver detalles" (click)="verDetalles(Pago.idPago)"></td></tr>
+                }
+            </tbody>
+        </table>
+        @if (isDetalles) {
+            <h3>Ver detalles</h3>
+            <app-payment [dinero]="pagoSelect?.pay || 0" [idPay]="pagoSelect?.idPago || 0" />
+        }@else {
+            <span>Haga click en ver detalles en uno</span>
+        }
+    }@else {
+        <span>Seleccione un hijo</span>
+    }
+</section>

@@ -21,6 +21,7 @@ public class PaymentController {
 
         @PostMapping("/processPayment")
         public ResponseEntity<?> processPayment(@RequestParam int idPayment) {
+                logger.info(idPayment + "");
                 Optional<Payment> optionalPayment = paymentDAO.findById(idPayment);
 
                 if (optionalPayment.isEmpty()) {
@@ -47,7 +48,7 @@ public class PaymentController {
                         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DNI NULL");
                 }
 
-                if (isEightDigitDni.test(dniStudent)) {
+                if (!isEightDigitDni.test(dniStudent)) {
                         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("DNI INVALID");
                 }
 
@@ -60,6 +61,7 @@ public class PaymentController {
                 return ResponseEntity.ok(paymentListDTO);
         }
 
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
         private final Predicate<String> isEightDigitDni = dni -> Optional.ofNullable(dni).filter(d -> d.length() == 8).isPresent();
         private final IStudentDAO studentDAO;
         private final IPaymentDAO paymentDAO;
