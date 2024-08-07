@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -15,6 +15,17 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class PerfilComponent {
 	protected user: User = new User("Alberto Edu Alanya Suarez", "12345678", "AAlanyaSu");
+
+	@ViewChild('perfilSection') miElementoRef!: ElementRef; // Cambiado a 'perfilSection'
+
+	toggleMenu() {
+		const element = this.miElementoRef.nativeElement;
+		if (element.classList.contains('noVisible')) {
+			element.classList.remove('noVisible'); // Quitar clase
+		} else {
+			element.classList.add('noVisible'); // Agregar clase
+		}
+	}
 }
 class User {
 	private _name: string = "";

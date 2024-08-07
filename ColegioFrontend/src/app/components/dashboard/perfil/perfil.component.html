@@ -1,9 +1,11 @@
-<section class="perfil">
+<button class="hamburger-menu" (click)="toggleMenu()">☰</button>
+
+<section #perfilSection class="perfil noVisible">
     <div class="perfil__content">
         <div class="perfil__data">
-            <label for="" class="perfil__label">Alumno:  {{user.name}}</label>
-            <label for="" class="perfil__label">DNI:  {{user.dni}}</label>
-            <label for="" class="perfil__label">Usuario:  {{user.user}}</label>
+            <label for="" class="perfil__label">Alumno: {{user.name}}</label>
+            <label for="" class="perfil__label">DNI: {{user.dni}}</label>
+            <label for="" class="perfil__label">Usuario: {{user.user}}</label>
         </div>
         <div class="perfil__separation-data-options">
             <div class="perfil__border"></div>

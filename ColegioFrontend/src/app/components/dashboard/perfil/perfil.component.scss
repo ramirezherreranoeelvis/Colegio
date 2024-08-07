@@ -8,6 +8,7 @@ $color__boder-separation: linear-gradient(130deg, #ff0080, #ff0080, #000a96, #00
     font-family: $font_lexend;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
 
     &__content {
         padding: 10px;
@@ -64,5 +65,35 @@ $color__boder-separation: linear-gradient(130deg, #ff0080, #ff0080, #000a96, #00
             background: #19008a;
             box-shadow: 2px 2px 2px 0px #0000004d;
         }
+    }
+}
+
+
+.hamburger-menu {
+    display: none; //invisible
+}
+
+@media only screen and (max-width: 1600px) {
+    .perfil {
+        left: 0px;
+        transition: left 0.3s ease;
+        position: absolute;
+        
+    }
+
+    .perfil.noVisible {
+        left: -373px;
+    }
+
+    .hamburger-menu {
+        font-size: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        background-color: #ff61d8;
+        z-index: 1001;
+
+        display: block; //visible
+        position: fixed; //por encima
     }
 }

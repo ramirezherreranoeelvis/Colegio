@@ -5,14 +5,17 @@ $color-btnDonwloadHorario: #143ef7;
 $sombra-input: 2px 1px 10px 0 #00065a;
 
 .body {
-    overflow: auto;
     background: $color-fondo;
-    height: 100%;
+    min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+.content{
+    overflow: auto;
+    /* width: 66.1%; */
+    height: 80%;
+}
 .horario {
     box-shadow: $sombra;
     border-radius: 20px;

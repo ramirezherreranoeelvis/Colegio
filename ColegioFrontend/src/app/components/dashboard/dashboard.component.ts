@@ -17,5 +17,5 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
         styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-
+        
 }

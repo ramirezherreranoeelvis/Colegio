@@ -1,36 +1,45 @@
 <section class="registrar-pago-mensual">
-    <h2>Pago Mensual</h2>
-    <section>
-        <h2>Escoge a tu hijo</h2>
-        <select (change)="updateDataStudentSelect($event)">
-            <option [value]="0">Seleccione a un estudiante</option>
+    <h2 class="registrar-pago-mensual__title">Pago Mensual</h2>
+    <section class="registrar-pago-mensual__selector">
+        <h2 class="registrar-pago-mensual__subtitle">Escoge a tu hijo</h2>
+        <select class="registrar-pago-mensual__select" (change)="updateDataStudentSelect($event)">
+            <option class="registrar-pago-mensual__option" [value]="0">Seleccione a un estudiante</option>
             @for (student of students; track $index) {
-                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
+                <option class="registrar-pago-mensual__option" [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
             }
         </select>
     </section>
     @if (studentSelect) {
-        <h3>Pagos pendienes mensuales</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>N°</th>
-                    <th>Costo</th>
+        <h3 class="registrar-pago-mensual__pending-title">Pagos pendientes mensuales</h3>
+        <table class="registrar-pago-mensual__table">
+            <thead class="registrar-pago-mensual__thead">
+                <tr class="registrar-pago-mensual__tr">
+                    <th class="registrar-pago-mensual__th">N°</th>
+                    <th class="registrar-pago-mensual__th">Costo</th>
+                    <th class="registrar-pago-mensual__th">Acciones</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="registrar-pago-mensual__tbody">
                 @for (Pago of mensualidadesPendientes; track $index) {
-                    <tr><td>{{$index + 1}}</td><td>{{Pago.pay}}</td> <td><input type="button" value="ver detalles" (click)="verDetalles(Pago.idPago)"></td></tr>
+                    <tr class="registrar-pago-mensual__tr">
+                        <td class="registrar-pago-mensual__td">{{ $index + 1 }}</td>
+                        <td class="registrar-pago-mensual__td">{{ Pago.pay }}</td>
+                        <td class="registrar-pago-mensual__td">
+                            <input type="button" class="registrar-pago-mensual__button" value="Ver detalles" (click)="verDetalles(Pago.idPago)">
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
         @if (isDetalles) {
-            <h3>Ver detalles</h3>
-            <app-payment [dinero]="pagoSelect?.pay || 0" [idPay]="pagoSelect?.idPago || 0" />
-        }@else {
-            <span>Haga click en ver detalles en uno</span>
+            <h3 class="registrar-pago-mensual__details-title">Ver detalles</h3>
+            <div class="options">
+                <app-payment class="registrar-pago-mensual__payment" [dinero]="pagoSelect?.pay || 0" [idPay]="pagoSelect?.idPago || 0"></app-payment>
+            </div>
+        } @else {
+            <span class="registrar-pago-mensual__message">Haga clic en "Ver detalles" en uno</span>
         }
-    }@else {
-        <span>Seleccione un hijo</span>
+    } @else {
+        <span class="registrar-pago-mensual__message">Seleccione un hijo</span>
     }
 </section>
