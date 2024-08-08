@@ -19,6 +19,6 @@ public interface IEnrollmentDAO {
 
         Enrollment update(Enrollment enrollment);
 
-        Optional<Enrollment> findBySeason(Season season);
+        Optional<Enrollment> findBySeasonAndByStudent(Season season, Student student);
 
 }

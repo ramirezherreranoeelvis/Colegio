@@ -16,7 +16,7 @@ public class Season {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idSeason;
+        private int idSeason;
 
         @Column(name = "startDate")
         private Date startDate;

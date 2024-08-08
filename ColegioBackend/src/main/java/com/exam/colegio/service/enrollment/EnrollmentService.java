@@ -112,8 +112,8 @@ public class EnrollmentService implements IEnrollmentDAO {
         }
 
         @Override
-        public Optional<Enrollment> findBySeason(Season season) {
-                return this.enrollmentRepository.findAll().stream().filter(enrollment -> enrollment.getSeason().getIdSeason() == season.getIdSeason()).findFirst();
+        public Optional<Enrollment> findBySeasonAndByStudent(Season season, Student student) {
+                return this.enrollmentRepository.findBySeasonAndStudent(season.getIdSeason(), student.getIdPerson());
         }
 
         private final IEnrollmentRepository enrollmentRepository;

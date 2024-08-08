@@ -2,10 +2,9 @@ package com.exam.colegio.controller.others;
 
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;
+import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
-import com.exam.colegio.model.enrollment.Season;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/horario")
-@CrossOrigin(origins = "http://localhost:4200/", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class ScheduledController {
 
         @GetMapping("/temporadas")
@@ -26,9 +25,11 @@ public class ScheduledController {
         }
 
         @GetMapping("/horario")
-        public ResponseEntity<?> getHorario(@RequestBody Season season) {
-                var enrollmentOptional = enrollmentDAO.findBySeason(season);
-                return ResponseEntity.ok(enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get()));
+        public ResponseEntity<?> getHorario(@RequestParam int idSeason, @RequestParam String dniStudent) {
+                var student = studentDAO.findByDni(dniStudent).get();
+                var season = this.seasonDAO.findById(idSeason).get();
+                var enrollmentOptional = enrollmentDAO.findBySeasonAndByStudent(season, student);
+                return ResponseEntity.ok(enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get()).getWeekHorario());
         }
 
         @Autowired
@@ -38,5 +39,7 @@ public class ScheduledController {
         private IStudentDAO studentDAO;
         @Autowired
         private IEnrollmentStudentDAO enrollmentStudentDAO;
+        @Autowired
+        private ISeasonDAO seasonDAO;
 
 }

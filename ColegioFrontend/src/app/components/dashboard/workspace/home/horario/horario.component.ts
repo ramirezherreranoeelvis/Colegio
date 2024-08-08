@@ -58,7 +58,7 @@ export class HorarioComponent {
                         return;
                 }
                 var temporada: Temporada = this.temporadas.find(t => t.idSeason.toString() == this.idTemporadaSelect)
-                this.horarioService.obtenerHorarioPorTemporada(temporada).subscribe((data: DayHorario[]) => {
+                this.horarioService.obtenerHorarioPorTemporada(temporada.idSeason, this.studentSelectDNI).subscribe((data: DayHorario[]) => {
                         //borramos los dias para volver a llenarlo:
                         this.days = []
                         this.days = data

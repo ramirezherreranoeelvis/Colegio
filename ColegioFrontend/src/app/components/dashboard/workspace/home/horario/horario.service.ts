@@ -14,18 +14,18 @@ export class HorarioService {
 
         constructor(private httpClient: HttpClient) { }
 
-        public obtenerTemporadas(dniStudent: string): Observable<Temporada[]> {
-                const params = new HttpParams().set('dniStudent', dniStudent);
-                const urlTemporadas = `${this.url}/temporadas`;
-                return this.httpClient.get<Temporada[]>(urlTemporadas, { params }).pipe(
+        public obtenerHorarioPorTemporada(idSeason: number, dniStudent: string): Observable<DayHorario[]> {
+                const urlHorarioMatricula = `${this.url}/horario`;
+                const params = new HttpParams().set('idSeason', idSeason).set('dniStudent', dniStudent);
+                return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
                         map(response => response)
                 );
         }
 
-        public obtenerHorarioPorTemporada(temporada: Temporada): Observable<DayHorario[]> {
-                const urlHorarioMatricula = `${this.url}/horario`;
-                const body = { season: temporada };
-                return this.httpClient.post<DayHorario[]>(urlHorarioMatricula, body).pipe(
+        public obtenerTemporadas(dniStudent: string): Observable<Temporada[]> {
+                const params = new HttpParams().set('dniStudent', dniStudent);
+                const urlTemporadas = `${this.url}/temporadas`;
+                return this.httpClient.get<Temporada[]>(urlTemporadas, { params }).pipe(
                         map(response => response)
                 );
         }
