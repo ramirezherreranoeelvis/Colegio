@@ -22,7 +22,7 @@ ___
 
 <h4>Frontend:</h4>
 
-  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angularjs/angularjs-original.svg" title="Angular" alt="Angular" width="14" height="14">&nbsp;
+  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angular/angular-original.svg" title="Angular" alt="Angular" width="14" height="14">&nbsp;
   - TypeScript <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="TS" alt="TS" width="14" height="14">&nbsp;
   - SASS <img src="https://github.com/devicons/devicon/blob/master/icons/sass/sass-original.svg" title="JAVA" alt="JAVA" width="14" height="14">&nbsp;
   - HTML <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="14" height="14">&nbsp;
