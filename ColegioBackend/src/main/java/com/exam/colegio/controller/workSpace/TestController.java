@@ -1,4 +1,4 @@
-package com.exam.colegio.controller.others;
+package com.exam.colegio.controller.workSpace;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
