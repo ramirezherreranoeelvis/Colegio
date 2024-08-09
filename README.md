@@ -16,13 +16,13 @@ ___
 <h4>Backend:</h4>
 
   - Spring Boot <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original.svg" title="SPRING" alt="SPRING" width="14" height="14">&nbsp;
-  - Java <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="JAVA" alt="JAVA" width="14" height="14">&nbsp;
+  - Java <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original.svg" title="JAVA" alt="JAVA" width="18" height="18">&nbsp;
   - Maven <img src="https://github.com/devicons/devicon/blob/6910f0503efdd315c8f9b858234310c06e04d9c0/icons/maven/maven-original.svg?plain=1" title="JAVA" alt="JAVA" width="14" height="14">&nbsp;
   - Hibernate <img src="https://github.com/devicons/devicon/blob/master/icons/hibernate/hibernate-original.svg" title="JAVA" alt="JAVA" width="14" height="14">&nbsp;
 
 <h4>Frontend:</h4>
 
-  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angularjs/angularjs-original.svg" title="Angular" alt="Angular" width="14" height="14">&nbsp;
+  - Angular <img src="https://github.com/devicons/devicon/blob/master/icons/angular/angular-original.svg" title="Angular" alt="Angular" width="18" height="18">&nbsp;
   - TypeScript <img src="https://github.com/devicons/devicon/blob/master/icons/typescript/typescript-original.svg" title="TS" alt="TS" width="14" height="14">&nbsp;
   - SASS <img src="https://github.com/devicons/devicon/blob/master/icons/sass/sass-original.svg" title="JAVA" alt="JAVA" width="14" height="14">&nbsp;
   - HTML <img src="https://github.com/devicons/devicon/blob/master/icons/html5/html5-original.svg" title="HTML5" alt="HTML" width="14" height="14">&nbsp;
