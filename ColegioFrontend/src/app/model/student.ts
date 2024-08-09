@@ -1,6 +1,6 @@
-import { Enrollment } from "./nextEnrollment";
+import { Enrollment } from "./registrarMatricula/nextEnrollment";
 
-export interface StudentRegistrarMatricula {
+export interface Student {
         dni: string;
         name: string;
         surnamePaternal: string;

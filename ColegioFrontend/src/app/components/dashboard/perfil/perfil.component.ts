@@ -17,7 +17,7 @@ export class PerfilComponent {
 	protected user: User = new User("Alberto Edu Alanya Suarez", "12345678", "AAlanyaSu");
 
 	@ViewChild('perfilSection') perfilSection!: ElementRef;
-	@ViewChild('menu') menuHamburguesa!: ElementRef;
+	@ViewChild('menu') menu!: ElementRef;
 	toggleMenu() {
 		const perfilElement = this.perfilSection.nativeElement;
 		if (perfilElement.classList.contains('noVisible')) {
@@ -25,11 +25,11 @@ export class PerfilComponent {
 		} else {
 			perfilElement.classList.add('noVisible'); // Agregar clase
 		}
-		const menuElement = this.menuHamburguesa.nativeElement;
-		if (menuElement.classList.contains('hamburger-menu__active')) {
-			menuElement.classList.remove('hamburger-menu__active'); // Quitar clase
+		const menuElement = this.menu.nativeElement;
+		if (menuElement.classList.contains('menu__active')) {
+			menuElement.classList.remove('menu__active'); // Quitar clase
 		} else {
-			menuElement.classList.add('hamburger-menu__active'); // Agregar clase
+			menuElement.classList.add('menu__active'); // Agregar clase
 		}
 	}
 }

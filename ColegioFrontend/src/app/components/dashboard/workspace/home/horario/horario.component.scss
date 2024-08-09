@@ -41,6 +41,7 @@ $sombra-input: 2px 1px 10px 0 #00065a;
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
+        cursor: pointer;
     }
 
     &__select {
@@ -65,6 +66,7 @@ $sombra-input: 2px 1px 10px 0 #00065a;
             option {
                 background-color: #fff;
                 color: #ff0080;
+                cursor: pointer;
             }
         }
     }
@@ -112,6 +114,7 @@ $sombra-input: 2px 1px 10px 0 #00065a;
         border-radius: 10px;
         transition: background .2s, box-shadow .2s;
         font-size: 15px;
+        cursor: pointer;
 
         &:hover {
             background: #4400ff;

@@ -1,4 +1,4 @@
-package com.exam.colegio.controller.workSpace;
+package com.exam.colegio.controller.workspace;
 
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;

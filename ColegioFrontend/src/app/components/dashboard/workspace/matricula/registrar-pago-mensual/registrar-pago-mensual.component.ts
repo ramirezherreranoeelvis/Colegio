@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParentService } from '../../parent.service';
 import { PaymentService } from '../../../../payment/payment.service';
 import { PaymentComponent } from "../../../../payment/payment.component";
-import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { Student } from '../../../../../model/student';
 import { Pago } from '../../../../../model/Pago';
 
 @Component({
@@ -15,8 +15,8 @@ import { Pago } from '../../../../../model/Pago';
 export class RegistrarPagoMensualComponent implements OnInit {
 
         protected dniParent: string = "99233923";
-        protected students: StudentRegistrarMatricula[];
-        protected studentSelect: StudentRegistrarMatricula;
+        protected students: Student[];
+        protected studentSelect: Student;
         protected mensualidadesPendientes: Pago[];
         protected pagoSelect: Pago;
         protected isDetalles:boolean = false;
@@ -25,7 +25,7 @@ export class RegistrarPagoMensualComponent implements OnInit {
 
         public ngOnInit(): void {
                 this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: StudentRegistrarMatricula[]) => {
+                        (data: Student[]) => {
                                 this.students = data;
                         },
                         (error) => {

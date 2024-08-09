@@ -3,10 +3,14 @@ $color__fondo-data: #ffffff;
 $color__boder-separation: linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
 $line__menu: linear-gradient(90deg, #ff0080, #000768);
 $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93, #ff2f9e93, #4032ff93, #4032ff93, #913dff93, #ff2f9e93, #4032ff93);
+$z-index_perfil: 1000;
+$z-index_content-before: -1;
+$z-index_menu: 1100;
+$z-index_menu-before: -1;
 
 .perfil {
     position: relative;
-    z-index: 1000;
+    z-index: $z-index_perfil;
     height: 100vh;
     display: flex;
     font-family: $font_lexend;
@@ -21,21 +25,21 @@ $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93,
         background-color: $color__fondo-data;
         width: 85%;
         border-radius: 3px;
-        box-shadow: 0 0 2px 1px #0000004d;
 
         &::before {
             position: absolute; // Para posicionarlo respecto a __content
-            content: "asdasd";
+            content: "";
             border-radius: 10px;
             background-position: 800% 0;
             width: 100%;
             height: 100%;
-            z-index: -1; // Asegúrate de que sea menor que el z-index del contenido
+            z-index: $z-index_content-before; // Asegúrate de que sea menor que el z-index del contenido
             left: 0;
             top: 0;
             filter: blur(3px);
             background: $linear-gradient-azul-morado-fuxea;
             background-size: 800%;
+            box-shadow: 0 0 3px 2px #0000004d;
             animation: navbar_animation 20s linear infinite;
 
         }
@@ -92,19 +96,42 @@ $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93,
 }
 
 
-.hamburger-menu {
-    display: none; //invisible
-    margin: 5px 0px 0px 5px;
-    padding: 5px;
+.menu {
+    display: none;
+    z-index: $z-index_menu;
     width: 46px;
     height: 38px;
-    cursor: pointer;
-    overflow: hidden;
-    border-radius: 5px;
-    transition: .3s background-color;
-    background-color: #fff;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.349);
-    z-index: 1001;
+
+    &__content {
+        position: relative;
+        flex-direction: column;
+        justify-content: space-between;
+        display: flex;
+        margin: 5px 0px 0px 5px;
+        padding: 5px;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: #fff;
+
+        &::before {
+            position: absolute;
+            content: "";
+            z-index: $z-index_menu-before;
+            border-radius: 10px;
+            background-position: 800% 0;
+            width: 105%;
+            height: 105%;
+            left: -1px;
+            top: -1px;
+            filter: blur(3px);
+            box-shadow: 0 0 3px 2px #0000004d;
+            background: $linear-gradient-azul-morado-fuxea;
+            background-size: 800%;
+            animation: navbar_animation 20s linear infinite;
+        }
+    }
 
     &__line {
         overflow: hidden;
@@ -114,6 +141,8 @@ $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93,
         transform-origin: left;
         transition: .8s transform ease-in-out, opacity .5s ease-in-out;
         background: $line__menu;
+        left: 0px;
+        opacity: 1;
 
         &::after {
             top: 0;
@@ -131,18 +160,21 @@ $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93,
 
     &__active {
         div {
-            &:nth-child(1) {
-                transform: rotate(35deg) scaleX(1.2);
-            }
+            div {
+                &:nth-child(1) {
+                    transform: rotate(35deg) scaleX(1.2);
+                }
 
-            &:nth-child(2) {
-                opacity: 0;
-            }
+                &:nth-child(2) {
+                    opacity: 0;
+                }
 
-            &:nth-child(3) {
-                transform: rotate(-35deg) scaleX(1.2);
+                &:nth-child(3) {
+                    transform: rotate(-35deg) scaleX(1.2);
+                }
             }
         }
+
     }
 }
 
@@ -159,13 +191,12 @@ $linear-gradient-azul-morado-fuxea: linear-gradient(45deg, #4032ff93, #913dff93,
         left: -373px;
     }
 
-    .hamburger-menu {
-        display: flex; //visible
-        position: fixed; //por encima
-        flex-direction: column;
-        justify-content: space-between;
+    .menu {
+        display: block;
+        position: fixed;
     }
 }
+
 
 @keyframes menu {
     from {

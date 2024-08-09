@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
-import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { Student } from '../../../../../model/student';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,7 +21,7 @@ export class RegistrarMatriculaService {
                 );
         }
 
-        public registrarMatricula(student: StudentRegistrarMatricula): Observable<string> {
+        public registrarMatricula(student: Student): Observable<string> {
                 var idEnrollment: number = student.nextEnrollment.idEnrollment;
                 var dniStudent: string = student.dni;
                 const params = new HttpParams()

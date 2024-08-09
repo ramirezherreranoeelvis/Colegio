@@ -1,6 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ParentService } from '../../parent.service';
-import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { Student } from '../../../../../model/student';
 import { Enrollment } from '../../../../../model/registrarMatricula/nextEnrollment';
 import { TurnoHorario } from '../../../../../model/horario/turnoHorario';
 import { HorarioService } from './horario.service';
@@ -19,7 +19,7 @@ export class HorarioComponent {
 
         protected dniParent: string = "99233923";
         protected studentSelectDNI: string = "0";
-        protected students: StudentRegistrarMatricula[];
+        protected students: Student[];
         protected days: string[];
         protected horario: TurnoHorario[] = [];
         protected temporadas: Temporada[] = [];
@@ -29,7 +29,7 @@ export class HorarioComponent {
 
         public ngOnInit(): void {
                 this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: StudentRegistrarMatricula[]) => {
+                        (data: Student[]) => {
                                 this.students = data;
                         },
                         (error) => {
@@ -39,7 +39,7 @@ export class HorarioComponent {
         }
         public updateDataStudentSelect(): void {
                 //si no se escojio ninguno los datos se borran
-                var studentSelect: StudentRegistrarMatricula;
+                var studentSelect: Student;
                 if (this.studentSelectDNI == "0") {
                         studentSelect = null;
                         return;

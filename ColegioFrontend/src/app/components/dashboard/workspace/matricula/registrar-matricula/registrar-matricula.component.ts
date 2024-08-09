@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { RegistrarMatriculaService } from './registrar-matricula.service';
-import { StudentRegistrarMatricula } from '../../../../../model/registrarMatricula/StudentRegistrarMatricula';
+import { Student } from '../../../../../model/student';
 import { Enrollment } from '../../../../../model/registrarMatricula/nextEnrollment';
 import { FormsModule } from '@angular/forms';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
@@ -20,15 +20,15 @@ export class RegistrarMatriculaComponent implements OnInit {
 
         protected dniParent: string = "99233923";
         protected studentSelectDNI: string;
-        protected studentSelect: StudentRegistrarMatricula;
+        protected studentSelect: Student;
         protected matricula: Enrollment;
-        protected students: StudentRegistrarMatricula[];
+        protected students: Student[];
         protected days: string[];
         protected horario: TurnoHorario[] = [];
 
         public ngOnInit(): void {
                 this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: StudentRegistrarMatricula[]) => {
+                        (data: Student[]) => {
                                 this.students = data;
                         },
                         (error) => {
