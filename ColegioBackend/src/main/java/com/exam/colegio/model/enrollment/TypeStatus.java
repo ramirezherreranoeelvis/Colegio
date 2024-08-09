@@ -14,7 +14,7 @@ public class TypeStatus {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idTypeStatus;
+        private int idTypeStatus;
 
         @Column(name = "name", nullable = false, length = 20, unique = true)
         private String name;

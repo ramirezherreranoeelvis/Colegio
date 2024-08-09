@@ -38,7 +38,7 @@ public class Student extends Person {
         private List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
 
         @Builder
-        public Student(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
+        public Student(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

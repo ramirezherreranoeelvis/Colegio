@@ -7,7 +7,7 @@ public class Enrollment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEnrollment;
+        private int idEnrollment;
 
         @ManyToOne
         @JoinColumn(name = "idSeason", nullable = false)
@@ -18,10 +18,10 @@ public class Enrollment {
         private Grade grade;
 
         @Column(name = "vacancies", nullable = false)
-        private Integer vacancies;
+        private int vacancies;
 
         @Column(name = "enrolled", nullable = false)
-        private Integer enrolled;
+        private int enrolled;
 
         @Column(name = "cost", nullable = false, precision = 6, scale = 2)
         private BigDecimal cost;
@@ -55,6 +55,10 @@ public class EnrollmentStudent {
         @JoinColumn(name = "idEnrollment", nullable = false)
         private Enrollment enrollment;
 
+        @JsonIgnore
+        @OneToMany(mappedBy = "enrollmentStudent", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<Payment> payments = new ArrayList<>();
+
 }
 @Setter
 @Getter
@@ -65,7 +69,7 @@ public class Payment {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idPayment;
+        private int idPayment;
 
         @ManyToOne
         @JoinColumn(name = "idEnrollmentStudent", nullable = false)
@@ -91,7 +95,7 @@ public class Season {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idSeason;
+        private int idSeason;
 
         @Column(name = "year", nullable = false, updatable = false, unique = true)
         private Date year;
@@ -107,7 +111,7 @@ public class TypeStatus {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idTypeStatus;
+        private int idTypeStatus;
 
         @Column(name = "name", nullable = false, length = 20, unique = true)
         private String name;

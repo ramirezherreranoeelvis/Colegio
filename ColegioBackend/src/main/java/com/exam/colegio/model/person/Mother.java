@@ -23,7 +23,7 @@ public class Mother extends Person {
         private List<Student> students = new ArrayList<>();
 
         @Builder
-        public Mother(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
+        public Mother(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

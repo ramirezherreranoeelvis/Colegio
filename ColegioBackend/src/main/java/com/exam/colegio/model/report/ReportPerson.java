@@ -15,7 +15,7 @@ public class ReportPerson {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idReportPerson;
+        private int idReportPerson;
 
         @ManyToOne
         @JoinColumn(name = "idPerson", nullable = false)

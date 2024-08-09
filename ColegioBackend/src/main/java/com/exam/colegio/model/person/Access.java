@@ -16,7 +16,7 @@ public class Access {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idAccess;
+        private int idAccess;
 
         @Column(name = "access", nullable = false)
         private boolean accessEnabled;

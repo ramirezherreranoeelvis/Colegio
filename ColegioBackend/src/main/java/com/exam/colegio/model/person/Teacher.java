@@ -16,7 +16,7 @@ import java.util.List;
 public class Teacher extends Person {
 
         @Builder
-        public Teacher(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
+        public Teacher(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

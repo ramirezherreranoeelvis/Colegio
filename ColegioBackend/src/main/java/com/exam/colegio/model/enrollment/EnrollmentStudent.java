@@ -19,7 +19,7 @@ public class EnrollmentStudent {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEnrollmentStudent;
+        private int idEnrollmentStudent;
 
         @ManyToOne
         @JoinColumn(name = "idStudent", nullable = false)

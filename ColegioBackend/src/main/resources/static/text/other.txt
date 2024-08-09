@@ -7,7 +7,7 @@ public class Classroom {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idClassroom;
+        private int idClassroom;
 
         @Column(name = "number", nullable = false, unique = true)
         private int number;
@@ -45,7 +45,7 @@ public class EntrySchool {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEntrySchool;
+        private int idEntrySchool;
 
         @ManyToOne
         @JoinColumn(name = "idPerson", nullable = false, updatable = false)
@@ -74,10 +74,18 @@ public class Grade {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idGrade;
+        private int idGrade;
 
         @Column(name = "name", nullable = false, unique = true, length = 30)
         private String name;
+
+        @ManyToOne
+        @JoinColumn(name = "idNextGrade")
+        private Grade nextGrade;
+
+        @ManyToOne
+        @JoinColumn(name = "idPreviousGrade")
+        private Grade previousGrade;
 
 }
 @Setter
@@ -89,7 +97,7 @@ public class TeacherCourseScheduled {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idTeacherCourseScheduled;
+        private int idTeacherCourseScheduled;
 
         @ManyToOne
         @JoinColumn(name = "idTeacher", nullable = false)

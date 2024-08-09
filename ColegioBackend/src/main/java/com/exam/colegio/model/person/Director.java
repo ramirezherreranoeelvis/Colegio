@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Director extends Person {
 
         @Builder
-        public Director(Integer idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
+        public Director(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

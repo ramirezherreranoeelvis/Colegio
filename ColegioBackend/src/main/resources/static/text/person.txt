@@ -1,12 +1,40 @@
 @Setter
 @Getter
+@Builder
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "access", indexes = {
+        @Index(name = "idx_username_password", columnList = "username, password")
+})
+public class Access {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idAccess;
+
+        @Column(name = "access", nullable = false)
+        private boolean accessEnabled;
+
+        @Column(name = "username", nullable = false, unique = true, updatable = true, length = 20)
+        private String username;
+
+        @Column(name = "password", nullable = false, length = 20)
+        private String password;
+
+        @Column(name = "description", length = 150)
+        private String description;
+
+}
+@Setter
+@Getter
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("assistant")
 public class Assistant extends Person {
 
         @Builder
-        public Assistant(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Assistant(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
@@ -19,7 +47,7 @@ public class Assistant extends Person {
 public class Director extends Person {
 
         @Builder
-        public Director(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Director(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
@@ -32,7 +60,7 @@ public class Director extends Person {
 public class Father extends Person {
 
         @Builder
-        public Father(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Father(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
@@ -45,7 +73,7 @@ public class Father extends Person {
 public class Mother extends Person {
 
         @Builder
-        public Mother(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Mother(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
@@ -53,20 +81,26 @@ public class Mother extends Person {
 @Setter
 @Getter
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorColumn(name = "typePerson", discriminatorType = DiscriminatorType.STRING, length = 20)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NoArgsConstructor
+@DiscriminatorColumn(
+        name = "typePerson",
+        discriminatorType = DiscriminatorType.STRING,
+        length = 20
+)
+@Inheritance(
+        strategy = InheritanceType.SINGLE_TABLE
+)
 @Table(name = "person")
 public class Person {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idPerson;
+        private int idPerson;
 
         @Dni
-        @Column(name = "dni", nullable = false, unique = true, updatable = false)
-        private Integer dni;
+        @Column(name = "dni", nullable = false, unique = true, updatable = false, length = 8)
+        private String dni;
 
         @Column(name = "name", nullable = false, length = 250)
         private String name;
@@ -77,12 +111,32 @@ public class Person {
         @Column(name = "surnameMaternal", nullable = false, length = 50)
         private String surnameMaternal;
 
-        @Column(name = "phoneNumber", nullable = false)
-        private int phoneNumber;
+        @Column(name = "phoneNumber", nullable = false, length = 15)
+        private String phoneNumber;
 
         @ManyToOne
         @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
         private Access access;
+
+        public String getTypePerson() {
+                if (this instanceof Student) {
+                        return "student";
+                } else if (this instanceof Teacher) {
+                        return "teacher";
+                } else if (this instanceof Assistant) {
+                        return "assistant";
+                } else if (this instanceof Director) {
+                        return "director";
+                } else if (this instanceof Father) {
+                        return "father";
+                } else if (this instanceof Mother) {
+                        return "mother";
+                } else if (this instanceof Representative) {
+                        return "representative";
+                } else {
+                        return "unknown";
+                }
+        }
 
 }
 @Setter
@@ -93,7 +147,7 @@ public class Person {
 public class Representative extends Person {
 
         @Builder
-        public Representative(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Representative(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
@@ -106,23 +160,31 @@ public class Representative extends Person {
 public class Student extends Person {
 
         @ManyToOne
-        @JoinColumn(name = "idFather", nullable = false, updatable = false)
+        @JoinColumn(name = "idFather")
         private Father father;
 
         @ManyToOne
-        @JoinColumn(name = "idMother", nullable = false, updatable = false)
+        @JoinColumn(name = "idMother")
         private Mother mother;
 
         @ManyToOne
-        @JoinColumn(name = "idRepresentative", nullable = false)
+        @JoinColumn(name = "idRepresentative")
         private Representative representative;
 
+        @ManyToOne
+        @JoinColumn(name = "idGrade")
+        private Grade grade;
+
+        @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
+
         @Builder
-        public Student(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Student(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 
 }
+
 @Setter
 @Getter
 @Entity
@@ -131,7 +193,7 @@ public class Student extends Person {
 public class Teacher extends Person {
 
         @Builder
-        public Teacher(Integer idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
+        public Teacher(int idPerson, Integer dni, String name, String surnamePaternal, String surnameMaternal, int phoneNumber, Access access) {
                 super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
         }
 

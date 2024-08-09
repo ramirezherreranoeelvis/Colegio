@@ -12,4 +12,3 @@ SELECT * FROM colegio.classroom;
 SELECT * FROM colegio.typestatus;
 SELECT * FROM colegio.gradetype;
 SELECT * FROM colegio.enrollment;
-

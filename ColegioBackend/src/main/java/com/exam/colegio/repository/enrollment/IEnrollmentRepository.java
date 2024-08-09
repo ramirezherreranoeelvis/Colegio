@@ -17,6 +17,6 @@ public interface IEnrollmentRepository extends JpaRepository<Enrollment, Integer
                + "WHERE es.student.dni = :dniStudent AND e.idEnrollment = :idEnrollment")
         List<CourseScheduled> findCoursesByStudentAndEnrollment(@Param("dniStudent") String dniStudent,
                                                                 @Param("idEnrollment") Integer idEnrollment);
-        @Query("SELECT e FROM Enrollment e JOIN e.enrollmentStudents es WHERE e.season.idSeason = :idSeason AND es.student.idPerson = :idStudent")
+        @Query(value = "CALL GetEnrollmentBySeasonAndStudent(:idSeason, :idStudent)", nativeQuery = true)
         Optional<Enrollment> findBySeasonAndStudent(@Param("idSeason") int idSeason, @Param("idStudent") int idStudent);
 }

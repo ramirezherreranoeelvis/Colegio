@@ -18,7 +18,7 @@ public class Report {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idReport;
+        private int idReport;
 
         @ManyToOne
         @JoinColumn(name = "idAssistant", nullable = false)

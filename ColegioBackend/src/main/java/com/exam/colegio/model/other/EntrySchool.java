@@ -16,7 +16,7 @@ public class EntrySchool {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEntrySchool;
+        private int idEntrySchool;
 
         @ManyToOne
         @JoinColumn(name = "idPerson", nullable = false, updatable = false)

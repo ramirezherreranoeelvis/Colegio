@@ -10,7 +10,7 @@ public class Report {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idReport;
+        private int idReport;
 
         @ManyToOne
         @JoinColumn(name = "idAssistant", nullable = false)
@@ -42,7 +42,7 @@ public class ReportPerson {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idReportPerson;
+        private int idReportPerson;
 
         @ManyToOne
         @JoinColumn(name = "idPerson", nullable = false)
