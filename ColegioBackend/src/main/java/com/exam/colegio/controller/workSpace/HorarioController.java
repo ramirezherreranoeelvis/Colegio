@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/horario")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-public class ScheduledController {
+public class HorarioController {
 
         @GetMapping("/temporadas")
         public ResponseEntity<?> getTemporadas(@RequestParam String dniStudent) {
@@ -26,20 +26,25 @@ public class ScheduledController {
 
         @GetMapping("/horario")
         public ResponseEntity<?> getHorario(@RequestParam int idSeason, @RequestParam String dniStudent) {
-                var student = studentDAO.findByDni(dniStudent).get();
-                var season = this.seasonDAO.findById(idSeason).get();
+                var studentOptional = this.studentDAO.findByDni(dniStudent);
+                var student = studentOptional.get();
+                var seasonOptional = this.seasonDAO.findById(idSeason);
+                var season = seasonOptional.get();
                 var enrollmentOptional = enrollmentDAO.findBySeasonAndByStudent(season, student);
                 return ResponseEntity.ok(enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get()).getWeekHorario());
         }
 
-        @Autowired
-        private IEnrollmentDAO enrollmentDAO;
+        private final IEnrollmentDAO enrollmentDAO;
+        private final IStudentDAO studentDAO;
+        private final IEnrollmentStudentDAO enrollmentStudentDAO;
+        private final ISeasonDAO seasonDAO;
 
         @Autowired
-        private IStudentDAO studentDAO;
-        @Autowired
-        private IEnrollmentStudentDAO enrollmentStudentDAO;
-        @Autowired
-        private ISeasonDAO seasonDAO;
+        public HorarioController(ISeasonDAO seasonDAO, IEnrollmentStudentDAO enrollmentStudentDAO, IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO) {
+                this.seasonDAO = seasonDAO;
+                this.enrollmentStudentDAO = enrollmentStudentDAO;
+                this.studentDAO = studentDAO;
+                this.enrollmentDAO = enrollmentDAO;
+        }
 
 }

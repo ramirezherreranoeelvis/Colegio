@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IEnrollmentRepository extends JpaRepository<Enrollment, Integer> {
 
-        @Query("SELECT cs FROM Enrollment e JOIN e.enrollmentStudents es JOIN e.courseScheduleds cs "
-               + "WHERE es.student.dni = :dniStudent AND e.idEnrollment = :idEnrollment")
+        @Query(value = "CALL GetCoursesByStudentAndEnrollment(:dniStudent, :idEnrollment)", nativeQuery = true)
         List<CourseScheduled> findCoursesByStudentAndEnrollment(@Param("dniStudent") String dniStudent,
                                                                 @Param("idEnrollment") Integer idEnrollment);
+
         @Query(value = "CALL GetEnrollmentBySeasonAndStudent(:idSeason, :idStudent)", nativeQuery = true)
         Optional<Enrollment> findBySeasonAndStudent(@Param("idSeason") int idSeason, @Param("idStudent") int idStudent);
 }

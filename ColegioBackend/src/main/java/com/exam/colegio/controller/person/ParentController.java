@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.exam.colegio.dto.MatriculaRegistrarDTO;
-import com.exam.colegio.dto.StudentRegistrarMatriculaDTO;
+import com.exam.colegio.dto.HijoStudentDTO;
 import com.exam.colegio.model.person.Father;
 import com.exam.colegio.model.person.Mother;
 import com.exam.colegio.model.person.Student;
@@ -69,7 +69,7 @@ public class ParentController {
                                                 .cost(enrollment.getCost()).monthlyFee(enrollment.getMonthlyFee())
                                                 .build();
                         }
-                        return StudentRegistrarMatriculaDTO.builder().dni(student.getDni()).name(student.getName())
+                        return HijoStudentDTO.builder().dni(student.getDni()).name(student.getName())
                                         .surnamePaternal(student.getSurnamePaternal())
                                         .surnameMaternal(student.getSurnameMaternal())
                                         .phoneNumber(student.getPhoneNumber())

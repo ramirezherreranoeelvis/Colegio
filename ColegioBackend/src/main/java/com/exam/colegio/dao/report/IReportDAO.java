@@ -1,10 +1,10 @@
 package com.exam.colegio.dao.report;
 
-import com.exam.colegio.model.report.Report;
+import com.exam.colegio.dto.ReporteDTO;
 
 import java.util.List;
-public interface ReportDAO {
+public interface IReportDAO {
 
-        List<Report> findAllByStudent(String dni);
+        List<ReporteDTO> findAllByStudent(String dni);
 
 }

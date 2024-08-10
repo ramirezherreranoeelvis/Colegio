@@ -1,0 +1,245 @@
+buenos dias
+tengo esto
+@Service
+public class ReportService implements IReportDAO {
+
+        @Override
+        public List<ReporteDTO> findAllByStudent(String dni) {
+                var reportes = this.reportRepository.findAllByStudent(dni);
+                //transformamos al DTO
+                return reportes.stream()
+                        .map(report -> {
+                                var assistant = report.getAssistant();
+                                return ReporteDTO.builder()
+                                        .date(DateFormatUtil.ymd(report.getDateReport()))
+                                        .description(report.getDescription())
+                                        .assistant(assistant.getName() + " " + assistant.getSurnamePaternal() + " " + assistant.getSurnameMaternal())
+                                        .assistant(assistant.getPhoneNumber())
+                                        .build();
+                        }).toList();
+        }
+
+        private final IReportRepository reportRepository;
+
+
+        @Autowired
+        public ReportService(IReportRepository reportRepository) {
+                this.reportRepository = reportRepository;
+        }
+
+}
+@RestController
+@RequestMapping("/incidentes")
+@CrossOrigin(origins = "http://localcalhost:4200/", allowedHeaders = "*")
+public class IncidentesController {
+
+        @GetMapping
+        public List<ReporteDTO> findAllByStudent(@RequestParam String dni) {
+                return this.reportDAO.findAllByStudent(dni);
+        }
+
+        private final IReportDAO reportDAO;
+
+        @Autowired
+        public IncidentesController(IReportDAO reportDAO) {
+                this.reportDAO = reportDAO;
+        }
+
+}
+@Setter
+@Getter
+@Builder
+public class ReporteDTO {
+
+        private String date;
+        private String description;
+        private String assistant;
+        private String phoneNumberAssistant;
+
+}
+@Repository
+public interface IReportRepository extends JpaRepository<Report, Integer> {
+
+        @Query(value = "CALL usp_getReportsByStudent(:dni)", nativeQuery = true)
+        List<Report> findAllByStudent(@Param("dni") String dni);
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "report")
+public class Report {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idReport;
+
+        @ManyToOne
+        @JoinColumn(name = "idAssistant", nullable = false)
+        private Assistant assistant;
+
+        @Column(name = "description", nullable = false, length = 300)
+        private String description;
+
+        @Column(name = "dateReport", nullable = false, updatable = false)
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date dateReport;
+
+        @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<ReportPerson> reportPersons = new ArrayList<>();
+
+        @PrePersist
+        protected void onCreate() {
+                dateReport = new Date();
+        }
+
+
+}
+@Setter
+@Getter
+@Builder
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "reportPerson")
+public class ReportPerson {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idReportPerson;
+
+        @ManyToOne
+        @JoinColumn(name = "idPerson", nullable = false)
+        private Person person;
+
+        @ManyToOne
+        @JoinColumn(name = "idReport", nullable = false)
+        private Report report;
+
+}
+@Setter
+@Getter
+@Entity
+@NoArgsConstructor
+@DiscriminatorValue("assistant")
+public class Assistant extends Person {
+
+        @Builder
+        public Assistant(int idPerson, String dni, String name, String surnamePaternal, String surnameMaternal, String phoneNumber, Access access) {
+                super(idPerson, dni, name, surnamePaternal, surnameMaternal, phoneNumber, access);
+        }
+
+}
+y esto
+@Setter
+@Getter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorColumn(
+        name = "typePerson",
+        discriminatorType = DiscriminatorType.STRING,
+        length = 20
+)
+@Inheritance(
+        strategy = InheritanceType.SINGLE_TABLE
+)
+@Table(name = "person")
+public class Person {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idPerson;
+
+        @Dni
+        @Column(name = "dni", nullable = false, unique = true, updatable = false, length = 8)
+        private String dni;
+
+        @Column(name = "name", nullable = false, length = 250)
+        private String name;
+
+        @Column(name = "surnamePaternal", nullable = false, length = 50)
+        private String surnamePaternal;
+
+        @Column(name = "surnameMaternal", nullable = false, length = 50)
+        private String surnameMaternal;
+
+        @Column(name = "phoneNumber", nullable = false, length = 15)
+        private String phoneNumber;
+
+        @ManyToOne
+        @JoinColumn(name = "idAccess", nullable = false, unique = true, updatable = false)
+        private Access access;
+
+        public String getTypePerson() {
+                if (this instanceof Student) {
+                        return "student";
+                } else if (this instanceof Teacher) {
+                        return "teacher";
+                } else if (this instanceof Assistant) {
+                        return "assistant";
+                } else if (this instanceof Director) {
+                        return "director";
+                } else if (this instanceof Father) {
+                        return "father";
+                } else if (this instanceof Mother) {
+                        return "mother";
+                } else if (this instanceof Representative) {
+                        return "representative";
+                } else {
+                        return "unknown";
+                }
+        }
+
+}
+
+
+pero cuando solicito el meodo del controlador
+me deuvelte esto
+[
+    {
+        "date": "2025-05-05",
+        "description": "Hablo grocerias en clases",
+        "assistant": null,
+        "phoneNumberAssistant": null
+    },
+    {
+        "date": "2025-06-18",
+        "description": "Insulto a la profesora",
+        "assistant": null,
+        "phoneNumberAssistant": null
+    },
+    {
+        "date": "2025-08-25",
+        "description": "Hizo un berrinche",
+        "assistant": null,
+        "phoneNumberAssistant": null
+    },
+    {
+        "date": "2025-11-04",
+        "description": "Lanzo su lapicero por la ventana",
+        "assistant": null,
+        "phoneNumberAssistant": null
+    }
+]
+no coje ni el numeor ni los nombres
+porque
+que paso
+este es mi procedure
+DELIMITER //
+
+CREATE PROCEDURE usp_getReportsByStudent(
+    IN p_dniStudent VARCHAR(8)
+)
+BEGIN
+	SELECT
+	r.*
+	FROM report r
+	JOIN reportperson rp ON r.idReport = rp.idReport
+    JOIN person p ON rp.idPerson = p.idPerson
+    WHERE p.dni = p_dniStudent;
+END //
+
+DELIMITER ;

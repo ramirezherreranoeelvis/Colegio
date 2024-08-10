@@ -2,9 +2,7 @@ package com.exam.colegio.model.report;
 
 import com.exam.colegio.model.person.Assistant;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +11,8 @@ import java.util.List;
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "report")
 public class Report {
 

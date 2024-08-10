@@ -1,7 +1,7 @@
 package com.exam.colegio.service.person;
 
 import com.exam.colegio.dao.person.IPersonDAO;
-import com.exam.colegio.dto.PersonLoginDTO;
+import com.exam.colegio.dto.PersonDTO;
 import com.exam.colegio.repository.person.IPersonRepository;
 
 import java.util.Optional;
@@ -16,11 +16,11 @@ public class PersonService implements IPersonDAO {
         private IPersonRepository personRepository;
 
         @Override
-        public Optional<PersonLoginDTO> findByUsername(String username, String password) {
+        public Optional<PersonDTO> findByUsername(String username, String password) {
 
                 var personOptional = personRepository.findByAccessUsernameAndAccessPassword(username, password);
 
-                return personOptional.map(person -> PersonLoginDTO.builder()
+                return personOptional.map(person -> PersonDTO.builder()
                         .dni(person.getDni())
                         .name(person.getName())
                         .surnamePaternal(person.getSurnamePaternal())

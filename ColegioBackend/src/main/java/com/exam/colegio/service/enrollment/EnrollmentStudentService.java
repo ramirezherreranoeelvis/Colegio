@@ -20,10 +20,7 @@ public class EnrollmentStudentService implements IEnrollmentStudentDAO {
 
         @Override
         public Optional<EnrollmentStudent> findByStudentAndEnrollment(Student student, Enrollment enrollment) {
-                return this.enrollmentStudentRepository.findAll().stream()
-                        .filter(es -> es.getStudent().getIdPerson() == student.getIdPerson() &&
-                                      es.getEnrollment().getIdEnrollment() == enrollment.getIdEnrollment()
-                        ).findFirst();
+                return this.enrollmentStudentRepository.findByStudentAndEnrollment(student.getIdPerson(), enrollment.getIdEnrollment());
         }
 
         //encontre si ya existe el estudiante registrado a esa matrícula

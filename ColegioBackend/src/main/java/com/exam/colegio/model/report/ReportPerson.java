@@ -2,14 +2,14 @@ package com.exam.colegio.model.report;
 
 import com.exam.colegio.model.person.Person;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "reportPerson")
 public class ReportPerson {
 

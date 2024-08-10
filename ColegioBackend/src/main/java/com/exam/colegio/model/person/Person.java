@@ -37,7 +37,7 @@ public class Person {
         @Column(name = "surnameMaternal", nullable = false, length = 50)
         private String surnameMaternal;
 
-        @Column(name = "phoneNumber", nullable = false, length = 15)
+        @Column(name = "phoneNumber", length = 15)
         private String phoneNumber;
 
         @ManyToOne

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
-public class StudentRegistrarMatriculaDTO {
+public class HijoStudentDTO {
 
         private String dni;
         private String name;
