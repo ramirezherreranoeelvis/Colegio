@@ -1,0 +1,101 @@
+$font_lexend: lexend, System-UI;
+$color-content: linear-gradient(212deg, #DA1D55, #C82460, #24007A, #1E0151, #000441);
+$sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
+$table__border: 5px solid #3900d4;
+$table__border-item: 5px solid #d80048;
+$table__border-header: 5px solid #000441;
+
+select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+}
+
+.incidentes {
+        height: 100%;
+        background: $color-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__content {
+                background-color: rgb(255, 255, 255);
+                min-width: 65%;
+                min-height: 40vh;
+                box-shadow: $sombra;
+                border-radius: 20px;
+                padding: 40px 40px 0px 40px;
+                display: flex;
+                flex-direction: column;
+        }
+
+        &__select-wrapper {}
+
+        &__select {
+                margin: 0px 30px 0px 00px;
+                text-align: center;
+                width: 200px;
+                height: 50px;
+                color: #000000;
+                font-size: 1.1rem;
+                font-family: "Geologica", sans-serif;
+                background: #0dcaf0;
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                overflow: hidden;
+                transition: .3s box-shadow, .2s background, .2s color;
+
+                option {
+                        font-size: 0.9rem;
+                        background-color: #ffffff;
+                        color: #ff0080;
+                        cursor: pointer;
+                }
+
+                &:hover {
+                        background: #000441;
+                        color: white;
+                        box-shadow: 2px 1px 10px 0 #0000004d;
+                }
+        }
+
+        &__table-wrapper {
+                width: 100%;
+                margin: 3% 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+
+        &__table {
+                position: relative;
+                border-collapse: collapse;
+                border: $table__border;
+                background-color: #fff;
+                font-family: $font_lexend;
+                font-weight: normal;
+                overflow: auto;
+                width: 90%;
+
+                &-head {}
+
+                &-row {}
+
+                &-header {
+                        color: white;
+                        background-color: #000441;
+                        border: $table__border-header;
+                        padding: 5px 10px;
+                }
+
+                &-body {}
+
+                &-item {
+                        border: $table__border-item;
+                        font-size: 14px;
+                        padding: 5px 10px;
+                }
+        }
+}
