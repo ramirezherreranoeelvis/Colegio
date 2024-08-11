@@ -40,7 +40,7 @@ $z-index_menu-before: -1;
             background: $linear-gradient-azul-morado-fuxea;
             background-size: 800%;
             box-shadow: 0 0 3px 2px #0000004d;
-            animation: navbar_animation 20s linear infinite;
+            animation: background_animation 20s linear infinite;
 
         }
     }
@@ -129,7 +129,7 @@ $z-index_menu-before: -1;
             box-shadow: 0 0 3px 2px #0000004d;
             background: $linear-gradient-azul-morado-fuxea;
             background-size: 800%;
-            animation: navbar_animation 20s linear infinite;
+            animation: background_animation 20s linear infinite;
         }
     }
 
@@ -208,7 +208,7 @@ $z-index_menu-before: -1;
     }
 }
 
-@keyframes navbar_animation {
+@keyframes background_animation {
     0% {
         background-position: 0 0;
     }
