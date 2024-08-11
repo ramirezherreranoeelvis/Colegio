@@ -3,8 +3,8 @@ $border__separacion-semana: 1px solid #ffffff;
 $font_lexend: lexend, System-UI;
 $color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
 
-$color__background-header: #000a96;
-$border-header: 3px solid #000a96;
+$color__background-header: #000157;
+$border-header: 3px solid #000157;
 $color__header: #dbf8ff;
 
 $color__background-row: #0855F2;
@@ -22,6 +22,7 @@ $color-row--falta: #ffffff;
 $color__background-row--falta--hover: #ff6a97;
 $color-row--falta--hover: #28005c;
 
+$color__background-filter: #240079;
 
 $sombra: 0 0 20px 0 #00000059;
 
@@ -31,6 +32,7 @@ $sombra: 0 0 20px 0 #00000059;
     align-items: center;
     height: 100%;
     background: $color-fondo;
+    overflow: auto;
 
     &__content {
         background: #ffffff;
@@ -58,7 +60,7 @@ $sombra: 0 0 20px 0 #00000059;
             color: white;
             font-size: 15px;
             font-family: $font_lexend;
-            background: #240079;
+            background: $color__background-filter;
             border: none;
             border-bottom: 1px solid;
             outline: none;
@@ -111,15 +113,19 @@ $sombra: 0 0 20px 0 #00000059;
             }
         }
 
-        &-item {
-            padding: 0.9rem;
-            text-align: center;
-            transition: 0.1s background;
+        &-date {
+            cursor: pointer;
 
             &:hover {
                 background: $color__background-row--hover;
                 color: $color-row--hover;
             }
+        }
+
+        &-item {
+            padding: 0.9rem;
+            text-align: center;
+            transition: 0.1s background;
 
             &--semana {
                 border-radius: 10px;

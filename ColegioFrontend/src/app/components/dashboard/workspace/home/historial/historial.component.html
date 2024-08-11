@@ -13,117 +13,62 @@
                     <tr class="history__head-row">
                         <th class="history__head-item">Fecha</th>
                         <th class="history__head-item"></th>
-                        <th class="history__head-item">Lunes</th>
-                        <th class="history__head-item">Martes</th>
-                        <th class="history__head-item">Miércoles</th>
-                        <th class="history__head-item">Jueves</th>
-                        <th class="history__head-item">Viernes</th>
+                        @for (dia of historial[1].dias; track $index) {
+                            <th class="history__head-item">{{dia.name}}</th>
+                        }
                     </tr>
                 </thead>
                 <tbody class="history__body">
+                    @for (semana of historial; track $index) {
                     <tr class="history__row-space">
                         <td></td>
                     </tr>
                     <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--semana" rowspan="2">Semana Actual</td>
+                        <td class="history__body-item history__body-item--semana" rowspan="2">{{semana.name}}</td>
                         <td class="history__body-item history__body-item--entrada">Entrada</td>
-                        <td class="history__body-item">03/06/2024</td>
-                        <td class="history__body-item">04/06/2024</td>
-                        <td class="history__body-item">05/06/2024</td>
-                        <td class="history__body-item">06/06/2024</td>
-                        <td class="history__body-item history__body-item--final-1">07/06/2024</td>
+                        @for (day of semana.dias; track $index) {
+                            @if (day.elementoFinal) {
+                                @if (day.entrada.status=="asistio") {
+                                    <td class="history__body-item history__body-date history__body-item--asistencia history__body-item--final-1">{{day.entrada.content}}</td>
+                                }@else if (day.entrada.status=="falto") {
+                                    <td class="history__body-item history__body-date history__body-item--falta history__body-item--final-1">{{day.entrada.content}}</td>
+                                }@else {
+                                    <td class="history__body-item history__body-date history__body-item--final-1">{{day.entrada.content}}</td>
+                                }
+                            }@else {
+                                @if (day.entrada.status=="asistio") {
+                                    <td class="history__body-item history__body-date history__body-item--asistencia">{{day.entrada.content}}</td>
+                                }@else if (day.entrada.status=="falto") {
+                                    <td class="history__body-item history__body-date history__body-item--falta">{{day.entrada.content}}</td>
+                                }@else {
+                                    <td class="history__body-item history__body-date">{{day.entrada.content}}</td>
+                                }
+                            }
+                        }
                     </tr>
                     <tr class="history__body-row">
                         <td class="history__body-item history__body-item--salida">Salida</td>
-                        <td class="history__body-item history__body-item--asistencia">03/06/2024</td>
-                        <td class="history__body-item">04/06/2024</td>
-                        <td class="history__body-item">05/06/2024</td>
-                        <td class="history__body-item">06/06/2024</td>
-                        <td class="history__body-item history__body-item--final-2">07/06/2024</td>
+                        @for (day of semana.dias; track $index) {
+                            @if (day.elementoFinal) {
+                                @if (day.salida.status=="asistio") {
+                                    <td class="history__body-item history__body-date history__body-item--asistencia history__body-item--final-2">{{day.salida.content}}</td>
+                                }@else if (day.salida.status=="falto") {
+                                    <td class="history__body-item history__body-date history__body-item--falta history__body-item--final-2">{{day.salida.content}}</td>
+                                }@else {
+                                    <td class="history__body-item history__body-date history__body-item--final-2">{{day.salida.content}}</td>
+                                }
+                            }@else {
+                                @if (day.salida.status=="asistio") {
+                                    <td class="history__body-item history__body-date history__body-item--asistencia">{{day.salida.content}}</td>
+                                }@else if (day.salida.status=="falto") {
+                                    <td class="history__body-item history__body-date history__body-item--falta">{{day.salida.content}}</td>
+                                }@else {
+                                    <td class="history__body-item history__body-date">{{day.salida.content}}</td>
+                                }
+                            }
+                        }
                     </tr>
-                    <tr class="history__row-space">
-                        <td></td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--semana" rowspan="2">Semana Anterior</td>
-                        <td class="history__body-item history__body-item--entrada">Entrada</td>
-                        <td class="history__body-item history__body-item--falta">27/05/2024</td>
-                        <td class="history__body-item">28/05/2024</td>
-                        <td class="history__body-item">29/05/2024</td>
-                        <td class="history__body-item">30/05/2024</td>
-                        <td class="history__body-item history__body-item--final-1">31/05/2024</td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--salida">Salida</td>
-                        <td class="history__body-item">27/05/2024</td>
-                        <td class="history__body-item">28/05/2024</td>
-                        <td class="history__body-item">29/05/2024</td>
-                        <td class="history__body-item">30/05/2024</td>
-                        <td class="history__body-item history__body-item--final-2">31/05/2024</td>
-                    </tr>
-                    <tr class="history__row-space">
-                        <td></td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--semana" rowspan="2">Semana Pasada</td>
-                        <td class="history__body-item history__body-item--entrada">Entrada</td>
-                        <td class="history__body-item">20/05/2024</td>
-                        <td class="history__body-item">21/05/2024</td>
-                        <td class="history__body-item">22/05/2024</td>
-                        <td class="history__body-item">23/05/2024</td>
-                        <td class="history__body-item history__body-item--final-1">24/05/2024</td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--salida">Salida</td>
-                        <td class="history__body-item">20/05/2024</td>
-                        <td class="history__body-item">21/05/2024</td>
-                        <td class="history__body-item">22/05/2024</td>
-                        <td class="history__body-item">23/05/2024</td>
-                        <td class="history__body-item history__body-item--final-2">24/05/2024</td>
-                    </tr>
-                    <tr class="history__row-space">
-                        <td></td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--semana" rowspan="2">Semana Anterior</td>
-                        <td class="history__body-item history__body-item--entrada">Entrada</td>
-                        <td class="history__body-item">fecha 1</td>
-                        <td class="history__body-item">fecha 2</td>
-                        <td class="history__body-item">fecha 3</td>
-                        <td class="history__body-item">fecha 4</td>
-                        <td class="history__body-item history__body-item--final-1">fecha 5</td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--salida">Salida</td>
-                        <td class="history__body-item">fecha 1</td>
-                        <td class="history__body-item">fecha 2</td>
-                        <td class="history__body-item">fecha 3</td>
-                        <td class="history__body-item">fecha 4</td>
-                        <td class="history__body-item history__body-item--final-2">fecha 5</td>
-                    </tr>
-                    <tr class="history__row-space">
-                        <td></td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--semana" rowspan="2">Semana Anterior</td>
-                        <td class="history__body-item history__body-item--entrada">Entrada</td>
-                        <td class="history__body-item">fecha 1</td>
-                        <td class="history__body-item">fecha 2</td>
-                        <td class="history__body-item">fecha 3</td>
-                        <td class="history__body-item">fecha 4</td>
-                        <td class="history__body-item history__body-item--final-1">fecha 5</td>
-                    </tr>
-                    <tr class="history__body-row">
-                        <td class="history__body-item history__body-item--salida">Salida</td>
-                        <td class="history__body-item">fecha 1</td>
-                        <td class="history__body-item">fecha 2</td>
-                        <td class="history__body-item">fecha 3</td>
-                        <td class="history__body-item">fecha 4</td>
-                        <td class="history__body-item history__body-item--final-2">fecha 5</td>
-                    </tr>
-                    <tr class="history__row-space">
-                        <td></td>
-                    </tr>
+                    }
                 </tbody>
             </table>
         </div>
