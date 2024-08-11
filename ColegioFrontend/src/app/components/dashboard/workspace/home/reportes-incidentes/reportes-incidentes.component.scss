@@ -18,10 +18,22 @@ select {
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+                width: 15px;
+                background-color: #ff0080;
+
+                /* background-color: #F5F7FA; */
+                &-thumb {
+                        border-radius: 10px;
+                        background: #000980;
+                }
+        }
 
         &__content {
                 background-color: rgb(255, 255, 255);
-                min-width: 65%;
+                width: 65%;
                 min-height: 40vh;
                 box-shadow: $sombra;
                 border-radius: 20px;
@@ -35,16 +47,16 @@ select {
         &__select {
                 margin: 0px 30px 0px 00px;
                 text-align: center;
-                width: 200px;
                 height: 50px;
                 color: #000000;
-                font-size: 1.1rem;
+                font-size: 1rem;
                 font-family: "Geologica", sans-serif;
                 background: #0dcaf0;
                 border: none;
                 outline: none;
                 border-radius: 10px;
                 overflow: hidden;
+                padding: 0 15px;
                 transition: .3s box-shadow, .2s background, .2s color;
 
                 option {
@@ -79,6 +91,7 @@ select {
                 overflow: auto;
                 width: 90%;
 
+
                 &-head {}
 
                 &-row {}
@@ -88,13 +101,14 @@ select {
                         background-color: #000441;
                         border: $table__border-header;
                         padding: 5px 10px;
+                        font-size: .8rem;
                 }
 
                 &-body {}
 
                 &-item {
                         border: $table__border-item;
-                        font-size: 14px;
+                        font-size: .75rem;
                         padding: 5px 10px;
                 }
         }
