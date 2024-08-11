@@ -1,6 +1,6 @@
 $font_lexend: lexend, System-UI;
 $color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
-$sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
+$sombra: 0 0 20px 0 #00000059;
 $color-btnDonwloadHorario: #143ef7;
 $sombra-input: 2px 1px 10px 0 #00065a;
 
@@ -15,7 +15,7 @@ $sombra-input: 2px 1px 10px 0 #00065a;
         box-shadow: $sombra;
         border-radius: 20px;
         background: #ffffff;
-        padding: 40px 40px 0px 40px;
+        padding: 40px 40px 40px 40px;
         display: flex;
 
         flex-direction: column;

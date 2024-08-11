@@ -2,7 +2,6 @@ package com.exam.colegio.controller.workspace;
 
 
 import com.exam.colegio.dao.report.IReportDAO;
-import com.exam.colegio.dto.ReporteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
