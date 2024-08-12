@@ -1,7 +1,7 @@
 package com.exam.colegio.service.enrollment;
 
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
-import com.exam.colegio.dto.HorarioDTO;
+import com.exam.colegio.dto.horario.HorarioDTO;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;

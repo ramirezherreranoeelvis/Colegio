@@ -2,13 +2,14 @@ package com.exam.colegio.model.other;
 
 import com.exam.colegio.model.person.Student;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
+
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "entrySchool")
@@ -22,7 +23,7 @@ public class EntrySchool {
         @JoinColumn(name = "idPerson", nullable = false, updatable = false)
         private Student student;
 
-        @Column(name = "timeEntry", nullable = false)
+        @Column(name = "timeEntry")
         @Temporal(TemporalType.TIMESTAMP)
         private Date timeEntry;
 

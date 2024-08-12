@@ -1,4 +1,4 @@
-package com.exam.colegio.dto;
+package com.exam.colegio.dto.horario;
 
 import java.time.LocalTime;
 import java.util.List;
