@@ -12,7 +12,7 @@ export class HistorialComponent implements OnInit {
 
 	constructor(private historialService: HistorialService) { }
 	ngOnInit(): void {
-		this.historialService.obtenerTemporadas().subscribe(
+		this.historialService.obtenerTemporadas("21787088").subscribe(
 			(data: []) => {
 				this.historial = data
 			}

@@ -1,12 +1,11 @@
 package com.exam.colegio.dao.other;
 
-import com.exam.colegio.model.other.EntrySchool;
+import com.exam.colegio.dto.historial.SemanaDTO;
+import com.exam.colegio.model.person.Student;
 
 import java.util.List;
 public interface IEntrySchoolDAO {
 
-        String findByStudent(String dniStudent);
-
-        List<EntrySchool> findAll();
+        List<SemanaDTO> finAllSemanaDTOByStudent(Student student);
 
 }

@@ -5,6 +5,22 @@ CREATE PROCEDURE usp_getReportsByStudent(
 )
 BEGIN
     SELECT
+        r.*
+    FROM report r
+    JOIN reportperson rp ON r.idReport = rp.idReport
+    JOIN person p ON rp.idPerson = p.idPerson
+    WHERE p.dni = p_dniStudent;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE usp_getReportsByStudent(
+    IN p_dniStudent VARCHAR(8)
+)
+BEGIN
+    SELECT
         r.*, 
         a.name AS assistant_name,
         a.surnamePaternal AS assistant_surnamePaternal,
@@ -18,7 +34,3 @@ BEGIN
 END //
 
 DELIMITER ;
-
-
-
-call usp_getReportsByStudent("21787088")

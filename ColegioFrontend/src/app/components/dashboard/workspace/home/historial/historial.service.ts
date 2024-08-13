@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
@@ -8,10 +8,11 @@ import { map, Observable } from 'rxjs';
 export class HistorialService {
         private url = "http://localhost:8080/historial"
 
-        constructor(private httpClient: HttpClient) {}
-        
-        public obtenerTemporadas(): Observable<[]> {
-                return this.httpClient.get<[]>(this.url).pipe(
+        constructor(private httpClient: HttpClient) { }
+
+        public obtenerTemporadas(dniStudent: string): Observable<[]> {
+                const params: HttpParams = new HttpParams().set('dniStudent', dniStudent);
+                return this.httpClient.get<[]>(this.url, { params }).pipe(
                         map(response => response)
                 );
         }
