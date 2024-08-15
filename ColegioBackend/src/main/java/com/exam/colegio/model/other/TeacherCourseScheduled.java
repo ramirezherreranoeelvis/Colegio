@@ -3,14 +3,14 @@ package com.exam.colegio.model.other;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.person.Teacher;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "teacherCourseScheduled")
 public class TeacherCourseScheduled {

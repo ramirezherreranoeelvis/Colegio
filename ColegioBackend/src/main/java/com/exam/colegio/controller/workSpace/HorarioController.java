@@ -16,19 +16,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class HorarioController {
 
-        @GetMapping("/temporadas")
-        public ResponseEntity<?> getTemporadas(@RequestParam String dniStudent) {
-                var studentOptional = this.studentDAO.findByDni(dniStudent);
-                var student = studentOptional.get();
-                var seasons = this.studentDAO.findAllSeasonByStudent(student);
-                return ResponseEntity.ok(seasons);
-        }
-
         @GetMapping("/horario")
-        public ResponseEntity<?> getHorario(@RequestParam int idSeason, @RequestParam String dniStudent) {
+        public ResponseEntity<?> getHorario(@RequestParam String year, @RequestParam String dniStudent) {
                 var studentOptional = this.studentDAO.findByDni(dniStudent);
                 var student = studentOptional.get();
-                var seasonOptional = this.seasonDAO.findById(idSeason);
+                var seasonOptional = this.seasonDAO.findByYear(year);
                 var season = seasonOptional.get();
                 var enrollmentOptional = enrollmentDAO.findBySeasonAndByStudent(season, student);
                 return ResponseEntity.ok(enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get()).getWeekHorario());

@@ -62,6 +62,11 @@ $sombra-input: 2px 1px 10px 0 #00065a;
             border-radius: 10px;
             overflow: hidden;
 
+            &:hover {
+                background: #000441;
+                color: white;
+                box-shadow: 2px 1px 10px 0 #0000004d;
+            }
 
             option {
                 background-color: #fff;

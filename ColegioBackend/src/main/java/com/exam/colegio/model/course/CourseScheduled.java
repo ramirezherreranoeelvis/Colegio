@@ -2,9 +2,14 @@ package com.exam.colegio.model.course;
 
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.other.Classroom;
+import com.exam.colegio.model.other.TeacherCourseScheduled;
 import com.exam.colegio.util.DayOfWeek;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.*;
 
@@ -42,5 +47,12 @@ public class CourseScheduled {
         @Enumerated(EnumType.STRING)
         @Column(name = "day", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
         private DayOfWeek dayOfWeek;
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "courseScheduled", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<TeacherCourseScheduled> teacherCourseScheduled = new ArrayList<>();
+
+        @Column(name = "portada", columnDefinition = "LONGTEXT")
+        private String portada;
 
 }

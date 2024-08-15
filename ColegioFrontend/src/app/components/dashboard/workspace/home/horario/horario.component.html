@@ -13,7 +13,7 @@
                 (change)="updateHorario()">
                 <option selected [value]="0">Selecciona una temporada</option>
                 @for (temporada of temporadas; track $index) {
-                <option [value]="temporada.idSeason">{{temporada.year}}</option>
+                <option [value]="temporada.year">{{temporada.year}}</option>
                 }
             </select>
             }

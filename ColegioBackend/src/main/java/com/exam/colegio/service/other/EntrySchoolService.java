@@ -83,11 +83,7 @@ public class EntrySchoolService implements IEntrySchoolDAO {
                 semanas = separacionPorSemanas.apply(list, semanas);
 
                 //conversion de arreglos uno por uno arreglo convirtiendo:
-
-
-                for (var semana : semanas) {
-                        semanaDTOS.add(castSemanaDTO(semana, ""));
-                }
+                semanas.forEach(semana -> semanaDTOS.add(castSemanaDTO(semana)));
 
                 //en reversa la lista de semanas:
                 Collections.reverse(semanaDTOS);
@@ -111,9 +107,8 @@ public class EntrySchoolService implements IEntrySchoolDAO {
                 return semanaDTOS;
         }
 
-        private SemanaDTO castSemanaDTO(EntrySchool[] entrySchools, String nameSemana) {
+        private SemanaDTO castSemanaDTO(EntrySchool[] entrySchools) {
                 SemanaDTO semanaDTO = new SemanaDTO();
-                semanaDTO.setName(nameSemana);
                 List<DiaIngreso> dias = new ArrayList<>();
 
                 int nDia = 0;

@@ -1,19 +1,37 @@
-<section class="cursos">
-    <div class="cursos__filters">
-        <input type="text" name="nameFind" class="cursos__filters-name" placeholder="Busque sus cursos" [(ngModel)] = nameFind>
-        <select name="a" id="">
-            <option value="a">Periodos</option>
-        </select>
-        
+<section class="course">
+    <div class="course__base">
+        <div class="course__content">
+            <!-- para seleccionar hijos -->
+            <div class="course__select-wrapper">
+                <select name="childSelect" id="childSelect"></select>
+            </div>
+            <!-- para filtros por temporadas entre otros -->
+            <div class="course__filters">
+                <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre"
+                    [(ngModel)]="nameFind">
+                <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year"
+                    (change)="updateDataCoursesSelect()">
+                    <option selected [value]="0">Periodos</option>
+                    @for (temporada of temporadas; track $index) {
+                    <option [value]="temporada.year">{{temporada.year}}</option>
+                    }
+                </select>
+            </div>
+            <!-- los cursos -->
+            <div class="course__list">
+                @for (curso of cursos; track 1) {
+                <article class="course__item">
+                    <div class="course__item-cover">
+                        <div class="course__item-cover-overlay"></div>
+                        <img [src]="curso.portada" alt="Portada del curso" class="course__item-cover-image">
+                    </div>
+                    <div class="course__item-name">{{curso.name}}</div>
+                    <div class="course__item-id">{{curso.id}}</div>
+                    <div class="course__item-teacher">{{curso.profesores[0]}}</div>
+                </article>
+                }
+            </div>
+        </div>
     </div>
-    <div class="cursos__content">
-        @for (curso of cursos; track 1) {
-        <article class="cursos__curso">
-            <div class="cursos__curso-portada"><div></div><img [src]="curso.portada" alt=""></div>
-            <div class="cursos__curso-nombre">{{curso.name}}-{{curso.year}} </div>
-            <div class="cursos__curso-id">{{curso.id}}</div>
-            <div class="cursos__curso-teacher">{{curso.profesor}}</div>
-        </article>
-        }
-    </div>
+
 </section>

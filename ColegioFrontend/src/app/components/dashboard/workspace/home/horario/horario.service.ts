@@ -11,20 +11,12 @@ import { Temporada } from '../../../../../model/Temporada';
 export class HorarioService {
         private url: string = "http://localhost:8080/horario";
 
-        constructor(private httpClient: HttpClient) { }
+        constructor(private httpClient: HttpClient ) { }
 
-        public obtenerHorarioPorTemporada(idSeason: number, dniStudent: string): Observable<DayHorario[]> {
+        public obtenerHorarioPorTemporada(year: string, dniStudent: string): Observable<DayHorario[]> {
                 const urlHorarioMatricula = `${this.url}/horario`;
-                const params = new HttpParams().set('idSeason', idSeason).set('dniStudent', dniStudent);
+                const params = new HttpParams().set('year', year).set('dniStudent', dniStudent);
                 return this.httpClient.get<DayHorario[]>(urlHorarioMatricula, { params }).pipe(
-                        map(response => response)
-                );
-        }
-
-        public obtenerTemporadas(dniStudent: string): Observable<Temporada[]> {
-                const params = new HttpParams().set('dniStudent', dniStudent);
-                const urlTemporadas = `${this.url}/temporadas`;
-                return this.httpClient.get<Temporada[]>(urlTemporadas, { params }).pipe(
                         map(response => response)
                 );
         }

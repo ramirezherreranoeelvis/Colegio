@@ -43,6 +43,7 @@ $sombra: 0 0 20px 0 #00000059;
         flex-direction: column;
         min-width: 70%;
         min-height: 20vh;
+        display: flex;
     }
 
     &__filter {
@@ -62,7 +63,6 @@ $sombra: 0 0 20px 0 #00000059;
             font-family: $font_lexend;
             background: $color__background-filter;
             border: none;
-            border-bottom: 1px solid;
             outline: none;
             border-radius: 10px;
             overflow: hidden;
@@ -70,8 +70,14 @@ $sombra: 0 0 20px 0 #00000059;
     }
 
     &__table-container {
+        padding: 0 00px 20px 0px;
+        border-radius: 10px;
+        background-color: #fff;
         display: flex;
         justify-content: center;
+        align-items: center;
+        flex: 1;
+
     }
 
     &__table {
@@ -79,6 +85,13 @@ $sombra: 0 0 20px 0 #00000059;
         font-family: lexend;
         border-collapse: collapse;
         font-weight: 500;
+        height: 100%;
+
+
+        &-nofound {
+
+            font-family: lexend
+        }
     }
 
     &__row-space {

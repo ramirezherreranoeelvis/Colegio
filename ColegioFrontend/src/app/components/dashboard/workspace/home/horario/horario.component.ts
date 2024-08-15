@@ -7,6 +7,7 @@ import { HorarioService } from './horario.service';
 import { DayHorario } from '../../../../../model/horario/dayHorario';
 import { FormsModule } from '@angular/forms';
 import { Temporada } from '../../../../../model/Temporada';
+import { TemporadaService } from '../../temporada.service';
 
 @Component({
         selector: 'app-horario',
@@ -25,7 +26,7 @@ export class HorarioComponent {
         protected temporadas: Temporada[] = [];
         protected idTemporadaSelect = "0";
 
-        constructor(private renderer: Renderer2, private parentService: ParentService, private horarioService: HorarioService) { }
+        constructor(private renderer: Renderer2, private parentService: ParentService, private horarioService: HorarioService, private temporadaService: TemporadaService) { }
 
         public ngOnInit(): void {
                 this.parentService.getStudent(this.dniParent).subscribe(
@@ -45,7 +46,7 @@ export class HorarioComponent {
                         return;
                 }
                 studentSelect = this.students.find(s => s.dni == this.studentSelectDNI)
-                this.horarioService.obtenerTemporadas(studentSelect.dni).subscribe(
+                this.temporadaService.findAllSeasonByStudent(studentSelect.dni).subscribe(
                         (t: Temporada[]) => {
                                 this.temporadas = t
                         })
@@ -57,8 +58,8 @@ export class HorarioComponent {
                         this.horario = null
                         return;
                 }
-                var temporada: Temporada = this.temporadas.find(t => t.idSeason.toString() == this.idTemporadaSelect)
-                this.horarioService.obtenerHorarioPorTemporada(temporada.idSeason, this.studentSelectDNI).subscribe((data: DayHorario[]) => {
+                var temporada: Temporada = this.temporadas.find(t => t.year.toString() == this.idTemporadaSelect)
+                this.horarioService.obtenerHorarioPorTemporada(temporada.year, this.studentSelectDNI).subscribe((data: DayHorario[]) => {
                         //borramos los dias para volver a llenarlo:
                         this.days = []
                         this.days = data
