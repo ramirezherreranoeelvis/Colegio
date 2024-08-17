@@ -13,7 +13,14 @@ import { TemporadaService } from '../../temporada.service';
         styleUrl: './cursos.component.scss'
 })
 export class CursosComponent implements OnInit {
+        //diseño
+        protected verCursos: boolean = false;
+        //metodos de diseño
+        verCursoSeleccionado() {
+                this.verCursos = this.verCursos == true ? false : true;
+        }
 
+        //datos:
         protected cursos: Curso[] = []
         protected nameFind = '';
         protected dniStudent = "21787088"
@@ -31,7 +38,7 @@ export class CursosComponent implements OnInit {
 
         }
 
-        public updateDataCoursesSelect(): void {
+        protected updateDataCoursesSelect(): void {
                 if (this.year == "0") {
                         this.cursos.length = 0;
                         return;
@@ -42,5 +49,6 @@ export class CursosComponent implements OnInit {
                         }
                 );
         }
+
 
 }

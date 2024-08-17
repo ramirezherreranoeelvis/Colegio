@@ -1,5 +1,7 @@
 <section class="course">
     <div class="course__base">
+        <!-- todos los cursos con el filtro y todo -->
+        @if (verCursos) {
         <div class="course__content">
             <!-- para seleccionar hijos -->
             <div class="course__select-wrapper">
@@ -7,8 +9,8 @@
             </div>
             <!-- para filtros por temporadas entre otros -->
             <div class="course__filters">
-                <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre"
-                    [(ngModel)]="nameFind">
+                <input type="text" name="nameFind" class="course__filters-input"
+                    placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
                 <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year"
                     (change)="updateDataCoursesSelect()">
                     <option selected [value]="0">Periodos</option>
@@ -20,7 +22,7 @@
             <!-- los cursos -->
             <div class="course__list">
                 @for (curso of cursos; track 1) {
-                <article class="course__item">
+                <article class="course__item" (click)="verCursoSeleccionado()">
                     <div class="course__item-cover">
                         <div class="course__item-cover-overlay"></div>
                         <img [src]="curso.portada" alt="Portada del curso" class="course__item-cover-image">
@@ -32,6 +34,22 @@
                 }
             </div>
         </div>
+        }@else {
+        <!-- para mostras datos de un curso seleccionado osea si se dio click en un item-->
+        <div class="course__data">
+            <div class="salir" (click)="verCursoSeleccionado()">
+                <div class="salir__content">
+                    <div class="salir__line"></div>
+                    <div class="salir__line"></div>
+                </div>
+            </div>
+            <div class="content">
+                
+            </div>
+        </div>
+        }
+
+
     </div>
 
 </section>
