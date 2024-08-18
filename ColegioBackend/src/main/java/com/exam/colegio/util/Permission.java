@@ -1,22 +1,16 @@
 package com.exam.colegio.util;
 
 /**
- *
  * @author Gatomontes
  */
-public enum DayOfWeek {
+public enum Permission {
 
-        LUNES("LUNES"),
-        MARTES("MARTES"),
-        MIERCOLES("MIERCOLES"),
-        JUEVES("JUEVES"),
-        VIERNES("VIERNES"),
-        SABADO("SABADO"),
-        DOMINGO("DOMINGO");
+        TEACHER("TEACHER"),
+        ALL("ALL");
 
         private final String displayName;
 
-        DayOfWeek(String displayName) {
+        Permission(String displayName) {
                 this.displayName = displayName;
         }
 

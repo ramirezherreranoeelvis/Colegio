@@ -1,5 +1,5 @@
 DELIMITER //
-CREATE PROCEDURE usp_findByStudent(
+CREATE PROCEDURE usp_findAllSeasonByStudent(
 	IN p_dniStudent VARCHAR(8)
 )
 BEGIN

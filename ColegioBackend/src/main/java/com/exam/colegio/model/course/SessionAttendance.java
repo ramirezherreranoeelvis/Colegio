@@ -12,20 +12,24 @@ import java.util.Date;
 @Getter
 @Builder
 @Entity
-@Table(name = "studentAttendanceCourseScheduled")
-public class StudentAttendanceCourseScheduled {
+@Table(name = "sessionAttendance")
+public class SessionAttendance {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int idStudentAttendanceCourseScheduled;
+        private int idAttendance;
 
         @ManyToOne
         @JoinColumn(name = "idPerson", nullable = false)
         private Student student;
 
         @ManyToOne
-        @JoinColumn(name = "idCourseScheduled", nullable = false)
-        private CourseScheduled courseScheduled;
+        @JoinColumn(name = "idStatus", nullable = false)
+        private StatusAttendance status;
+
+        @ManyToOne
+        @JoinColumn(name = "idSession", nullable = false)
+        private Session session;
 
         @Column(name = "timeEntry", nullable = false)
         @Temporal(TemporalType.TIMESTAMP)

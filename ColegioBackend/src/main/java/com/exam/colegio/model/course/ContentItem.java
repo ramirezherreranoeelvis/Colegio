@@ -1,5 +1,6 @@
 package com.exam.colegio.model.course;
 
+import com.exam.colegio.model.course.content.Resource;
 import com.exam.colegio.model.person.Person;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table(name = "resource")
+@Table(name = "contentItem")
 public class ContentItem {
 
         @Id
@@ -25,7 +26,7 @@ public class ContentItem {
         @JoinColumn(name = "idResource", nullable = false)
         private Resource resource;
 
-        @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
+        @Column(name = "Content", nullable = false, columnDefinition = "LONGTEXT")
         private String content;
 
 }

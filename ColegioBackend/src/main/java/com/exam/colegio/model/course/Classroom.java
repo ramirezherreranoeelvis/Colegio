@@ -1,4 +1,4 @@
-package com.exam.colegio.model.other;
+package com.exam.colegio.model.course;
 
 import jakarta.persistence.*;
 import lombok.*;

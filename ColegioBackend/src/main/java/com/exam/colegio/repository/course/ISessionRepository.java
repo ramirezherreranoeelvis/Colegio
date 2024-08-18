@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.course;
 
-import com.exam.colegio.model.course.SessionAttendance;
+import com.exam.colegio.model.course.Session;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author Gatomontes
  */
 @Repository
-public interface ISessionAttendanceRepository extends JpaRepository<SessionAttendance, Integer> {
+public interface ISessionRepository extends JpaRepository<Session, Integer> {
 
 }

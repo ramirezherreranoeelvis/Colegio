@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author Gatomontes
  */
 @Repository
-public interface ISessionAttendance extends JpaRepository<SessionAttendance, Integer> {
+public interface ISessionAttendanceRepository extends JpaRepository<SessionAttendance, Integer> {
 
 }

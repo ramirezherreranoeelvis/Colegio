@@ -1,7 +1,6 @@
 package com.exam.colegio.model.course;
 
 import com.exam.colegio.model.enrollment.Enrollment;
-import com.exam.colegio.model.other.Classroom;
 import com.exam.colegio.model.other.TeacherCourseScheduled;
 import com.exam.colegio.util.DayOfWeek;
 import com.fasterxml.jackson.annotation.JsonIgnore;

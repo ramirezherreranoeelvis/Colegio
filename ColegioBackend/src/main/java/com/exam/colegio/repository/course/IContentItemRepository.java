@@ -1,4 +1,9 @@
 package com.exam.colegio.repository.course;
 
-public interface IResourceRepository {
+import com.exam.colegio.model.course.ContentItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface IContentItemRepository extends JpaRepository<ContentItem, Integer> {
 }
