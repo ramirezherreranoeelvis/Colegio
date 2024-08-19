@@ -1,4 +1,4 @@
-package com.exam.colegio.repository.course;
+package com.exam.colegio.repository.course.content.resource;
 
 import com.exam.colegio.model.course.content.resource.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;

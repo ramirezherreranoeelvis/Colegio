@@ -1,4 +1,4 @@
-package com.exam.colegio.repository.course;
+package com.exam.colegio.repository.course.content;
 
 import com.exam.colegio.model.course.content.SessionAttendance;
 import org.springframework.data.jpa.repository.JpaRepository;
