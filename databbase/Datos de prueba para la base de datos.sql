@@ -203,6 +203,8 @@ VALUES
         (250.00, 0, 250.00, 40, 11, 1);
 
 
+SELECT * FROM colegio.content;
+
 
 INSERT INTO `colegio`.`content` (`typeContent`, `isVisible`, `name`, `number`, `idCourseScheduled`) VALUES 
 ('session', '1', 'Historia de la Quimica', '1', '1'),
