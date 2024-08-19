@@ -1,28 +1,25 @@
-package com.exam.colegio.model.course.content;
+package com.exam.colegio.model.course.session.content;
 
-import com.exam.colegio.model.course.Session;
-import com.exam.colegio.util.Permission;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import lombok.Builder;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
-
-@Setter
 @Getter
+@Setter
 @Entity
-@NoArgsConstructor
-@DiscriminatorValue("content")
-public class Content extends Resource {
+@Table(name = "content")
+public class Content {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idContent;
 
-        @Builder
-        public Content(int idResource, Session session, String name, String description, Permission permission, Date createtAt) {
-                super(idResource, session, name, description, permission, createtAt);
-        }
+        @Column(name = "name", nullable = true, length = 150)
+        private String name;
 
+        @Column(name = "number", nullable = false)
+        private int number;
+
+        @Column(name = "isVisible", nullable = false)
+        private boolean isVisible;
 
 
 }

@@ -1,5 +1,6 @@
-package com.exam.colegio.model.course;
+package com.exam.colegio.model.course.session;
 
+import com.exam.colegio.model.course.StatusAttendance;
 import com.exam.colegio.model.person.Student;
 import jakarta.persistence.*;
 import lombok.Builder;

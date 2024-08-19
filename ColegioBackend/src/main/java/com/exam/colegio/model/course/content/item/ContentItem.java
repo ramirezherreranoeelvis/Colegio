@@ -1,6 +1,6 @@
-package com.exam.colegio.model.course;
+package com.exam.colegio.model.course.session;
 
-import com.exam.colegio.model.course.content.Resource;
+import com.exam.colegio.model.course.session.resource.Resource;
 import com.exam.colegio.model.person.Person;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -26,7 +26,7 @@ public class ContentItem {
         @JoinColumn(name = "idResource", nullable = false)
         private Resource resource;
 
-        @Column(name = "Content", nullable = false, columnDefinition = "LONGTEXT")
+        @Column(name = "Data", nullable = false, columnDefinition = "LONGTEXT")
         private String content;
 
 }

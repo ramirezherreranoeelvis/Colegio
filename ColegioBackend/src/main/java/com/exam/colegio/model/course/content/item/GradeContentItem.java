@@ -1,5 +1,7 @@
-package com.exam.colegio.model.course;
+package com.exam.colegio.model.course.content.item;
 
+import com.exam.colegio.model.course.CourseScheduled;
+import com.exam.colegio.model.course.GradeType;
 import com.exam.colegio.model.person.Student;
 import jakarta.persistence.*;
 import lombok.Builder;

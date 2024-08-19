@@ -1,6 +1,6 @@
-package com.exam.colegio.model.course.content;
+package com.exam.colegio.model.course.session.resource;
 
-import com.exam.colegio.model.course.Session;
+import com.exam.colegio.model.course.session.Session;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -14,15 +14,15 @@ import java.util.Date;
 @Getter
 @Entity
 @NoArgsConstructor
-@DiscriminatorValue("forum")
-public class Forum extends Resource {
+@DiscriminatorValue("homework")
+public class Homework extends Resource {
 
         @Column(name = "createtAt")
         @Temporal(TemporalType.TIMESTAMP)
         private Date createtAt;
 
         @Builder
-        public Forum(int idResource, Session session, String name, String description, Permission permission, Date createtAt, Date createtAt1) {
+        public Homework(int idResource, Session session, String name, String description, Permission permission, Date createtAt, Date createtAt1) {
                 super(idResource, session, name, description, permission, createtAt);
                 this.createtAt = createtAt1;
         }

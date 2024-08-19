@@ -1,7 +1,7 @@
-package com.exam.colegio.model.course.content;
+package com.exam.colegio.model.course.session.resource;
 
-import com.exam.colegio.model.course.ContentItem;
-import com.exam.colegio.model.course.Session;
+import com.exam.colegio.model.course.session.ContentItem;
+import com.exam.colegio.model.course.session.Session;
 import com.exam.colegio.util.Permission;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

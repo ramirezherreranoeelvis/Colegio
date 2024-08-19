@@ -21,5 +21,6 @@ public class CursoDTO {
         private String day;
         private List<String> profesores;
         private String portada;
+        private int numeroSesiones;
 
 }
