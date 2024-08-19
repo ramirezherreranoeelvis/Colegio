@@ -1,5 +1,6 @@
 package com.exam.colegio.model.course;
 
+import com.exam.colegio.model.course.content.SessionAttendance;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;

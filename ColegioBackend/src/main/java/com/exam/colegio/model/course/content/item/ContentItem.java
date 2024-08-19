@@ -1,16 +1,23 @@
-package com.exam.colegio.model.course.session;
+package com.exam.colegio.model.course.content.item;
 
-import com.exam.colegio.model.course.session.resource.Resource;
+import com.exam.colegio.model.course.content.resource.Resource;
 import com.exam.colegio.model.person.Person;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
 @Setter
-@Builder
+@Getter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorColumn(
+        name = "typeContentItem",
+        discriminatorType = DiscriminatorType.STRING,
+        length = 100
+)
+@Inheritance(
+        strategy = InheritanceType.SINGLE_TABLE
+)
 @Table(name = "contentItem")
 public class ContentItem {
 
@@ -26,7 +33,17 @@ public class ContentItem {
         @JoinColumn(name = "idResource", nullable = false)
         private Resource resource;
 
-        @Column(name = "Data", nullable = false, columnDefinition = "LONGTEXT")
+        @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
         private String content;
+
+        public String getType() {
+                if (this instanceof TeacherContentItem) {
+                        return "teacherContent";
+                } else if (this instanceof StudentContentItem) {
+                        return "studentContent";
+                } else {
+                        return "unknown";
+                }
+        }
 
 }

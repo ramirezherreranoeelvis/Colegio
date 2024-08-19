@@ -4,7 +4,6 @@ import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
 import com.exam.colegio.dto.TemporadaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

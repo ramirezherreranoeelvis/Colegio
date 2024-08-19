@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ICourseScheduledRepository extends JpaRepository<CourseScheduled, Integer> {
@@ -18,5 +19,8 @@ public interface ICourseScheduledRepository extends JpaRepository<CourseSchedule
         @Query(value = "CALL usp_findCoursesByDniStudentByYear(:student, :year)", nativeQuery = true)
         List<CourseScheduled> obtenerPorStudentYPorTemporada(@Param("student") String student,
                                                              @Param("year") String season);
+
+
+        Optional<CourseScheduled> findByCode(String code);
 
 }

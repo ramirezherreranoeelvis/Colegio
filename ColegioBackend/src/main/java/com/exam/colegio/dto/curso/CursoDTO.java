@@ -1,4 +1,4 @@
-package com.exam.colegio.dto;
+package com.exam.colegio.dto.curso;
 
 import lombok.*;
 
@@ -12,15 +12,15 @@ import java.util.List;
 @Builder
 public class CursoDTO {
 
-        private int id;
-        private String name;
-        private int numberClassroom;
-        private int floor;
-        private LocalTime startTime;
-        private LocalTime endTime;
-        private String day;
+        private String nombre;
+        private int numeroSalon;
+        private int piso;
+        private LocalTime horaInicio;
+        private LocalTime horaFin;
+        private String dia;
         private List<String> profesores;
         private String portada;
         private int numeroSesiones;
+        private List<ContentDTO> contenidos;
 
 }

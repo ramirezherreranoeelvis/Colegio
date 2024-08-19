@@ -12,11 +12,11 @@ import lombok.Setter;
 @Getter
 @Entity
 @NoArgsConstructor
-@DiscriminatorValue("general")
-public class GeneralContent extends Content {
+@DiscriminatorValue("auxiliary")
+public class AuxiliaryContent extends Content {
 
         @Builder
-        public GeneralContent(int idContent, String name, int number, boolean isVisible, CourseScheduled courseScheduled) {
+        public AuxiliaryContent(int idContent, String name, int number, boolean isVisible, CourseScheduled courseScheduled) {
                 super(idContent, name, number, isVisible, courseScheduled);
         }
 

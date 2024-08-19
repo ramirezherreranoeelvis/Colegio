@@ -204,6 +204,28 @@ VALUES
 
 
 
+INSERT INTO `colegio`.`content` (`typeContent`, `isVisible`, `name`, `number`, `idCourseScheduled`) VALUES 
+('session', '1', 'Historia de la Quimica', '1', '1'),
+('session', '1', 'Hexenos', '2', '1'),
+('session', '1', 'Pentenos', '3', '1'),
+('session', '1', 'Fusiones y Mezclas', '4', '1'),
+('session', '1', 'Fusiones y Mezclas II', '5', '1'),
+('session', '1', 'Propiedades Generales de la Materia', '6', '1'),
+('session', '1', 'Estados y Cambios de Estado de la Materia', '7', '1'),
+('session', '1', 'Fenómenos Físicos y Químicos de la Materia', '8', '1'),
+('session', '1', 'Sustancias Simples y Compuestas', '9', '1'),
+('session', '1', 'Mezclas Homogéneas y Heterogéneas', '10', '1'),
+('session', '1', 'Historia del Átomo', '11', '1'),
+('session', '1', 'Número Atómico y Número de Masa', '12', '1'),
+('session', '1', 'Anión y Catión', '13', '1'),
+('session', '1', 'Niveles, Subniveles y Orbitales', '14', '1'),
+('session', '1', 'Historia de la Tabla Periódica', '15', '1'),
+('session', '1', 'Estructura de la Tabla Periódica Actual', '16', '1'),
+('session', '1', 'Ubicación de un Elemento en la TPA', '17', '1'),
+('session', '1', 'Número de Oxidación', '18', '1'),
+('session', '1', 'Óxidos Básicos o Metálicos', '19', '1'),
+('session', '1', 'Óxidos Ácidos o Anhídridos', '20', '1');
+
 
 
 

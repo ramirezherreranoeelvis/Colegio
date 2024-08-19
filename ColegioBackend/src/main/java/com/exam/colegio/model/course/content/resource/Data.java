@@ -1,6 +1,6 @@
-package com.exam.colegio.model.course.session.resource;
+package com.exam.colegio.model.course.content.resource;
 
-import com.exam.colegio.model.course.session.Session;
+import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -19,10 +19,8 @@ import java.util.Date;
 public class Data extends Resource {
 
         @Builder
-        public Data(int idResource, Session session, String name, String description, Permission permission, Date createtAt) {
-                super(idResource, session, name, description, permission, createtAt);
+        public Data(int idResource, Content content, String name, String description, Permission permission, Date createdAt) {
+                super(idResource, content, name, description, permission, createdAt);
         }
-
-
 
 }

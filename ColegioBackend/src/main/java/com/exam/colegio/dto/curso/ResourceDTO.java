@@ -2,15 +2,18 @@ package com.exam.colegio.dto.curso;
 
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Builder
-public class ContentDTO {
+public class ResourceDTO {
 
-        private String name;
-        private int number;
-        private boolean isVisible;
+        private String nombre;
+        private String description;
+        private String tipo;
+        private List<ItemDTO> items;
 
 }

@@ -1,6 +1,7 @@
-package com.exam.colegio.model.course.session.resource;
+package com.exam.colegio.model.course.content.resource;
 
-import com.exam.colegio.model.course.session.Session;
+import com.exam.colegio.model.course.content.Content;
+import com.exam.colegio.model.course.content.Session;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -17,14 +18,14 @@ import java.util.Date;
 @DiscriminatorValue("forum")
 public class Forum extends Resource {
 
-        @Column(name = "createtAt")
+        @Column(name = "dueDate")
         @Temporal(TemporalType.TIMESTAMP)
-        private Date createtAt;
+        private Date dueDate;
 
         @Builder
-        public Forum(int idResource, Session session, String name, String description, Permission permission, Date createtAt, Date createtAt1) {
-                super(idResource, session, name, description, permission, createtAt);
-                this.createtAt = createtAt1;
+        public Forum(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
+                super(idResource, content, name, description, permission, createdAt);
+                this.dueDate = dueDate;
         }
 
 }

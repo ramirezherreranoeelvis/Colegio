@@ -1,7 +1,7 @@
-package com.exam.colegio.model.course.session.resource;
+package com.exam.colegio.model.course.content.resource;
 
-import com.exam.colegio.model.course.session.ContentItem;
-import com.exam.colegio.model.course.session.Session;
+import com.exam.colegio.model.course.content.*;
+import com.exam.colegio.model.course.content.item.ContentItem;
 import com.exam.colegio.util.Permission;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -32,8 +32,8 @@ public class Resource {
         private int idResource;
 
         @ManyToOne
-        @JoinColumn(name = "idSession", nullable = false)
-        private Session session;
+        @JoinColumn(name = "idContent", nullable = false)
+        private Content content;
 
         @Column(name = "name", nullable = false, length = 100)
         private String name;
@@ -45,12 +45,24 @@ public class Resource {
         @Column(name = "permission", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
         private Permission permission;
 
-        @Column(name = "createtAt")
+        @Column(name = "createdAt")
         @Temporal(TemporalType.TIMESTAMP)
-        private Date createtAt;
+        private Date createdAt;
 
         @JsonIgnore
         @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<ContentItem> contentItems = new ArrayList<>();
+
+        public String getType() {
+                if (this instanceof Homework) {
+                        return "homework";
+                } else if (this instanceof Forum) {
+                        return "forum";
+                } else if (this instanceof Data) {
+                        return "data";
+                } else {
+                        return "unknown";
+                }
+        }
 
 }

@@ -1,4 +1,4 @@
-package com.exam.colegio.model.course.session;
+package com.exam.colegio.model.course.content;
 
 import com.exam.colegio.model.course.StatusAttendance;
 import com.exam.colegio.model.person.Student;

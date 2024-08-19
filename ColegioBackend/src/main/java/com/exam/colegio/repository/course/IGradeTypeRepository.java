@@ -1,6 +1,6 @@
 package com.exam.colegio.repository.course;
 
-import com.exam.colegio.model.course.GradeType;
+import com.exam.colegio.model.course.content.item.GradeType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

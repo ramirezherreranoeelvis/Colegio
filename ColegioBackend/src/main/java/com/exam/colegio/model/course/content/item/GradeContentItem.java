@@ -1,40 +1,44 @@
 package com.exam.colegio.model.course.content.item;
 
-import com.exam.colegio.model.course.CourseScheduled;
-import com.exam.colegio.model.course.GradeType;
-import com.exam.colegio.model.person.Student;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Setter
 @Getter
 @Builder
 @Entity
-@Table(name = "gradeCourseScheduled")
-public class GradeCourseScheduled {
+@Table(name = "gradeContentItem")
+public class GradeContentItem {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int idGradeCourseScheduled;
+        private int idGradeContentItem;
 
         @ManyToOne
         @JoinColumn(name = "idGradeType", nullable = false)
         private GradeType gradeType;
 
-        @ManyToOne
-        @JoinColumn(name = "idCourseScheduled", nullable = false)
-        private CourseScheduled courseScheduled;
-
-        @ManyToOne
-        @JoinColumn(name = "idStudent", nullable = false)
-        private Student student;
+        @OneToOne
+        @JoinColumn(name = "idStudentContentItem", nullable = false)
+        private StudentContentItem studentContentItem;
 
         @Column(name = "grade", precision = 4, scale = 2, nullable = false)
-        private BigDecimal grade;
+        private BigDecimal gradeValue;
 
+        @Column(name = "comments", length = 500)
+        private String comments;
 
+        @Column(name = "gradedAt")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date gradedAt;
+
+        @PrePersist
+        protected void onCreate() {
+                gradedAt = new Date();
+        }
 }

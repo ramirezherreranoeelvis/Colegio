@@ -1,5 +1,6 @@
 package com.exam.colegio.model.course;
 
+import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.other.TeacherCourseScheduled;
 import com.exam.colegio.util.DayOfWeek;
@@ -25,6 +26,9 @@ public class CourseScheduled {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int idCourseScheduled;
 
+        @Column(name = "code", length = 14, nullable = false, unique = true)
+        private String code;
+
         @ManyToOne
         @JoinColumn(name = "idClassroom", nullable = false)
         private Classroom classroom;
@@ -47,11 +51,16 @@ public class CourseScheduled {
         @Column(name = "day", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
         private DayOfWeek dayOfWeek;
 
-        @JsonIgnore
-        @OneToMany(mappedBy = "courseScheduled", cascade = CascadeType.ALL, orphanRemoval = true)
-        private final List<TeacherCourseScheduled> teacherCourseScheduled = new ArrayList<>();
-
         @Column(name = "portada", columnDefinition = "LONGTEXT")
         private String portada;
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "courseScheduled", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<TeacherCourseScheduled> teacherCourseScheduleds = new ArrayList<>();
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "courseScheduled", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<Content> contents = new ArrayList<>();
+
 
 }
