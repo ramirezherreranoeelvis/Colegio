@@ -5,6 +5,7 @@ import com.exam.colegio.dto.curso.ContentDTO;
 import com.exam.colegio.dto.curso.CursoDTO;
 import com.exam.colegio.dto.curso.ItemDTO;
 import com.exam.colegio.dto.curso.ResourceDTO;
+import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.course.ICourseScheduledRepository;
@@ -26,6 +27,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                         var course = courseScheduled.getCourse();
                                         var enrollment = courseScheduled.getEnrollment();
                                         return CursoDTO.builder()
+                                                .codigo(courseScheduled.getCode())
                                                 .numeroSalon(classroom.getNumber())
                                                 .piso(classroom.getFloor())
                                                 .nombre(course.getName() + "-" + enrollment.getSeason().getYear())
@@ -55,6 +57,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                         var teacherCourseScheduleds = courseScheduled.getTeacherCourseScheduleds();
                         var contents = courseScheduled.getContents();
                         return CursoDTO.builder()
+                                .codigo(courseScheduled.getCode())
                                 .nombre(course.getName() + "-" + enrollment.getSeason().getYear())
                                 .numeroSalon(classroom.getNumber())
                                 .piso(classroom.getFloor())
@@ -74,15 +77,15 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                         .count()
                                 )
                                 .contenidos(contents.stream()
+                                        .filter(Content::isVisible)
                                         .map(content -> ContentDTO.builder()
                                                 .nombre(content.getName())
                                                 .numero(content.getNumber())
                                                 .tipo(content.getType())
-                                                .esVisible(content.isVisible())
                                                 .recursos(content.getResources().stream()
                                                         .map(resource -> ResourceDTO.builder()
                                                                 .nombre(resource.getName())
-                                                                .description(resource.getName())
+                                                                .descripcion(resource.getName())
                                                                 .tipo(resource.getType())
                                                                 .items(resource.getContentItems().stream()
                                                                         .map(item -> ItemDTO.builder()

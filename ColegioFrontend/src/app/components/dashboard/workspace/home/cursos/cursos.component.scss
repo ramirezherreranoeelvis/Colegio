@@ -10,6 +10,11 @@ $color__sombra-menu_salir: linear-gradient(45deg, #4032ff93, #913dff93, #ff2f9e9
 $line__menu: linear-gradient(90deg, #913dff93, #4032ff93);
 $z-index_menu: 900;
 $z-index_list: 900;
+$text-gradient: (
+        -webkit-background-clip: text,
+        background-clip: text,
+        -webkit-text-fill-color: transparent
+);
 
 select {
         appearance: none;
@@ -26,7 +31,35 @@ select {
         background: $color-fondo;
         overflow: auto;
 
-        &__base {
+        &__details-title,
+        &__title {
+                &::first-letter {
+                        text-transform: uppercase;
+                }
+
+                text-align: center;
+                font-family: "Rubik Dirt";
+                background: linear-gradient(45deg, #E31C48, #000980, #8400ffde);
+                font-weight: 600;
+                letter-spacing: 1px;
+                font-size: 2.5rem;
+                padding: 25px 0;
+
+                @each $property, $value in $text-gradient {
+                        #{$property}: $value;
+                }
+        }
+
+        &__title {
+                background: linear-gradient(45deg, #E31C48, #E31C48, #000980, #8400ffde, #8400ffde);
+
+                @each $property, $value in $text-gradient {
+                        #{$property}: $value;
+                }
+
+        }
+
+        &__container {
                 padding: 20px 0px 20px 0px;
                 box-shadow: $sombra;
                 border-radius: 20px;
@@ -36,8 +69,7 @@ select {
                 min-height: 20vh;
         }
 
-        &__content,
-        &__data {
+        &__content {
                 padding: 0px 40px 0px 40px;
                 max-height: 75vh;
                 max-width: 70vw;
@@ -49,7 +81,6 @@ select {
                         width: 15px;
                         background-color: #ff0080;
 
-                        /* background-color: #F5F7FA; */
                         &-thumb {
                                 border-radius: 10px;
                                 background: #000980;
@@ -59,89 +90,6 @@ select {
         }
 }
 
-/* curso seleccionado */
-.course {
-        &__data {
-                .salir {
-                        display: block;
-                        position: fixed;
-                        z-index: $z-index_menu;
-                        width: 46px;
-                        height: 38px;
-
-                        &__content {
-                                position: fixed;
-                                position: relative;
-                                flex-direction: column;
-                                justify-content: space-between;
-                                display: flex;
-                                margin: 5px 0px 0px 5px;
-                                padding: 5px;
-                                width: 100%;
-                                height: 100%;
-                                cursor: pointer;
-                                border-radius: 5px;
-                                background-color: #fff;
-
-                                &::before {
-                                        position: absolute;
-                                        content: "";
-                                        z-index: -1;
-                                        border-radius: 10px;
-                                        background-position: 800% 0;
-                                        width: 105%;
-                                        height: 105%;
-                                        left: -1px;
-                                        top: -1px;
-                                        filter: blur(3px);
-                                        box-shadow: 0 0 3px 2px #0000004d;
-                                        background: $color__sombra-menu_salir;
-                                        background-size: 800%;
-                                        animation: background_animation 20s linear infinite;
-                                }
-                        }
-
-                        &__line {
-                                overflow: hidden;
-                                position: relative;
-                                height: 7px;
-                                border-radius: 50px;
-                                transform-origin: left;
-                                transition: .8s transform ease-in-out, opacity .5s ease-in-out;
-                                background: $line__menu;
-                                left: 0px;
-                                opacity: 1;
-
-                                &::after {
-                                        top: 0;
-                                        left: -55px;
-                                        border-radius: 50px;
-                                        position: absolute;
-                                        content: "";
-                                        background: $line__menu;
-                                        width: 120%;
-                                        height: 100%;
-                                        filter: blur(3px);
-                                        animation: menu 1s linear infinite;
-                                }
-
-                                &:nth-child(1) {
-                                        transform: rotate(35deg) scaleX(1.2);
-                                }
-
-                                &:nth-child(2) {
-                                        transform: rotate(-35deg) scaleX(1.2);
-                                }
-                        }
-                }
-
-                .content {
-                        margin: 70px 0 0 0;
-                }
-        }
-}
-
-/* cursos */
 .course {
         &__select-wrapper {
                 display: flex;
@@ -257,19 +205,14 @@ select {
 
                 }
 
-                &-name {
-                        margin: $margin-datos;
-
-                }
-
                 &-cover {
 
-                        img {
+                        &-image {
                                 width: 380px;
                                 height: 100px;
                         }
 
-                        div {
+                        &-overlay {
                                 position: absolute;
                                 background-color: #ffffff00;
                                 width: 380px;
@@ -278,7 +221,13 @@ select {
 
                 }
 
-                &-id {
+                &-details {}
+
+                &-name {
+                        margin: $margin-datos;
+                }
+
+                &-code {
                         margin: $margin-datos;
                         background-color: #fff;
                 }
@@ -288,7 +237,7 @@ select {
                 }
 
                 &-name,
-                &-id,
+                &-code,
                 &-teacher {
                         &::selection {
                                 background: #240079;
@@ -297,6 +246,141 @@ select {
                 }
         }
 }
+
+.course {
+        font-family: $font_lexend;
+
+        &__exit {
+                display: block;
+                position: fixed;
+                z-index: $z-index_menu;
+                width: 46px;
+                height: 38px;
+
+                &-content {
+                        position: fixed;
+                        position: relative;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        display: flex;
+                        margin: 5px 0px 0px 5px;
+                        padding: 5px;
+                        width: 100%;
+                        height: 100%;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        background-color: #fff;
+
+                        &::before {
+                                position: absolute;
+                                content: "";
+                                z-index: -1;
+                                border-radius: 10px;
+                                background-position: 800% 0;
+                                width: 105%;
+                                height: 105%;
+                                left: -1px;
+                                top: -1px;
+                                filter: blur(3px);
+                                box-shadow: 0 0 3px 2px #0000004d;
+                                background: $color__sombra-menu_salir;
+                                background-size: 800%;
+                                animation: background_animation 20s linear infinite;
+                        }
+                }
+
+                &-line {
+                        overflow: hidden;
+                        position: relative;
+                        height: 7px;
+                        border-radius: 50px;
+                        transform-origin: left;
+                        transition: .8s transform ease-in-out, opacity .5s ease-in-out;
+                        background: $line__menu;
+                        left: 0px;
+                        opacity: 1;
+
+                        &::after {
+                                top: 0;
+                                left: -55px;
+                                border-radius: 50px;
+                                position: absolute;
+                                content: "";
+                                background: $line__menu;
+                                width: 120%;
+                                height: 100%;
+                                filter: blur(3px);
+                                animation: menu 1s linear infinite;
+                        }
+
+                        &:nth-child(1) {
+                                transform: rotate(35deg) scaleX(1.2);
+                        }
+
+                        &:nth-child(2) {
+                                transform: rotate(-35deg) scaleX(1.2);
+                        }
+                }
+        }
+
+        &__details-title {
+                margin: 50px 0 0 0;
+        }
+
+        &__professors {
+                &-title {
+                        padding: 10px 0;
+                        font-size: 1rem;
+                }
+
+                &-list {
+                        font-size: .85rem;
+                }
+        }
+
+        &__professor {}
+
+        &__data {
+                &-title {
+                        padding: 10px 0;
+                        font-size: 1rem;
+                }
+
+                &-list {
+                        font-size: .80rem;
+
+                        span {
+                                font-weight: bold;
+                        }
+                }
+
+                &-item {}
+        }
+
+        &__contents {
+                &-title {
+                        padding: 10px 0;
+                        font-size: 1rem;
+                }
+
+                &-list {}
+        }
+
+        &__content {
+                &-item {
+                        border: 1px solid;
+                        padding: 20px 5px;
+                        margin-bottom: -1px;
+                }
+
+                &-title {}
+        }
+
+        &__resources {}
+
+        &__resource {}
+}
+
 
 @keyframes background_animation {
         0% {

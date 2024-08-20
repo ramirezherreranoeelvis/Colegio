@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 public class CursoDTO {
 
+        private String codigo;
         private String nombre;
         private int numeroSalon;
         private int piso;

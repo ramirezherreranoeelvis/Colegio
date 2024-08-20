@@ -1,14 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Curso } from '../../../../../model/curso';
+import { Curso } from '../../../../../model/cursos/curso';
 import { map } from 'rxjs/operators'
 
 @Injectable({
         providedIn: 'root'
 })
 export class CursoService {
-        
+
         private url = "http://localhost:8080/cursos";
         constructor(private httpCLient: HttpClient) { }
 
@@ -17,5 +17,11 @@ export class CursoService {
                 return this.httpCLient.get<Curso[]>(this.url, { params }).pipe(
                         map(response => response)
                 );
+        }
+
+        public verCursoSeleccionado(codigoCurso: string): Observable<Curso> {
+                const params: HttpParams = new HttpParams().set("code", codigoCurso)
+                const url: string = `${this.url}/curso`
+                return this.httpCLient.get<Curso>(url, { params }).pipe(map(response => response));
         }
 }

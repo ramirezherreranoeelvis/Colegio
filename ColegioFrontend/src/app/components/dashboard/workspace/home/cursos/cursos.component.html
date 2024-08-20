@@ -1,13 +1,15 @@
 <section class="course">
-    <div class="course__base">
-        <!-- todos los cursos con el filtro y todo -->
-        @if (verCursos) {
+    <div class="course__container">
         <div class="course__content">
-            <!-- para seleccionar hijos -->
+            @if (verCursos) {
+            <h2 class="course__title">Cursos</h2>
+
+            <!-- Selección de hijos -->
             <div class="course__select-wrapper">
-                <select name="childSelect" id="childSelect"></select>
+                <select name="childSelect" id="childSelect" class="course__select"></select>
             </div>
-            <!-- para filtros por temporadas entre otros -->
+
+            <!-- Filtros -->
             <div class="course__filters">
                 <input type="text" name="nameFind" class="course__filters-input"
                     placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
@@ -19,39 +21,81 @@
                     }
                 </select>
             </div>
-            <!-- los cursos -->
+
+            <!-- Lista de cursos -->
             <div class="course__list">
                 @for (curso of cursos; track 1) {
-                <article class="course__item" (click)="verCursoSeleccionado()">
+                <article class="course__item" (click)="verCursoSeleccionado(curso.codigo)">
                     <div class="course__item-cover">
                         <div class="course__item-cover-overlay"></div>
                         <img [src]="curso.portada" alt="Portada del curso" class="course__item-cover-image">
                     </div>
-                    <div class="course__item-name">{{curso.name}}</div>
-                    <div class="course__item-id">{{curso.id}}</div>
-                    <div class="course__item-teacher">{{curso.profesores[0]}}</div>
+                    <div class="course__item-details">
+                        <div class="course__item-name">{{curso.nombre}}</div>
+                        <div class="course__item-code">{{curso.codigo}}</div>
+                        <div class="course__item-teacher">{{curso.profesores[0]}}</div>
+                    </div>
                 </article>
                 }
             </div>
-        </div>
-        }@else {
-        <!-- para mostras datos de un curso seleccionado osea si se dio click en un item-->
-        <div class="course__data">
-            <div class="salir" (click)="verCursoSeleccionado()">
-                <div class="salir__content">
-                    <div class="salir__line"></div>
-                    <div class="salir__line"></div>
+            }@else {
+            <!-- Detalles del curso seleccionado -->
+            <div class="course__details">
+                <div class="course__exit" (click)="verCursoSeleccionado('0')">
+                    <div class="course__exit-content">
+                        <div class="course__exit-line"></div>
+                        <div class="course__exit-line"></div>
+                    </div>
+                </div>
+
+                <h2 class="course__details-title">{{cursoSelect.nombre}}</h2>
+
+                <!-- Profesores -->
+                <div class="course__professors">
+                    <h3 class="course__professors-title">Profesores:</h3>
+                    <div class="course__professors-list">
+                        @for (profesor of cursoSelect.profesores; track $index) {
+                        <div class="course__professor">{{profesor}}</div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Datos del curso -->
+                <div class="course__data">
+                    <h3 class="course__data-title">Datos:</h3>
+                    <div class="course__data-list">
+                        <div class="course__data-item"><span>Día: </span>{{cursoSelect.dia}}</div>
+                        <div class="course__data-item"><span>Hora de Inicio: </span>{{cursoSelect.horaInicio}}</div>
+                        <div class="course__data-item"><span>Hora de Salida: </span>{{cursoSelect.horaFin}}</div>
+                        <div class="course__data-item"><span>Piso: </span>{{cursoSelect.piso}}</div>
+                        <div class="course__data-item"><span>Salón: </span>{{cursoSelect.numeroSalon}}</div>
+                        <div class="course__data-item"><span>Número de Sesiones: </span>{{cursoSelect.numeroSesiones}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido del curso -->
+                <div class="course__contents">
+                    <h3 class="course__contents-title">Contenido:</h3>
+                    <div class="course__contents-list">
+                        @for (contenido of cursoSelect.contenidos; track $index) {
+                        <div class="course__content-item">
+                            @if (contenido.tipo=="session") {
+                            <h4 class="course__content-title">Sesión N°{{contenido.numero}}: {{contenido.nombre}}</h4>
+                            }@else {
+                            <h4 class="course__content-title">{{contenido.nombre}}</h4>
+                            }
+                            <div class="course__resources">
+                                @for (recurso of contenido.recursos; track $index) {
+                                <h5 class="course__resource">{{recurso.nombre}}</h5>
+                                }
+                            </div>
+                        </div>
+                        }
+                    </div>
                 </div>
             </div>
-            <div class="content">
-                <div class="profesores"></div>
-                <div class="datosDelCUrso"></div>
-                <div class="sesionesCurso"></div>
-            </div>
+            }
         </div>
-        }
-
-
     </div>
-
 </section>

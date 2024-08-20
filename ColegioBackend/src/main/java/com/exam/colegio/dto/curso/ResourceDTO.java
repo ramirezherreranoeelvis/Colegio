@@ -12,7 +12,7 @@ import java.util.List;
 public class ResourceDTO {
 
         private String nombre;
-        private String description;
+        private String descripcion;
         private String tipo;
         private List<ItemDTO> items;
 

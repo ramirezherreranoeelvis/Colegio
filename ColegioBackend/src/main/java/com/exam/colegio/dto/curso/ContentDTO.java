@@ -14,7 +14,6 @@ public class ContentDTO {
         private String nombre;
         private int numero;
         private String tipo;
-        private boolean esVisible;
         private List<ResourceDTO> recursos;
 
 }
