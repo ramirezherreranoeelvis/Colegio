@@ -23,6 +23,7 @@ select {
         cursor: pointer;
 }
 
+/* all */
 .course {
         display: flex;
         justify-content: center;
@@ -90,6 +91,7 @@ select {
         }
 }
 
+/* cursos */
 .course {
         &__select-wrapper {
                 display: flex;
@@ -247,9 +249,8 @@ select {
         }
 }
 
+/* btn menu hamburguesa para sair */
 .course {
-        font-family: $font_lexend;
-
         &__exit {
                 display: block;
                 position: fixed;
@@ -322,17 +323,47 @@ select {
                         }
                 }
         }
+}
+
+/* curso seleccionado */
+.course {
+        font-family: $font_lexend;
 
         &__details-title {
                 margin: 50px 0 0 0;
         }
 
-        &__professors {
+        &__professors,
+        &__data,
+        &__contents,
+        &__content {
                 &-title {
                         padding: 10px 0;
                         font-size: 1rem;
+                        font-weight: bold;
                 }
+        }
 
+        &__professors,
+        &__data,
+        &__contents {
+                width: 100%;
+                padding: 10px;
+        }
+
+        &__separation {
+                position: relative;
+                height: 1px;
+                z-index: 800;
+                background: $color__sombra-menu_salir;
+                background-size: 300%;
+                background-position: 300% 0;
+                animation: background_animation-separation 20s linear infinite;
+                border-radius: 2px;
+                margin-bottom: 20px;
+        }
+
+        &__professors {
                 &-list {
                         font-size: .85rem;
                 }
@@ -341,11 +372,6 @@ select {
         &__professor {}
 
         &__data {
-                &-title {
-                        padding: 10px 0;
-                        font-size: 1rem;
-                }
-
                 &-list {
                         font-size: .80rem;
 
@@ -358,11 +384,6 @@ select {
         }
 
         &__contents {
-                &-title {
-                        padding: 10px 0;
-                        font-size: 1rem;
-                }
-
                 &-list {}
         }
 
@@ -373,7 +394,6 @@ select {
                         margin-bottom: -1px;
                 }
 
-                &-title {}
         }
 
         &__resources {}
@@ -389,6 +409,20 @@ select {
 
         50% {
                 background-position: 800% 0;
+        }
+
+        100% {
+                background-position: 0 0;
+        }
+}
+
+@keyframes background_animation-separation {
+        0% {
+                background-position: 0 0;
+        }
+
+        50% {
+                background-position: 300% 0;
         }
 
         100% {

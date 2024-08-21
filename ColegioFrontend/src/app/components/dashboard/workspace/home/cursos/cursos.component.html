@@ -52,47 +52,55 @@
 
                 <!-- Profesores -->
                 <div class="course__professors">
-                    <h3 class="course__professors-title">Profesores:</h3>
-                    <div class="course__professors-list">
-                        @for (profesor of cursoSelect.profesores; track $index) {
-                        <div class="course__professor">{{profesor}}</div>
-                        }
-                    </div>
+                    <details>
+                        <summary class="course__professors-title">Profesores:</summary>
+                        <div class="course__professors-list">
+                            @for (profesor of cursoSelect.profesores; track $index) {
+                            <div class="course__professor">{{profesor}}</div>
+                            }
+                        </div>
+                    </details>
                 </div>
-
+                <div class="course__separation"></div>
                 <!-- Datos del curso -->
                 <div class="course__data">
-                    <h3 class="course__data-title">Datos:</h3>
-                    <div class="course__data-list">
-                        <div class="course__data-item"><span>Día: </span>{{cursoSelect.dia}}</div>
-                        <div class="course__data-item"><span>Hora de Inicio: </span>{{cursoSelect.horaInicio}}</div>
-                        <div class="course__data-item"><span>Hora de Salida: </span>{{cursoSelect.horaFin}}</div>
-                        <div class="course__data-item"><span>Piso: </span>{{cursoSelect.piso}}</div>
-                        <div class="course__data-item"><span>Salón: </span>{{cursoSelect.numeroSalon}}</div>
-                        <div class="course__data-item"><span>Número de Sesiones: </span>{{cursoSelect.numeroSesiones}}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contenido del curso -->
-                <div class="course__contents">
-                    <h3 class="course__contents-title">Contenido:</h3>
-                    <div class="course__contents-list">
-                        @for (contenido of cursoSelect.contenidos; track $index) {
-                        <div class="course__content-item">
-                            @if (contenido.tipo=="session") {
-                            <h4 class="course__content-title">Sesión N°{{contenido.numero}}: {{contenido.nombre}}</h4>
-                            }@else {
-                            <h4 class="course__content-title">{{contenido.nombre}}</h4>
-                            }
-                            <div class="course__resources">
-                                @for (recurso of contenido.recursos; track $index) {
-                                <h5 class="course__resource">{{recurso.nombre}}</h5>
-                                }
+                    <details>
+                        <summary class="course__data-title">Datos:</summary>
+                        <div class="course__data-list">
+                            <div class="course__data-item"><span>Día: </span>{{cursoSelect.dia}}</div>
+                            <div class="course__data-item"><span>Hora de Inicio: </span>{{cursoSelect.horaInicio}}</div>
+                            <div class="course__data-item"><span>Hora de Salida: </span>{{cursoSelect.horaFin}}</div>
+                            <div class="course__data-item"><span>Piso: </span>{{cursoSelect.piso}}</div>
+                            <div class="course__data-item"><span>Salón: </span>{{cursoSelect.numeroSalon}}</div>
+                            <div class="course__data-item"><span>Número de Sesiones:
+                                </span>{{cursoSelect.numeroSesiones}}
                             </div>
                         </div>
-                        }
-                    </div>
+                    </details>
+                </div>
+                <div class="course__separation"></div>
+                <!-- Contenido del curso -->
+                <div class="course__contents">
+                    <details>
+                        <summary class="course__contents-title">Contenido:</summary>
+                        <div class="course__contents-list">
+                            @for (contenido of cursoSelect.contenidos; track $index) {
+                            <details class="course__content-item">
+                                <summary class="course__content-title">
+                                    @if (contenido.tipo=="session") {Sesión N°{{contenido.numero}}:{{contenido.nombre}}
+                                    }@else {{{contenido.nombre}}}
+                                </summary>
+                                <div class="course__resources">
+                                    @for (recurso of contenido.recursos; track $index) {
+                                    <h5 class="course__resource">{{recurso.nombre}}</h5>
+                                    }
+                                </div>
+
+                            </details>
+                            }
+                        </div>
+                    </details>
+
                 </div>
             </div>
             }
