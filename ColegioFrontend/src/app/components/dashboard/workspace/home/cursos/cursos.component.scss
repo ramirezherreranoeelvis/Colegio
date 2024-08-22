@@ -8,6 +8,7 @@ $radius__50_32h: 10px;
 $radius__item: 10px;
 $color__sombra-menu_salir: linear-gradient(45deg, #4032ff93, #913dff93, #ff2f9e93, #4032ff93, #4032ff93, #913dff93, #ff2f9e93, #4032ff93);
 $line__menu: linear-gradient(90deg, #913dff93, #4032ff93);
+$line__menu: linear-gradient(90deg, #000a96, #4032ff93);
 $z-index_menu: 900;
 $z-index_list: 900;
 $text-gradient: (
@@ -77,6 +78,7 @@ select {
                 display: flex;
                 flex-direction: column;
                 overflow: auto;
+                animation: identifier 2s linear infinite;
 
                 &::-webkit-scrollbar {
                         width: 15px;
@@ -341,12 +343,17 @@ select {
                         padding: 10px 0;
                         font-size: 1rem;
                         font-weight: bold;
+                        cursor: pointer;
                 }
         }
 
         &__professors,
         &__data,
         &__contents {
+                summary::marker {
+                        color: #ff0077;
+                }
+
                 width: 100%;
                 padding: 10px;
         }
@@ -384,23 +391,128 @@ select {
         }
 
         &__contents {
+                &-title {
+                        margin-bottom: 10px;
+                }
+
                 &-list {}
         }
 
         &__content {
                 &-item {
-                        border: 1px solid;
+                        box-shadow: 0 2px 2px 1px #0000004d;
+                        margin-bottom: 10px;
+                        background-color: #fff;
+                        border-radius: 10px;
+                }
+
+                &-title {
+                        box-shadow: 0 0 3px 2px #0000004d;
+                        display: flex;
+                        align-items: center;
+                        background: #00054e;
+                        color: #ffffff;
                         padding: 20px 5px;
                         margin-bottom: -1px;
+                        max-height: 60px;
+                        transition: .1s ease-in-out;
+                        border-radius: 10px;
+
+                        .book-icon {
+                                width: 40px;
+                                height: 40px;
+                                padding: 5px 10px;
+
+                                .cover {
+                                        fill: #4264ff;
+                                        /* Color de la cubierta */
+                                        stroke: #6200ff;
+                                        /* Borde de la cubierta */
+                                        stroke-width: 4;
+                                }
+
+                                .page {
+                                        fill: #ff0077;
+                                }
+
+                                .inner-page {
+                                        fill: #ff0077;
+                                }
+
+                                .spine {
+                                        fill: #2C3E50;
+                                }
+                        }
+
+                        &:hover {
+                                background: #ff0080;
+
+                                .book-icon {
+                                        width: 40px;
+                                        height: 40px;
+                                        padding: 5px 10px;
+
+                                        .cover {
+                                                fill: #000000;
+                                                /* Color de la cubierta */
+                                                stroke: #000000;
+                                                /* Borde de la cubierta */
+                                                stroke-width: 4;
+                                        }
+
+                                        .page {
+                                                fill: #ffffff;
+                                        }
+
+                                        .inner-page {
+                                                fill: #ffffff;
+                                        }
+
+                                        .spine {
+                                                fill: #000000;
+                                        }
+                                }
+                        }
                 }
+
 
         }
 
-        &__resources {}
+        &__resources {
+                box-sizing: border-box;
 
-        &__resource {}
+                &-separation {
+                        display: flex;
+                        justify-content: center;
+
+                        div {
+                                width: 95%;
+                                position: relative;
+                                height: 1px;
+                                z-index: 800;
+                                background: $color__sombra-menu_salir;
+                                background-size: 300%;
+                                background-position: 300% 0;
+                                animation: background_animation-separation 20s linear infinite;
+                                border-radius: 2px;
+                        }
+
+                }
+        }
+
+
+
+        &__resource {
+                padding: 25px 10px;
+                cursor: pointer;
+
+                &:hover {
+                        background: #eeeeee;
+                }
+
+
+        }
 }
-
 
 @keyframes background_animation {
         0% {
