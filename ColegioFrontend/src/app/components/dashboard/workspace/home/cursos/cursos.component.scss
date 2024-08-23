@@ -331,7 +331,7 @@ select {
 .course {
         font-family: $font_lexend;
 
-        &__details-title {
+        &__details-title, .app-recurso {
                 margin: 50px 0 0 0;
         }
 
@@ -479,7 +479,6 @@ select {
         }
 
         &__resources {
-                box-sizing: border-box;
 
                 &-separation {
                         display: flex;
@@ -500,12 +499,10 @@ select {
                 }
         }
 
-
-
         &__resource {
                 padding: 25px 10px;
                 cursor: pointer;
-
+                
                 &:hover {
                         background: #eeeeee;
                 }

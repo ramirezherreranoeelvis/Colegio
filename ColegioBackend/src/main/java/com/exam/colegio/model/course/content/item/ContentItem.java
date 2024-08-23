@@ -36,6 +36,9 @@ public class ContentItem {
         @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
         private String content;
 
+        @Column(name = "name", columnDefinition = "LONGTEXT")
+        private String name;
+
         public String getType() {
                 if (this instanceof TeacherContentItem) {
                         return "teacherContent";

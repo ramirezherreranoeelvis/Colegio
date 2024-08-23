@@ -22,8 +22,10 @@ public class StudentContentItem extends ContentItem {
         private GradeContentItem gradeContentItem;
 
         @Builder
-        public StudentContentItem(int idContentItem, Person person, Resource resource, String content, GradeContentItem gradeContentItem) {
-                super(idContentItem, person, resource, content);
+
+        public StudentContentItem(int idContentItem, Person person, Resource resource, String content, String name, GradeContentItem gradeContentItem) {
+                super(idContentItem, person, resource, content, name);
                 this.gradeContentItem = gradeContentItem;
         }
+
 }

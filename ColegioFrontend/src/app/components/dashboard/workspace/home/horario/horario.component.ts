@@ -1,7 +1,6 @@
 import { Component, Renderer2 } from '@angular/core';
 import { ParentService } from '../../parent.service';
 import { Student } from '../../../../../model/student';
-import { Enrollment } from '../../../../../model/registrarMatricula/nextEnrollment';
 import { TurnoHorario } from '../../../../../model/horario/turnoHorario';
 import { HorarioService } from './horario.service';
 import { DayHorario } from '../../../../../model/horario/dayHorario';

@@ -12,5 +12,6 @@ public class ItemDTO {
         private String dniPerson;
         private String tipo;
         private String contenido;
+        private String nombreArchivo;
 
 }

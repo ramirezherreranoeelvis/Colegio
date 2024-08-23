@@ -17,8 +17,8 @@ import lombok.Setter;
 public class TeacherContentItem extends ContentItem{
 
         @Builder
-        public TeacherContentItem(int idContentItem, Person person, Resource resource, String content) {
-                super(idContentItem, person, resource, content);
+        public TeacherContentItem(int idContentItem, Person person, Resource resource, String content, String name) {
+                super(idContentItem, person, resource, content, name);
         }
 
 }

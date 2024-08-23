@@ -3,10 +3,17 @@ package com.exam.colegio.controller.workspace;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
+import com.exam.colegio.model.course.content.resource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RequestMapping("/cursos")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -32,6 +39,21 @@ public class CoursesController {
                 var curso = this.courseScheduledDAO.findByCode(code);
                 return ResponseEntity.ok(curso);
         }
+
+        @GetMapping("/download")
+        public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@RequestParam String filePath) throws IOException {
+                Path path = Paths.get(filePath);
+                org.springframework.core.io.Resource resource = new UrlResource(path.toUri());
+
+                HttpHeaders headers = new HttpHeaders();
+                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+                headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
+
+                return ResponseEntity.ok()
+                        .headers(headers)
+                        .body(resource);
+        }
+
 
         private final ICourseScheduledDAO courseScheduledDAO;
         private final IStudentDAO studentDAO;

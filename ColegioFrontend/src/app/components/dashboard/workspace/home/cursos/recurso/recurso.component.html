@@ -1,0 +1,27 @@
+<div class="resource">
+        <h2 class="resource__title">{{recurso.nombre}}</h2>
+        <div class="resource__content">
+                <div class="resource__description">
+                        <div class="resource__description-text">
+                                {{recurso.descripcion}} Lorem, ipsum dolor sit amet consectetur
+                                adipisicing elit. Perspiciatis ea quisquam aliquam repudiandae iusto, nulla praesentium
+                                voluptatem cumque ab cum deleniti laudantium debitis veniam quidem possimus earum
+                                maiores tempore magni?
+                        </div>
+                </div>
+                <div class="resource__items">
+                        @if(recurso.items.length != 0){
+                        @for (item of recurso.items; track $index) {
+                        <article class="resource__item">
+                                <a [href]="item.contenido" [download]="item.nombreArchivo"
+                                        class="resource__item-download-button">{{item.nombreArchivo}}</a>
+                        </article>
+                        }
+                        }@else {
+                        <article class="resource__item resource__item--empty">
+                                NO HAY RECURSOS
+                        </article>
+                        }
+                </div>
+        </div>
+</div>

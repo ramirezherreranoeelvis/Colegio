@@ -1,7 +1,7 @@
 <section class="course">
     <div class="course__container">
         <div class="course__content">
-            @if (verCursos) {
+            @if (ver == "cursos") {
             <h2 class="course__title">Cursos</h2>
 
             <!-- Selección de hijos -->
@@ -25,7 +25,7 @@
             <!-- Lista de cursos -->
             <div class="course__list">
                 @for (curso of cursos; track 1) {
-                <article class="course__item" (click)="verCursoSeleccionado(curso.codigo)">
+                <article class="course__item" (click)="verSeleccionado('curso',curso.codigo)">
                     <div class="course__item-cover">
                         <div class="course__item-cover-overlay"></div>
                         <img [src]="curso.portada" alt="Portada del curso" class="course__item-cover-image">
@@ -38,10 +38,10 @@
                 </article>
                 }
             </div>
-            }@else {
+            }@else if(ver == "curso") {
             <!-- Detalles del curso seleccionado -->
             <div class="course__details">
-                <div class="course__exit" (click)="verCursoSeleccionado('0')">
+                <div class="course__exit" (click)="verSeleccionado('cursos',null)">
                     <div class="course__exit-content">
                         <div class="course__exit-line"></div>
                         <div class="course__exit-line"></div>
@@ -99,21 +99,28 @@
                             </summary>
                             <div class="course__resources">
                                 @for (recurso of contenido.recursos; track $index) {
-                                <h5 class="course__resource">{{recurso.nombre}}</h5>
+                                <h5 class="course__resource" (click)="verSeleccionado('recurso',recurso)">
+                                    {{recurso.nombre}}</h5>
                                 @if (contenido.recursos.length != $index+1) {
                                 <div class="course__resources-separation">
                                     <div></div>
                                 </div>
                                 }
-
                                 }
                             </div>
-
                         </details>
                         }
                     </div>
                 </details>
             </div>
+            }@else if(ver == "recurso"){
+            <div class="course__exit" (click)="verSeleccionado('curso',cursoCodeSelect)">
+                <div class="course__exit-content">
+                    <div class="course__exit-line"></div>
+                    <div class="course__exit-line"></div>
+                </div>
+            </div>
+            <app-recurso [recurso]="recursoSelect" />
             }
         </div>
     </div>

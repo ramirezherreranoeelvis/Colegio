@@ -9,22 +9,23 @@ export interface Curso {
         profesores: string[];
         portada: string;
         numeroSesiones: number;
-        contenidos: Contenido[];
+        contenidos: ContenidoCurso[];
 }
-class Contenido {
+export class ContenidoCurso {
         nombre: string;
         numero: number;
         tipo: string;
-        recursos: Recurso[];
+        recursos: RecursoContenidoCurso[];
 }
-class Recurso {
+export class RecursoContenidoCurso {
         nombre: string;
         descripcion: string;
         tipo: string;
-        items: Item[];
+        items: ItemRecursoCurso[];
 }
-class Item {
+export class ItemRecursoCurso {
         dniPerson: string;
         tipo: string;
         contenido: string;
+        nombreArchivo:string;
 }
