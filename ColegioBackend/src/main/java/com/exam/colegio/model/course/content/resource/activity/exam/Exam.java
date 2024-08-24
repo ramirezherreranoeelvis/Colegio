@@ -1,10 +1,10 @@
-package com.exam.colegio.model.course.content.resource.activity;
+package com.exam.colegio.model.course.content.resource.activity.exam;
 
 import com.exam.colegio.model.course.content.Content;
+import com.exam.colegio.model.course.content.resource.activity.Activity;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,14 +17,8 @@ import java.util.Date;
 @DiscriminatorValue("exam")
 public abstract class Exam extends Activity {
 
-        @Builder
         public Exam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
         }
-
-        /**
-         * metodo abstracto para el peso, no se define aca porque el peso varia de la especificacion
-         */
-        public abstract double getWeight();
 
 }

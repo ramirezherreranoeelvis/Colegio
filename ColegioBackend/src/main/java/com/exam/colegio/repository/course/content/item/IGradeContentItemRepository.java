@@ -1,10 +1,10 @@
 package com.exam.colegio.repository.course.content.item;
 
-import com.exam.colegio.model.course.content.item.GradeContentItem;
+import com.exam.colegio.model.course.content.resource.GradeActivity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IGradeContentItemRepository extends JpaRepository<GradeContentItem, Integer> {
+public interface IGradeContentItemRepository extends JpaRepository<GradeActivity, Integer> {
 
 }

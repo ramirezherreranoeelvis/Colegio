@@ -30,7 +30,7 @@ public class SessionAttendance {
 
         @ManyToOne
         @JoinColumn(name = "idSession", nullable = false)
-        private Session session;
+        private SessionContent session;
 
         @Column(name = "timeEntry", nullable = false)
         @Temporal(TemporalType.TIMESTAMP)

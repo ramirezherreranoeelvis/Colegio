@@ -26,7 +26,7 @@ import java.util.List;
         strategy = InheritanceType.SINGLE_TABLE
 )
 @Table(name = "content")
-public class Content {
+public abstract class Content {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +56,7 @@ public class Content {
                         return "extra";
                 } else if (this instanceof GeneralContent) {
                         return "general";
-                } else if (this instanceof Session) {
+                } else if (this instanceof SessionContent) {
                         return "session";
                 } else {
                         return "unknown";

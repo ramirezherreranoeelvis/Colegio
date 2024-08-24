@@ -15,13 +15,12 @@ import java.util.Date;
 @Getter
 @Entity
 @NoArgsConstructor
-@DiscriminatorValue("exam")
-public class MonthlyExam extends Activity {
+@DiscriminatorValue("bimonthly_exam")
+public class BimonthlyExam  extends Activity {
 
         @Builder
-        public MonthlyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
+        public BimonthlyExam (int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
         }
-
 
 }

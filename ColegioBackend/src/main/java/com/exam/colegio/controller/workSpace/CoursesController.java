@@ -40,21 +40,6 @@ public class CoursesController {
                 return ResponseEntity.ok(curso);
         }
 
-        @GetMapping("/download")
-        public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@RequestParam String filePath) throws IOException {
-                Path path = Paths.get(filePath);
-                org.springframework.core.io.Resource resource = new UrlResource(path.toUri());
-
-                HttpHeaders headers = new HttpHeaders();
-                headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
-                headers.add(HttpHeaders.CONTENT_TYPE, "application/octet-stream");
-
-                return ResponseEntity.ok()
-                        .headers(headers)
-                        .body(resource);
-        }
-
-
         private final ICourseScheduledDAO courseScheduledDAO;
         private final IStudentDAO studentDAO;
         private final ISeasonDAO seasonDAO;

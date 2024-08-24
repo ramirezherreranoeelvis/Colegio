@@ -1,4 +1,4 @@
-package com.exam.colegio.model.course.content.resource;
+package com.exam.colegio.model.course.content.resource.activity;
 
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.util.Permission;

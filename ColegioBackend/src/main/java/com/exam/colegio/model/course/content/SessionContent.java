@@ -12,10 +12,10 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("session")
-public class Session extends Content {
+public class SessionContent extends Content {
 
         @Builder
-        public Session(int idContent, String name, int number, boolean isVisible, CourseScheduled enrollment) {
+        public SessionContent(int idContent, String name, int number, boolean isVisible, CourseScheduled enrollment) {
                 super(idContent, name, number, isVisible, enrollment);
         }
 

@@ -19,7 +19,7 @@ import lombok.*;
         strategy = InheritanceType.SINGLE_TABLE
 )
 @Table(name = "contentItem")
-public class ContentItem {
+public abstract class ContentItem {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

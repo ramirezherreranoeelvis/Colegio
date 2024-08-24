@@ -1,4 +1,4 @@
-package com.exam.colegio.model.course.content.resource;
+package com.exam.colegio.model.course.content.resource.activity;
 
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.util.Permission;
@@ -21,4 +21,5 @@ public class Homework extends Activity {
         public Homework(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
         }
+
 }

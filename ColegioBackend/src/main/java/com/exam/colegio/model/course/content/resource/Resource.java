@@ -2,6 +2,9 @@ package com.exam.colegio.model.course.content.resource;
 
 import com.exam.colegio.model.course.content.*;
 import com.exam.colegio.model.course.content.item.ContentItem;
+import com.exam.colegio.model.course.content.resource.activity.Forum;
+import com.exam.colegio.model.course.content.resource.activity.Homework;
+import com.exam.colegio.model.course.content.resource.data.Data;
 import com.exam.colegio.util.Permission;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -25,7 +28,7 @@ import java.util.List;
         strategy = InheritanceType.SINGLE_TABLE
 )
 @Table(name = "resource")
-public class Resource {
+public abstract class Resource {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,10 +3,7 @@
         <div class="resource__content">
                 <div class="resource__description">
                         <div class="resource__description-text">
-                                {{recurso.descripcion}} Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Perspiciatis ea quisquam aliquam repudiandae iusto, nulla praesentium
-                                voluptatem cumque ab cum deleniti laudantium debitis veniam quidem possimus earum
-                                maiores tempore magni?
+                                {{recurso.descripcion}}
                         </div>
                 </div>
                 <div class="resource__items">
@@ -14,7 +11,7 @@
                         @for (item of recurso.items; track $index) {
                         <article class="resource__item">
                                 <a [href]="item.contenido" [download]="item.nombreArchivo"
-                                        class="resource__item-download-button">{{item.nombreArchivo}}</a>
+                                        class="resource__item-download-button" target="_blank" rel="noopener noreferrer">{{item.nombreArchivo}}</a>
                         </article>
                         }
                         }@else {

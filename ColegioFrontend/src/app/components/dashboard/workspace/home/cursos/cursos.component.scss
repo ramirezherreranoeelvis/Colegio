@@ -83,6 +83,7 @@ select {
                 &::-webkit-scrollbar {
                         width: 15px;
                         background-color: #ff0080;
+                        border-radius: 10px;
 
                         &-thumb {
                                 border-radius: 10px;
@@ -331,7 +332,8 @@ select {
 .course {
         font-family: $font_lexend;
 
-        &__details-title, .app-recurso {
+        &__details-title,
+        .app-recurso {
                 margin: 50px 0 0 0;
         }
 
@@ -502,7 +504,7 @@ select {
         &__resource {
                 padding: 25px 10px;
                 cursor: pointer;
-                
+
                 &:hover {
                         background: #eeeeee;
                 }

@@ -1,12 +1,12 @@
 annotation -> 2 class
-conroller -> 3 class
-dao -> 3 class
-dto -> 3 class
-entity -> 39 class
+conroller -> 9 class
+dao -> 12 class
+dto -> 14 class
 exception -> 1 class
-repository -> 39 class
-service -> 3 class
-util -> 1 class
+model -> 44 class
+repository -> 38 class
+service -> 12 class
+util -> 3 class
 -> 1 class
 
-total -> 95 class
+total -> 136 class

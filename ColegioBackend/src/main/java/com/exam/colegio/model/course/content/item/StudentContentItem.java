@@ -2,10 +2,7 @@ package com.exam.colegio.model.course.content.item;
 
 import com.exam.colegio.model.course.content.resource.Resource;
 import com.exam.colegio.model.person.Person;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,14 +15,9 @@ import lombok.Setter;
 @DiscriminatorValue("studentContent")
 public class StudentContentItem extends ContentItem {
 
-        @OneToOne(mappedBy = "studentContentItem", cascade = CascadeType.ALL)
-        private GradeContentItem gradeContentItem;
-
         @Builder
-
-        public StudentContentItem(int idContentItem, Person person, Resource resource, String content, String name, GradeContentItem gradeContentItem) {
+        public StudentContentItem(int idContentItem, Person person, Resource resource, String content, String name) {
                 super(idContentItem, person, resource, content, name);
-                this.gradeContentItem = gradeContentItem;
         }
 
 }

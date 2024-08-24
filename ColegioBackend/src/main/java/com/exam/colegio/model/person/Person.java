@@ -18,7 +18,7 @@ import lombok.*;
         strategy = InheritanceType.SINGLE_TABLE
 )
 @Table(name = "person")
-public class Person {
+public abstract class Person {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

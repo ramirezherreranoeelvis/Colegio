@@ -1,6 +1,7 @@
-package com.exam.colegio.model.course.content.resource;
+package com.exam.colegio.model.course.content.resource.data;
 
 import com.exam.colegio.model.course.content.Content;
+import com.exam.colegio.model.course.content.resource.Resource;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
