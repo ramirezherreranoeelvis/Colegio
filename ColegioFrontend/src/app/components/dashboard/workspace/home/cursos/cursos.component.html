@@ -100,7 +100,18 @@
                             <div class="course__resources">
                                 @for (recurso of contenido.recursos; track $index) {
                                 <h5 class="course__resource" (click)="verSeleccionado('recurso',recurso)">
-                                    {{recurso.nombre}}</h5>
+                                    <div class="course__resource-name">{{recurso.nombre}}</div>
+
+                                    @if (recurso.notas) {<div class="course__resource-nota">
+                                        @if (recurso.notas.length==1) {
+                                        {{recurso.notas[0].nota}}
+                                        }@else {
+                                            Sin calificar
+                                        }
+                                    </div>
+                                    }
+                                </h5>
+
                                 @if (contenido.recursos.length != $index+1) {
                                 <div class="course__resources-separation">
                                     <div></div>

@@ -24,4 +24,9 @@ export class CursoService {
                 const url: string = `${this.url}/curso`
                 return this.httpCLient.get<Curso>(url, { params }).pipe(map(response => response));
         }
+        public verCursoSeleccionadoByStudent(codigoCurso: string, dniStudent: string): Observable<Curso> {
+                const params: HttpParams = new HttpParams().set("code", codigoCurso).set("dni", dniStudent)
+                const url: string = `${this.url}/cursoByStudent`
+                return this.httpCLient.get<Curso>(url, { params }).pipe(map(response => response));
+        }
 }

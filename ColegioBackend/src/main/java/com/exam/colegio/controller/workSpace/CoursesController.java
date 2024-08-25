@@ -34,10 +34,10 @@ public class CoursesController {
                 return ResponseEntity.ok(curso);
         }
 
-        @GetMapping("/test")
-        public ResponseEntity<?> findByCourse() {
-                var studentOptional = this.studentDAO.findByDni("21787088");
-                return ResponseEntity.ok(this.courseScheduledDAO.findByCodeByStudent("00000000000001",studentOptional.get()));
+        @GetMapping("/cursoByStudent")
+        public ResponseEntity<?> findByCourse(@RequestParam String code, @RequestParam String dni) {
+                var studentOptional = this.studentDAO.findByDni(dni);
+                return ResponseEntity.ok(this.courseScheduledDAO.findByCodeByStudent(code, studentOptional.get()));
         }
 
 

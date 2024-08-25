@@ -8,11 +8,13 @@ import com.exam.colegio.model.course.content.resource.activity.Activity;
 import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.course.ICourseScheduledRepository;
+import com.exam.colegio.util.DateFormatUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseScheduledService implements ICourseScheduledDAO {
@@ -157,7 +159,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                         .items(buildItems(resource, student))
                                         .build();
                                 if (!resource.getType().equals("data")) {
-                                        resourceDTO.setNota(getNotaForStudent((Activity) resource, student));
+                                        resourceDTO.setNotas(getNotaForStudent((Activity) resource, student));
                                 }
                                 return resourceDTO;
                         })
@@ -177,16 +179,15 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                         .toList();
         }
 
-        private NotaDTO getNotaForStudent(Activity activity, Student student) {
+        private List<NotaDTO> getNotaForStudent(Activity activity, Student student) {
                 return activity.getGradeActivity().stream()
                         .filter(gradeActivity -> gradeActivity.getPerson().getDni().equals(student.getDni()))
                         .map(gradeActivity -> NotaDTO.builder()
                                 .comentario(gradeActivity.getComments())
-                                .fechaCalificacion(gradeActivity.getGradedAt())
+                                .fechaCalificacion(DateFormatUtil.ymd(gradeActivity.getGradedAt()))
                                 .nota(gradeActivity.getGradeValue())
                                 .build())
-                        .findFirst()
-                        .orElse(null);
+                        .collect(Collectors.toList());
         }
 
         private final ICourseScheduledRepository courseScheduledRepository;

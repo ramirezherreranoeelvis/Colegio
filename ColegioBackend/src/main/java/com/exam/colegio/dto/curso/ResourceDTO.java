@@ -15,6 +15,6 @@ public class ResourceDTO {
         private String descripcion;
         private String tipo;
         private List<ItemDTO> items;
-        private NotaDTO nota;
+        private List<NotaDTO> notas;
 
 }

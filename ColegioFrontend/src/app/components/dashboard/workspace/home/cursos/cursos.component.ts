@@ -23,7 +23,7 @@ export class CursosComponent implements OnInit {
                 if (codigo != null) {
                         if (this.ver == "curso") {
                                 this.cursoCodeSelect = codigo;
-                                this.cursoService.verCursoSeleccionado(codigo).subscribe(
+                                this.cursoService.verCursoSeleccionadoByStudent(codigo, this.dniStudent).subscribe(
                                         (curso: Curso) => {
                                                 this.cursoSelect = curso
                                         }
@@ -63,7 +63,7 @@ export class CursosComponent implements OnInit {
                 )
                 this.ver = "curso"
                 this.cursoCodeSelect = "00000000000001";
-                this.cursoService.verCursoSeleccionado("00000000000001").subscribe(
+                this.cursoService.verCursoSeleccionadoByStudent("00000000000001", this.dniStudent).subscribe(
                         (curso: Curso) => {
                                 this.cursoSelect = curso
                         }
