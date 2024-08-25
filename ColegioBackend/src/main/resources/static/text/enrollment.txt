@@ -2,6 +2,8 @@
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "enrollment")
 public class Enrollment {
 
@@ -29,9 +31,14 @@ public class Enrollment {
         @Column(name = "monthlyFee", nullable = false, precision = 6, scale = 2)
         private BigDecimal monthlyFee;
 
+        @Column(name = "months", nullable = false)
+        private int months;
+
+        @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
 
+        @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<CourseScheduled> courseScheduleds = new ArrayList<>();
 
@@ -40,12 +47,14 @@ public class Enrollment {
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "enrollmentStudent")
 public class EnrollmentStudent {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer idEnrollmentStudent;
+        private int idEnrollmentStudent;
 
         @ManyToOne
         @JoinColumn(name = "idStudent", nullable = false)
@@ -58,11 +67,12 @@ public class EnrollmentStudent {
         @JsonIgnore
         @OneToMany(mappedBy = "enrollmentStudent", cascade = CascadeType.ALL, orphanRemoval = true)
         private List<Payment> payments = new ArrayList<>();
-
 }
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "payment")
 public class Payment {
@@ -86,10 +96,13 @@ public class Payment {
         private String description;
 
 }
+
 @Setter
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "season")
 public class Season {
 
@@ -97,14 +110,19 @@ public class Season {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int idSeason;
 
-        @Column(name = "year", nullable = false, updatable = false, unique = true)
-        private Date year;
+        @Column(name = "startDate")
+        private Date startDate;
 
+        @Column(name = "year", nullable = false, updatable = false, unique = true)
+        private String year;
 
 }
+
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "typeStatus")
 public class TypeStatus {

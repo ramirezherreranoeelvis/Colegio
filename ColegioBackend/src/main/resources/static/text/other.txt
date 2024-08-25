@@ -1,47 +1,11 @@
 @Setter
 @Getter
-@Builder
-@Entity
-@Table(name = "classroom")
-public class Classroom {
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int idClassroom;
-
-        @Column(name = "number", nullable = false, unique = true)
-        private int number;
-
-        @Column(name = "floor", nullable = false)
-        private int floor;
-
-}
-public enum DayOfWeek {
-
-        MONDAY("LUNES"),
-        TUESDAY("MARTES"),
-        WEDNESDAY("MIERCOLES"),
-        THURSDAY("JUEVES"),
-        FRIDAY("VIERNES"),
-        SATURDAY("SABADO"),
-        SUNDAY("DOMINGO");
-
-        private final String displayName;
-
-        DayOfWeek(String displayName) {
-                this.displayName = displayName;
-        }
-
-        public String getDisplayName() {
-                return displayName;
-        }
-}
-@Setter
-@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 @Table(name = "entrySchool")
-public class EntrySchool {
+public class EntrySchool{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +15,7 @@ public class EntrySchool {
         @JoinColumn(name = "idPerson", nullable = false, updatable = false)
         private Student student;
 
-        @Column(name = "timeEntry", nullable = false)
+        @Column(name = "timeEntry")
         @Temporal(TemporalType.TIMESTAMP)
         private Date timeEntry;
 
@@ -69,6 +33,8 @@ public class EntrySchool {
 @Getter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "grade")
 public class Grade {
 
@@ -91,6 +57,8 @@ public class Grade {
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "teacherCourseScheduled")
 public class TeacherCourseScheduled {

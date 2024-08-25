@@ -3,9 +3,7 @@ package com.exam.colegio.model.course.content.resource;
 import com.exam.colegio.model.course.content.resource.activity.Activity;
 import com.exam.colegio.model.person.Person;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +11,9 @@ import java.util.Date;
 @Setter
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "gradeActivity")
 public class GradeActivity {

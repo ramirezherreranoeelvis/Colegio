@@ -23,5 +23,4 @@ public class WeeklyExam extends Activity {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
         }
 
-
 }

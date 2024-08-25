@@ -61,6 +61,4 @@ public class CourseScheduled {
         @JsonIgnore
         @OneToMany(mappedBy = "courseScheduled", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<Content> contents = new ArrayList<>();
-
-
 }

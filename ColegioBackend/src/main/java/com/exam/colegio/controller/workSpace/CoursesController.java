@@ -3,17 +3,11 @@ package com.exam.colegio.controller.workspace;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
-import com.exam.colegio.model.course.content.resource.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RequestMapping("/cursos")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -39,6 +33,13 @@ public class CoursesController {
                 var curso = this.courseScheduledDAO.findByCode(code);
                 return ResponseEntity.ok(curso);
         }
+
+        @GetMapping("/test")
+        public ResponseEntity<?> findByCourse() {
+                var studentOptional = this.studentDAO.findByDni("21787088");
+                return ResponseEntity.ok(this.courseScheduledDAO.findByCodeByStudent("00000000000001",studentOptional.get()));
+        }
+
 
         private final ICourseScheduledDAO courseScheduledDAO;
         private final IStudentDAO studentDAO;

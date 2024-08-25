@@ -12,4 +12,6 @@ public interface ICourseScheduledDAO {
 
         Optional<CursoDTO> findByCode(String code);
 
+        Optional<CursoDTO> findByCodeByStudent(String code, Student student);
+
 }

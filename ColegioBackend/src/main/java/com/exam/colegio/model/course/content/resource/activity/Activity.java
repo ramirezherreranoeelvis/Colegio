@@ -34,8 +34,4 @@ public abstract class Activity extends Resource {
                 this.dueDate = dueDate;
         }
 
-        /**
-         * metodo abstracto para el peso, no se define aca porque el peso varia de la especificacion
-         */
-        //public abstract double getWeight();
 }

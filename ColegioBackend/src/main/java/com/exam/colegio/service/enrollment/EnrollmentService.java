@@ -105,7 +105,6 @@ public class EnrollmentService implements IEnrollmentDAO {
                         .findFirst();
         }
 
-
         @Override
         public Enrollment update(Enrollment enrollment) {
                 return this.enrollmentRepository.save(enrollment);
