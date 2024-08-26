@@ -45,7 +45,7 @@ public class EnrollmentService implements IEnrollmentDAO {
                         .student(student)
                         .build());
 
-                // Guardar el Enrollment, lo que también debería guardar el nuevo EnrollmentStudent debido al cascade = CascadeType.ALL
+                // Guardar el NotasController, lo que también debería guardar el nuevo EnrollmentStudent debido al cascade = CascadeType.ALL
                 return Optional.of(enrollmentRepository.save(enrollment));
         }
 

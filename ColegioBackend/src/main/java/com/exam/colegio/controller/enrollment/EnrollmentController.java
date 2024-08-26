@@ -49,7 +49,7 @@ public class EnrollmentController {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
                 }
                 if (enrollmentOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Enrollment Not Found");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NotasController Not Found");
                 }
                 var student = studentOptional.get();
                 var enrollment = enrollmentOptional.get();

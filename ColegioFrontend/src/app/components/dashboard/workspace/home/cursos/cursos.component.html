@@ -11,8 +11,7 @@
 
             <!-- Filtros -->
             <div class="course__filters">
-                <input type="text" name="nameFind" class="course__filters-input"
-                    placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
+                <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
                 <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year"
                     (change)="updateDataCoursesSelect()">
                     <option selected [value]="0">Periodos</option>
