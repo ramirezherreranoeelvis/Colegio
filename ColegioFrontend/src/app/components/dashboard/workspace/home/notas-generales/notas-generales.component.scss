@@ -148,11 +148,13 @@ select {
         &__body-row {
                 &:hover {
                         background: #dfdfdf;
+
                 }
         }
 
         &__body-item {
                 text-align: center;
+                padding: 2.4px 0px;
 
                 &:nth-child(2) {
                         text-align: left;

@@ -23,194 +23,21 @@
                                                 <tr class="notas__header-row">
                                                         <th class="notas__header-item">N°</th>
                                                         <th class="notas__header-item">Curso</th>
-                                                        <th class="notas__header-item">Bimestre 1</th>
-                                                        <th class="notas__header-item">Bimestre 2</th>
-                                                        <th class="notas__header-item">Bimestre 3</th>
-                                                        <th class="notas__header-item">Bimestre 4</th>
-                                                        <th class="notas__header-item">Promedio</th>
+                                                        @for (item of cursoNotas[0].notas; track $index) {
+                                                        <th class="notas__header-item">{{item.name}}</th>
+                                                        }
                                                 </tr>
                                         </thead>
                                         <tbody class="notas__body">
+                                                @for (cursoNota of cursoNotas; track $index) {
                                                 <tr class="notas__body-row">
-                                                        <td class="notas__body-item">1</td>
-                                                        <td class="notas__body-item">Quimica</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
+                                                        <td class="notas__body-item">{{$index + 1}}</td>
+                                                        <td class="notas__body-item">{{cursoNota.curso}}</td>
+                                                        @for (nota of cursoNota.notas; track $index) {
+                                                        <td class="notas__body-item">{{nota.nota}}</td>
+                                                        }
                                                 </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">2</td>
-                                                        <td class="notas__body-item">Aritmética</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">3</td>
-                                                        <td class="notas__body-item">Geometría</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">4</td>
-                                                        <td class="notas__body-item">Álgebra</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">5</td>
-                                                        <td class="notas__body-item">Razonamiento Matemático</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">6</td>
-                                                        <td class="notas__body-item">Razonamiento Verbal</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">7</td>
-                                                        <td class="notas__body-item">Literatura</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">8</td>
-                                                        <td class="notas__body-item">Comprensión Lectora</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">9</td>
-                                                        <td class="notas__body-item">Física</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">10</td>
-                                                        <td class="notas__body-item">Historia Universal</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">11</td>
-                                                        <td class="notas__body-item">Cómputo</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">12</td>
-                                                        <td class="notas__body-item">Ingles</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">13</td>
-                                                        <td class="notas__body-item">Biología</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">14</td>
-                                                        <td class="notas__body-item">Educación Física</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">15</td>
-                                                        <td class="notas__body-item">Geografía</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">16</td>
-                                                        <td class="notas__body-item">Castellano</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">Ortografía</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">18</td>
-                                                        <td class="notas__body-item">Cívica</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">19</td>
-                                                        <td class="notas__body-item">Historia del Perú</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">20</td>
-                                                        <td class="notas__body-item">Razonamiento Matemático</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                        <td class="notas__body-item">17</td>
-                                                </tr>
+                                                }
                                         </tbody>
                                 </table>
                         </div>
