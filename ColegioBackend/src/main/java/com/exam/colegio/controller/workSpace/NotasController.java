@@ -8,4 +8,5 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 public class NotasController {
+
 }
