@@ -2,13 +2,16 @@ package com.exam.colegio.model.enrollment;
 
 import com.exam.colegio.model.other.Grade;
 import com.exam.colegio.model.course.CourseScheduled;
+import com.exam.colegio.util.TypePeriod;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -46,6 +49,10 @@ public class Enrollment {
         @Column(name = "months", nullable = false)
         private int months;
 
+        @Enumerated(EnumType.STRING)
+        @Column(name = "periodType", length = 20, nullable = false, columnDefinition = "VARCHAR(20)")
+        private TypePeriod typePeriod;
+
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
@@ -53,5 +60,9 @@ public class Enrollment {
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<CourseScheduled> courseScheduleds = new ArrayList<>();
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<EnrollmentPeriod> enrollmentPeriods = new ArrayList<>();
 
 }

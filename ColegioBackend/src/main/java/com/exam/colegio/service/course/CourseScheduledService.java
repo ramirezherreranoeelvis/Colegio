@@ -5,6 +5,7 @@ import com.exam.colegio.dto.curso.*;
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.model.course.content.resource.Resource;
 import com.exam.colegio.model.course.content.resource.activity.Activity;
+import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.course.ICourseScheduledRepository;
@@ -56,7 +57,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                         var course = courseScheduled.getCourse();
                         var enrollment = courseScheduled.getEnrollment();
                         var teacherCourseScheduleds = courseScheduled.getTeacherCourseScheduleds();
-                        var contents = courseScheduled.getContents();
+                        var contents = courseScheduled.getContentList();
                         return CursoDTO.builder()
                                 .codigo(courseScheduled.getCode())
                                 .nombre(course.getName() + "-" + enrollment.getSeason().getYear())
@@ -83,7 +84,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                                 .nombre(content.getName())
                                                 .numero(content.getNumber())
                                                 .tipo(content.getType())
-                                                .recursos(content.getResources().stream()
+                                                .recursos(content.getResourceList().stream()
                                                         .map(resource -> ResourceDTO.builder()
                                                                 .nombre(resource.getName())
                                                                 .descripcion(resource.getDescription())
@@ -104,7 +105,15 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                 });
         }
 
-        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
+        @Override
+        public List<NotaDTO> calcularPromedios(Enrollment enrollment) {
+
+                // cada temporada tiene inicio fin, el promedio se saca de notas con fecha de creacion y fin entre ellas
+
+                // para las siguientes solo se tomas con inicio de entre inicio y fin de cada temporada :)
+
+                return List.of();
+        }
 
         @Override
         public Optional<CursoDTO> findByCodeByStudent(String code, Student student) {
@@ -115,7 +124,7 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                         var course = courseS.getCourse();
                         var enrollment = courseS.getEnrollment();
                         var teacherCourseScheduleds = courseS.getTeacherCourseScheduleds();
-                        var contents = courseS.getContents();
+                        var contents = courseS.getContentList();
                         return CursoDTO.builder()
                                 .codigo(courseS.getCode())
                                 .nombre(course.getName() + "-" + enrollment.getSeason().getYear())
@@ -149,8 +158,17 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                 });
         }
 
+
+        private final ICourseScheduledRepository courseScheduledRepository;
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
+
+        @Autowired
+        public CourseScheduledService(ICourseScheduledRepository courseScheduledRepository) {
+                this.courseScheduledRepository = courseScheduledRepository;
+        }
+
         private List<ResourceDTO> buildResources(Content content, Student student) {
-                return content.getResources().stream()
+                return content.getResourceList().stream()
                         .map(resource -> {
                                 var resourceDTO = ResourceDTO.builder()
                                         .nombre(resource.getName())
@@ -190,11 +208,5 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                         .collect(Collectors.toList());
         }
 
-        private final ICourseScheduledRepository courseScheduledRepository;
-
-        @Autowired
-        public CourseScheduledService(ICourseScheduledRepository courseScheduledRepository) {
-                this.courseScheduledRepository = courseScheduledRepository;
-        }
 
 }

@@ -11,9 +11,9 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "enrollmentStudent")
 public class EnrollmentStudent {
 

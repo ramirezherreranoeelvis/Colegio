@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IBimonthlyExamRepository extends JpaRepository<Exam, Integer> {
+public interface IBimonthlyExamRepository extends JpaRepository<BimonthlyExam, Integer> {
 }

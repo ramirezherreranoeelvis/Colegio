@@ -1,7 +1,6 @@
 package com.exam.colegio.model.course.content.resource.activity.exam;
 
 import com.exam.colegio.model.course.content.Content;
-import com.exam.colegio.model.course.content.resource.activity.Activity;
 import com.exam.colegio.util.Permission;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -16,7 +15,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("weekly_exam")
-public class WeeklyExam extends Activity {
+public class WeeklyExam extends Exam {
 
         @Builder
         public WeeklyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {

@@ -2,6 +2,7 @@ package com.exam.colegio.model.course.content;
 
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.course.content.resource.Resource;
+import com.exam.colegio.model.course.content.resource.activity.Homework;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,7 +48,7 @@ public abstract class Content {
 
         @JsonIgnore
         @OneToMany(mappedBy = "content", cascade = CascadeType.ALL, orphanRemoval = true)
-        private final List<Resource> resources = new ArrayList<>();
+        private final List<Resource> resourceList = new ArrayList<>();
 
         public String getType() {
                 if (this instanceof AuxiliaryContent) {

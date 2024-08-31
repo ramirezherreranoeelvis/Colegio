@@ -34,6 +34,10 @@ public class Enrollment {
         @Column(name = "months", nullable = false)
         private int months;
 
+        @Enumerated(EnumType.STRING)
+        @Column(name = "periodType", length = 20, nullable = false, columnDefinition = "VARCHAR(20)")
+        private TypePeriod typePeriod;
+
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<EnrollmentStudent> enrollmentStudents = new ArrayList<>();
@@ -41,6 +45,10 @@ public class Enrollment {
         @JsonIgnore
         @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
         private final List<CourseScheduled> courseScheduleds = new ArrayList<>();
+
+        @JsonIgnore
+        @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+        private final List<EnrollmentPeriod> enrollmentPeriods = new ArrayList<>();
 
 }
 @Setter
@@ -135,3 +143,52 @@ public class TypeStatus {
         private String name;
 
 }
+@Setter
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "enrollmentPeriod")
+public class EnrollmentPeriod {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int idEnrollmentPeriod;
+
+        @ManyToOne
+        @JoinColumn(name = "idEnrollment", nullable = false)
+        private Enrollment enrollment;
+
+        @ManyToOne
+        @JoinColumn(name = "idPeriod", nullable = false)
+        private Period period;
+
+        @Column(name = "visibilityDate")
+        private boolean visibilityDate;
+
+}
+@Setter
+ @Getter
+ @Builder
+ @Entity
+ @AllArgsConstructor
+ @NoArgsConstructor
+ @Table(name = "period")
+ public class Period {
+
+         @Id
+         @GeneratedValue(strategy = GenerationType.IDENTITY)
+         private int idPeriod;
+
+         @Column(name = "startDate", nullable = false)
+         private Date startDate;
+
+         @Column(name = "endDate", nullable = false)
+         private Date endtDate;
+
+         @JsonIgnore
+         @OneToMany(mappedBy = "period", cascade = CascadeType.ALL, orphanRemoval = true)
+         private final List<EnrollmentPeriod> enrollmentPeriods = new ArrayList<>();
+
+ }

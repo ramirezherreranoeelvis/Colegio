@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IHomeworkRepository extends JpaRepository<Homework, Integer> {
+
 }

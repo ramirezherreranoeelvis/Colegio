@@ -100,7 +100,7 @@ public class DailyExam extends Exam {
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("exam")
-public abstract class Exam extends Activity {
+public abstract class Exam extends Exam {
 
         public Exam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
@@ -112,7 +112,7 @@ public abstract class Exam extends Activity {
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("monthly_exam")
-public class MonthlyExam extends Activity {
+public class MonthlyExam extends Exam {
 
         @Builder
         public MonthlyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
@@ -125,7 +125,7 @@ public class MonthlyExam extends Activity {
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("quarterly_exam")
-public class QuarterlyExam extends Activity {
+public class QuarterlyExam extends Exam {
 
         @Builder
         public QuarterlyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
@@ -138,7 +138,7 @@ public class QuarterlyExam extends Activity {
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("weekly_exam")
-public class WeeklyExam extends Activity {
+public class WeeklyExam extends Exam {
 
         @Builder
         public WeeklyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
