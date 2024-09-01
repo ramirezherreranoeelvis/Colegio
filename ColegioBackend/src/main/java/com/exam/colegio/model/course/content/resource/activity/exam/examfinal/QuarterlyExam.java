@@ -1,4 +1,4 @@
-package com.exam.colegio.model.course.content.resource.activity.exam;
+package com.exam.colegio.model.course.content.resource.activity.exam.examfinal;
 
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.util.Permission;
@@ -15,9 +15,9 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @DiscriminatorValue("quarterly_exam")
-public class QuarterlyExam extends Exam {
+public class QuarterlyExam extends ExamFinal {
 
-        @Builder
+
         public QuarterlyExam(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt, dueDate);
         }

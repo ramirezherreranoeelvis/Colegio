@@ -27,7 +27,7 @@ public abstract class Activity extends Resource {
 
         @JsonIgnore
         @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL, orphanRemoval = true)
-        private final List<GradeActivity> gradeActivity = new ArrayList<>();
+        private List<GradeActivity> gradeActivity = new ArrayList<>();
 
         public Activity(int idResource, Content content, String name, String description, Permission permission, Date createdAt, Date dueDate) {
                 super(idResource, content, name, description, permission, createdAt);

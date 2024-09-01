@@ -3,7 +3,8 @@ package com.exam.colegio.util;
 public enum TypePeriod {
 
         BIMESTRE("BIMESTRE"),
-        TRIMESTRE("TRIMESTRE");
+        TRIMESTRE("TRIMESTRE"),
+        SEMESTRE("SEMESTRE");
 
         private final String displayName;
 

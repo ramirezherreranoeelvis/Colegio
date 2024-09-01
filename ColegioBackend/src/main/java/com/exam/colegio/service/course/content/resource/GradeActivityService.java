@@ -12,7 +12,66 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class GradeActivity {
+public class GradeActivityService {
+
+        public int promedioGeneral(List<Homework> homeworkList, List<Forum> forumList, List<DailyExam> dailyExamList, List<WeeklyExam> weeklyExamList, List<MonthlyExam> monthlyExamList, List<ExamFinal> examFinalList, int idStudent, String typePeriod) {
+                /*
+                 * Variables:
+                 * nT: Promedio de notas de tareas.
+                 * nF: Promedio de notas de foros.
+                 * nED: Promedio de notas de exámenes diarios.
+                 * nES: Promedio de notas de exámenes semanales.
+                 * nEM: Promedio de notas de exámenes mensuales.
+                 * nEF: Nota del examen final (bimestral, trimestral o semestral).
+                 * typePeriod : Tipo de periodo
+                 */
+                var nT = (int) Math.ceil(promedioTarea(homeworkList, idStudent));
+                var nF = (int) Math.ceil(promedioForo(forumList, idStudent));
+                var nED = (int) Math.ceil(promedioExamenesDiarios(dailyExamList, idStudent));
+                var nEM = (int) Math.ceil(promedioExamenesMensuales(monthlyExamList, idStudent));
+                var nES = (int) Math.ceil(promedioExamenesSemanales(weeklyExamList, idStudent));
+                int nEF = (int) Math.ceil(notaExamenFinal(examFinalList, idStudent));
+
+                double pT, pF, pED, pEM, pES, pEF;
+                switch (typePeriod) {
+                        case "BIMESTRE" -> {
+                                pT = 0.1;
+                                pF = 0.1;
+                                pED = 0.05;
+                                pEM = 0.15;
+                                pES = 0.1;
+                                pEF = 0.5;
+                        }
+                        case "TRIMESTRE" -> {
+                                pT = 0.1;
+                                pF = 0.1;
+                                pED = 0.05;
+                                pEM = 0.1;
+                                pES = 0.1;
+                                pEF = 0.55;
+                        }
+                        case "SEMESTRE" -> {
+                                pT = 0.1;
+                                pF = 0.1;
+                                pED = 0.05;
+                                pEM = 0.1;
+                                pES = 0.1;
+                                pEF = 0.55;
+                        }
+
+                        default -> throw new IllegalArgumentException("Tipo de periodo no válido: " + typePeriod);
+                }
+
+
+                return (int) Math.ceil(
+                        (pT * nT) +
+                        (pF * nF) +
+                        (pED * nED) +
+                        (pEM * nEM) +
+                        (pES * nES) +
+                        (pEF * nEF)
+                );
+        }
 
         public double promedioTarea(List<Homework> tareas, int idStudent) {
                 var sumaTotalNotasTareas = tareas.stream()
