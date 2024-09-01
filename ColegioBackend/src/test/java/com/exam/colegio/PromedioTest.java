@@ -16,7 +16,6 @@ class PromedioTest {
         @Transactional
         @Test
         void obternetPromedioByIdEnrollment() {
-
                 Enrollment enrollment = this.enrollmentRepository.findById(7).get();
                 var promedios = this.courseScheduledService.calcularPromedios(enrollment, this.studentDAO.findByDni("21787088").get());
                 promedios.forEach(promedio -> {

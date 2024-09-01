@@ -204,7 +204,6 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                 });
         }
 
-
         private final ICourseScheduledRepository courseScheduledRepository;
         private final IEnrollmentRepository enrollmentRepository;
         private final ActivityService activityService;
