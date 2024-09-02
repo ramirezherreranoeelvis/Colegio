@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Promedio } from '../../../../../model/notas/promedio';
+import { Promedio, Promedios } from '../../../../../model/notas/promedios';
 
 @Injectable({
         providedIn: 'root'
@@ -12,10 +12,10 @@ export class NotasService {
 
         constructor(private httpClient: HttpClient) { }
 
-        protected obtenerPromediosGenerales(dniStudent: string, year: string): Observable<Promedio[]> {
+        public obtenerPromediosGenerales(dniStudent: string, year: string): Observable<Promedios> {
                 const urlPromedioGeneral = `${this.url}/promedios`;
                 const params = new HttpParams().set('dniStudent', dniStudent).set('year', year);
-                return this.httpClient.get<Promedio[]>(urlPromedioGeneral, { params });
+                return this.httpClient.get<Promedios>(urlPromedioGeneral, { params });
         }
 
 }

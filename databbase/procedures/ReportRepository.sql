@@ -13,7 +13,7 @@ BEGIN
 END //
 
 DELIMITER ;
-
+-- actually
 DELIMITER //
 
 CREATE PROCEDURE usp_getReportsByStudent(

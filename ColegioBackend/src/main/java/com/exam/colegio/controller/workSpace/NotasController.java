@@ -1,5 +1,8 @@
 package com.exam.colegio.controller.workspace;
 
+import com.exam.colegio.dao.course.ICourseScheduledDAO;
+import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
+import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,31 @@ public class NotasController {
         @GetMapping("/promedios")
         public ResponseEntity<?> obtenerPromediosGenerales(@RequestParam String dniStudent, @RequestParam String year) {
                 var studentOptional = this.studentDAO.findByDni(dniStudent);
-                return null;
+                var student = studentOptional.get();
+                logger.info(student.getIdPerson() + "");
+                var seasionOptional = this.seasonDAO.findByYear(year);
+                var season = seasionOptional.get();
+                logger.info(student.getName());
+                var enrollmentOptional = this.enrollmentDAO.findBySeasonAndByStudent(season, student);
+                var enrollment = enrollmentOptional.get();
+                var promedios = this.courseScheduledDAO.calcularPromedios(enrollment, student);
+
+                return ResponseEntity.ok(promedios);
         }
 
+        private final IStudentDAO studentDAO;
+        private final IEnrollmentDAO enrollmentDAO;
+        private final ISeasonDAO seasonDAO;
+        private final ICourseScheduledDAO courseScheduledDAO;
+
         @Autowired
-        private IStudentDAO studentDAO;
+        public NotasController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO, ISeasonDAO seasonDAO, ICourseScheduledDAO courseScheduledDAO) {
+                this.studentDAO = studentDAO;
+                this.enrollmentDAO = enrollmentDAO;
+                this.seasonDAO = seasonDAO;
+                this.courseScheduledDAO = courseScheduledDAO;
+        }
+
+        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
 }

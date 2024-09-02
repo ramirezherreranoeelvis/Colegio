@@ -1,8 +1,7 @@
 package com.exam.colegio.dao.course;
 
 import com.exam.colegio.dto.curso.CursoDTO;
-import com.exam.colegio.dto.curso.NotaDTO;
-import com.exam.colegio.dto.notas.Promedio;
+import com.exam.colegio.dto.notas.Promedios;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
@@ -17,6 +16,6 @@ public interface ICourseScheduledDAO {
 
         Optional<CursoDTO> findByCodeByStudent(String code, Student student);
 
-        List<Promedio> calcularPromedios(Enrollment enrollment, Student student);
+        Promedios calcularPromedios(Enrollment enrollment, Student student);
 
 }

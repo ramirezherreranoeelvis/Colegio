@@ -3,6 +3,7 @@ package com.exam.colegio.service.course;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dto.curso.*;
 import com.exam.colegio.dto.notas.Promedio;
+import com.exam.colegio.dto.notas.Promedios;
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.model.course.content.resource.Resource;
@@ -119,12 +120,11 @@ public class CourseScheduledService implements ICourseScheduledDAO {
         }
 
         @Override
-        public List<Promedio> calcularPromedios(Enrollment enrollment, Student student) {
+        public Promedios calcularPromedios(Enrollment enrollment, Student student) {
                 // datos
                 List<EnrollmentPeriod> enrollmentPeriods = enrollment.getEnrollmentPeriods();
                 List<CourseScheduled> cursosProgramados = enrollment.getCourseScheduleds();
-
-                return cursosProgramados.stream()
+                List<Promedio> promedioList = cursosProgramados.stream()
                         .map(courseScheduled -> {
                                         List<Integer> promediosCursos = new ArrayList<>();
                                         enrollmentPeriods.forEach(enrollmentPeriod -> {
@@ -137,7 +137,6 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                                         List<WeeklyExam> weeklyExamList = activityService.getActivitiesByTypeAndDateRange(courseScheduled, WeeklyExam.class, period.getStartDate(), period.getEndtDate());
                                                         List<MonthlyExam> monthlyExamList = activityService.getActivitiesByTypeAndDateRange(courseScheduled, MonthlyExam.class, period.getStartDate(), period.getEndtDate());
                                                         List<ExamFinal> examFinalList = activityService.getActivitiesByTypeAndDateRange(courseScheduled, ExamFinal.class, period.getStartDate(), period.getEndtDate());
-
                                                         promediosCursos.add(gradeActivityService.promedioGeneral(
                                                                 homeworkList,
                                                                 forumList,
@@ -148,23 +147,30 @@ public class CourseScheduledService implements ICourseScheduledDAO {
                                                                 student.getIdPerson(),
                                                                 enrollment.getTypePeriod().getDisplayName()
                                                         ));
-
                                                 } else {
                                                         promediosCursos.add(null);
                                                 }
                                         });
                                         return Promedio.builder()
                                                 .nombre(courseScheduled.getCourse().getName())
+                                                .codigo(courseScheduled.getCode())
                                                 .promedios(promediosCursos)
                                                 .build();
                                 }
                         ).toList();
+                List<String> periods = new ArrayList<>();
+                for (int i = 0; i < enrollmentPeriods.size(); i++) {
+                        periods.add(enrollmentPeriods.get(i).getEnrollment().getTypePeriod().getDisplayName() +" "+ (i + 1));
+                }
+                return Promedios.builder()
+                        .periodos(periods)
+                        .promedioList(promedioList)
+                        .build();
         }
 
         @Override
         public Optional<CursoDTO> findByCodeByStudent(String code, Student student) {
                 var courseScheduled = this.courseScheduledRepository.findByCode(code);
-                logger.info(student.getIdPerson() + "");
                 return courseScheduled.map(courseS -> {
                         var classroom = courseS.getClassroom();
                         var course = courseS.getCourse();
@@ -208,7 +214,6 @@ public class CourseScheduledService implements ICourseScheduledDAO {
         private final IEnrollmentRepository enrollmentRepository;
         private final ActivityService activityService;
         private final GradeActivityService gradeActivityService;
-        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
         @Autowired
         public CourseScheduledService(ICourseScheduledRepository courseScheduledRepository, IEnrollmentRepository enrollmentRepository, ActivityService activityService, GradeActivityService gradeActivity) {

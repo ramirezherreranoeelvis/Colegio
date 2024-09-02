@@ -18,28 +18,38 @@
                                 </select>
                         </div>
                         <div class="notas__values">
-                                <table class="notas__table" border="1">
-                                        <thead class="notas__header">
-                                                <tr class="notas__header-row">
-                                                        <th class="notas__header-item">N°</th>
-                                                        <th class="notas__header-item">Curso</th>
-                                                        @for (item of cursoNotas[0].notas; track $index) {
-                                                        <th class="notas__header-item">{{item.name}}</th>
+                                @if (cursoNotas) {
+                                        <table class="notas__table" border="1">
+                                                <thead class="notas__header">
+                                                        <tr class="notas__header-row">
+                                                                <th class="notas__header-item">N°</th>
+                                                                <th class="notas__header-item">Curso</th>
+                                                                @for (periodo of cursoNotas.periodos; track $index) {
+                                                                <th class="notas__header-item">{{periodo}}</th>
+                                                                }
+                                                        </tr>
+                                                </thead>
+                                                <tbody class="notas__body">
+                                                        @for (cursoNota of cursoNotas.promedioList; track $index) {
+                                                        <tr class="notas__body-row">
+                                                                <td class="notas__body-item">{{$index + 1}}</td>
+                                                                <td class="notas__body-item">{{cursoNota.nombre}}</td>
+                                                                @for (nota of cursoNota.promedios; track $index) {
+                                                                <td class="notas__body-item">
+                                                                        @if (nota) {
+                                                                        {{nota}}
+                                                                        }
+                                                                </td>
+        
+                                                                }
+                                                        </tr>
                                                         }
-                                                </tr>
-                                        </thead>
-                                        <tbody class="notas__body">
-                                                @for (cursoNota of cursoNotas; track $index) {
-                                                <tr class="notas__body-row">
-                                                        <td class="notas__body-item">{{$index + 1}}</td>
-                                                        <td class="notas__body-item">{{cursoNota.curso}}</td>
-                                                        @for (nota of cursoNota.notas; track $index) {
-                                                        <td class="notas__body-item">{{nota.nota}}</td>
-                                                        }
-                                                </tr>
-                                                }
-                                        </tbody>
-                                </table>
+                                                </tbody>
+                                        </table>
+                                }@else {
+                                        No hay promedios que mostrar
+                                }
+                                
                         </div>
                 </div>
         </div>

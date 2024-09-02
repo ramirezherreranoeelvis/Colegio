@@ -13,6 +13,7 @@ public class Promedio {
 
         private String nombre;
         private String codigo;
+        private List<String> periodos;
         private List<Integer> promedios;
 
 }
