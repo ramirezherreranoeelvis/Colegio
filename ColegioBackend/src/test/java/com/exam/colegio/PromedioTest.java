@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest
 class PromedioTest {
 
@@ -18,14 +17,13 @@ class PromedioTest {
         void obternetPromedioByIdEnrollment() {
                 Enrollment enrollment = this.enrollmentRepository.findById(7).get();
                 var promedios = this.courseScheduledService.calcularPromedios(enrollment, this.studentDAO.findByDni("21787088").get());
-                promedios.forEach(promedio -> {
-                        System.out.println(promedio.getNombre());
-                });
 
         }
 
         private final IEnrollmentRepository enrollmentRepository;
+
         private final CourseScheduledService courseScheduledService;
+
         private final IStudentDAO studentDAO;
 
         @Autowired

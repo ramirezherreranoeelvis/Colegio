@@ -61,13 +61,6 @@ export class CursosComponent implements OnInit {
                                 this.temporadas = data
                         }
                 )
-                this.ver = "curso"
-                this.cursoCodeSelect = "00000000000001";
-                this.cursoService.verCursoSeleccionadoByStudent("00000000000001", this.dniStudent).subscribe(
-                        (curso: Curso) => {
-                                this.cursoSelect = curso
-                        }
-                )
 
         }
 
