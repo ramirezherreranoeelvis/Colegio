@@ -4,12 +4,21 @@ import { Curso, RecursoContenidoCurso } from '../../../../../model/cursos/curso'
 import { CursoService } from './curso.service';
 import { Temporada } from '../../../../../model/Temporada';
 import { TemporadaService } from '../../temporada.service';
-import { RecursoComponent } from './recurso/recurso.component';
+import { RecursoComponent } from '../../../../sub-components/molecules/recurso/recurso.component';
+import { CourseCardComponent } from '../../../../sub-components/atoms/course-card/course-card.component';
+import { CourseContentComponent } from '../../../../sub-components/organisms/course-content/course-content.component';
+import { MenuExitComponent } from "../../../../sub-components/atoms/menu-exit/menu-exit.component";
 
 @Component({
         selector: 'app-cursos',
         standalone: true,
-        imports: [FormsModule, RecursoComponent],
+        imports: [
+                FormsModule,
+                RecursoComponent,
+                CourseCardComponent,
+                CourseContentComponent,
+                MenuExitComponent
+        ],
         templateUrl: './cursos.component.html',
         styleUrl: './cursos.component.scss'
 })
@@ -18,9 +27,9 @@ export class CursosComponent implements OnInit {
         protected ver: string = "cursos";
         protected cursoCodeSelect: string = null;
         //metodos de diseño
-        protected verSeleccionado(contenido: string, codigo: string | any) {
+        protected verSeleccionado(contenido: string, codigo: string | any): void {
                 this.ver = contenido;
-                if (codigo != null) {
+                if (codigo) {
                         if (this.ver == "curso") {
                                 this.cursoCodeSelect = codigo;
                                 this.cursoService.verCursoSeleccionadoByStudent(codigo, this.dniStudent).subscribe(
@@ -42,6 +51,10 @@ export class CursosComponent implements OnInit {
                                 this.cursoCodeSelect = null;
                         }
                 }
+        }
+
+        protected viewResource(event: { contenido: string, codigo: string | any }): void {
+                this.verSeleccionado(event.contenido, event.codigo)
         }
 
         //datos:

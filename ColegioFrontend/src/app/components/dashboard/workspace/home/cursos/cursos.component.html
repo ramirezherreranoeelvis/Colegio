@@ -2,135 +2,38 @@
     <div class="course__container">
         <div class="course__content">
             @if (ver == "cursos") {
-            <h2 class="course__title">Cursos</h2>
+                <h2 class="course__title">Cursos</h2>
 
-            <!-- Selección de hijos -->
-            <div class="course__select-wrapper">
-                <select name="childSelect" id="childSelect" class="course__select"></select>
-            </div>
-
-            <!-- Filtros -->
-            <div class="course__filters">
-                <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
-                <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year"
-                    (change)="updateDataCoursesSelect()">
-                    <option selected [value]="0">Periodos</option>
-                    @for (temporada of temporadas; track $index) {
-                    <option [value]="temporada.year">{{temporada.year}}</option>
-                    }
-                </select>
-            </div>
-
-            <!-- Lista de cursos -->
-            <div class="course__list">
-                @for (curso of cursos; track 1) {
-                <article class="course__item" (click)="verSeleccionado('curso',curso.codigo)">
-                    <div class="course__item-cover">
-                        <div class="course__item-cover-overlay"></div>
-                        <img [src]="curso.portada" alt="Portada del curso" class="course__item-cover-image">
-                    </div>
-                    <div class="course__item-details">
-                        <div class="course__item-name">{{curso.nombre}}</div>
-                        <div class="course__item-code">{{curso.codigo}}</div>
-                        <div class="course__item-teacher">{{curso.profesores[0]}}</div>
-                    </div>
-                </article>
-                }
-            </div>
-            }@else if(ver == "curso") {
-            <!-- Detalles del curso seleccionado -->
-            <div class="course__details">
-                <div class="course__exit" (click)="verSeleccionado('cursos',null)">
-                    <div class="course__exit-content">
-                        <div class="course__exit-line"></div>
-                        <div class="course__exit-line"></div>
-                    </div>
+                <!-- Selección de hijos -->
+                <div class="course__select-wrapper">
+                    <select name="childSelect" id="childSelect" class="course__select"></select>
                 </div>
 
-                <h2 class="course__details-title">{{cursoSelect.nombre}}</h2>
-
-                <!-- Profesores -->
-                <div class="course__professors">
-                    <details>
-                        <summary class="course__professors-title">Profesores:</summary>
-                        <div class="course__professors-list">
-                            @for (profesor of cursoSelect.profesores; track $index) {
-                            <div class="course__professor">{{profesor}}</div>
-                            }
-                        </div>
-                    </details>
-                </div>
-                <div class="course__separation"></div>
-                <!-- Datos del curso -->
-                <div class="course__data">
-                    <details>
-                        <summary class="course__data-title">Datos:</summary>
-                        <div class="course__data-list">
-                            <div class="course__data-item"><span>Día: </span>{{cursoSelect.dia}}</div>
-                            <div class="course__data-item"><span>Hora de Inicio: </span>{{cursoSelect.horaInicio}}</div>
-                            <div class="course__data-item"><span>Hora de Salida: </span>{{cursoSelect.horaFin}}</div>
-                            <div class="course__data-item"><span>Piso: </span>{{cursoSelect.piso}}</div>
-                            <div class="course__data-item"><span>Salón: </span>{{cursoSelect.numeroSalon}}</div>
-                            <div class="course__data-item"><span>Número de Sesiones:
-                                </span>{{cursoSelect.numeroSesiones}}
-                            </div>
-                        </div>
-                    </details>
-                </div>
-                <div class="course__separation"></div>
-                <!-- Contenido del curso -->
-                <details open class="course__contents">
-                    <summary class="course__contents-title">Contenido:</summary>
-                    <div class="course__contents-list">
-                        @for (contenido of cursoSelect.contenidos; track $index) {
-                        <details open class="course__content-item">
-                            <summary class="course__content-title">
-                                @if (contenido.tipo=="session"){
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" class="book-icon">
-                                    <rect x="10" y="10" width="44" height="50" rx="4" ry="4" class="cover" />
-                                    <path d="M14 10v50h36V10H14z" class="page" />
-                                    <path d="M18 14h28v42H18z" class="inner-page" />
-                                    <rect x="14" y="10" width="4" height="50" class="spine" />
-                                </svg>
-
-                                Sesión N°{{contenido.numero}}: {{contenido.nombre}}
-                                }@else {{{contenido.nombre}}}
-                            </summary>
-                            <div class="course__resources">
-                                @for (recurso of contenido.recursos; track $index) {
-                                <h5 class="course__resource" (click)="verSeleccionado('recurso',recurso)">
-                                    <div class="course__resource-name">{{recurso.nombre}}</div>
-
-                                    @if (recurso.notas) {<div class="course__resource-nota">
-                                        @if (recurso.notas.length==1) {
-                                        {{recurso.notas[0].nota}}
-                                        }@else {
-                                            Sin calificar
-                                        }
-                                    </div>
-                                    }
-                                </h5>
-
-                                @if (contenido.recursos.length != $index+1) {
-                                <div class="course__resources-separation">
-                                    <div></div>
-                                </div>
-                                }
-                                }
-                            </div>
-                        </details>
+                <!-- Filtros -->
+                <div class="course__filters">
+                    <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
+                    <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year" (change)="updateDataCoursesSelect()">
+                        <option selected [value]="0">Periodos</option>
+                        @for (temporada of temporadas; track $index) {
+                            <option [value]="temporada.year">{{temporada.year}}</option>
                         }
-                    </div>
-                </details>
-            </div>
-            }@else if(ver == "recurso"){
-            <div class="course__exit" (click)="verSeleccionado('curso',cursoCodeSelect)">
-                <div class="course__exit-content">
-                    <div class="course__exit-line"></div>
-                    <div class="course__exit-line"></div>
+                    </select>
                 </div>
-            </div>
-            <app-recurso [recurso]="recursoSelect" />
+
+                <!-- Lista de cursos -->
+                <div class="course__list">
+                    @for (curso of cursos; track $index) {
+                        <app-course-card [portada]="curso.portada" [name]="curso.nombre" [code]="curso.codigo" [profesores]="['Juan Perez']" (selectedCourse)="verSeleccionado('curso', curso.codigo)" />
+                    }@empty {
+                        <p class="course__empty">No se encontraron cursos</p>
+                    }
+                </div>
+            }@else if(ver == "curso") {
+                <app-menu-exit (exit)="verSeleccionado('cursos',null)" />
+                <app-course-content [course]="cursoSelect" (selectedResource)="viewResource($event)" />
+            }@else if(ver == "recurso"){
+                <app-menu-exit (exit)="verSeleccionado('curso',cursoCodeSelect)" />
+                <app-recurso [recurso]="recursoSelect" />
             }
         </div>
     </div>

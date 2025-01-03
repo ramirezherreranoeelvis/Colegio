@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { User } from './model/user';
+import { CourseCardComponent } from './components/sub-components/atoms/course-card/course-card.component';
 
 @Component({
         selector: 'app-root',
@@ -9,7 +10,8 @@ import { User } from './model/user';
         imports: [
                 CommonModule,
                 RouterOutlet,
-                RouterLink
+                RouterLink,
+                CourseCardComponent
         ],
         templateUrl: './app.component.html',
         styleUrls: ['./app.component.scss']

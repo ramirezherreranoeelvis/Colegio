@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.function.BiPredicate;
 
-
 /**
  * <h4>Requisitos para registrar matrícula</h4>
  * <ul>
@@ -31,20 +30,22 @@ public class EnrollmentController {
 
         @GetMapping("/horario")
         public ResponseEntity<?> getHorario(@RequestParam int idEnrollment) {
+                System.out.println();
                 var enrollmentOptional = this.enrollmentDAO.findById(idEnrollment);
                 if (enrollmentOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe una matricula actualmente para este grado escolar");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                        .body("No existe una matricula actualmente para este grado escolar");
                 }
                 var horarioDTO = this.enrollmentDAO.getScheduleByEnrollment(enrollmentOptional.get());
                 return ResponseEntity.ok(horarioDTO.getWeekHorario());
         }
 
         @PostMapping("/registrar")
-        public ResponseEntity<?> registerStudentEnrollment(@RequestParam String dniStudent, @RequestParam int idEnrollment) {
+        public ResponseEntity<?> registerStudentEnrollment(@RequestParam String dniStudent,
+                        @RequestParam int idEnrollment) {
                 var studentOptional = this.studentDAO.findByDni(dniStudent);
                 var enrollmentOptional = this.enrollmentDAO.findById(idEnrollment);
-
-                //validation de alumno y matrícula existente
+                // validation de alumno y matrícula existente
                 if (studentOptional.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student Not Found");
                 }
@@ -54,64 +55,69 @@ public class EnrollmentController {
                 var student = studentOptional.get();
                 var enrollment = enrollmentOptional.get();
 
-                //validation de grado y alumno
-                BiPredicate<Student, Enrollment> validationGrade = (s, e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
+                // validation de grado y alumno
+                BiPredicate<Student, Enrollment> validationGrade = (s,
+                                e) -> s.getGrade().getNextGrade().getIdGrade() == e.getGrade().getIdGrade();
 
                 if (!validationGrade.test(student, enrollment)) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Esa matricula no es para ese estudiante");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                        .body("Esa matricula no es para ese estudiante");
                 }
 
                 // validar que no este registrado:
                 var enrollmentStudentExist = enrollmentStudentDAO.isStudentEnrolled(student, enrollment);
                 if (enrollmentStudentExist) {
-                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El alumno ya esta registradoa  esta amtricula");
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                        .body("El alumno ya esta registradoa  esta amtricula");
                 }
 
                 // Obtener los tipos de pago para ponerlos como falta:
                 var pendienteOptional = this.typeStatusDAO.getPendiente();
                 if (pendienteOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Tipo de estado pendiente no encontrado");
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                        .body("Tipo de estado pendiente no encontrado");
                 }
                 var pendiente = pendienteOptional.get();
 
-                //creación de lista de pagos
+                // creación de lista de pagos
                 var payments = new ArrayList<Payment>();
 
                 // creamos el pago de matrícula:
                 payments.add(Payment.builder()
-                        .typeStatus(pendiente)
-                        .pay(enrollment.getCost())
-                        .description("Matricula")
-                        .build());
+                                .typeStatus(pendiente)
+                                .pay(enrollment.getCost())
+                                .description("Matricula")
+                                .build());
                 // creamos mensualidades:
                 for (int i = 0; i < enrollment.getMonths(); i++) {
                         payments.add(Payment
-                                .builder()
-                                .typeStatus(pendiente)
-                                .pay(enrollment.getMonthlyFee())
-                                .description("mensualidad")
-                                .build()
-                        );
+                                        .builder()
+                                        .typeStatus(pendiente)
+                                        .pay(enrollment.getMonthlyFee())
+                                        .description("mensualidad")
+                                        .build());
                 }
 
                 // crear enrollmentStudent:
                 var enrollmentStudent = this.enrollmentStudentDAO.save(EnrollmentStudent.builder()
-                        .student(student)
-                        .enrollment(enrollment)
-                        .build()
-                );
+                                .student(student)
+                                .enrollment(enrollment)
+                                .build());
 
-                //resultado:
+                // resultado:
                 var message = new HashMap<String, String>();
                 if (enrollmentStudent == null) {
                         message.put("message", "Hubo un error al guardar");
                         ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
                 }
-                //a los pagos ahora les agregaos el enrollmentStudent sabiendo que ya se guardo;
+
+                // a los pagos ahora les agregaos el enrollmentStudent sabiendo que ya se
+                // guardo;
                 payments.forEach(payment -> payment.setEnrollmentStudent(enrollmentStudent));
                 enrollmentStudent.setPayments(payments);
                 this.enrollmentStudentDAO.update(enrollmentStudent);
-                //actualizamos los matriculados
+
+                // actualizamos los matriculados
                 enrollment.setEnrolled(enrollment.getEnrolled() + 1);
                 this.enrollmentDAO.update(enrollment);
 
@@ -125,7 +131,8 @@ public class EnrollmentController {
         private final ITypeStatusDAO typeStatusDAO;
 
         @Autowired
-        public EnrollmentController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO, IEnrollmentStudentDAO enrollmentStudentDAO, ITypeStatusDAO typeStatusService) {
+        public EnrollmentController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO,
+                        IEnrollmentStudentDAO enrollmentStudentDAO, ITypeStatusDAO typeStatusService) {
                 this.studentDAO = studentDAO;
                 this.enrollmentDAO = enrollmentDAO;
                 this.enrollmentStudentDAO = enrollmentStudentDAO;

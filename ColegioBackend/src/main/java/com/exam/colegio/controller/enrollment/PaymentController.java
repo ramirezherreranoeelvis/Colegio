@@ -1,18 +1,24 @@
 package com.exam.colegio.controller.enrollment;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.exam.colegio.dao.enrollment.IPaymentDAO;
 import com.exam.colegio.dao.enrollment.ITypeStatusDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
 import com.exam.colegio.dto.PagoDTO;
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.enrollment.TypeStatus;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 @RestController
 @RequestMapping("/payment")
@@ -22,7 +28,7 @@ public class PaymentController {
         @PostMapping("/processPayment")
         public ResponseEntity<?> processPayment(@RequestParam int idPayment) {
                 logger.info(idPayment + "");
-                Optional<Payment> optionalPayment = paymentDAO.findById(idPayment);
+                Optional<Payment> optionalPayment = this.paymentDAO.findById(idPayment);
 
                 if (optionalPayment.isEmpty()) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pago no encontrado.");
@@ -57,12 +63,14 @@ public class PaymentController {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found Student");
                 }
                 var paymentList = this.studentDAO.findPendingPaymentsForStudent(studentOptional.get());
-                var paymentListDTO = paymentList.stream().map(payment -> new PagoDTO(payment.getIdPayment(), payment.getPay(), payment.getDescription())).toList();
+                var paymentListDTO = paymentList.stream().map(payment -> new PagoDTO(payment.getIdPayment(),
+                                payment.getPay(), payment.getDescription())).toList();
                 return ResponseEntity.ok(paymentListDTO);
         }
 
         private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
-        private final Predicate<String> isEightDigitDni = dni -> Optional.ofNullable(dni).filter(d -> d.length() == 8).isPresent();
+        private final Predicate<String> isEightDigitDni = dni -> Optional.ofNullable(dni).filter(d -> d.length() == 8)
+                        .isPresent();
         private final IStudentDAO studentDAO;
         private final IPaymentDAO paymentDAO;
         private final ITypeStatusDAO typeStatusDAO;

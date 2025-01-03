@@ -19,7 +19,7 @@ export class RegistrarPagoMensualComponent implements OnInit {
         protected studentSelect: Student;
         protected mensualidadesPendientes: Pago[];
         protected pagoSelect: Pago;
-        protected isDetalles:boolean = false;
+        protected isDetalles: boolean = false;
 
         constructor(private paymentService: PaymentService, private parentService: ParentService) { }
 
@@ -36,13 +36,13 @@ export class RegistrarPagoMensualComponent implements OnInit {
 
         public updateDataStudentSelect(event: Event): void {
                 this.isDetalles = false;
-                const dni = (event.target as HTMLSelectElement).value;
-                if (dni === "0") {
+                const DNI = (event.target as HTMLSelectElement).value;
+                if (DNI === "0") {
                         this.studentSelect = null;
                         this.mensualidadesPendientes = null; // Resetea el monto cuando no hay selección
                         return;
                 }
-                this.studentSelect = this.students.find(s => s.dni === dni);
+                this.studentSelect = this.students.find(s => s.dni === DNI);
                 this.paymentService.obtenerDeudas(this.studentSelect.dni).subscribe(
                         (data: Pago[]) => {
                                 this.mensualidadesPendientes = data.filter(pago => pago.description === "mensualidad");

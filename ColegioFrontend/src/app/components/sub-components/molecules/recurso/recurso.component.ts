@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RecursoContenidoCurso } from '../../../../../../model/cursos/curso';
-import { HttpClient } from '@angular/common/http';
+import { RecursoContenidoCurso } from '../../../../model/cursos/curso';
 
 @Component({
         selector: 'app-recurso',
