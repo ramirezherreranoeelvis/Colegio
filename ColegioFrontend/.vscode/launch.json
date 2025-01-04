@@ -3,20 +3,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "java",
-      "name": "ColegioApplication",
-      "request": "launch",
-      "mainClass": "com.exam.colegio.ColegioApplication",
-      "projectName": ""
-    },
-    {
-      "type": "java",
-      "name": "ColegioApplication",
-      "request": "launch",
-      "mainClass": "com.exam.colegio.ColegioApplication",
-      "projectName": "colegio"
-    },
-    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",

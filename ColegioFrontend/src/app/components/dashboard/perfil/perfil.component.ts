@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { HamburgerMenuComponent } from '../../sub-components/atoms/hamburger-menu/hamburger-menu.component';
 
 @Component({
@@ -8,7 +8,6 @@ import { HamburgerMenuComponent } from '../../sub-components/atoms/hamburger-men
 	standalone: true,
 	imports: [
 		CommonModule,
-		RouterOutlet,
 		RouterLink,
 		HamburgerMenuComponent
 	],

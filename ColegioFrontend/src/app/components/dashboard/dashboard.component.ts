@@ -8,8 +8,6 @@ import { WorkspaceComponent } from "./workspace/workspace.component";
         standalone: true,
         imports: [
                 CommonModule,
-                RouterOutlet,
-                RouterLink,
                 PerfilComponent,
                 WorkspaceComponent
         ],
