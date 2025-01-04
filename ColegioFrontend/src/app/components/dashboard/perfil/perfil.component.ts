@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { HamburgerMenuComponent } from '../../sub-components/atoms/hamburger-menu/hamburger-menu.component';
 
 @Component({
 	selector: 'app-perfil',
@@ -8,7 +9,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 	imports: [
 		CommonModule,
 		RouterOutlet,
-		RouterLink
+		RouterLink,
+		HamburgerMenuComponent
 	],
 	templateUrl: './perfil.component.html',
 	styleUrl: './perfil.component.scss'
@@ -17,19 +19,13 @@ export class PerfilComponent {
 	protected user: User = new User("Alberto Edu Alanya Suarez", "12345678", "AAlanyaSu");
 
 	@ViewChild('perfilSection') perfilSection!: ElementRef;
-	@ViewChild('menu') menu!: ElementRef;
+
 	toggleMenu() {
 		const perfilElement = this.perfilSection.nativeElement;
 		if (perfilElement.classList.contains('noVisible')) {
 			perfilElement.classList.remove('noVisible'); // Quitar clase
 		} else {
 			perfilElement.classList.add('noVisible'); // Agregar clase
-		}
-		const menuElement = this.menu.nativeElement;
-		if (menuElement.classList.contains('menu__active')) {
-			menuElement.classList.remove('menu__active'); // Quitar clase
-		} else {
-			menuElement.classList.add('menu__active'); // Agregar clase
 		}
 	}
 }

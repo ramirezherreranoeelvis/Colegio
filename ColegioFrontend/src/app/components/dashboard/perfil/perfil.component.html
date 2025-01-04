@@ -1,10 +1,5 @@
-<div #menu class="menu" (click)="toggleMenu()">
-    <div class="menu__content">
-        <div class="menu__line"></div>
-        <div class="menu__line"></div>
-        <div class="menu__line"></div>
-    </div>
-</div>
+<app-hamburger-menu (clickMenu)="toggleMenu()" class="menu"/>
+
 <section #perfilSection class="perfil noVisible">
     <div class="perfil__content">
         <div class="perfil__data">
