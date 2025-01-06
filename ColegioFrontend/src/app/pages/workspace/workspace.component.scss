@@ -1,0 +1,14 @@
+$color-fondo : linear-gradient(130deg, #001c9b 10%, #ff3164 40%, #000a96, #000768, #000768);
+
+.dashboard {
+    /* background: $color-fondo; */
+    display: flex;
+}
+
+.dashboard__center-separate {
+    display: flex;
+}
+
+.content {
+    flex: 1;
+}

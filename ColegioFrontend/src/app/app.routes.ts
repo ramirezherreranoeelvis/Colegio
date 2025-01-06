@@ -1,16 +1,17 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { HomeComponent } from './components/dashboard/workspace/home/home.component';
-import { CursosComponent } from './components/dashboard/workspace/home/cursos/cursos.component';
-import { HistorialComponent } from './components/dashboard/workspace/home/historial/historial.component';
-import { HorarioComponent } from './components/dashboard/workspace/home/horario/horario.component';
-import { NotasGeneralesComponent } from './components/dashboard/workspace/home/notas-generales/notas-generales.component';
-import { ReportesIncidentesComponent } from './components/dashboard/workspace/home/reportes-incidentes/reportes-incidentes.component';
-import { MatriculaComponent } from './components/dashboard/workspace/matricula/matricula.component';
-import { RegistrarMatriculaComponent } from './components/dashboard/workspace/matricula/registrar-matricula/registrar-matricula.component';
-import { RegistrarPagoMatriculaComponent } from './components/dashboard/workspace/matricula/registrar-pago-matricula/registrar-pago-matricula.component';
-import { RegistrarPagoMensualComponent } from './components/dashboard/workspace/matricula/registrar-pago-mensual/registrar-pago-mensual.component';
+import { LoginComponent } from './pages/login/login.component';
+import { WorkspaceComponent } from './pages/workspace/workspace.component';
+import { HomeComponent } from './pages/workspace/home/home.component';
+import { CursosComponent } from './pages/workspace/home/cursos/cursos.component';
+import { HistorialComponent } from './pages/workspace/home/historial/historial.component';
+import { HorarioComponent } from './pages/workspace/home/horario/horario.component';
+import { NotasGeneralesComponent } from './pages/workspace/home/notas-generales/notas-generales.component';
+import { ReportesIncidentesComponent } from './pages/workspace/home/reportes-incidentes/reportes-incidentes.component';
+import { MatriculaComponent } from './pages/workspace/matricula/matricula.component';
+import { RegistrarMatriculaComponent } from './pages/workspace/matricula/registrar-matricula/registrar-matricula.component';
+import { RegistrarPagoMatriculaComponent } from './pages/workspace/matricula/registrar-pago-matricula/registrar-pago-matricula.component';
+import { RegistrarPagoMensualComponent } from './pages/workspace/matricula/registrar-pago-mensual/registrar-pago-mensual.component';
+
 
 export const routes: Routes = [
         {
@@ -24,9 +25,9 @@ export const routes: Routes = [
                 component: LoginComponent
         },
         {
-                path: 'dashboard',
-                title: 'dashboard',
-                component: DashboardComponent,
+                path: 'workspace',
+                title: 'workspace',
+                component: WorkspaceComponent,
                 children: [
                         {
                                 path: '',

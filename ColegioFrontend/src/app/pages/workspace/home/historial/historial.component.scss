@@ -1,0 +1,64 @@
+$font_lexend: lexend, System-UI;
+$color-fondo : linear-gradient(130deg, #ff0080, #ff0080, #000a96, #000768, #000768);
+$color__background-filter: #240079;
+$sombra: 0 0 20px 0 #00000059;
+
+.history {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: $color-fondo;
+    overflow: auto;
+
+    &__content {
+        background: #ffffff;
+        box-shadow: $sombra;
+        border-radius: 20px;
+        padding: 40px 40px 40px 40px;
+        display: flex;
+        flex-direction: column;
+        min-width: 70%;
+        min-height: 20vh;
+        display: flex;
+    }
+
+    &__filter {
+        margin-bottom: 15px;
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            margin: 0px 30px 0px 00px;
+            text-align: center;
+            width: 200px;
+            height: 50px;
+            color: white;
+            font-size: 15px;
+            font-family: $font_lexend;
+            background: $color__background-filter;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    }
+
+    &__table-container {
+        padding: 0 00px 20px 0px;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+
+    }
+
+    &__table-nofound {
+        font-family: $font_lexend
+    }
+
+}
