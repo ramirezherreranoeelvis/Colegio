@@ -127,7 +127,11 @@ VALUES
         ('castellano'),
         ('ortografía'),
         ('cívica'),
-        ('historia del perú');
+        ('historia del perú'),
+        ('personal social'),
+        ('logico verbal'),
+        ('psicología'),
+        ('fechas cívicas');
 -- Tabla: grade
 INSERT INTO grade
         (name)
@@ -147,7 +151,7 @@ VALUES
 INSERT INTO season
         (year, startDate)
 VALUES
-        (2025, '2024-04-004'),
+        (2025, '2024-04-04'),
         (2026, null),
         (2027, null),
         (2028, null),
