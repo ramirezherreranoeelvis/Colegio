@@ -1,14 +1,14 @@
 package com.exam.colegio.service.enrollment;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.enrollment.IEnrollmentStudentDAO;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.IEnrollmentStudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class EnrollmentStudentService implements IEnrollmentStudentDAO {
@@ -38,7 +38,6 @@ public class EnrollmentStudentService implements IEnrollmentStudentDAO {
 
         private final IEnrollmentStudentRepository enrollmentStudentRepository;
 
-        @Autowired
         public EnrollmentStudentService(IEnrollmentStudentRepository enrollmentStudentRepository) {
                 this.enrollmentStudentRepository = enrollmentStudentRepository;
         }

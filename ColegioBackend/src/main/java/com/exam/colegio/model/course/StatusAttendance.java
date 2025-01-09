@@ -3,8 +3,10 @@ package com.exam.colegio.model.course;
 import com.exam.colegio.model.course.content.SessionAttendance;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "statusAttendance")
 public class StatusAttendance {

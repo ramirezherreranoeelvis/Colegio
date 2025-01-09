@@ -1,13 +1,13 @@
 package com.exam.colegio.service.enrollment;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.enrollment.IPaymentDAO;
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.repository.enrollment.IPaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaymentService implements IPaymentDAO {
@@ -34,7 +34,6 @@ public class PaymentService implements IPaymentDAO {
 
         private final IPaymentRepository paymentRepository;
 
-        @Autowired
         public PaymentService(IPaymentRepository paymentRepository) {
                 this.paymentRepository = paymentRepository;
         }

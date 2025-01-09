@@ -3,8 +3,10 @@ package com.exam.colegio.model.course.content;
 import com.exam.colegio.model.course.StatusAttendance;
 import com.exam.colegio.model.person.Student;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -12,6 +14,8 @@ import java.util.Date;
 @Setter
 @Getter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "sessionAttendance")
 public class SessionAttendance {

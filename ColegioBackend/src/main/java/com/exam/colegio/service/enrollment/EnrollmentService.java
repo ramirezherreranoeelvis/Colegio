@@ -1,5 +1,18 @@
 package com.exam.colegio.service.enrollment;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dto.horario.HorarioDTO;
 import com.exam.colegio.model.course.CourseScheduled;
@@ -10,13 +23,6 @@ import com.exam.colegio.model.other.Grade;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
 import com.exam.colegio.util.DayOfWeek;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EnrollmentService implements IEnrollmentDAO {
@@ -117,7 +123,6 @@ public class EnrollmentService implements IEnrollmentDAO {
 
         private final IEnrollmentRepository enrollmentRepository;
 
-        @Autowired
         public EnrollmentService(IEnrollmentRepository enrollmentRepository) {
                 this.enrollmentRepository = enrollmentRepository;
         }

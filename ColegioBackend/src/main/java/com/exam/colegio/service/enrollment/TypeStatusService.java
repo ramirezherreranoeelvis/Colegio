@@ -1,29 +1,32 @@
 package com.exam.colegio.service.enrollment;
 
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.enrollment.ITypeStatusDAO;
 import com.exam.colegio.model.enrollment.TypeStatus;
 import com.exam.colegio.repository.enrollment.ITypeStatusRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class TypeStatusService implements ITypeStatusDAO {
 
         @Override
         public Optional<TypeStatus> getPendiente() {
-                return this.typeStatusRepository.findAll().stream().filter(typeStatus -> typeStatus.getName().equals("pendiente")).findFirst();
+                return this.typeStatusRepository.findAll().stream()
+                                .filter(typeStatus -> typeStatus.getName().equals("pendiente")).findFirst();
         }
 
         @Override
         public Optional<TypeStatus> getCancelado() {
-                return this.typeStatusRepository.findAll().stream().filter(typeStatus -> typeStatus.getName().equals("cancelado")).findFirst();
+                return this.typeStatusRepository.findAll().stream()
+                                .filter(typeStatus -> typeStatus.getName().equals("cancelado")).findFirst();
         }
 
         @Override
         public Optional<TypeStatus> getAnulado() {
-                return this.typeStatusRepository.findAll().stream().filter(typeStatus -> typeStatus.getName().equals("anulado")).findFirst();
+                return this.typeStatusRepository.findAll().stream()
+                                .filter(typeStatus -> typeStatus.getName().equals("anulado")).findFirst();
         }
 
         @Override
@@ -33,7 +36,6 @@ public class TypeStatusService implements ITypeStatusDAO {
 
         private final ITypeStatusRepository typeStatusRepository;
 
-        @Autowired
         public TypeStatusService(ITypeStatusRepository typeStatusRepository) {
                 this.typeStatusRepository = typeStatusRepository;
         }

@@ -2,7 +2,6 @@ package com.exam.colegio.model.course.content;
 
 import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.model.course.content.resource.Resource;
-import com.exam.colegio.model.course.content.resource.activity.Homework;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

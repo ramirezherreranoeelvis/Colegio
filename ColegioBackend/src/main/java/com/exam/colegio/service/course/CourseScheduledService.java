@@ -1,7 +1,18 @@
 package com.exam.colegio.service.course;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
-import com.exam.colegio.dto.curso.*;
+import com.exam.colegio.dto.curso.ContentDTO;
+import com.exam.colegio.dto.curso.CursoDTO;
+import com.exam.colegio.dto.curso.ItemDTO;
+import com.exam.colegio.dto.curso.NotaDTO;
+import com.exam.colegio.dto.curso.ResourceDTO;
 import com.exam.colegio.dto.notas.Promedio;
 import com.exam.colegio.dto.notas.Promedios;
 import com.exam.colegio.model.course.CourseScheduled;
@@ -23,13 +34,6 @@ import com.exam.colegio.repository.enrollment.IEnrollmentRepository;
 import com.exam.colegio.service.course.content.resource.GradeActivityService;
 import com.exam.colegio.service.course.content.resource.activity.ActivityService;
 import com.exam.colegio.util.DateFormatUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CourseScheduledService implements ICourseScheduledDAO {
@@ -215,7 +219,6 @@ public class CourseScheduledService implements ICourseScheduledDAO {
         private final ActivityService activityService;
         private final GradeActivityService gradeActivityService;
 
-        @Autowired
         public CourseScheduledService(ICourseScheduledRepository courseScheduledRepository, IEnrollmentRepository enrollmentRepository, ActivityService activityService, GradeActivityService gradeActivity) {
                 this.courseScheduledRepository = courseScheduledRepository;
                 this.enrollmentRepository = enrollmentRepository;

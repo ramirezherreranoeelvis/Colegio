@@ -1,15 +1,15 @@
 package com.exam.colegio.service.enrollment;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dto.TemporadaDTO;
 import com.exam.colegio.model.enrollment.Season;
 import com.exam.colegio.model.person.Student;
 import com.exam.colegio.repository.enrollment.ISeasonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 @Service
 public class SeasonService implements ISeasonDAO {
 
@@ -25,7 +25,6 @@ public class SeasonService implements ISeasonDAO {
 
         private ISeasonRepository seasonRepository;
 
-        @Autowired
         public SeasonService(ISeasonRepository seasonRepository) {
                 this.seasonRepository = seasonRepository;
         }
