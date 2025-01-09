@@ -7,5 +7,10 @@ import com.exam.colegio.model.course.content.SessionContent;
 import com.exam.colegio.model.person.Student;
 
 public interface ISessionAttendanceDAO {
-        ResponseEntity<?> registerAttendance(Student student, SessionContent session, StatusAttendance statusAttendance);
+
+        ResponseEntity<?> registerAttendance(Student student, SessionContent session,
+                        StatusAttendance statusAttendance);
+
+        ResponseEntity<?> registerExitAttendance(Student student, SessionContent session);
+
 }
