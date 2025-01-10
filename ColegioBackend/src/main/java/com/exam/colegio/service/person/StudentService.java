@@ -27,32 +27,7 @@ public class StudentService implements IStudentDAO {
         public List<CursoDTO> findCourseSchedulesByTemporada(Student student, Season season) {
                 return this.courseScheduledRepository.obtenerPorStudentYPorTemporada(student.getDni(), season.getYear())
                                 .stream()
-                                .map(courseScheduled -> {
-                                        var classroom = courseScheduled.getClassroom();
-                                        var course = courseScheduled.getCourse();
-                                        var enrollment = courseScheduled.getEnrollment();
-                                        return CursoDTO.builder()
-                                                        .codigo(courseScheduled.getCode())
-                                                        .numeroSalon(classroom.getNumber())
-                                                        .piso(classroom.getFloor())
-                                                        .nombre(course.getName() + "-"
-                                                                        + enrollment.getSeason().getYear())
-                                                        .horaInicio(courseScheduled.getStartTime())
-                                                        .horaFin(courseScheduled.getEndTime())
-                                                        .dia(courseScheduled.getDayOfWeek().getDisplayName())
-                                                        .profesores(courseScheduled.getTeacherCourseScheduleds()
-                                                                        .stream()
-                                                                        .map(teacherCourseScheduled -> {
-                                                                                var teacher = teacherCourseScheduled
-                                                                                                .getTeacher();
-                                                                                return teacher.getName() + " " + teacher
-                                                                                                .getSurnamePaternal()
-                                                                                                + " "
-                                                                                                + teacher.getSurnameMaternal();
-                                                                        }).toList())
-                                                        .portada(courseScheduled.getPortada())
-                                                        .build();
-                                }).toList();
+                                .map(CursoDTO::buildByCourse).toList();
         }
 
         @Override

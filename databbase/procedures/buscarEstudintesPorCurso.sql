@@ -1,11 +1,3 @@
--- MOSTRAR EL PROFESOR LOS CURSOS EN EL QUE PUEDE ENTRAR
-select 
-        c.*
-from person p
-join teacherCourseScheduled tc on p.idPerson = tc.idTeacher
-JOIN coursescheduled c on tc.idCourseScheduled = c.idCourseScheduled
-where dni = '99995978'
-
 -- findBySeasonAndStudent
 DELIMITER //
 CREATE PROCEDURE usp_findStudentsByContent(
@@ -24,7 +16,6 @@ END //
 DELIMITER ;
 
 -- mostrar alumnos de un curso en especifico
-
 DELIMITER //
 CREATE PROCEDURE usp_findStudentsByCourse(
     IN p_codeCourse INT
@@ -40,7 +31,22 @@ BEGIN
 END //
 DELIMITER ;
 
-
+-- cursos al que un profesor tiene acceso por temporada
+DELIMITER //
+CREATE PROCEDURE usp_findCourseBySeason(
+    IN p_year VARCHAR(4),
+    IN p_dni VARCHAR(8)
+)
+BEGIN
+	SELECT cs.*
+	FROM coursescheduled cs
+	JOIN enrollment e ON cs.idEnrollment = e.idEnrollment
+	JOIN season s ON e.idSeason = s.idSeason
+	JOIN teachercoursescheduled tcs ON cs.idCourseScheduled = tcs.idCourseScheduled
+	JOIN person p ON tcs.idTeacher = p.idPerson
+	WHERE s.year = p_year AND p.dni = p_dni;
+END //
+DELIMITER ;
 
 
 

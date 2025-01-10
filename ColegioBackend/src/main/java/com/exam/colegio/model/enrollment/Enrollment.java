@@ -5,13 +5,11 @@ import com.exam.colegio.model.course.CourseScheduled;
 import com.exam.colegio.util.TypePeriod;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.transaction.Transactional;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Setter
 @Getter

@@ -1,5 +1,7 @@
 package com.exam.colegio.controller.person;
 
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,9 @@ import com.exam.colegio.dao.course.IContentDAO;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.course.IStatusAttendanceDAO;
 import com.exam.colegio.dao.course.content.ISessionAttendanceDAO;
+import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
+import com.exam.colegio.dao.person.ITeacherDAO;
 import com.exam.colegio.model.course.content.SessionContent;
 
 import jakarta.validation.Valid;
@@ -54,19 +58,34 @@ public class TeacherController {
                 return this.sessionAttendanceDAO.registerExitAttendance(student.get(), (SessionContent) content.get());
         }
 
+        @GetMapping("/courses")
+        public ResponseEntity<?> findCoursesByYear(@RequestParam String year, @RequestParam String dni) {
+                var seasonOptional = this.seasonDAO.findByYear(year);
+                if (seasonOptional.isEmpty()) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro una la temporada seleccionada");
+                }
+                var courses = this.teacherDAO.findCoursesByYear(year, dni);
+                return courses;
+        }
+
         private final IStatusAttendanceDAO statusAttendanceDAO;
         private final IStudentDAO studentDAO;
         private final ISessionAttendanceDAO sessionAttendanceDAO;
         private final IContentDAO contentDAO;
         private final ICourseScheduledDAO courseScheduledDAO;
+        private final ISeasonDAO seasonDAO;
+        private final ITeacherDAO teacherDAO;
 
         public TeacherController(IStatusAttendanceDAO statusAttendanceDAO, IStudentDAO studentDAO,
-                        ISessionAttendanceDAO sessionAttendanceDAO, IContentDAO contentDAO, ICourseScheduledDAO courseScheduledDAO) {
+                        ISessionAttendanceDAO sessionAttendanceDAO, IContentDAO contentDAO,
+                        ICourseScheduledDAO courseScheduledDAO, ISeasonDAO seasonDAO, ITeacherDAO teacherDAO) {
                 this.statusAttendanceDAO = statusAttendanceDAO;
                 this.studentDAO = studentDAO;
                 this.sessionAttendanceDAO = sessionAttendanceDAO;
                 this.contentDAO = contentDAO;
                 this.courseScheduledDAO = courseScheduledDAO;
+                this.seasonDAO = seasonDAO;
+                this.teacherDAO = teacherDAO;
         }
 
 }

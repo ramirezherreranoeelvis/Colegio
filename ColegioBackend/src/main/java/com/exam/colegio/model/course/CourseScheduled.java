@@ -2,7 +2,6 @@ package com.exam.colegio.model.course;
 
 import com.exam.colegio.model.course.content.Content;
 import com.exam.colegio.model.course.content.SessionContent;
-import com.exam.colegio.model.course.content.resource.activity.Homework;
 import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.other.TeacherCourseScheduled;
 import com.exam.colegio.util.DayOfWeek;

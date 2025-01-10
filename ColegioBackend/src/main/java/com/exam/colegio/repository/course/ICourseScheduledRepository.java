@@ -14,13 +14,15 @@ public interface ICourseScheduledRepository extends JpaRepository<CourseSchedule
 
         @Query(value = "CALL GetCoursesByStudentAndEnrollment(:dniStudent, :idEnrollment)", nativeQuery = true)
         List<CourseScheduled> findCoursesByStudentAndEnrollment(@Param("dniStudent") String dniStudent,
-                                                                @Param("idEnrollment") Integer idEnrollment);
+                        @Param("idEnrollment") Integer idEnrollment);
 
         @Query(value = "CALL usp_findCoursesByDniStudentByYear(:student, :year)", nativeQuery = true)
         List<CourseScheduled> obtenerPorStudentYPorTemporada(@Param("student") String student,
-                                                             @Param("year") String season);
-
+                        @Param("year") String season);
 
         Optional<CourseScheduled> findByCode(String code);
+
+        @Query(value = "CALL usp_findCourseBySeason(:year, :dni)", nativeQuery = true)
+        List<CourseScheduled> findByYearAndTeacher(@Param("year") String season, @Param("dni") String student);
 
 }
