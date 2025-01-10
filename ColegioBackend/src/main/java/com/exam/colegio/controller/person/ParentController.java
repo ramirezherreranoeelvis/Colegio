@@ -3,7 +3,7 @@ package com.exam.colegio.controller.person;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,15 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.exam.colegio.dto.MatriculaRegistrarDTO;
-import com.exam.colegio.dto.HijoStudentDTO;
-import com.exam.colegio.model.person.Father;
-import com.exam.colegio.model.person.Mother;
-import com.exam.colegio.model.person.Student;
+
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dao.person.IFatherDAO;
 import com.exam.colegio.dao.person.IMotherDAO;
 import com.exam.colegio.dao.person.IPersonDAO;
+import com.exam.colegio.dto.HijoStudentDTO;
+import com.exam.colegio.dto.MatriculaRegistrarDTO;
+import com.exam.colegio.model.person.Father;
+import com.exam.colegio.model.person.Mother;
+import com.exam.colegio.model.person.Student;
 
 @RestController
 @RequestMapping("/parent")
@@ -87,7 +88,6 @@ public class ParentController {
         private final IFatherDAO fatherDAO;
         private final IMotherDAO motherDAO;
 
-        @Autowired
         public ParentController(IEnrollmentDAO enrollmentDAO, IPersonDAO personDAO, IFatherDAO fatherDAO, IMotherDAO motherDAO) {
                 this.enrollmentDAO = enrollmentDAO;
                 this.personDAO = personDAO;

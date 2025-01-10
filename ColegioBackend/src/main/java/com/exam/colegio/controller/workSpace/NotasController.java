@@ -4,7 +4,6 @@ import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.enrollment.IEnrollmentDAO;
 import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +35,6 @@ public class NotasController {
         private final ISeasonDAO seasonDAO;
         private final ICourseScheduledDAO courseScheduledDAO;
 
-        @Autowired
         public NotasController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO, ISeasonDAO seasonDAO, ICourseScheduledDAO courseScheduledDAO) {
                 this.studentDAO = studentDAO;
                 this.enrollmentDAO = enrollmentDAO;

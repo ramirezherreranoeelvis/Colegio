@@ -8,7 +8,6 @@ import com.exam.colegio.model.enrollment.Enrollment;
 import com.exam.colegio.model.enrollment.EnrollmentStudent;
 import com.exam.colegio.model.enrollment.Payment;
 import com.exam.colegio.model.person.Student;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -108,7 +107,7 @@ public class EnrollmentController {
                 var message = new HashMap<String, String>();
                 if (enrollmentStudent == null) {
                         message.put("message", "Hubo un error al guardar");
-                        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
                 }
 
                 // a los pagos ahora les agregaos el enrollmentStudent sabiendo que ya se
@@ -130,7 +129,6 @@ public class EnrollmentController {
         private final IEnrollmentStudentDAO enrollmentStudentDAO;
         private final ITypeStatusDAO typeStatusDAO;
 
-        @Autowired
         public EnrollmentController(IStudentDAO studentDAO, IEnrollmentDAO enrollmentDAO,
                         IEnrollmentStudentDAO enrollmentStudentDAO, ITypeStatusDAO typeStatusService) {
                 this.studentDAO = studentDAO;
@@ -139,6 +137,6 @@ public class EnrollmentController {
                 this.typeStatusDAO = typeStatusService;
         }
 
-        private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
+        // private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
 
 }

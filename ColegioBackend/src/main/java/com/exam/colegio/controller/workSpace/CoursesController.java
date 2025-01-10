@@ -3,7 +3,6 @@ package com.exam.colegio.controller.workspace;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.enrollment.ISeasonDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class CoursesController {
                 }
                 var student = studentOptional.get();
                 var season = seasonOptional.get();
-                var lista = this.courseScheduledDAO.obtenerPorStudentYPorTemporada(student, season);
+                var lista = this.studentDAO.findCourseSchedulesByTemporada(student, season);
                 return ResponseEntity.ok(lista);
         }
 
@@ -45,7 +44,6 @@ public class CoursesController {
         private final IStudentDAO studentDAO;
         private final ISeasonDAO seasonDAO;
 
-        @Autowired
         public CoursesController(ICourseScheduledDAO courseScheduledDAO, IStudentDAO studentDAO, ISeasonDAO seasonDAO) {
                 this.courseScheduledDAO = courseScheduledDAO;
                 this.studentDAO = studentDAO;

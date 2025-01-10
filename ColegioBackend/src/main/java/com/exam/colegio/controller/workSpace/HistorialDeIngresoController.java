@@ -3,7 +3,6 @@ package com.exam.colegio.controller.workspace;
 import com.exam.colegio.dao.other.IEntrySchoolDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
 import com.exam.colegio.dto.historial.SemanaDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,6 @@ public class HistorialDeIngresoController {
         private final IEntrySchoolDAO entrySchoolDAO;
         private final IStudentDAO studentDAO;
 
-        @Autowired
         public HistorialDeIngresoController(IEntrySchoolDAO entrySchoolDAO, IStudentDAO studentDAO) {
                 this.entrySchoolDAO = entrySchoolDAO;
                 this.studentDAO = studentDAO;

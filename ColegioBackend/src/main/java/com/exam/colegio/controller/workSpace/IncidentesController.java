@@ -2,7 +2,6 @@ package com.exam.colegio.controller.workspace;
 
 
 import com.exam.colegio.dao.report.IReportDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +19,6 @@ public class IncidentesController {
 
         private final IReportDAO reportDAO;
 
-        @Autowired
         public IncidentesController(IReportDAO reportDAO) {
                 this.reportDAO = reportDAO;
         }

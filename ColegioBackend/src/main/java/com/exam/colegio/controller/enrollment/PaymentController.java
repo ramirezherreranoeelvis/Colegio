@@ -3,7 +3,6 @@ package com.exam.colegio.controller.enrollment;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -75,7 +74,6 @@ public class PaymentController {
         private final IPaymentDAO paymentDAO;
         private final ITypeStatusDAO typeStatusDAO;
 
-        @Autowired
         public PaymentController(IStudentDAO studentDAO, IPaymentDAO paymentDAO, ITypeStatusDAO typeStatusDAO) {
                 this.studentDAO = studentDAO;
                 this.paymentDAO = paymentDAO;

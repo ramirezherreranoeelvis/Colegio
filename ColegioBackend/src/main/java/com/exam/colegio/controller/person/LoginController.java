@@ -35,7 +35,6 @@ public class LoginController {
         private java.util.logging.Logger logger = java.util.logging.Logger.getLogger(getClass().getName());
         private final IPersonDAO personDAO;
 
-        @Autowired
         public LoginController(IPersonDAO personDAO) {
                 this.personDAO = personDAO;
         }

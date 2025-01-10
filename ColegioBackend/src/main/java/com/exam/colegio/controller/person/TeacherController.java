@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.colegio.dao.course.IContentDAO;
+import com.exam.colegio.dao.course.ICourseScheduledDAO;
 import com.exam.colegio.dao.course.IStatusAttendanceDAO;
 import com.exam.colegio.dao.course.content.ISessionAttendanceDAO;
 import com.exam.colegio.dao.person.IStudentDAO;
@@ -20,16 +21,21 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/teacher")
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class TeacherController {
 
-        @GetMapping("/students")
+        @GetMapping("/session-students")
         public ResponseEntity<?> findStudentsByContent(@RequestParam Integer idContent) {
                 return this.contentDAO.findStudentsByContent(idContent);
+        }
+
+        @GetMapping("/course-students")
+        public ResponseEntity<?> findStudentsByCourse(@RequestParam String codeCourse) {
+                var courseScheduled = this.courseScheduledDAO.findByCode(codeCourse);
+                return this.courseScheduledDAO.findStudents(courseScheduled.get());
         }
 
         @PostMapping("/registerAttendance")
@@ -48,17 +54,19 @@ public class TeacherController {
                 return this.sessionAttendanceDAO.registerExitAttendance(student.get(), (SessionContent) content.get());
         }
 
-        private IStatusAttendanceDAO statusAttendanceDAO;
-        private IStudentDAO studentDAO;
-        private ISessionAttendanceDAO sessionAttendanceDAO;
-        private IContentDAO contentDAO;
+        private final IStatusAttendanceDAO statusAttendanceDAO;
+        private final IStudentDAO studentDAO;
+        private final ISessionAttendanceDAO sessionAttendanceDAO;
+        private final IContentDAO contentDAO;
+        private final ICourseScheduledDAO courseScheduledDAO;
 
         public TeacherController(IStatusAttendanceDAO statusAttendanceDAO, IStudentDAO studentDAO,
-                        ISessionAttendanceDAO sessionAttendanceDAO, IContentDAO contentDAO) {
+                        ISessionAttendanceDAO sessionAttendanceDAO, IContentDAO contentDAO, ICourseScheduledDAO courseScheduledDAO) {
                 this.statusAttendanceDAO = statusAttendanceDAO;
                 this.studentDAO = studentDAO;
                 this.sessionAttendanceDAO = sessionAttendanceDAO;
                 this.contentDAO = contentDAO;
+                this.courseScheduledDAO = courseScheduledDAO;
         }
 
 }

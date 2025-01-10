@@ -2,7 +2,6 @@ package com.exam.colegio.controller.enrollment;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,6 @@ public class SeasonController {
         private final ISeasonDAO seasonDAO;
         private final IStudentDAO studentDAO;
 
-        @Autowired
         public SeasonController(ISeasonDAO seasonDAO, IStudentDAO studentDAO) {
                 this.seasonDAO = seasonDAO;
                 this.studentDAO = studentDAO;

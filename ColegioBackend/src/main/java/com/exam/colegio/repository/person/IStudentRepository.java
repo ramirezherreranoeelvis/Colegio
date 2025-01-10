@@ -21,4 +21,7 @@ public interface IStudentRepository extends JpaRepository<Student, Integer> {
         @Query(value = "CALL usp_findStudentsByContent(:idContent)", nativeQuery = true)
         List<Student> findStudentsByContent(@Param("idContent") Integer idContent);
 
+        @Query(value = "CALL usp_findStudentsByCourse(:code)", nativeQuery = true)
+        List<Student> findStudentsByCourse(@Param("code") String code);
+
 }
