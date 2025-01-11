@@ -3,12 +3,6 @@ $table__border: 5px solid #3900d4;
 $table__border-item: 5px solid #d80048;
 $table__border-header: 5px solid #000441;
 
-select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        cursor: pointer;
-}
 
 .incidentes {
         padding: 15px 40px;
@@ -23,35 +17,7 @@ select {
         app-select-list {
                 display: block;
                 height: 50px;
-        }
-
-        &__select {
-                margin: 0px 30px 0px 00px;
-                text-align: center;
-                height: 50px;
-                color: #000000;
-                font-size: 1rem;
-                font-family: "Geologica", sans-serif;
-                background: #0dcaf0;
-                border: none;
-                outline: none;
-                border-radius: 10px;
-                overflow: hidden;
-                padding: 0 15px;
-                transition: .3s box-shadow, .2s background, .2s color;
-
-                option {
-                        font-size: 0.9rem;
-                        background-color: #ffffff;
-                        color: #ff0080;
-                        cursor: pointer;
-                }
-
-                &:hover {
-                        background: #000441;
-                        color: white;
-                        box-shadow: 2px 1px 10px 0 #0000004d;
-                }
+                width: 200px;
         }
 
         &__table-wrapper {

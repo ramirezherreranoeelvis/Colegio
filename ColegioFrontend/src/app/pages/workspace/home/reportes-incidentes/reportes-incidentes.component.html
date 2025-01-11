@@ -1,13 +1,7 @@
 <section class="incidentes">
-    <h2 class="incidentes__title"><app-text-gradient text="Horario"/></h2>
+    <h2 class="incidentes__title"><app-text-gradient text="Reportes"/></h2>
     <div class="incidentes__select-wrapper">
-        <!-- Para seleccionar hijo -->
-        <select class="incidentes__select" [(ngModel)]="studentSelectDNI" (change)="updateDataStudentSelect()">
-            <option selected [value]="0">Selecciona a tu hijo</option>
-            @for (student of students; track $index) {
-                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " " +student.surnameMaternal}}</option>
-            }
-        </select>
+        <app-select-list default="Selecciona a tu hijo" [items]="studentsList" (changeElement)="updateDataStudentSelect($event)"/>
     </div>
     <div class="incidentes__table-wrapper">
         @if (studentSelectDNI!="0") {

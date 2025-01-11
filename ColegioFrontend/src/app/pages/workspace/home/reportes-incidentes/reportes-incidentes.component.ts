@@ -6,6 +6,8 @@ import { ParentService } from '../../parent.service';
 import { Report } from '../../../../model/report';
 import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
 import { TextGradientComponent } from '../../../../components/atoms/text-gradient/text-gradient.component';
+import List from '../../../../components/atoms/select-list/list';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
         selector: 'app-reportes-incidentes',
@@ -22,32 +24,40 @@ export class ReportesIncidentesComponent implements OnInit {
 
         protected dniParent: string = "99233923";
         protected studentSelectDNI: string = "0";
-        protected students: Student[] = [];
+        protected studentsList: List[]
         protected reportes: Report[] = [];
 
         constructor(private incidentesService: IncidentesService, private parentService: ParentService) { }
 
 
         public ngOnInit(): void {
-                this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: Student[]) => {
-                                this.students = data;
-                        },
-                        (error) => {
-                                console.error('Error fetching students', error);
-                        }
-                );
+                this.getStudents();
         }
 
-        public updateDataStudentSelect(): void {
+        async getStudents() {
+                try {
+                        const students = await firstValueFrom(this.parentService.getStudent(this.dniParent));
+                        this.studentsList = students.map(s => {
+                                return {
+                                        id: s.dni,
+                                        value: s.name + " " + s.surnamePaternal + " " + s.surnameMaternal
+                                }
+                        })
+                } catch (error) {
+                        console.error('Error fetching students', error);
+                }
+        }
+
+        async updateDataStudentSelect(dni: string) {
                 //si no se escojio ninguno los datos se borran
-                if (this.studentSelectDNI == "0") {
+                this.studentSelectDNI = dni;
+                if (dni == "0") {
                         return;
                 }
-                this.incidentesService.obtenerIncidentes(this.studentSelectDNI).subscribe(
-                        (data: Report[]) => {
-                                this.reportes = data;
-                        }
-                )
+                try {
+                        this.reportes = await firstValueFrom(this.incidentesService.obtenerIncidentes(dni));
+                } catch (error) {
+                        console.error('Error fetching reports', error);
+                }
         }
 }
