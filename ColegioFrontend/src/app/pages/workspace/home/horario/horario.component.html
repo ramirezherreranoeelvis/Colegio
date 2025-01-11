@@ -1,57 +1,28 @@
 <div class="horario">
-    <div class="horario__content">
-        <div class="horario__select">
-            <select class="horario__select-student" [(ngModel)]="studentSelectDNI" (change)="updateDataStudentSelect()">
-                <option selected [value]="0">Selecciona a tu hijo</option>
-                @for (student of students; track $index) {
-                <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " " +
-                    student.surnameMaternal}}</option>
-                }
-            </select>
-            @if (studentSelectDNI!="0") {
-            <select class="horario__select-student" [(ngModel)]="idTemporadaSelect"
-                (change)="updateHorario()">
-                <option selected [value]="0">Selecciona una temporada</option>
-                @for (temporada of temporadas; track $index) {
-                <option [value]="temporada.year">{{temporada.year}}</option>
-                }
-            </select>
-            }
+    <h2 class="horario__title"><app-text-gradient text="Horario"/></h2>
+    <div class="horario__select">
+        <app-select-list default="Selecciona a tu hijo" [items]="studentsList"
+            (changeElement)="updateDataStudentSelect($event)" />
 
-        </div>
-        @if (idTemporadaSelect!="0") {
-            <div class="x">
-                <table class="horario__table" border="1">
-                    <thead class="horario__header">
-                        <tr class="horario__header-row">
-                            <th class="horario__header-item" colspan=6>Horario</th>
-                        </tr>
-                        <tr class="horario__header-row">
-                            <th class="horario__header-item">Hora</th>
-                            @for (day of days; track $index) {
-                            <th class="horario__header-item">{{day}}</th>
-                            }
-                        </tr>
-                    </thead>
-                    <tbody class="horario__body">
-                        @for (day of horario; track $index) {
-                        <tr class="horario__body-row horario__body-clase">
-                            <td class="horario__body-item">{{day.startTime}} - {{day.endTime}}</td>
-                            @for (curso of day.cursos; track $index) {
-                            <td class="horario__body-item">{{curso}}</td>
-                            }
-                        </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="options">
-                <input type="button" value="Descargar horario" class="horario__download-button" (click)="donwloadHorario()">
-            </div>
-
-        } @else {
+        @if (studentSelectDNI!="0") {
+        <app-select-list default="Selecciona una temporada" [items]="temporadasList"
+            (changeElement)="updateHorario($event)" />
+        }@else {
         <span class="horario__mensaje">Usted no tiene ningún hijo seleccionado</span>
         }
 
     </div>
+    @if (studentSelectDNI!="0") {
+        @if (horarioView ) {
+            <div class="table">
+                <app-table-horario [dayHorarioList]="daysHorario" />
+            </div>
+            <div class="options">
+                <input type="button" value="Descargar horario" class="horario__download-button" (click)="donwloadHorario()">
+            </div>
+        } @else {
+            <span class="horario__mensaje">Usted no tiene una temporada escojida</span>
+        }
+    }
+
 </div>

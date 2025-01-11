@@ -1,56 +1,42 @@
 <section class="notas">
-        <div class="notas__container">
-                <div class="notas__content">
-                        <h2 class="notas__title">Notas Generales</h2>
+        <h2 class="notas__title"><app-text-gradient text="Notas Generales"/></h2>
 
-                        <div class="notas__filters">
-                                <!-- Selección de hijos -->
-                                <select name="childSelect" id="childSelect" class="notas__filters-select">
-                                        <option [value]="0">Escoje a uno de tus crios</option>
-                                </select>
-                                <!-- filtro por año-temporada-epoca -->
-                                <select name="year" id="yearSelect" class="notas__filters-select" [(ngModel)]="year"
-                                        (change)="updateDataCoursesSelect()">
-                                        <option selected [value]="0">Periodos</option>
-                                        @for (temporada of temporadas; track $index) {
-                                        <option [value]="temporada.year">{{temporada.year}}</option>
-                                        }
-                                </select>
-                        </div>
-                        <div class="notas__values">
-                                @if (cursoNotas) {
-                                        <table class="notas__table" border="1">
-                                                <thead class="notas__header">
-                                                        <tr class="notas__header-row">
-                                                                <th class="notas__header-item">N°</th>
-                                                                <th class="notas__header-item">Curso</th>
-                                                                @for (periodo of cursoNotas.periodos; track $index) {
-                                                                <th class="notas__header-item">{{periodo}}</th>
-                                                                }
-                                                        </tr>
-                                                </thead>
-                                                <tbody class="notas__body">
-                                                        @for (cursoNota of cursoNotas.promedioList; track $index) {
-                                                        <tr class="notas__body-row">
-                                                                <td class="notas__body-item">{{$index + 1}}</td>
-                                                                <td class="notas__body-item">{{cursoNota.nombre}}</td>
-                                                                @for (nota of cursoNota.promedios; track $index) {
-                                                                <td class="notas__body-item">
-                                                                        @if (nota) {
-                                                                        {{nota}}
-                                                                        }
-                                                                </td>
-        
-                                                                }
-                                                        </tr>
+        <div class="notas__filters">
+                 <app-select-list default="Escoje a uno de tus crios"/>
+                 <app-select-list default="Periodos" [items]="temporadasList" (changeElement)="updateDataCoursesSelect($event)"/>
+        </div>
+        <div class="notas__values">
+                @if (cursoNotas) {
+                        <table class="notas__table" border="1">
+                                <thead class="notas__header">
+                                        <tr class="notas__header-row">
+                                                <th class="notas__header-item">N°</th>
+                                                <th class="notas__header-item">Curso</th>
+                                                @for (periodo of cursoNotas.periodos; track $index) {
+                                                <th class="notas__header-item">{{periodo}}</th>
+                                                }
+                                        </tr>
+                                </thead>
+                                <tbody class="notas__body">
+                                        @for (cursoNota of cursoNotas.promedioList; track $index) {
+                                        <tr class="notas__body-row">
+                                                <td class="notas__body-item">{{$index + 1}}</td>
+                                                <td class="notas__body-item">{{cursoNota.nombre}}</td>
+                                                @for (nota of cursoNota.promedios; track $index) {
+                                                <td class="notas__body-item">
+                                                        @if (nota) {
+                                                        {{nota}}
                                                         }
-                                                </tbody>
-                                        </table>
-                                }@else {
-                                        No hay promedios que mostrar
-                                }
-                                
-                        </div>
-                </div>
+                                                </td>
+
+                                                }
+                                        </tr>
+                                        }
+                                </tbody>
+                        </table>
+                }@else {
+                        No hay promedios que mostrar
+                }
+                
         </div>
 </section>

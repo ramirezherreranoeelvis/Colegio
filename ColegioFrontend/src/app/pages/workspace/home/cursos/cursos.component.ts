@@ -10,6 +10,9 @@ import { RecursoComponent } from '../../../../components/molecules/recurso/recur
 import { CourseCardComponent } from '../../../../components/atoms/course-card/course-card.component';
 import { CourseContentComponent } from '../../../../components/organisms/course-content/course-content.component';
 import { MenuExitComponent } from '../../../../components/atoms/menu-exit/menu-exit.component';
+import { TextGradientComponent } from '../../../../components/atoms/text-gradient/text-gradient.component';
+import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
+import List from '../../../../components/atoms/select-list/list';
 
 @Component({
         selector: 'app-cursos',
@@ -19,7 +22,9 @@ import { MenuExitComponent } from '../../../../components/atoms/menu-exit/menu-e
                 RecursoComponent,
                 CourseCardComponent,
                 CourseContentComponent,
-                MenuExitComponent
+                MenuExitComponent,
+                TextGradientComponent,
+                SelectListComponent
         ],
         templateUrl: './cursos.component.html',
         styleUrl: './cursos.component.scss'
@@ -63,10 +68,10 @@ export class CursosComponent implements OnInit {
         protected cursos: Curso[] = []
         protected nameFind = '';
         protected dniStudent = "21787088"
-        protected year = "0"
         protected temporadas: Temporada[]
         protected cursoSelect: Curso;
-        protected recursoSelect: RecursoContenidoCurso
+        protected recursoSelect: RecursoContenidoCurso;
+        protected temporadasLst: List[]
 
         constructor(private cursoService: CursoService, private temporadaService: TemporadaService) { }
 
@@ -77,25 +82,27 @@ export class CursosComponent implements OnInit {
         async getSeasionByStudent() {
                 try {
                         this.temporadas = await firstValueFrom(this.temporadaService.findAllSeasonByStudent(this.dniStudent));
-
+                        
+                        this.temporadasLst = this.temporadas.map((t) => {
+                                return { id: t.year, value: t.year } as List
+                        })
                 } catch (error) {
                         console.log(error)
                 }
         }
 
 
-        protected async updateDataCoursesSelect() {
-                if (this.year == "0") {
+        protected async updateDataCoursesSelect(year:string) {
+                if (year == "0") {
                         this.cursos.length = 0;
                         return;
                 }
                 try {
-                        this.cursos = await firstValueFrom(this.cursoService.findCursosByStudentByYear(this.dniStudent, this.year));
+                        this.cursos = await firstValueFrom(this.cursoService.findCursosByStudentByYear(this.dniStudent, year));
                 } catch (error) {
                         console.log(error)
 
                 }
         }
-
 
 }

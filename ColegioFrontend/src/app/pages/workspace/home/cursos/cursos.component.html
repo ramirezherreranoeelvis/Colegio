@@ -1,40 +1,31 @@
-<section class="course">
-    <div class="course__container">
-        <div class="course__content">
-            @if (ver == "cursos") {
-                <h2 class="course__title">Cursos</h2>
+<div class="course">
+    @if (ver == "cursos") {
+        <h2 class="course__title"><app-text-gradient text="Cursos"/></h2>
+        <!-- Selección de hijos -->
+        <div class="course__select-wrapper">
+            <app-select-list default="Selecciona a tu hijo" />
+        </div>
+        
 
-                <!-- Selección de hijos -->
-                <div class="course__select-wrapper">
-                    <select name="childSelect" id="childSelect" class="course__select"></select>
-                </div>
+        <!-- Filtros -->
+        <div class="course__filters">
+            <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
+            <app-select-list default="Periodos" [items]="temporadasLst" (changeElement)="updateDataCoursesSelect($event)"/>
+        </div>
 
-                <!-- Filtros -->
-                <div class="course__filters">
-                    <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
-                    <select name="year" id="yearSelect" class="course__filters-select" [(ngModel)]="year" (change)="updateDataCoursesSelect()">
-                        <option selected [value]="0">Periodos</option>
-                        @for (temporada of temporadas; track $index) {
-                            <option [value]="temporada.year">{{temporada.year}}</option>
-                        }
-                    </select>
-                </div>
-
-                <!-- Lista de cursos -->
-                <div class="course__list">
-                    @for (curso of cursos; track $index) {
-                        <app-course-card [portada]="curso.portada" [name]="curso.nombre" [code]="curso.codigo" [profesores]="['Juan Perez']" (selectedCourse)="verSeleccionado('curso', curso.codigo)" />
-                    }@empty {
-                        <p class="course__empty">No se encontraron cursos</p>
-                    }
-                </div>
-            }@else if(ver == "curso") {
-                <app-menu-exit (exit)="verSeleccionado('cursos',null)" />
-                <app-course-content [course]="cursoSelect" (selectedResource)="viewResource($event)" />
-            }@else if(ver == "recurso"){
-                <app-menu-exit (exit)="verSeleccionado('curso',cursoCodeSelect)" />
-                <app-recurso [recurso]="recursoSelect" />
+        <!-- Lista de cursos -->
+        <div class="course__list">
+            @for (curso of cursos; track $index) {
+                <app-course-card [portada]="curso.portada" [name]="curso.nombre" [code]="curso.codigo" [profesores]="['Juan Perez']" (selectedCourse)="verSeleccionado('curso', curso.codigo)" />
+            }@empty {
+                <p class="course__empty">No se encontraron cursos</p>
             }
         </div>
-    </div>
-</section>
+    }@else if(ver == "curso") {
+        <app-menu-exit (exit)="verSeleccionado('cursos',null)" />
+        <app-course-content [course]="cursoSelect" (selectedResource)="viewResource($event)" />
+    }@else if(ver == "recurso"){
+        <app-menu-exit (exit)="verSeleccionado('curso',cursoCodeSelect)" />
+        <app-recurso [recurso]="recursoSelect" />
+    }
+</div>

@@ -1,6 +1,4 @@
 $font_lexend: lexend, System-UI;
-$color-content: linear-gradient(212deg, #DA1D55, #C82460, #24007A, #1E0151, #000441);
-$sombra: 0 0 20px 0 rgba(0, 0, 0, 0.349);
 $table__border: 5px solid #3900d4;
 $table__border-item: 5px solid #d80048;
 $table__border-header: 5px solid #000441;
@@ -13,36 +11,19 @@ select {
 }
 
 .incidentes {
-        height: 100%;
-        background: $color-content;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: auto;
+        padding: 15px 40px;
 
-        &::-webkit-scrollbar {
-                width: 15px;
-                background-color: #ff0080;
-
-                /* background-color: #F5F7FA; */
-                &-thumb {
-                        border-radius: 10px;
-                        background: #000980;
-                }
-        }
-
-        &__content {
-                background-color: rgb(255, 255, 255);
-                width: 65%;
-                min-height: 40vh;
-                box-shadow: $sombra;
-                border-radius: 20px;
-                padding: 40px 40px 0px 40px;
-                display: flex;
-                flex-direction: column;
+        &__title {
+                padding: 10px 0px 20px 0;
+                text-align: center;
         }
 
         &__select-wrapper {}
+
+        app-select-list {
+                display: block;
+                height: 50px;
+        }
 
         &__select {
                 margin: 0px 30px 0px 00px;

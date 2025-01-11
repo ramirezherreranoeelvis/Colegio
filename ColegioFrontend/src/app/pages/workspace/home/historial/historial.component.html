@@ -1,19 +1,16 @@
 <div class="history">
-    <div class="history__content">
-        <!-- para seleccionar algunos datos que pueden filtrar -->
-        <div class="history__filter">
-            <select name="filter" id="filter">
-                <option selected [value]="0">Selecciona a tu hijo</option>
-            </select>
-        </div>
-        <!-- tabla para mostrar datos -->
-        <div class="history__table-container">
-            @if (historial) {
-                <app-table-attendance-history [historial]="historial" />
-            }@else {
-                <span class="history__table-nofound">No tiene un historial de ingreso para ver</span>
-            }
+    <h2 class="history__title"><app-text-gradient text="Historial de Ingreso"/></h2>
+    <!-- para seleccionar algunos datos que pueden filtrar -->
+    <div class="history__filter">
+        <app-select-list default="Selecciona a tu hijo"/>
+    </div>
+    <!-- tabla para mostrar datos -->
+    <div class="history__table-container">
+        @if (historial) {
+            <app-table-attendance-history [historial]="historial" />
+        }@else {
+            <span class="history__table-nofound">No tiene un historial de ingreso para ver</span>
+        }
 
-        </div>
     </div>
 </div>

@@ -1,0 +1,27 @@
+$color__background-filter: #240079;
+$font_lexend: lexend, System-UI;
+
+select {
+        background: $color__background-filter;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        color: white;
+        font-size: 15px;
+        font-family: $font_lexend;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all .2s;
+
+        &:hover {
+                background: #000441;
+                color: white;
+                box-shadow: 2px 1px 10px 0 #0000004d;
+        }
+}
