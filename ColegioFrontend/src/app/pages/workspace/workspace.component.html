@@ -1,10 +1,15 @@
 <section class="dashboard">
-        <!-- <app-perfil class="dashboard__perfil" /> -->
-        <!-- <div class="dashboard__center-separate">
-                <div class="dashboard__center-border"></div>
-        </div> -->
-        <div class="content">
-                <router-outlet />
+        <div class="controller-navegation">
+                <perfil class="dashboard__perfil" />
+                <nav-buttons id="routesMain" [routes]="routesMain" />
+                <nav-buttons id="routesMatricula" [routes]="routesMatricula" />
+        </div>
+        <div class="controller-workspace">
+                <div class="content">
+                        <div class="panel">
+                                <router-outlet />
+                        </div>
+                </div>
         </div>
 
 </section>

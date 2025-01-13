@@ -1,30 +1,28 @@
 <section class="registrar-pago-matricula">
-        <div class="registrar-pago-matricula__content">
-                <h1 class="registrar-pago-matricula__title">Pago de Matricula</h1>
-                <section class="registrar-matricula__datos">
-                        <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
-                        <select class="registrar-matricula__select" (change)="updateDataStudentSelect($event)">
-                                <option [value]="0">Seleccione a un estudiante</option>
-                                @for (student of students; track $index) {
-                                        <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
-                                }
-                        </select>
-                </section>
-                <section class="pago">
-                        @if(studentSelect){
-                                <div class="data">
-                                        <div class="attribute"><span class="name">DNI: </span><span class="data">{{studentSelect.dni}}</span></div>
-                                        <div class="attribute"><span class="name">Alumno: </span><span class="data">{{studentSelect.name + " " + studentSelect.surnamePaternal + " " + studentSelect.surnameMaternal}}</span></div>
-                                        <div class="attribute"><span class="name">Grado: </span><span class="data">{{studentSelect.grade}}</span></div>
-                                        <div class="attribute"><span class="name">Costo: </span><span class="data">S/{{matriculaPendiente.pay}}</span></div>
-                                </div>
-                                <div class="options">
-                                        <app-payment [dinero]="matriculaPendiente?.pay || 0" [idPay]="matriculaPendiente?.idPago || 0"/>
-                                </div>
-                        }@else {
-                                Usted no ah seleccionado a ningun crio
-                        }
-                </section>
+        <h2 class="registrar-pago-matricula__title"><app-text-gradient text="Pago de Matricula"/></h2>
+        <section class="registrar-matricula__datos">
+                <app-select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
+        </section>
+        <section class="pago">
+                @if(studentSelect){
+                <div class="data">
+                        <div class="attribute"><span class="name">DNI: </span><span
+                                        class="data">{{studentSelect.dni}}</span></div>
+                        <div class="attribute"><span class="name">Alumno: </span><span class="data">{{studentSelect.name
+                                        + " " + studentSelect.surnamePaternal + " " +
+                                        studentSelect.surnameMaternal}}</span></div>
+                        <div class="attribute"><span class="name">Grado: </span><span
+                                        class="data">{{studentSelect.grade}}</span></div>
+                        <div class="attribute"><span class="name">Costo: </span><span
+                                        class="data">S/{{matriculaPendiente.pay}}</span></div>
+                </div>
+                <div class="options">
+                        <app-payment [dinero]="matriculaPendiente?.pay || 0"
+                                [idPay]="matriculaPendiente?.idPago || 0" />
+                </div>
+                }@else {
+                Usted no ah seleccionado a ningun crio
+                }
+        </section>
 
-        </div>
 </section>

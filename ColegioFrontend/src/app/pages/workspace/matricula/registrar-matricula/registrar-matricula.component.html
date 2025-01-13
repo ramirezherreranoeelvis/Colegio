@@ -1,14 +1,7 @@
 <section class="registrar-matricula">
-    <div class="registrar-matricula__content">
-        <h1 class="registrar-matricula__title">Registro de Matrícula</h1>
+        <h2 class="registrar-matricula__title"><app-text-gradient text="Registrar Matricula"/></h2>
         <section class="registrar-matricula__datos">
-            <h2 class="registrar-matricula__subtitle">Escoge a tu hijo</h2>
-            <select class="registrar-matricula__select" [(ngModel)]="studentSelectDNI" (change)="updateDataStudentSelect()">
-                <option selected="" [value]="0">Hijos</option>
-                @for (student of students; track $index) {
-                    <option [value]="student.dni">{{student.name + " " + student.surnamePaternal + " " +student.surnameMaternal}}</option>
-                }
-            </select>
+            <app-select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
         </section>
         <section class="registrar-matricula__hijo">
             @if(studentSelect){
@@ -69,5 +62,4 @@
         <section class="registrar-matricula__opciones">
             <input type="button" class="registrar-matricula__button" value="Registrar matrícula" (click)="registrarMatricula()">
         </section>
-    </div>
 </section>

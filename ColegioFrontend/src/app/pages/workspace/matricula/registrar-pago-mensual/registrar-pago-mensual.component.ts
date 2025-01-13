@@ -4,11 +4,16 @@ import { Student } from '../../../../model/student';
 import { Pago } from '../../../../model/Pago';
 import { PaymentComponent } from '../../../../components/atoms/payment/payment.component';
 import { PaymentService } from '../../../../components/atoms/payment/payment.service';
+import List from '../../../../components/atoms/select-list/list';
+import { firstValueFrom } from 'rxjs';
+import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
+import { TextGradientComponent } from '../../../../components/atoms/text-gradient/text-gradient.component';
 
 @Component({
         selector: 'app-registrar-pago-mensual',
         standalone: true,
-        imports: [PaymentComponent],
+        imports: [PaymentComponent, TextGradientComponent,
+                SelectListComponent],
         templateUrl: './registrar-pago-mensual.component.html',
         styleUrl: './registrar-pago-mensual.component.scss'
 })
@@ -20,23 +25,27 @@ export class RegistrarPagoMensualComponent implements OnInit {
         protected mensualidadesPendientes: Pago[];
         protected pagoSelect: Pago;
         protected isDetalles: boolean = false;
-
+        stutentList: List[]
         constructor(private paymentService: PaymentService, private parentService: ParentService) { }
 
         public ngOnInit(): void {
-                this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: Student[]) => {
-                                this.students = data;
-                        },
-                        (error) => {
-                                console.error('Error fetching students', error);
-                        }
-                );
+                this.getStudents();
         }
-
-        public updateDataStudentSelect(event: Event): void {
+        async getStudents() {
+                try {
+                        this.students = await firstValueFrom(this.parentService.getStudent(this.dniParent));
+                        this.stutentList = this.students.map(student => {
+                                return {
+                                        id: student.dni,
+                                        value: `${student.name} ${student.surnamePaternal} ${student.surnameMaternal}`
+                                }
+                        })
+                } catch (error) {
+                        console.error('Error fetching students', error);
+                }
+        }
+        public updateDataStudentSelect(DNI: string): void {
                 this.isDetalles = false;
-                const DNI = (event.target as HTMLSelectElement).value;
                 if (DNI === "0") {
                         this.studentSelect = null;
                         this.mensualidadesPendientes = null; // Resetea el monto cuando no hay selección

@@ -6,13 +6,19 @@ import { FormsModule } from '@angular/forms';
 import { DayHorario } from '../../../../model/horario/dayHorario';
 import { TurnoHorario } from '../../../../model/horario/turnoHorario';
 import { ParentService } from '../../parent.service';
-
-
+import { TextGradientComponent } from '../../../../components/atoms/text-gradient/text-gradient.component';
+import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
+import List from '../../../../components/atoms/select-list/list';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
         selector: 'app-registrar-matricula',
         standalone: true,
-        imports: [FormsModule],
+        imports: [
+                FormsModule,
+                TextGradientComponent,
+                SelectListComponent
+        ],
         templateUrl: './registrar-matricula.component.html',
         styleUrls: ['./registrar-matricula.component.scss']
 })
@@ -25,16 +31,23 @@ export class RegistrarMatriculaComponent implements OnInit {
         protected students: Student[];
         protected days: string[];
         protected horario: TurnoHorario[] = [];
+        stutentList: List[]
 
         public ngOnInit(): void {
-                this.parentService.getStudent(this.dniParent).subscribe(
-                        (data: Student[]) => {
-                                this.students = data;
-                        },
-                        (error) => {
-                                console.error('Error fetching students', error);
-                        }
-                );
+                this.getStudents();
+        }
+        async getStudents() {
+                try {
+                        this.students = await firstValueFrom(this.parentService.getStudent(this.dniParent));
+                        this.stutentList = this.students.map(student => {
+                                return {
+                                        id: student.dni,
+                                        value: `${student.name} ${student.surnamePaternal} ${student.surnameMaternal}`
+                                }
+                        })
+                } catch (error) {
+                        console.error('Error fetching students', error);
+                }
         }
 
         constructor(private registrarMatriculaService: RegistrarMatriculaService, private parentService: ParentService) {
@@ -57,8 +70,9 @@ export class RegistrarMatriculaComponent implements OnInit {
                 }
         }
 
-        public updateDataStudentSelect(): void {
+        public updateDataStudentSelect(dni: string): void {
                 //si no se escojio ninguno los datos se borran
+                this.studentSelectDNI = dni
                 if (this.studentSelectDNI == "0") {
                         this.studentSelect = null;
                         this.matricula = null;

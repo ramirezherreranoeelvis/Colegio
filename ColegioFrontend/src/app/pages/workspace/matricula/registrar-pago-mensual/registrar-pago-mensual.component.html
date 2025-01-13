@@ -1,13 +1,7 @@
 <section class="registrar-pago-mensual">
-    <h2 class="registrar-pago-mensual__title">Pago Mensual</h2>
+    <h2 class="registrar-pago-mensual__title"><app-text-gradient text="Pago Mensual"/></h2>
     <section class="registrar-pago-mensual__selector">
-        <h2 class="registrar-pago-mensual__subtitle">Escoge a tu hijo</h2>
-        <select class="registrar-pago-mensual__select" (change)="updateDataStudentSelect($event)">
-            <option class="registrar-pago-mensual__option" [value]="0">Seleccione a un estudiante</option>
-            @for (student of students; track $index) {
-                <option class="registrar-pago-mensual__option" [value]="student.dni">{{student.name + " " + student.surnamePaternal + " "+student.surnameMaternal}}</option>
-            }
-        </select>
+        <app-select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
     </section>
     @if (studentSelect) {
         <h3 class="registrar-pago-mensual__pending-title">Pagos pendientes mensuales</h3>

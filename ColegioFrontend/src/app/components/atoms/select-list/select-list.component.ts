@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import List from './list';
 
 @Component({
         selector: 'app-select-list',
-        imports: [FormsModule],
+        imports: [],
         template: `
-        <select name="year" id="select" [(ngModel)]="itemSelect" (change)="updateDataCoursesSelect()" [class]="styleSelect">
+        <select name="year" id="select" (change)="updateDataCoursesSelect($event)" [class]="styleSelect">
                 <option selected [value]="0" [class]="styleOption">{{default}}</option>
                 @for (item of items; track $index) {
                         <option [value]="item.id" [class]="styleOption">{{item.value}}</option>
@@ -21,9 +20,9 @@ export class SelectListComponent {
         @Output() changeElement = new EventEmitter<string>();
         @Input() styleSelect: string;
         @Input() styleOption: string;
-        itemSelect = "0";
 
-        updateDataCoursesSelect() {
-                this.changeElement.emit(this.itemSelect)
+        updateDataCoursesSelect(event:Event) {
+                const itemSelect = (event.target as HTMLSelectElement).value;
+                this.changeElement.emit(itemSelect)
         }
 }
