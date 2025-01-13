@@ -1,5 +1,4 @@
 $font_lexend: lexend, System-UI;
-$radius__50_32h: 10px;
 $z-index_list: 900;
 
 /* all */
@@ -26,61 +25,32 @@ $z-index_list: 900;
 
     &__title {
         text-align: center;
-        padding: 25px 0;
     }
 }
 
 /* cursos */
 .course {
-    &__select-wrapper {
-        display: flex;
-
-        app-select-list {
-            width: 200px;
-            height: 50px;
-        }
-    }
-
     &__filters {
-        display: flex;
-        margin: 10px;
-        padding: 10px;
-        flex-direction: row;
-        justify-content: space-evenly;
+        display: grid;
+        grid-template-areas:
+            "selectHijo . . "
+            "selectText selectText selectPeriodo"
+        ;
+        grid-template-columns: 200px 1fr 200px;
+        grid-template-rows: 50px 50px;
         gap: 20px;
+        margin: 0 0 20px 0;
 
-        &-input {
-            font-family: lexend;
-            margin: auto;
-            height: 35px;
-            width: 80%;
-            border: none;
-            outline: none;
-            padding: 5px 13px;
-            background: #ff0080;
-            font-size: 15px;
-            color: #ecfffe;
-            box-shadow: 0 1px 1px 0px black;
-            border-radius: $radius__50_32h;
-            line-height: 36px;
-
-            &::-ms-input-placeholder {
-                color: #ecfffe;
-            }
-
-            &::placeholder {
-                color: #ecfffe;
-            }
-
-            &::selection {
-                background: #240079;
-                color: #ffffff;
-            }
+        app-select-list#select-hijo {
+            grid-area: selectHijo;
         }
 
-        app-select-list {
-            width: 200px;
-            height: 50px;
+        input-text {
+            grid-area: selectText;
+        }
+
+        app-select-list#select-periodo {
+            grid-area: selectPeriodo;
         }
 
     }
@@ -94,6 +64,7 @@ $z-index_list: 900;
     }
 
     &__empty {
+        margin: 20px 0 0 0;
         font-family: $font_lexend;
     }
 }

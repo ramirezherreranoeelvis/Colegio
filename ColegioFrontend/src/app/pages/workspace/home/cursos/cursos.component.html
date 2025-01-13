@@ -1,16 +1,13 @@
 <div class="course">
     @if (ver == "cursos") {
         <h2 class="course__title"><app-text-gradient text="Cursos"/></h2>
-        <!-- Selección de hijos -->
-        <div class="course__select-wrapper">
-            <app-select-list default="Selecciona a tu hijo" />
-        </div>
-        
-
-        <!-- Filtros -->
         <div class="course__filters">
-            <input type="text" name="nameFind" class="course__filters-input" placeholder="Busque sus cursos por nombre" [(ngModel)]="nameFind">
-            <app-select-list default="Periodos" [items]="temporadasLst" (changeElement)="updateDataCoursesSelect($event)"/>
+            <!-- filtro por hijos -->
+                <app-select-list default="Selecciona a tu hijo" styleSelect="bg-blue white" styleOption="bg-dark-blue" id="select-hijo"/>
+
+            <!-- Filtros por cursos temporadas-->
+                <input-text  placeholder="Busque sus cursos por nombre" [text]="nameFind" (search)="setNameFind($event)"/>
+                <app-select-list default="Periodos" [items]="temporadasLst" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataCoursesSelect($event)" id="select-periodo"/>
         </div>
 
         <!-- Lista de cursos -->

@@ -7,7 +7,7 @@ $radius__item: 10px;
 
 /* all */
 .notas {
-        padding: 15px 40px;
+        padding: 20px 40px;
         max-height: 75vh;
         max-width: 70vw;
         display: flex;
@@ -29,7 +29,6 @@ $radius__item: 10px;
 
         &__title {
                 text-align: center;
-                padding: 25px 0;
         }
 }
 
@@ -37,7 +36,7 @@ $radius__item: 10px;
 .notas {
         &__filters {
                 display: flex;
-                margin: 10px 0;
+                margin: 5px 0;
                 padding: 10px;
                 flex-direction: row;
                 display: flex;

@@ -73,6 +73,15 @@ $line__menu: linear-gradient(90deg, #000a96, #4032ff93);
                 }
         }
 }
+@keyframes menu {
+        from {
+                left: -55px;
+        }
+
+        to {
+                left: 47px;
+        }
+}
 @keyframes background_animation {
         0% {
                 background-position: 0 0;

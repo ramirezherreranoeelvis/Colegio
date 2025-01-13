@@ -21,18 +21,13 @@ $sombra-input: 2px 1px 10px 0 #00065a;
         justify-content: center;
     }
 
-    select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        cursor: pointer;
-    }
 
     &__select {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 15px;
         margin: 15px 0;
+
         app-select-list{
             display: block;
             width: 200px;
@@ -61,5 +56,6 @@ $sombra-input: 2px 1px 10px 0 #00065a;
 
     &__mensaje {
         font-family: $font_lexend;
+        text-align: center;
     }
 }

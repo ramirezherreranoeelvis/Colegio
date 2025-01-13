@@ -2,8 +2,8 @@
         <h2 class="notas__title"><app-text-gradient text="Notas Generales"/></h2>
 
         <div class="notas__filters">
-                 <app-select-list default="Escoje a uno de tus crios"/>
-                 <app-select-list default="Periodos" [items]="temporadasList" (changeElement)="updateDataCoursesSelect($event)"/>
+                 <app-select-list default="Escoje a uno de tus crios" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
+                 <app-select-list default="Periodos" [items]="temporadasList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataCoursesSelect($event)"/>
         </div>
         <div class="notas__values">
                 @if (cursoNotas) {
@@ -13,7 +13,7 @@
                                                 <th class="notas__header-item">N°</th>
                                                 <th class="notas__header-item">Curso</th>
                                                 @for (periodo of cursoNotas.periodos; track $index) {
-                                                <th class="notas__header-item">{{periodo}}</th>
+                                                        <th class="notas__header-item">{{periodo}}</th>
                                                 }
                                         </tr>
                                 </thead>
@@ -23,11 +23,11 @@
                                                 <td class="notas__body-item">{{$index + 1}}</td>
                                                 <td class="notas__body-item">{{cursoNota.nombre}}</td>
                                                 @for (nota of cursoNota.promedios; track $index) {
-                                                <td class="notas__body-item">
-                                                        @if (nota) {
-                                                        {{nota}}
-                                                        }
-                                                </td>
+                                                        <td class="notas__body-item">
+                                                                @if (nota) {
+                                                                        {{nota}}
+                                                                }
+                                                        </td>
 
                                                 }
                                         </tr>

@@ -1,19 +1,15 @@
 <div class="horario">
     <h2 class="horario__title"><app-text-gradient text="Horario"/></h2>
     <div class="horario__select">
-        <app-select-list default="Selecciona a tu hijo" [items]="studentsList"
-            (changeElement)="updateDataStudentSelect($event)" />
+        <app-select-list default="Selecciona a tu hijo" [items]="studentsList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataStudentSelect($event)" />
 
         @if (studentSelectDNI!="0") {
-        <app-select-list default="Selecciona una temporada" [items]="temporadasList"
-            (changeElement)="updateHorario($event)" />
-        }@else {
-        <span class="horario__mensaje">Usted no tiene ningún hijo seleccionado</span>
+            <app-select-list default="Selecciona un año" [items]="temporadasList" styleSelect="bg-blue white" (changeElement)="updateHorario($event)" />
         }
-
+    
     </div>
     @if (studentSelectDNI!="0") {
-        @if (horarioView ) {
+        @if (horarioView) {
             <div class="table">
                 <app-table-horario [dayHorarioList]="daysHorario" />
             </div>
@@ -21,8 +17,10 @@
                 <input type="button" value="Descargar horario" class="horario__download-button" (click)="donwloadHorario()">
             </div>
         } @else {
-            <span class="horario__mensaje">Usted no tiene una temporada escojida</span>
+            <p class="horario__mensaje">Usted no tiene un año escojido</p>
         }
+    }@else {
+        <p class="horario__mensaje">Usted no tiene ningún hijo seleccionado</p>
     }
 
 </div>

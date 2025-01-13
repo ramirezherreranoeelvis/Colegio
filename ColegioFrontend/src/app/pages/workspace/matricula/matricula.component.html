@@ -1,11 +1,5 @@
 <section class="matricula">
-    <nav class="matricula__nav">
-        <ul class="matricula__menu-list">
-            <li class="matricula__menu-item"><a routerLink="/workspace/matricula/registrar-matricula">registrar matricula</a></li>
-            <li class="matricula__menu-item"><a routerLink="/workspace/matricula/registrar-pago-matricula">pago matricula</a></li>
-            <li class="matricula__menu-item"><a routerLink="/workspace/matricula/registrar-pago-mensual">pago mensualidad</a></li>
-        </ul>
-    </nav>
+    <nav-buttons [routes]="routes" />
     <div class="matricula__content">
         <router-outlet></router-outlet>
     </div>

@@ -1,7 +1,7 @@
 <section class="incidentes">
     <h2 class="incidentes__title"><app-text-gradient text="Reportes"/></h2>
     <div class="incidentes__select-wrapper">
-        <app-select-list default="Selecciona a tu hijo" [items]="studentsList" (changeElement)="updateDataStudentSelect($event)"/>
+        <app-select-list default="Selecciona a tu hijo" [items]="studentsList" styleSelect="bg-celeste white" styleOption="bg-white pink" (changeElement)="updateDataStudentSelect($event)"/>
     </div>
     <div class="incidentes__table-wrapper">
         @if (studentSelectDNI!="0") {

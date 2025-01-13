@@ -13,6 +13,7 @@ import { MenuExitComponent } from '../../../../components/atoms/menu-exit/menu-e
 import { TextGradientComponent } from '../../../../components/atoms/text-gradient/text-gradient.component';
 import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
 import List from '../../../../components/atoms/select-list/list';
+import { InputTextComponent } from '../../../../components/atoms/input-text/input-text.component';
 
 @Component({
         selector: 'app-cursos',
@@ -24,7 +25,8 @@ import List from '../../../../components/atoms/select-list/list';
                 CourseContentComponent,
                 MenuExitComponent,
                 TextGradientComponent,
-                SelectListComponent
+                SelectListComponent,
+                InputTextComponent
         ],
         templateUrl: './cursos.component.html',
         styleUrl: './cursos.component.scss'
@@ -73,6 +75,10 @@ export class CursosComponent implements OnInit {
         protected recursoSelect: RecursoContenidoCurso;
         protected temporadasLst: List[]
 
+        setNameFind(nameFind: string) {
+                this.nameFind = nameFind;
+        }
+
         constructor(private cursoService: CursoService, private temporadaService: TemporadaService) { }
 
         public ngOnInit(): void {
@@ -82,7 +88,7 @@ export class CursosComponent implements OnInit {
         async getSeasionByStudent() {
                 try {
                         this.temporadas = await firstValueFrom(this.temporadaService.findAllSeasonByStudent(this.dniStudent));
-                        
+
                         this.temporadasLst = this.temporadas.map((t) => {
                                 return { id: t.year, value: t.year } as List
                         })
@@ -92,7 +98,7 @@ export class CursosComponent implements OnInit {
         }
 
 
-        protected async updateDataCoursesSelect(year:string) {
+        protected async updateDataCoursesSelect(year: string) {
                 if (year == "0") {
                         this.cursos.length = 0;
                         return;

@@ -1,13 +1,5 @@
 <section class="home">
-    <nav class="home__nav">
-        <ul class="home__menu-list">
-            <li class="home__menu-item"><a routerLink="/workspace/home/horario">horario</a></li>
-            <li class="home__menu-item"><a routerLink="/workspace/home/reportes-incidentes">incidentes</a></li>
-            <li class="home__menu-item"><a routerLink="/workspace/home/cursos">cursos</a></li>
-            <li class="home__menu-item"><a routerLink="/workspace/home/historial">historial de ingreso</a></li>
-            <li class="home__menu-item"><a routerLink="/workspace/home/notas-generales">Notas Generales</a></li>
-        </ul>
-    </nav>
+    <nav-buttons [routes]="routes" />
     <div class="content">
         <div class="content__panel">
             <router-outlet></router-outlet>
