@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecursoContenidoCurso } from '../../../model/cursos/curso';
 
 @Component({
-        selector: 'app-resource-course',
+        selector: 'resource-course',
         standalone: true,
         imports: [],
         templateUrl: './resource-course.component.html',

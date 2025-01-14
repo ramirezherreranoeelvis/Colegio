@@ -30,4 +30,9 @@ export class WorkspaceComponent {
                 { id: "/workspace/registrar-pago-matricula", value: "pago matricula" },
                 { id: "/workspace/registrar-pago-mensual", value: "pago mensualidad" }
         ]
+        routesTeacher: List[] = [
+                { id: "/workspace/registrar-matricula", value: "registrar matricula" },
+                { id: "/workspace/registrar-pago-matricula", value: "pago matricula" },
+                { id: "/workspace/registrar-pago-mensual", value: "pago mensualidad" }
+        ]
 }

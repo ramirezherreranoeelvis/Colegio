@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RecursoContenidoCurso } from '../../../model/cursos/curso';
 
 @Component({
-        selector: 'app-recurso',
+        selector: 'recurso',
         standalone: true,
         imports: [],
         templateUrl: './recurso.component.html',

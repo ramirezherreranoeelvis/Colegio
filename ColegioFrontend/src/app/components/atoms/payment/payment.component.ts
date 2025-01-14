@@ -2,10 +2,14 @@ import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChi
 import { PaymentService } from './payment.service';
 
 @Component({
-        selector: 'app-payment',
+        selector: 'button-payment',
         standalone: true,
         imports: [],
-        templateUrl: './payment.component.html',
+        template: `
+        <div class="options">
+                <div #paypal></div>
+        </div>
+        `,
         styleUrl: './payment.component.scss'
 })
 export class PaymentComponent implements OnInit, OnChanges {

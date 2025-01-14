@@ -12,7 +12,7 @@
                         </div>
                 </details>
         </div>
-        <app-line-separator/>
+        <line-separator/>
         <!-- Datos del curso -->
         <div class="course__data">
                 <details>
@@ -27,13 +27,13 @@
                         </div>
                 </details>
         </div>
-        <app-line-separator/>
+        <line-separator/>
         <!-- Contenido del curso -->
         <details open class="course__contents">
                 <summary class="course__contents-title">Contenido:</summary>
                 <div class="course__contents-list">
                         @for (contenido of course.contenidos; track $index) {
-                                <app-course-section-card [content]="contenido" (selectedContent)="handleClick($event)"/>
+                                <course-section-card [content]="contenido" (selectedContent)="handleClick($event)"/>
                         }
                 </div>
         </details>

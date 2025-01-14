@@ -14,9 +14,9 @@
         </summary>
         <div class="course__resources">
                 @for (recurso of content.recursos; track $index) {
-                        <app-resource-course [resource]="recurso" (selectedContent)="handleClick('recurso', recurso)" />
+                        <resource-course [resource]="recurso" (selectedContent)="handleClick('recurso', recurso)" />
                         @if (content.recursos.length != $index+1) {
-                                <app-line-separator/>
+                                <line-separator/>
                         }
                 }
         </div>

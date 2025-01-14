@@ -1,7 +1,7 @@
 <section class="registrar-matricula">
-        <h2 class="registrar-matricula__title"><app-text-gradient text="Registrar Matricula"/></h2>
+        <h2 class="registrar-matricula__title"><text-gradient text="Registrar Matricula"/></h2>
         <section class="registrar-matricula__datos">
-            <app-select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
+            <select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
         </section>
         <section class="registrar-matricula__hijo">
             @if(studentSelect){

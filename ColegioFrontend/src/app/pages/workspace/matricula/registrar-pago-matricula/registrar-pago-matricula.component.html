@@ -1,7 +1,7 @@
 <section class="registrar-pago-matricula">
-        <h2 class="registrar-pago-matricula__title"><app-text-gradient text="Pago de Matricula"/></h2>
+        <h2 class="registrar-pago-matricula__title"><text-gradient text="Pago de Matricula"/></h2>
         <section class="registrar-matricula__datos">
-                <app-select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
+                <select-list default="Escoge a tu hijo" [items]="stutentList" (changeElement)="updateDataStudentSelect($event)" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
         </section>
         <section class="pago">
                 @if(studentSelect){
@@ -17,7 +17,7 @@
                                         class="data">S/{{matriculaPendiente.pay}}</span></div>
                 </div>
                 <div class="options">
-                        <app-payment [dinero]="matriculaPendiente?.pay || 0"
+                        <button-payment [dinero]="matriculaPendiente?.pay || 0"
                                 [idPay]="matriculaPendiente?.idPago || 0" />
                 </div>
                 }@else {

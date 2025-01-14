@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { SemanaHistorial } from '../../../model/semanaHistorial';
 
 @Component({
-        selector: 'app-table-attendance-history',
+        selector: 'table-attendance-history',
         imports: [],
         templateUrl: './table-attendance-history.component.html',
         styleUrl: './table-attendance-history.component.scss'

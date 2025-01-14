@@ -41,7 +41,7 @@ $z-index_list: 900;
         gap: 20px;
         margin: 0 0 20px 0;
 
-        app-select-list#select-hijo {
+        select-list#select-hijo {
             grid-area: selectHijo;
         }
 
@@ -49,7 +49,7 @@ $z-index_list: 900;
             grid-area: selectText;
         }
 
-        app-select-list#select-periodo {
+        select-list#select-periodo {
             grid-area: selectPeriodo;
         }
 

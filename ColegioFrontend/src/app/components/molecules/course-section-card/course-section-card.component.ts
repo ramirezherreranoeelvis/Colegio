@@ -4,7 +4,7 @@ import { ResourceCourseComponent } from '../../atoms/resource-course/resource-co
 import { LineSeparatorComponent } from '../../atoms/line-separator/line-separator.component';
 
 @Component({
-        selector: 'app-course-section-card',
+        selector: 'course-section-card',
         standalone: true,
         imports: [ResourceCourseComponent, LineSeparatorComponent],
         templateUrl: './course-section-card.component.html',

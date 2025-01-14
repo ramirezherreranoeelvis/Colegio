@@ -4,7 +4,7 @@ import { CourseSectionCardComponent } from '../../molecules/course-section-card/
 import { LineSeparatorComponent } from '../../atoms/line-separator/line-separator.component';
 
 @Component({
-        selector: 'app-course-content',
+        selector: 'course-content',
         standalone: true,
         imports: [CourseSectionCardComponent, LineSeparatorComponent],
         templateUrl: './course-content.component.html',

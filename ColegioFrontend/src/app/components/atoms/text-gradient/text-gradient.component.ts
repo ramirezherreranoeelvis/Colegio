@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-        selector: 'app-text-gradient',
+        selector: 'text-gradient',
         imports: [],
-        templateUrl: './text-gradient.component.html',
+        template: '<span class="text">{{text}}</span>',
         styleUrl: './text-gradient.component.scss'
 })
 export class TextGradientComponent {

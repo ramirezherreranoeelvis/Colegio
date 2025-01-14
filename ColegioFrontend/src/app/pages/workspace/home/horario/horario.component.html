@@ -1,17 +1,17 @@
 <div class="horario">
-    <h2 class="horario__title"><app-text-gradient text="Horario"/></h2>
+    <h2 class="horario__title"><text-gradient text="Horario"/></h2>
     <div class="horario__select">
-        <app-select-list default="Selecciona a tu hijo" [items]="studentsList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataStudentSelect($event)" />
+        <select-list default="Selecciona a tu hijo" [items]="studentsList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataStudentSelect($event)" />
 
         @if (studentSelectDNI!="0") {
-            <app-select-list default="Selecciona un año" [items]="temporadasList" styleSelect="bg-blue white" (changeElement)="updateHorario($event)" />
+            <select-list default="Selecciona un año" [items]="temporadasList" styleSelect="bg-blue white" (changeElement)="updateHorario($event)" />
         }
     
     </div>
     @if (studentSelectDNI!="0") {
         @if (horarioView) {
             <div class="table">
-                <app-table-horario [dayHorarioList]="daysHorario" />
+                <table-horario [dayHorarioList]="daysHorario" />
             </div>
             <div class="options">
                 <input type="button" value="Descargar horario" class="horario__download-button" (click)="donwloadHorario()">

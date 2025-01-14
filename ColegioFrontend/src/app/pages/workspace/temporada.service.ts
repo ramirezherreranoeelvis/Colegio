@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Temporada } from '../../model/Temporada';
-import { map, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
 
 @Injectable({
         providedIn: 'root'

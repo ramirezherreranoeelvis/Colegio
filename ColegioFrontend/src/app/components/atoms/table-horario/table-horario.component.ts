@@ -3,7 +3,7 @@ import { DayHorario } from '../../../model/horario/dayHorario';
 import { TurnoHorario } from '../../../model/horario/turnoHorario';
 
 @Component({
-        selector: 'app-table-horario',
+        selector: 'table-horario',
         imports: [],
         templateUrl: './table-horario.component.html',
         styleUrl: './table-horario.component.scss'

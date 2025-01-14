@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import List from './list';
 
 @Component({
-        selector: 'app-select-list',
+        selector: 'select-list',
         imports: [],
         template: `
         <select name="year" id="select" (change)="updateDataCoursesSelect($event)" [class]="styleSelect">

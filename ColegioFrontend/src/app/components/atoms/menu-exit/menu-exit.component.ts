@@ -1,10 +1,17 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-        selector: 'app-menu-exit',
+        selector: 'menu-exit',
         standalone: true,
         imports: [],
-        templateUrl: './menu-exit.component.html',
+        template: `
+        <div class="exit" (click)="handleClick()">
+        <div class="exit-content">
+                <div class="exit-line"></div>
+                <div class="exit-line"></div>
+        </div>
+</div>
+        `,
         styleUrl: './menu-exit.component.scss'
 })
 export class MenuExitComponent {

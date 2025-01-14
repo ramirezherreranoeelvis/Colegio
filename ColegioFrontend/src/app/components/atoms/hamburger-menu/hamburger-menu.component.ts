@@ -1,10 +1,18 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 
 @Component({
-        selector: 'app-hamburger-menu',
+        selector: 'hamburger-menu',
         standalone: true,
         imports: [],
-        templateUrl: './hamburger-menu.component.html',
+        template: `
+        <div #menu class="menu" (click)="handleClick()">
+                <div class="menu__content">
+                        <div class="menu__line"></div>
+                        <div class="menu__line"></div>
+                        <div class="menu__line"></div>
+                </div>
+        </div>
+        `,
         styleUrl: './hamburger-menu.component.scss'
 })
 export class HamburgerMenuComponent {

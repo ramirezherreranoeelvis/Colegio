@@ -1,9 +1,9 @@
 <section class="notas">
-        <h2 class="notas__title"><app-text-gradient text="Notas Generales"/></h2>
+        <h2 class="notas__title"><text-gradient text="Notas Generales"/></h2>
 
         <div class="notas__filters">
-                 <app-select-list default="Escoje a uno de tus crios" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
-                 <app-select-list default="Periodos" [items]="temporadasList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataCoursesSelect($event)"/>
+                 <select-list default="Escoje a uno de tus crios" styleSelect="bg-blue white" styleOption="bg-dark-blue"/>
+                 <select-list default="Periodos" [items]="temporadasList" styleSelect="bg-blue white" styleOption="bg-dark-blue" (changeElement)="updateDataCoursesSelect($event)"/>
         </div>
         <div class="notas__values">
                 @if (cursoNotas) {
