@@ -1,36 +1,17 @@
 $font_lexend: lexend, System-UI;
-$text-gradient: (
-        -webkit-background-clip: text,
-        background-clip: text,
-        -webkit-text-fill-color: transparent
-);
 
 .course__details {
         font-family: $font_lexend;
 
         &-title {
-                &::first-letter {
-                        text-transform: uppercase;
-                }
-
                 text-align: center;
-                font-family: "Rubik Dirt";
-                background: linear-gradient(45deg, #E31C48, #000980, #8400ffde);
-                font-weight: 600;
-                letter-spacing: 1px;
-                font-size: 2.5rem;
-                padding: 25px 0;
-
-                @each $property, $value in $text-gradient {
-                        #{$property}: $value;
-                }
         }
 }
 
 .course {
 
         &__details-title {
-                margin: 50px 0 0 0;
+                margin: 25px 0;
         }
 
         &__professors,

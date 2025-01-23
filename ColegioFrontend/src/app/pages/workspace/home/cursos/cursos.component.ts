@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Curso, RecursoContenidoCurso } from '../../../../model/cursos/curso';
-import { CursoService } from './curso.service';
+import { CursoService } from './cursos.service';
 import { Temporada } from '../../../../model/Temporada';
 import { TemporadaService } from '../../temporada.service';
 
@@ -14,6 +14,7 @@ import { TextGradientComponent } from '../../../../components/atoms/text-gradien
 import { SelectListComponent } from '../../../../components/atoms/select-list/select-list.component';
 import List from '../../../../components/atoms/select-list/list';
 import { InputTextComponent } from '../../../../components/atoms/input-text/input-text.component';
+import { TeacherService } from '../../../../core/teacher.service';
 
 @Component({
         selector: 'app-cursos',
@@ -38,6 +39,7 @@ export class CursosComponent implements OnInit {
         //metodos de diseño
         protected async verSeleccionado(contenido: string, codigo: string | any) {
                 this.ver = contenido;
+                
                 if (codigo) {
                         if (this.ver == "curso") {
                                 this.cursoCodeSelect = codigo;
@@ -79,7 +81,7 @@ export class CursosComponent implements OnInit {
                 this.nameFind = nameFind;
         }
 
-        constructor(private cursoService: CursoService, private temporadaService: TemporadaService) { }
+        constructor(private teacherService: TeacherService, private cursoService: CursoService, private temporadaService: TemporadaService) { }
 
         public ngOnInit(): void {
                 this.getSeasionByStudent();
@@ -97,14 +99,19 @@ export class CursosComponent implements OnInit {
                 }
         }
 
-
+        protected rol: string = "teacher"
         protected async updateDataCoursesSelect(year: string) {
                 if (year == "0") {
                         this.cursos.length = 0;
                         return;
                 }
                 try {
-                        this.cursos = await firstValueFrom(this.cursoService.findCursosByStudentByYear(this.dniStudent, year));
+                        if (this.rol === "teacher") {
+                                this.cursos = await firstValueFrom(this.teacherService.findCoursesByTeacherAndYear("10234567", "2025"));
+                        } else {
+                                this.cursos = await firstValueFrom(this.cursoService.findCursosByStudentByYear(this.dniStudent, year));
+                        }
+
                 } catch (error) {
                         console.log(error)
 

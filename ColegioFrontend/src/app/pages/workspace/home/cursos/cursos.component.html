@@ -18,11 +18,14 @@
                 <p class="course__empty">No se encontraron cursos</p>
             }
         </div>
-    }@else if(ver == "curso") {
-        <menu-exit (exit)="verSeleccionado('cursos',null)" />
-        <course-content [course]="cursoSelect" (selectedResource)="viewResource($event)" />
-    }@else if(ver == "recurso"){
-        <menu-exit (exit)="verSeleccionado('curso',cursoCodeSelect)" />
+    }@else if (ver == "curso" && rol == "student") {
+        <menu-exit (exit)="verSeleccionado('cursos', null)" />
+        <course-content [course]="cursoSelect" [rol]="rol" (selectedResource)="viewResource($event)" />
+    }@else if (ver == "recurso" && rol == "student"){
+        <menu-exit (exit)="verSeleccionado('curso', cursoCodeSelect)" />
         <recurso [recurso]="recursoSelect" />
+    }@else if (ver == "curso" && rol == "teacher"){
+        <menu-exit (exit)="verSeleccionado('cursos', null)" />
+        <course-content [course]="cursoSelect" (selectedResource)="viewResource($event)" />
     }
 </div>

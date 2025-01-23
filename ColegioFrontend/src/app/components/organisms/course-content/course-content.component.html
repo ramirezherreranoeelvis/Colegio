@@ -1,6 +1,5 @@
 <div class="course__details">
-        <h2 class="course__details-title">{{course.nombre}}</h2>
-
+        <h2 class="course__details-title"><text-gradient [text]="course.nombre"/></h2>
         <!-- Profesores -->
         <div class="course__professors">
                 <details>
@@ -35,6 +34,7 @@
                         @for (contenido of course.contenidos; track $index) {
                                 <course-section-card [content]="contenido" (selectedContent)="handleClick($event)"/>
                         }
+                        
                 </div>
         </details>
 </div>
