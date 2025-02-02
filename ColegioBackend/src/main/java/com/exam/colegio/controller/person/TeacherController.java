@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.exam.colegio.dao.course.IContentDAO;
 import com.exam.colegio.dao.course.ICourseScheduledDAO;
@@ -23,7 +24,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/teacher")
@@ -61,7 +61,8 @@ public class TeacherController {
         public ResponseEntity<?> findCoursesByYear(@RequestParam String year, @RequestParam String dni) {
                 var seasonOptional = this.seasonDAO.findByYear(year);
                 if (seasonOptional.isEmpty()) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontro una la temporada seleccionada");
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                        .body("No se encontro una la temporada seleccionada");
                 }
                 var courses = this.teacherDAO.findCoursesByYear(year, dni);
                 return courses;

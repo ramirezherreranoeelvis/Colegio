@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class InputTextComponent {
         @Input() styleInput: string
-        @Input() placeholder: string=""
+        @Input() placeholder: string = ""
         @Input() text: string
         @Output() search = new EventEmitter<string>();
 
