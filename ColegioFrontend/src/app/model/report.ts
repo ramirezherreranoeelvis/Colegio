@@ -1,8 +1,6 @@
-export class Report {
-
-        date: string;
-        description: string;
-        assistant: string;
-        phoneNumberAssistant: string;
-
+export interface IReport {
+      date: string;
+      description: string;
+      assistant: string;
+      phoneNumberAssistant: string;
 }

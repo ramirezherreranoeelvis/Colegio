@@ -1,0 +1,198 @@
+$font_lexend: lexend, System-UI;
+$color-fondo: linear-gradient(
+      130deg,
+      #ff0080,
+      #ff0080,
+      #000a96,
+      #000768,
+      #000768
+);
+$sombra: 0 0 20px 0 #00000059;
+$color__background-filter: #240079;
+$radius__50_32h: 10px;
+$z-index_list: 900;
+$text-gradient: (
+      -webkit-background-clip: text,
+      background-clip: text,
+      -webkit-text-fill-color: transparent
+);
+
+select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+}
+
+/* all */
+.course {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background: $color-fondo;
+      overflow: auto;
+
+      &__title {
+            &::first-letter {
+                  text-transform: uppercase;
+            }
+
+            text-align: center;
+            font-family: "Rubik Dirt";
+            background: linear-gradient(45deg, #e31c48, #000980, #8400ffde);
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 2.5rem;
+            padding: 25px 0;
+
+            @each $property, $value in $text-gradient {
+                  #{$property}: $value;
+            }
+      }
+
+      &__title {
+            background: linear-gradient(
+                  45deg,
+                  #e31c48,
+                  #e31c48,
+                  #000980,
+                  #8400ffde,
+                  #8400ffde
+            );
+
+            @each $property, $value in $text-gradient {
+                  #{$property}: $value;
+            }
+      }
+
+      &__container {
+            padding: 20px 0px 20px 0px;
+            box-shadow: $sombra;
+            border-radius: 20px;
+            background: #ffffff;
+            overflow: hidden;
+            min-width: 45vw;
+            min-height: 20vh;
+      }
+
+      &__content {
+            padding: 0px 40px 0px 40px;
+            max-height: 75vh;
+            width: 70vw;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            animation: identifier 2s linear infinite;
+
+            &::-webkit-scrollbar {
+                  width: 15px;
+                  background-color: #ff0080;
+                  border-radius: 10px;
+
+                  &-thumb {
+                        border-radius: 10px;
+                        background: #000980;
+                        cursor: pointer;
+                  }
+            }
+      }
+}
+
+/* cursos */
+.course {
+      &__select-wrapper {
+            display: flex;
+
+            select {
+                  margin: 0 10px;
+                  text-align: center;
+                  width: 200px;
+                  height: 50px;
+                  color: white;
+                  font-size: 15px;
+                  font-family: $font_lexend;
+                  background: $color__background-filter;
+                  border: none;
+                  outline: none;
+                  border-radius: $radius__50_32h;
+                  overflow: hidden;
+
+                  &:hover {
+                        background: #000441;
+                        color: white;
+                        box-shadow: 2px 1px 10px 0 #0000004d;
+                  }
+            }
+      }
+
+      &__filters {
+            display: flex;
+            margin: 10px;
+            padding: 10px;
+            flex-direction: row;
+            justify-content: space-evenly;
+
+            &-input {
+                  font-family: lexend;
+                  margin: auto;
+                  height: 35px;
+                  width: 80%;
+                  border: none;
+                  outline: none;
+                  padding: 5px 13px;
+                  background: #ff0080;
+                  font-size: 15px;
+                  color: #ecfffe;
+                  box-shadow: 0 1px 1px 0px black;
+                  border-radius: $radius__50_32h;
+                  line-height: 36px;
+
+                  &::-ms-input-placeholder {
+                        color: #ecfffe;
+                  }
+
+                  &::placeholder {
+                        color: #ecfffe;
+                  }
+
+                  &::selection {
+                        background: #240079;
+                        color: #ffffff;
+                  }
+            }
+
+            &-select {
+                  margin: 0 0 0 20px;
+                  text-align: center;
+                  width: 200px;
+                  height: 50px;
+                  color: white;
+                  font-size: 15px;
+                  font-family: $font_lexend;
+                  background: $color__background-filter;
+                  border: none;
+                  outline: none;
+                  border-radius: $radius__50_32h;
+                  overflow: hidden;
+
+                  &:hover {
+                        background: #000441;
+                        color: white;
+                        box-shadow: 2px 1px 10px 0 #0000004d;
+                  }
+            }
+      }
+
+      &__list {
+            display: flex;
+            justify-content: space-evenly;
+            flex-flow: row wrap;
+            z-index: $z-index_list;
+            gap: 30px;
+      }
+
+      &__empty {
+            font-family: $font_lexend;
+      }
+}
