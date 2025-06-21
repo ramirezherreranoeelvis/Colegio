@@ -48,7 +48,7 @@ public class Enrollment {
         private int months;
 
         @Enumerated(EnumType.STRING)
-        @Column(name = "periodType", length = 20, nullable = false, columnDefinition = "VARCHAR(20)")
+        @Column(name = "periodType", length = 20, nullable = false)
         private TypePeriod typePeriod;
 
         @JsonIgnore

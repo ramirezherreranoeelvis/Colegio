@@ -17,6 +17,7 @@ VALUES
         (1, "", "10002000", "HYelowGo"),
         (1, "", "10002000", "IPurpleWi"),
         (1, "", "10002000", "JOrangeAn");
+        
 INSERT INTO person
         (dni, name, surnamePaternal, surnameMaternal, phoneNumber, idAccess, typePerson)
 VALUES
@@ -181,56 +182,78 @@ VALUES
         ('anulado'),
         ('cancelado'),
         ('pendiente');
--- Tabla: gradetype
-INSERT INTO gradetype
-        (name)
-VALUES
-        ('tarea'),
-        ('examen diario'),
-        ('examen semanal'),
-        ('examen mensual'),
-        ('examen bimestral'),
-        ('examen trimestral');
+
 INSERT INTO enrollment
-        (cost, enrolled, monthlyFee, vacancies, idGrade, idSeason)
+  (cost, enrolled, monthlyFee, months, periodType, vacancies, idGrade, idSeason)
 VALUES
-        (150.00, 0, 150.00, 40, 1, 1),
-        (150.00, 0, 150.00, 40, 2, 1),
-        (150.00, 0, 150.00, 40, 3, 1),
-        (150.00, 0, 150.00, 40, 4, 1),
-        (150.00, 0, 150.00, 40, 5, 1),
-        (150.00, 0, 150.00, 40, 6, 1),
-        (250.00, 0, 250.00, 40, 7, 1),
-        (250.00, 0, 250.00, 40, 8, 1),
-        (250.00, 0, 250.00, 40, 9, 1),
-        (250.00, 0, 250.00, 40, 10, 1),
-        (250.00, 0, 250.00, 40, 11, 1);
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 1, 1),
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 2, 1),
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 3, 1),
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 4, 1),
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 5, 1),
+  (150.00, 0, 150.00, 12, 'TRIMESTRE', 40, 6, 1),
+  (250.00, 0, 250.00, 12, 'TRIMESTRE', 40, 7, 1),
+  (250.00, 0, 250.00, 12, 'TRIMESTRE', 40, 8, 1),
+  (250.00, 0, 250.00, 12, 'TRIMESTRE', 40, 9, 1),
+  (250.00, 0, 250.00, 12, 'TRIMESTRE', 40, 10, 1),
+  (250.00, 0, 250.00, 12, 'TRIMESTRE', 40, 11, 1);
 
 
 SELECT * FROM colegio.content;
 
 
+INSERT INTO coursescheduled
+  (code, day, endTime, portada, startTime, idClassroom, idCourse, idEnrollment)
+VALUES
+  ('803566083', 'LUNES', '08:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature1_thumb.jpg', '08:00:00', 1, 1, 7),
+  ('803566084', 'LUNES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature2_thumb.jpg', '08:45:00', 2, 2, 7),
+  ('803566085', 'LUNES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature3_thumb.jpg', '09:30:00', 3, 3, 7),
+  ('803566086', 'LUNES', '11:00:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature4_thumb.jpg', '10:15:00', 4, 4, 7),
+  ('803566087', 'LUNES', '11:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature5_thumb.jpg', '11:00:00', 5, 5, 7),
+  ('803566088', 'LUNES', '12:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature6_thumb.jpg', '11:45:00', 6, 6, 7),
+  ('803566089', 'MARTES', '08:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature7_thumb.jpg', '08:00:00', 7, 7, 7),
+  ('803566090', 'MARTES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature8_thumb.jpg', '08:45:00', 8, 8, 7),
+  ('803566091', 'MARTES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature9_thumb.jpg', '09:30:00', 9, 9, 7),
+  ('803566092', 'MARTES', '11:00:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature10_thumb.jpg', '10:15:00', 10, 10, 7),
+  ('803566093', 'MARTES', '11:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature11_thumb.jpg', '11:00:00', 1, 11, 8),
+  ('803566094', 'MARTES', '12:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature12_thumb.jpg', '11:45:00', 2, 12, 8),
+  ('803566095', 'MIÉRCOLES', '08:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature13_thumb.jpg', '08:00:00', 3, 13, 8),
+  ('803566096', 'MIÉRCOLES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature14_thumb.jpg', '08:45:00', 4, 14, 8),
+  ('803566097', 'MIÉRCOLES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature15_thumb.jpg', '09:30:00', 5, 15, 8),
+  ('803566098', 'MIÉRCOLES', '11:00:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature16_thumb.jpg', '10:15:00', 6, 16, 8),
+  ('803566099', 'MIÉRCOLES', '11:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature17_thumb.jpg', '11:00:00', 7, 17, 8),
+  ('803566100', 'MIÉRCOLES', '12:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature18_thumb.jpg', '11:45:00', 8, 18, 8),
+  ('803566101', 'JUEVES', '08:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature19_thumb.jpg', '08:00:00', 9, 19, 8),
+  ('803566102', 'JUEVES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature20_thumb.jpg', '08:45:00', 10, 20, 8),
+  ('803566103', 'JUEVES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature1_thumb.jpg', '09:30:00', 1, 21, 8),
+  ('803566104', 'JUEVES', '11:00:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature2_thumb.jpg', '10:15:00', 2, 22, 8),
+  ('803566105', 'JUEVES', '11:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature3_thumb.jpg', '11:00:00', 3, 23, 8),
+  ('803566106', 'JUEVES', '12:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature4_thumb.jpg', '11:45:00', 4, 24, 8),
+  ('803566107', 'VIERNES', '08:45:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature5_thumb.jpg', '08:00:00', 5, 25, 8),
+  ('803566108', 'VIERNES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature6_thumb.jpg', '08:45:00', 6, 26, 8),
+  ('803566109', 'VIERNES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature7_thumb.jpg', '09:30:00', 7, 27, 8);
+
 INSERT INTO `colegio`.`content` (`typeContent`, `isVisible`, `name`, `number`, `idCourseScheduled`) VALUES 
-('session', '1', 'Historia de la Quimica', '1', '1'),
-('session', '1', 'Hexenos', '2', '1'),
-('session', '1', 'Pentenos', '3', '1'),
-('session', '1', 'Fusiones y Mezclas', '4', '1'),
-('session', '1', 'Fusiones y Mezclas II', '5', '1'),
-('session', '1', 'Propiedades Generales de la Materia', '6', '1'),
-('session', '1', 'Estados y Cambios de Estado de la Materia', '7', '1'),
-('session', '1', 'Fenómenos Físicos y Químicos de la Materia', '8', '1'),
-('session', '1', 'Sustancias Simples y Compuestas', '9', '1'),
-('session', '1', 'Mezclas Homogéneas y Heterogéneas', '10', '1'),
-('session', '1', 'Historia del Átomo', '11', '1'),
-('session', '1', 'Número Atómico y Número de Masa', '12', '1'),
-('session', '1', 'Anión y Catión', '13', '1'),
-('session', '1', 'Niveles, Subniveles y Orbitales', '14', '1'),
-('session', '1', 'Historia de la Tabla Periódica', '15', '1'),
-('session', '1', 'Estructura de la Tabla Periódica Actual', '16', '1'),
-('session', '1', 'Ubicación de un Elemento en la TPA', '17', '1'),
-('session', '1', 'Número de Oxidación', '18', '1'),
-('session', '1', 'Óxidos Básicos o Metálicos', '19', '1'),
-('session', '1', 'Óxidos Ácidos o Anhídridos', '20', '1');
+('session', 1, 'Historia de la Quimica', '1', '1'),
+('session', 1, 'Hexenos', '2', '1'),
+('session', 1, 'Pentenos', '3', '1'),
+('session', 1, 'Fusiones y Mezclas', '4', '1'),
+('session', 1, 'Fusiones y Mezclas II', '5', '1'),
+('session', 1, 'Propiedades Generales de la Materia', '6', '1'),
+('session', 1, 'Estados y Cambios de Estado de la Materia', '7', '1'),
+('session', 1, 'Fenómenos Físicos y Químicos de la Materia', '8', '1'),
+('session', 1, 'Sustancias Simples y Compuestas', '9', '1'),
+('session', 1, 'Mezclas Homogéneas y Heterogéneas', '10', '1'),
+('session', 1, 'Historia del Átomo', '11', '1'),
+('session', 1, 'Número Atómico y Número de Masa', '12', '1'),
+('session', 1, 'Anión y Catión', '13', '1'),
+('session', 1, 'Niveles, Subniveles y Orbitales', '14', '1'),
+('session', 1, 'Historia de la Tabla Periódica', '15', '1'),
+('session', 1, 'Estructura de la Tabla Periódica Actual', '16', '1'),
+('session', 1, 'Ubicación de un Elemento en la TPA', '17', '1'),
+('session', 1, 'Número de Oxidación', '18', '1'),
+('session', 1, 'Óxidos Básicos o Metálicos', '19', '1'),
+('session', 1, 'Óxidos Ácidos o Anhídridos', '20', '1');
 
 
 

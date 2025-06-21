@@ -49,7 +49,7 @@ public class CourseScheduled {
         private LocalTime endTime;
 
         @Enumerated(EnumType.STRING)
-        @Column(name = "day", length = 10, nullable = false, columnDefinition = "VARCHAR(10)")
+        @Column(name = "day", length = 10, nullable = false)
         private DayOfWeek dayOfWeek;
 
         @Column(name = "portada", columnDefinition = "LONGTEXT")
