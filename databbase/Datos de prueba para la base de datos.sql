@@ -135,29 +135,29 @@ VALUES
         ('fechas cívicas');
 -- Tabla: grade
 INSERT INTO grade
-        (name)
+        (name, idNextGrade, idPreviousGrade)
 VALUES
-        ('1° primaria'),
-        ('2° primaria'),
-        ('3° primaria'),
-        ('4° primaria'),
-        ('5° primaria'),
-        ('6° primaria'),
-        ('1° secundaria'),
-        ('2° secundaria'),
-        ('3° secundaria'),
-        ('4° secundaria'),
-        ('5° secundaria');
+		('1° primaria', 2, NULL),
+		('2° primaria', 3, 1),
+		('3° primaria', 4, 2),
+		('4° primaria', 5, 3),
+		('5° primaria', 6, 4),
+		('6° primaria', 7, 5),
+		('1° secundaria', 8, 6),
+		('2° secundaria', 9, 7),
+		('3° secundaria', 10, 8),
+		('4° secundaria', 11, 9),
+		('5° secundaria', NULL, 10);
 -- Tabla: season
 INSERT INTO season
         (year, startDate)
 VALUES
         (2025, '2024-04-04'),
-        (2026, null),
-        (2027, null),
-        (2028, null),
-        (2029, null),
-        (2030, null);
+        (2026, NULL),
+        (2027, NULL),
+        (2028, NULL),
+        (2029, NULL),
+        (2030, NULL);
 
 -- Tabla: classroom
 INSERT INTO classroom
@@ -233,7 +233,7 @@ VALUES
   ('803566108', 'VIERNES', '09:30:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature6_thumb.jpg', '08:45:00', 6, 26, 8),
   ('803566109', 'VIERNES', '10:15:00', 'https://ultra.content.blackboardcdn.com/ultra/static/images/default-banners/nature7_thumb.jpg', '09:30:00', 7, 27, 8);
 
-INSERT INTO `colegio`.`content` (`typeContent`, `isVisible`, `name`, `number`, `idCourseScheduled`) VALUES 
+INSERT INTO content (`typeContent`, `isVisible`, `name`, `number`, `idCourseScheduled`) VALUES 
 ('session', 1, 'Historia de la Quimica', '1', '1'),
 ('session', 1, 'Hexenos', '2', '1'),
 ('session', 1, 'Pentenos', '3', '1'),
