@@ -2,7 +2,7 @@
 	path = ColegioFrontend
 	url = https://github.com/ramirezherreranoeelvis/ColegioFrontend
 [submodule "ColegioBackend"]
-	path = ColegioBackend
+	path = ColegioBackend/ColegioMonolito
 	url = https://github.com/ramirezherreranoeelvis/ColegioBackend
 [submodule "ColegioBBDD"]
 	path = ColegioBBDD
