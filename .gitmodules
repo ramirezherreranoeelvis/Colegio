@@ -1,1 +1,4 @@
 
+[submodule "ColegioFrontend"]
+	path = ColegioFrontend/ColegioFrontend
+	url = https://github.com/ramirezherreranoeelvis/ColegioFrontend
