@@ -4,9 +4,9 @@
 [submodule "ColegioBBDD/ColegioBBDD"]
 	path = ColegioBBDD/ColegioBBDD
 	url = https://github.com/ramirezherreranoeelvis/ColegioBBDD
-[submodule "ColegioBackend/Monolito"]
-	path = ColegioBackend/Monolito
+[submodule "Monolito"]
+	path = Monolito
 	url = https://github.com/ramirezherreranoeelvis/ColegioBackend
-[submodule "ColegioBackend/ms/colegio-auth-ms"]
-	path = ColegioBackend/ms/colegio-auth-ms
-	url = https://github.com/ramirezherreranoeelvis/colegio-auth-ms
+[submodule "colegio-launcher-backend"]
+	path = colegio-launcher-backend
+	url = https://github.com/ramirezherreranoeelvis/colegio-launcher-backend
